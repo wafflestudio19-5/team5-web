@@ -1,0 +1,19 @@
+.TestComponent {
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginTestForm{
+    height:200px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.LoginTestButton{
+    margin-top:30px;
+}
