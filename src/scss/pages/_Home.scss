@@ -1,0 +1,105 @@
+div {display: block}
+
+#container {
+  width: 1180px;
+
+  position: relative;
+  box-sizing: border-box;
+  margin: 0 auto 25px auto;
+
+  .banner {
+    position: relative;
+    left: 215px;
+    margin-top: 25px;
+    width: 600px;
+    height: 160px;
+    overflow: hidden;
+    background-color: black;
+  }
+
+  .leftSide > div{
+    border : 1px solid $borderColor;
+    background-color: $cardColor;
+  }
+
+  .leftSide {
+    position: absolute;
+    left: 25px;
+    top: 0;
+    width: 175px;
+    height: 300px;
+
+    .userCard {
+      height: 219px;
+    }
+
+    .menu {
+      margin-top: 5px;
+      height: 122px;
+    }
+
+    .ad {
+      margin-top: 5px;
+      height: 115px;
+    }
+  }
+
+  .rightSide > div{
+    border : 1px solid $borderColor;
+    background-color: $cardColor;
+  }
+
+  .rightSide {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    width: 325px;
+    height: 400px;
+
+    .searchBar {
+      height: 40px;
+    }
+    .sideNow {
+      margin-top: 5px;
+      height: 230px;
+    }
+    .sideHot {
+      margin-top: 5px;
+      height: 192px;
+    }
+    .sideBest {
+      margin-top: 5px;
+      height: 40px;
+    }
+    .sideSchool {
+      margin-top: 5px;
+      height: 116px;
+    }
+    .sideSchool {
+      margin-top: 5px;
+      height: 432px;
+    }
+    .sideLecEval {
+      margin-top: 5px;
+      height: 432px;
+    }
+  }
+
+  .main > .card{
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 295px;
+    height: 192px;
+    overflow: hidden;
+    border : 1px solid $borderColor;
+    background-color: $cardColor;
+  }
+  .main {
+    position: relative;
+    left: 215px;
+    margin: 15px 0;
+    width: 605px;
+  }
+}
+
+
