@@ -1,0 +1,11 @@
+
+.LoginTestForm{
+    height:200px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.LoginTestButton{
+    margin-top:30px;
+}
