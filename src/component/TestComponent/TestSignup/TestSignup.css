@@ -1,0 +1,10 @@
+
+.SignupTestForm{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.SignupTestButton{
+    margin-top:30px;
+}
