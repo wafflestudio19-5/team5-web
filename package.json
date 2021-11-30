@@ -46,6 +46,7 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "https://www.waffle-minkyu.shop",
   "devDependencies": {
     "prettier": "2.4.1"
   }
