@@ -1,6 +1,6 @@
 import "./TestSignup.css";
 import React, { useState } from "react";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import request from "../../../API/API";
 
 const TestSignup = () => {
@@ -30,8 +30,8 @@ const TestSignup = () => {
   ) => {
     return (event: React.SyntheticEvent) => {
       event.preventDefault(); //submit 시 새로고침 방지
-      request
-        .post<SignupInputType, AxiosResponse>("/user/signup", {
+      axios
+        .post<SignupInputType, AxiosResponse>("/user/signup/", {
           username: usernameInput,
           password: passwordInput,
           email: emailInput,
