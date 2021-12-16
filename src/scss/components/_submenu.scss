@@ -1,4 +1,4 @@
-#submenu {
+.SubMenu {
   display: grid;
   position: relative;
   grid-template-columns: 1fr 1fr 1fr;
@@ -6,12 +6,18 @@
   height: 230px;
   background-color: #f2f2f2;
   border-bottom: 1px solid #d6d6d6;
-}
 
-
-
-.group {
-  height: 130px;
-  width: 100px;
-  background-color: aqua;
+  .SubMenu__group {
+    height: 130px;
+    width: 100px;
+    list-style: none;
+    li>a{
+      font-size:13px;
+      color:$fontColor;
+      text-decoration: none;
+      &:hover{
+        color:$keyColor;
+      }
+    }
+  }
 }
