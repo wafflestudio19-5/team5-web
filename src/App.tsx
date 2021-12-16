@@ -1,20 +1,19 @@
+import TestComponent from "./component/TestComponent/TestComponent";
 import "./App.css";
 import "./scss/main.scss";
-import { Redirect, Route, Switch } from "react-router-dom";
-import Header from "./component/Header/Header";
 import Home from "./component/Home/Home";
-import Footer from "./component/Footer/Footer";
+import { useState } from "react";
 function App() {
+  const [isLayoutDisplayed, setIsLayoutDisplayed] = useState<boolean>(false);
   return (
     <div className="App">
-      <Header />
-      <Switch>
-        <Route path="/timetable" />
-        <Route path="/lecture" />
-        <Route path="/" component={Home} />
-        {/*<Redirect to="/" />*/}
-      </Switch>
-      <Footer />
+      {isLayoutDisplayed ? <Home /> : <TestComponent />}
+      <button
+        className="ChangeTestButton"
+        onClick={() => setIsLayoutDisplayed(!isLayoutDisplayed)}
+      >
+        {isLayoutDisplayed ? "로그인 테스트로" : "레이아웃 테스트로"}
+      </button>
     </div>
   );
 }
