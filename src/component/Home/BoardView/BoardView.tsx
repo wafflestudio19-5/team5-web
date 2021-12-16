@@ -47,7 +47,7 @@ const BoardView = ({ match }: BoardViewParams) => {
           <div className="BoardView__writeArticle"></div>
           <ul className="BoardView__list">
             {boardDetail.data.map((item) => (
-              <li className="BoardView__item">
+              <li key={item.id} className="BoardView__item">
                 <div>
                   {item.title} <br /> {item.content}
                 </div>

@@ -34,7 +34,7 @@ const TotalView = () => {
         </div>
         <div className="TotalView__main">
           {boardList.map((item: boardDummyItem) => (
-            <TotalViewItem item={item} />
+            <TotalViewItem key={item.id} item={item} />
           ))}
         </div>
       </div>
