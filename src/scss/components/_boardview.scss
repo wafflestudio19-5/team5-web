@@ -1,0 +1,41 @@
+.BoardView{
+  .BoardView__main{
+    position:relative;
+    left:25px;
+    width:780px;
+    height:500px;
+  }
+
+  .BoardView__title{
+    width:748px;
+    height:29px;
+    left:25px;
+    margin-top:5px;
+    padding:15px;
+    border: 1px solid $borderColor;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .BoardView__writeArticle{
+    width:100%;
+    height:46px;
+    margin-top:5px;
+    background-color:khaki;
+  }
+
+  .BoardView__list{
+    margin-top:5px;
+    list-style: none;
+    padding: 0px;
+
+    li{
+      width:758px;
+      height:93px;
+      border: 1px solid $borderColor;
+      padding-left:20px;
+      display:flex;
+      align-items: center;
+    }
+  }
+}

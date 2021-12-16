@@ -1,4 +1,18 @@
+import TotalViewItem from "./TotalViewItem";
+import { useEffect, useState } from "react";
+import { boardDummy } from "../../../dummy/get-dummy";
+
+interface boardDummyItem {
+  id: string;
+  name: string;
+  available: boolean;
+}
+
 const TotalView = () => {
+  const [boardList, setBoardList] = useState([]);
+  useEffect(() => {
+    setBoardList(boardDummy);
+  });
   return (
     <div className="TotalView">
       <div id={"container"}>
@@ -18,55 +32,10 @@ const TotalView = () => {
           <div className={"sideSchool"}>학교 소식</div>
           <div className={"sideLecEval"}>최근 강의평</div>
         </div>
-        <div className={"main"}>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
-          <div className={"card"}>
-            <div className={"board"}></div>
-          </div>
+        <div className="TotalView__main">
+          {boardList.map((item: boardDummyItem) => (
+            <TotalViewItem item={item} />
+          ))}
         </div>
       </div>
     </div>

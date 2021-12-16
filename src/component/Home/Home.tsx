@@ -8,7 +8,7 @@ const Home = () => {
     <div className="Home">
       <SubMenu />
       <Switch>
-        <Route path="/" component={TotalView} />
+        <Route path="/" component={TotalView} exact />
         <Route path="/:id" component={BoardView} />
         {/*<Redirect to="/" />*/}
       </Switch>

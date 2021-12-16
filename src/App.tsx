@@ -9,9 +9,9 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route path="/" component={Home} exact />
         <Route path="/timetable" />
         <Route path="/lecture" />
+        <Route path="/" component={Home} />
         {/*<Redirect to="/" />*/}
       </Switch>
       <Footer />

@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 interface boardDummyItem {
-  id: number;
+  id: string;
   name: string;
   available: boolean;
 }
 interface SubMenuItemProps {
-  key: number;
+  key: string;
   item: boardDummyItem;
 }
 

@@ -1,0 +1,41 @@
+.TotalView {
+  .TotalView__main > .TotalView__card {
+    float: left;
+    margin: 0 5px 5px 0;
+    width: 295px;
+    height: 192px;
+    overflow: hidden;
+    border: 1px solid $borderColor;
+    background-color: $cardColor;
+
+    .TotalView__board {
+      list-style: none;
+      padding:0px;
+      margin:0px;
+      font-size: 14px;
+
+      li{
+        width:100%;
+        height:40px;
+        display:flex;
+        align-items: center;
+        padding-left: 12px;
+        border-bottom: 1px solid $borderColor;
+        &.TotalView__board-name{
+          color:$keyColor;
+          font-weight: bold;
+          a{
+            text-decoration: none;
+            color:inherit;
+          }
+        }
+      }
+    }
+  }
+  .TotalView__main {
+    position: relative;
+    left: 215px;
+    margin: 15px 0;
+    width: 605px;
+  }
+}

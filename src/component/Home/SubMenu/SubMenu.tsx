@@ -3,7 +3,7 @@ import { boardDummy } from "../../../dummy/get-dummy";
 import SubMenuItem from "./SubMenuItem";
 
 interface boardDummyItem {
-  id: number;
+  id: string;
   name: string;
   available: boolean;
 }
