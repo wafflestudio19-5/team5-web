@@ -12,7 +12,7 @@ function App() {
         <Route path="/" component={Home} exact />
         <Route path="/timetable" />
         <Route path="/lecture" />
-        <Redirect to="/" />
+        {/*<Redirect to="/" />*/}
       </Switch>
       <Footer />
     </div>

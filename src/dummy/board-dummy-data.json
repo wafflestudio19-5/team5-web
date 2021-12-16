@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "자유게시판",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "비밀게시판",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "졸업생게시판",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "새내기게시판",
+    "available": true
+  }
+]

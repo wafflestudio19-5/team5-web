@@ -10,7 +10,7 @@ const Home = () => {
       <Switch>
         <Route path="/" component={TotalView} />
         <Route path="/:id" component={BoardView} />
-        <Redirect to="/" />
+        {/*<Redirect to="/" />*/}
       </Switch>
     </div>
   );
