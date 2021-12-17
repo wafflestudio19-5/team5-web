@@ -1,6 +1,7 @@
 import TotalViewItem from "./TotalViewItem";
 import { useEffect, useState } from "react";
 import { boardDummy } from "../../../dummy/get-dummy";
+import RightMenu from "../RightMenu/RightMenu";
 
 interface boardDummyItem {
   id: string;
@@ -26,11 +27,7 @@ const TotalView = () => {
         </div>
         <div className={"rightSide"}>
           <div className={"searchBar"}>검색</div>
-          <div className={"sideNow"}>실시간 인기</div>
-          <div className={"sideHot"}>핫게</div>
-          <div className={"sideBest"}>Best</div>
-          <div className={"sideSchool"}>학교 소식</div>
-          <div className={"sideLecEval"}>최근 강의평</div>
+          <RightMenu />
         </div>
         <div className="TotalView__main">
           {boardList.map((item: boardDummyItem) => (

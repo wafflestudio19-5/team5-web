@@ -43,7 +43,7 @@ const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
         </li>
         {boardDetail.data.map((item) => (
           <li key={item.id} className="BoardView__item">
-            <div>{item.title}</div>
+            <Link to={`/${boardDetail.id}/${item.id}`}>{item.title}</Link>
           </li>
         ))}
       </ul>
