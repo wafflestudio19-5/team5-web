@@ -17,7 +17,7 @@
     font-weight: bold;
   }
 
-  .BoardView__writeArticle{
+  .BoardView__writePost{
     width:100%;
     height:46px;
     margin-top:5px;
@@ -37,5 +37,39 @@
       display:flex;
       align-items: center;
     }
+  }
+
+  .BoardView__post{
+    width:748px;
+    left:25px;
+    display: block;
+    margin-top:5px;
+    padding:15px;
+    border: 1px solid $borderColor;
+
+    .BoardView__post__profile__img{
+      float: left;
+      margin: 0 10px 15px 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: antiquewhite;
+    }
+
+    .BoardView__post__profile__writer{
+      display: block;
+      height: 20px;
+      max-width: 200px;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+
+      color: #292929;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
   }
 }

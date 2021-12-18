@@ -1,14 +1,47 @@
-const PostView = () => {
+import { useEffect, useState } from "react";
+import { getBoardDetailDummy } from "../../../dummy/get-dummy";
+
+interface PostViewParams {
+  match: {
+    params: {
+      boardId: string;
+      postId: string;
+    };
+  };
+}
+
+interface boardDetailDummyItem {
+  id: string;
+  writer: string;
+  title: string;
+  content: string;
+}
+
+const PostView = ({ match }: PostViewParams) => {
+  const [postDetail, setPostDetail] = useState<boardDetailDummyItem>({
+    id: "",
+    writer: "",
+    title: "",
+    content: "",
+  });
+
+  useEffect(() => {
+    setPostDetail(
+      getBoardDetailDummy(match.params.boardId).data.find(
+        (x: { id: string }) => x.id === match.params.postId
+      )
+    );
+  }, [setPostDetail, match.params.boardId, match.params.postId]);
+
   return (
-    <div>
-      <div id="container">
-        <div className={"rightSide"}>
-          <div className={"sideNow"}>실시간 인기</div>
-          <div className={"sideHot"}>핫게</div>
-          <div className={"sideBest"}>Best</div>
-          <div className={"sideSchool"}>학교 소식</div>
-          <div className={"sideLecEval"}>최근 강의평</div>
-        </div>
+    <div className={"BoardView__post"}>
+      <div className={"BoardView__post__profile"}>
+        <div className={"BoardView__post__profile__img"}>사진</div>
+        <h3 className={"BoardView__post__profile__writer"}>
+          {postDetail.writer}
+        </h3>
+        <div className={"BoardView__post__profile__time"}>사진</div>
+        <ul className={"status"}></ul>
       </div>
     </div>
   );
