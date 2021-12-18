@@ -30,6 +30,21 @@
             color:inherit;
           }
         }
+
+        &.BoardView__item{
+          a{
+            text-decoration: none;
+            p {
+              height: 17px;
+              line-height: 18px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: #444444;
+              font-size: 14px;
+            }
+          }
+        }
       }
     }
   }

@@ -37,7 +37,8 @@ const BoardView = ({ match }: BoardParams) => {
         {boardDetail.data.map((item) => (
           <li key={item.id} className="BoardView__item">
             <Link to={`${boardDetail.id}/${item.id}`}>
-              {item.title} <br /> {item.content}
+              <h2 className={"medium"}>{item.title}</h2> <br />{" "}
+              <p className={"small"}>{item.content}</p>
             </Link>
           </li>
         ))}

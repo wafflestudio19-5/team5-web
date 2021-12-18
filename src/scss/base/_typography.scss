@@ -1,0 +1,52 @@
+h2{
+  &.large{
+    margin-bottom: 15px;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  &.medium{
+    margin-bottom: 5px;
+    margin-top: 0;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  &.small{
+
+  }
+}
+
+h3{
+  &.large{
+    height: 20px;
+    max-width: 200px;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+p{
+  &.small{
+    margin-bottom: 5px;
+    max-height: 30px;
+    line-height: 15px;
+    white-space: normal;
+    overflow: hidden;
+    color: $postViewColor;
+    font-size: 12px;
+  }
+
+  &.large{
+    padding-bottom: 15px;
+    line-height: 20px;
+    color: $fontColor;
+    font-size: 14px;
+  }
+}

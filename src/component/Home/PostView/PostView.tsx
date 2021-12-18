@@ -37,12 +37,12 @@ const PostView = ({ match }: PostViewParams) => {
     <div className={"BoardView__post"}>
       <div className={"BoardView__post__profile"}>
         <div className={"BoardView__post__profile__img"}>사진</div>
-        <h3 className={"BoardView__post__profile__writer"}>
-          {postDetail.writer}
-        </h3>
-        <div className={"BoardView__post__profile__time"}>사진</div>
+        <h3 className={"large"}>{postDetail.writer}</h3>
         <ul className={"status"}></ul>
       </div>
+      <h2 className={"large"}>{postDetail.title}</h2>
+      <br />
+      <p className={"large"}>{postDetail.content}</p>
     </div>
   );
 };
