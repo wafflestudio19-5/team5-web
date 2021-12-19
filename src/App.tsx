@@ -14,7 +14,7 @@ function App() {
         <Route path="/" component={Home} />
         {/*<Redirect to="/" />*/}
       </Switch>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   );
 }

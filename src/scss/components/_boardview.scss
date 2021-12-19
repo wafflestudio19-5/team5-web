@@ -21,8 +21,108 @@
     width:100%;
     height:46px;
     margin-top:5px;
-    background-color:khaki;
+    box-sizing: border-box;
+    color: $postViewColor;
+    text-align: left;
+    background: $cardColor url(https://everytime.kr/images/new/container.write.background.png) no-repeat right center;
+    background-size: 40px;
+    border: 2px solid $borderColor;
+    cursor: text;
+    font-size: 14px;
   }
+
+  .Write{
+    width: 99.5%;
+    height: 480px;
+    margin-top:5px;
+    border: 2px solid $borderColor;
+
+    p{
+      display: block;
+      padding: 15px;
+      border-bottom: 1px solid #e3e3e3;
+      background-color: #fff;
+      margin: 0;
+
+      &.Write__title{
+        height: 21px;
+      }
+
+      &.Write__content{
+        height: 351px;
+      }
+
+      input{
+        vertical-align: middle;
+        &:focus{
+          outline: none;
+        }
+        &.title{
+          width: 100%;
+          height: 21px;
+          line-height: 20px;
+          color: #292929;
+          font-size: 16px;
+          font-weight: bold;
+          border: none;
+        }
+      }
+      textarea{
+        width: 100%;
+        height: 351px;
+        border: 0;
+        &:focus{
+          outline: none;
+        }
+      }
+    }
+    ul{
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      list-style: none;
+      height: 48px;
+
+      li{
+        //display: block;
+        margin: 0;
+        height: 48px;
+        width: 48px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 40px 40px;
+        cursor: pointer;
+        &.hashtag{
+          float: left;
+          background-image: url(https://everytime.kr/images/new/container.articles.write.hashtag.png);
+        }
+        &.attach{
+          margin: 0;
+          float: left;
+          background-image: url(https://everytime.kr/images/new/container.articles.write.attach.png)
+        }
+        &.question{
+          float: right;
+          margin-right: 15px;
+          background-image: url(https://everytime.kr/images/container.articles.write.question.png)
+        }
+
+        &.anonymus{
+          float: right;
+          margin-right: 15px;
+          background-image: url(https://everytime.kr/images/container.articles.write.anonym.png)
+        }
+        &.submit{
+          float: right;
+          background-color: $keyColor;
+          background-image: url(https://everytime.kr/images/new/container.articles.write.submit.png)
+        }
+      }
+
+    }
+  }
+
+
 
   .BoardView__list{
     margin-top:5px;
@@ -35,11 +135,13 @@
       padding: 15px;
       display:flex;
       align-items: center;
+      .wrapper{
+        width: 748px;
+      }
       &.BoardView__item{
         a{
           color: inherit;
           text-decoration: none;
-
         }
       }
     }
