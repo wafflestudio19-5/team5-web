@@ -1,37 +1,52 @@
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import { Link } from "react-router-dom";
-
+import request from "../../../../API/API";
+import axios from "axios";
 interface BoardParams {
   match: {
     path: string;
   };
 }
 
-interface boardDetailDummy {
-  id: string;
-  name: string;
-  data: boardDetailDummyItem[];
+interface boardDetail {
+  count: number;
+  next: string;
+  previous: string;
+  results: boardDetailItem[];
 }
 
-interface boardDetailDummyItem {
-  id: string;
+interface boardDetailItem {
+  board: string;
   writer: string;
   title: string;
   content: string;
+  id: number;
+  tags: string[];
 }
 
 const BoardView = ({ match }: BoardParams) => {
-  const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
-    id: "",
-    name: "",
-    data: [],
+  const [boardDetail, setBoardDetail] = useState<boardDetail>({
+    count: 0,
+    next: "",
+    previous: "",
+    results: [],
   });
   const [showForm, setShowForm] = useState<boolean>(false);
 
-  useEffect(() => {
-    setBoardDetail(getBoardDetailDummy(match.path.slice(1)));
-  }, [setBoardDetail, match.path]);
+  const getBoardDetail = () => {
+    request
+      .get(`/post/?board=${match.path.slice(1)}`)
+      .then((response) => {
+        console.log(response.data);
+        setBoardDetail(response.data);
+      })
+      .catch(() => {
+        console.log("게시글 리스트 불러오기 실패!"); //테스트용
+      });
+  };
+
+  useEffect(getBoardDetail, [setBoardDetail, match.path]);
 
   const openWrite = () => setShowForm(!showForm);
 
@@ -91,10 +106,11 @@ const BoardView = ({ match }: BoardParams) => {
           새 글을 작성해주세요!
         </button>
       )}
+
       <ul className="BoardView__list">
-        {boardDetail.data.map((item) => (
+        {boardDetail.results.map((item) => (
           <li key={item.id} className="BoardView__item">
-            <Link to={`${boardDetail.id}/${item.id}`}>
+            <Link to={`${match.path.slice(1)}/1`}>
               <div className={"wrapper"}>
                 <h2 className={"medium"}>{item.title}</h2> <br />{" "}
                 <p className={"small"}>{item.content}</p>
