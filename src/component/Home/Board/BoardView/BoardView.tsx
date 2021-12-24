@@ -38,7 +38,6 @@ const BoardView = ({ match }: BoardParams) => {
     request
       .get(`/post/?board=${match.path.slice(1)}`)
       .then((response) => {
-        console.log(response.data);
         setBoardDetail(response.data);
       })
       .catch(() => {
@@ -115,7 +114,7 @@ const BoardView = ({ match }: BoardParams) => {
         <ul className="BoardView__list">
           {boardDetail.results.map((item) => (
             <li key={item.id} className="BoardView__item">
-              <Link to={`${match.path.slice(1)}/1`}>
+              <Link to={`${match.path.slice(1)}/${item.id}`}>
                 <div className={"wrapper"}>
                   <h2 className={"medium"}>{item.title}</h2> <br />
                   <p className={"small"}>{item.content}</p>
