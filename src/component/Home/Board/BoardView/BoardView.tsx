@@ -107,18 +107,24 @@ const BoardView = ({ match }: BoardParams) => {
         </button>
       )}
 
-      <ul className="BoardView__list">
-        {boardDetail.results.map((item) => (
-          <li key={item.id} className="BoardView__item">
-            <Link to={`${match.path.slice(1)}/1`}>
-              <div className={"wrapper"}>
-                <h2 className={"medium"}>{item.title}</h2> <br />{" "}
-                <p className={"small"}>{item.content}</p>
-              </div>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {boardDetail.results.length == 0 ? (
+        <ul className="BoardView__list">
+          <li className="BoardView__noItem">아직 글이 없습니다.</li>
+        </ul>
+      ) : (
+        <ul className="BoardView__list">
+          {boardDetail.results.map((item) => (
+            <li key={item.id} className="BoardView__item">
+              <Link to={`${match.path.slice(1)}/1`}>
+                <div className={"wrapper"}>
+                  <h2 className={"medium"}>{item.title}</h2> <br />
+                  <p className={"small"}>{item.content}</p>
+                </div>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
