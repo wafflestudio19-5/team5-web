@@ -10,7 +10,7 @@ interface PostViewParams {
   };
 }
 
-interface boardDetailDummyItem {
+interface BoardDetailDummyItem {
   id: string;
   writer: string;
   title: string;
@@ -18,7 +18,7 @@ interface boardDetailDummyItem {
 }
 
 const PostView = ({ match }: PostViewParams) => {
-  const [postDetail, setPostDetail] = useState<boardDetailDummyItem>({
+  const [postDetail, setPostDetail] = useState<BoardDetailDummyItem>({
     id: "",
     writer: "",
     title: "",
