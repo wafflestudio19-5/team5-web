@@ -4,6 +4,7 @@ import { AxiosResponse } from "axios";
 import { login } from "../../../redux/authorization";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { saveToken } from "../../../function/localStorage";
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Login = () => {
       .then((response: AxiosResponse) => {
         if (response.data.success) {
           dispatch(login(response.data.token));
+          saveToken(response.data.token);
           history.push("/");
         }
       });

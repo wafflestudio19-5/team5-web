@@ -6,7 +6,7 @@ const LOGOUT = "authorization/LOGOUT" as const;
 const TEMPLOGIN = "authorization/TEMPLOGIN" as const;
 
 //액션 생성함수
-export const login = (loginData: string) => ({
+export const login = (loginData: null | string) => ({
   type: LOGIN,
   payload: loginData,
 });
