@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBoardDetailDummy } from "../../../dummy/get-dummy";
+import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 
 interface PostViewParams {
   match: {

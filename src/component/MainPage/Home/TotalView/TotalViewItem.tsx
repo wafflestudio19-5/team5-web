@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { boardDummy, getBoardDetailDummy } from "../../../dummy/get-dummy";
+import { boardDummy, getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import { Link } from "react-router-dom";
 
 interface boardDummyItem {

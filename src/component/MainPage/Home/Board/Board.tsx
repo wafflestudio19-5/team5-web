@@ -1,6 +1,6 @@
 import { Link, Route, Switch, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getBoardDetailDummy } from "../../../dummy/get-dummy";
+import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import RightMenu from "../RightMenu/RightMenu";
 import PostView from "../PostView/PostView";
 import BoardView from "./BoardView/BoardView";

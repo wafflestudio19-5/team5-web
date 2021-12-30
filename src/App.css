@@ -1,8 +1,9 @@
-/*.App{*/
-/*    position:relative;*/
-/*    width:100vw;*/
-/*    height:100vh;*/
-/*}*/
+.App{
+    position:relative;
+    width:100vw;
+    height:100vh;
+}
+
 
 .ChangeTestButton{
     position:fixed;

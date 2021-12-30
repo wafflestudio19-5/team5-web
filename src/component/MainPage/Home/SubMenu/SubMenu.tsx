@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { boardDummy } from "../../../dummy/get-dummy";
+import { boardDummy } from "../../../../dummy/get-dummy";
 import SubMenuItem from "./SubMenuItem";
 
 interface boardDummyItem {

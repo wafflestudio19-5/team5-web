@@ -1,6 +1,6 @@
 import TotalViewItem from "./TotalViewItem";
 import { useEffect, useState } from "react";
-import { boardDummy } from "../../../dummy/get-dummy";
+import { boardDummy } from "../../../../dummy/get-dummy";
 import RightMenu from "../RightMenu/RightMenu";
 
 interface boardDummyItem {

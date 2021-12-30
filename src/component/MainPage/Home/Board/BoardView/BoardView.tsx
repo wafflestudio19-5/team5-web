@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
+import { getBoardDetailDummy } from "../../../../../dummy/get-dummy";
 import { Link } from "react-router-dom";
-import request from "../../../../API/API";
+import request from "../../../../../API/API";
 import axios from "axios";
 interface BoardParams {
   match: {

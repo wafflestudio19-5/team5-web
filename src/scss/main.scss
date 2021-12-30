@@ -5,11 +5,15 @@
    "base/typography";
 
 @import
+   "components/loginandregister",
+   "components/lobby",
+   "components/login",
    "components/header",
    "components/submenu",
    "components/bottom",
    "components/totalview",
    "components/boardview";
+
 
 @import
    "pages/Home";
