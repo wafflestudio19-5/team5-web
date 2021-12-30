@@ -2,6 +2,9 @@ import TotalViewItem from "./TotalViewItem";
 import { useEffect, useState } from "react";
 import { boardDummy } from "../../../../dummy/get-dummy";
 import RightMenu from "../RightMenu/RightMenu";
+import { logout } from "../../../../redux/authorization";
+import { useDispatch } from "react-redux";
+import { deleteToken } from "../../../../function/localStorage";
 
 interface boardDummyItem {
   id: string;
@@ -10,16 +13,29 @@ interface boardDummyItem {
 }
 
 const TotalView = () => {
+  const dispatch = useDispatch();
   const [boardList, setBoardList] = useState([]);
   useEffect(() => {
     setBoardList(boardDummy);
   });
+  const tryLogout = () => {
+    deleteToken();
+    dispatch(logout());
+  };
+
   return (
     <div className="TotalView">
       <div id={"container"}>
         <div className={"banner"}></div>
         <div className={"leftSide"}>
-          <div className={"userCard"}>학생 정보</div>
+          <div
+            className={"userCard"}
+            onClick={() => {
+              tryLogout();
+            }}
+          >
+            로그아웃
+          </div>
           <div className={"menu"}>메뉴</div>
           <div className={"ad"}>광고</div>
           <div className={"ad"}>광고</div>

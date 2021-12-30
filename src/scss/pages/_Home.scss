@@ -31,6 +31,14 @@ div {display: block}
 
     .userCard {
       height: 219px;
+      background-color: $keyColor;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size:16px;
+      font-weight: bold;
+      color:white;
+      cursor: pointer;
     }
 
     .menu {

@@ -15,10 +15,9 @@ import { login } from "./redux/authorization";
 
 function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (loadToken()) {
-      dispatch(login(loadToken()));
+      dispatch(login(loadToken())); // 새로고침 시 로컬스토리지에 있는 토큰 확인
     }
   }, []);
   const auth = useSelector((state: RootState) => state.authorization).token;
