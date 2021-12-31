@@ -24,17 +24,10 @@ function App() {
   return (
     <div className="App">
       {auth ? (
-        <>
-          <Header />
-          <Switch>
-            <Route path="/timetable" />
-            <Route path="/lecture" />
-            <Route path="/asdasdf" component={MainPage} />
-            <Route path="/login" component={Login} />
-            <Route path="/" component={Home} />
-          </Switch>
-          {/*<Footer />*/}
-        </>
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/" component={MainPage} />
+        </Switch>
       ) : (
         <AuthPage />
       )}
