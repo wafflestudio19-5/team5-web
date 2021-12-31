@@ -28,13 +28,21 @@ const TotalView = () => {
       <div id={'container'}>
         <div className={'banner'}></div>
         <div className={'leftSide'}>
-          <div
-            className={'userCard'}
-            onClick={() => {
-              tryLogout();
-            }}
-          >
-            로그아웃
+          <div className={'userCard'}>
+            <img className={'userImg'} />
+            <p className={'nickName'}>자하연 금도끼</p>
+            <p className={'school'}>이름</p>
+            <p className={'school'}>id</p>
+            <div className={'buttons'}>
+              <button>내 정보</button>
+              <button
+                onClick={() => {
+                  tryLogout();
+                }}
+              >
+                로그아웃
+              </button>
+            </div>
           </div>
           <div className={'left_menu'}>
             <li id={'my_post'}>내가 쓴 글</li>

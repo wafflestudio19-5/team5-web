@@ -30,15 +30,60 @@ div {display: block}
     height: 300px;
 
     .userCard {
-      height: 219px;
-      background-color: $keyColor;
-      display: flex;
+      height: 185px;
+      padding: 15px ;
       justify-content: center;
       align-items: center;
       font-size:16px;
       font-weight: bold;
       color:white;
-      cursor: pointer;
+
+      .userImg{
+        display: block;
+        background: yellow;
+        margin: 15px auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+      }
+      .nickName{
+        margin-bottom: 5px;
+        line-height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color:$nickNameFontColor;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .school{
+        line-height: 15px;
+        color: $postViewColor;
+        font-size: 12px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .buttons{
+        display: block;
+        margin-left: 12px;
+        margin-top: 7px;
+        button{
+          float: left;
+          display: block;
+          margin-right: 5px;
+          border: 1px solid $borderColor;
+          border-radius: 3px;
+          line-height: 25px;
+          color: $timeFontColor;
+          font-size: 13px;
+          text-align: center;
+          cursor: pointer;
+          background-color: $cardColor;
+        }
+      }
+
     }
 
     .left_menu {
