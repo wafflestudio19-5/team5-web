@@ -46,7 +46,10 @@ const TotalView = () => {
           <div className={'ad'}>광고</div>
         </div>
         <div className={'rightSide'}>
-          <div className={'searchBar'}>검색</div>
+          <input
+            className={'searchBar'}
+            placeholder={'전체 게시판의 글을 검색하세요!'}
+          />
           <RightMenu />
         </div>
         <div className="TotalView__main">
