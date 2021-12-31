@@ -1,17 +1,13 @@
-import { Link, Route, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch, useHistory, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import RightMenu from "../RightMenu/RightMenu";
 import PostView from "../PostView/PostView";
-import BoardView from "./BoardView/BoardView";
+import BoardView from "../BoardView/BoardView";
 
 interface BoardParams {
-  match: {
-    params: {
-      boardId: string;
-      postId: string;
-    };
-  };
+  boardId: string;
+  postId: string;
 }
 
 interface boardDetailDummy {
@@ -27,16 +23,22 @@ interface boardDetailDummyItem {
   content: string;
 }
 
-const Board = ({ match }: BoardParams) => {
+const DetailView = () => {
   const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
     id: "",
     name: "",
     data: [],
   });
 
+  const params: BoardParams = useParams();
+
   useEffect(() => {
-    setBoardDetail(getBoardDetailDummy(match.params.boardId));
-  }, [setBoardDetail, match.params.boardId]);
+    const data = getBoardDetailDummy(params.boardId);
+    console.log(data);
+    if (data) {
+      setBoardDetail(data);
+    }
+  }, [setBoardDetail, params.boardId]);
 
   return (
     <>
@@ -48,11 +50,7 @@ const Board = ({ match }: BoardParams) => {
           <div className="BoardView__main">
             <div className="BoardView__title">{boardDetail.name}</div>
             <Switch>
-              <Route
-                exact
-                path={`/${match.params.boardId}`}
-                component={BoardView}
-              />
+              <Route exact path={`/:boardId`} component={BoardView} />
               <Route path={`/:boardId/:postId`} component={PostView} />
             </Switch>
           </div>
@@ -62,4 +60,4 @@ const Board = ({ match }: BoardParams) => {
   );
 };
 
-export default Board;
+export default DetailView;

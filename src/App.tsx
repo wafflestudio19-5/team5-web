@@ -1,6 +1,6 @@
 import "./App.css";
 import "./scss/main.scss";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import Header from "./component/MainPage/Header/Header";
 import Home from "./component/MainPage/Home/Home";
 import Footer from "./component/MainPage/Footer/Footer";
@@ -27,6 +27,7 @@ function App() {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/" component={MainPage} />
+          <Redirect to="/" />
         </Switch>
       ) : (
         <AuthPage />
