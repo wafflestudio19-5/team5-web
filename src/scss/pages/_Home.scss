@@ -41,9 +41,32 @@ div {display: block}
       cursor: pointer;
     }
 
-    .menu {
+    .left_menu {
       margin-top: 5px;
       height: 122px;
+      list-style: none;
+      padding:0px;
+      font-size: 14px;
+
+      li{
+        display:flex;
+        align-items: center;
+        padding: 10px 0 10px 37px;
+        border-bottom: 1px solid $borderColor;
+        background-repeat:no-repeat;
+        background-size: 18px 15px;
+        background-position: 8%;
+        &#my_post{
+          background-image: url(https://everytime.kr/images/new/container.community.card.myarticle.png);
+        }
+        &#my_comment{
+          background-image: url(https://everytime.kr/images/new/container.community.card.mycommentarticle.png);
+        }
+        &#my_clip{
+          background-image: url(https://everytime.kr/images/new/container.community.card.myscrap.png);
+        }
+      }
+
     }
 
     .ad {
@@ -92,7 +115,10 @@ div {display: block}
       height: 432px;
     }
   }
+}
 
+li{
+  list-style: none;
 }
 
 
