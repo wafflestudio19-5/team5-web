@@ -16,6 +16,6 @@ export const getBoardDetailDummy = (id: string) => {
     case "4":
       return boardDetailDummy4;
     default:
-      return null;
+      return {};
   }
 };

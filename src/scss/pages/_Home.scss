@@ -30,12 +30,88 @@ div {display: block}
     height: 300px;
 
     .userCard {
-      height: 219px;
+      height: 185px;
+      padding: 15px ;
+      justify-content: center;
+      align-items: center;
+      font-size:16px;
+      font-weight: bold;
+      color:white;
+
+      .userImg{
+        display: block;
+        background: yellow;
+        margin: 15px auto;
+        width: 60px;
+        height: 60px;
+        border-radius: 6px;
+      }
+      .nickName{
+        margin-bottom: 5px;
+        line-height: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color:$nickNameFontColor;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+      }
+      .school{
+        line-height: 15px;
+        color: $postViewColor;
+        font-size: 12px;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .buttons{
+        display: block;
+        margin-left: 12px;
+        margin-top: 7px;
+        button{
+          float: left;
+          display: block;
+          margin-right: 5px;
+          border: 1px solid $borderColor;
+          border-radius: 3px;
+          line-height: 25px;
+          color: $timeFontColor;
+          font-size: 13px;
+          text-align: center;
+          cursor: pointer;
+          background-color: $cardColor;
+        }
+      }
+
     }
 
-    .menu {
+    .left_menu {
       margin-top: 5px;
       height: 122px;
+      list-style: none;
+      padding:0px;
+      font-size: 14px;
+
+      li{
+        display:flex;
+        align-items: center;
+        padding: 10px 0 10px 37px;
+        border-bottom: 1px solid $borderColor;
+        background-repeat:no-repeat;
+        background-size: 18px 15px;
+        background-position: 8%;
+        &#my_post{
+          background-image: url(https://everytime.kr/images/new/container.community.card.myarticle.png);
+        }
+        &#my_comment{
+          background-image: url(https://everytime.kr/images/new/container.community.card.mycommentarticle.png);
+        }
+        &#my_clip{
+          background-image: url(https://everytime.kr/images/new/container.community.card.myscrap.png);
+        }
+      }
+
     }
 
     .ad {
@@ -44,9 +120,136 @@ div {display: block}
     }
   }
 
-  .rightSide > div{
-    border : 1px solid $borderColor;
+  .rightSide > ul{
+    margin: 0 0 5px 0;
+    border-top: 1px solid $borderColor;
+    border-right: 1px solid $borderColor;
+    border-left: 1px solid $borderColor;;
     background-color: $cardColor;
+    padding: 0;
+
+    li{
+      border-bottom: 1px solid $borderColor;
+    }
+
+    .RightMenu__board-name{
+      line-height: 20px;
+      height: 20px;
+      padding: 10px;
+      h3{
+        margin: 0;
+        color: $rightMenuColor;
+        font-size: 14px;
+        display: inline-block;
+      }
+      span{
+        float: right;
+        line-height: 20px;
+        color: #a6a6a6;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+
+    .RightMenu__board-item1{
+      padding: 10px;
+      display: block;
+      height: 56px;
+      p{
+        margin:0 0 5px 0;
+        height: 36px;
+        line-height: 18px;
+        white-space: normal;
+        overflow: hidden;
+        color: $fontColor;
+        font-size: 13px;
+      }
+      h4{
+        float: left;
+        margin: 0 10px 0 0;
+        height: 14px;
+        line-height: 14px;
+        color: $postViewColor;
+        font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0;
+      }
+      .status{
+        float: left;
+        padding: 0;
+        li{
+          border: none;
+          background-repeat: no-repeat;
+          float: left;
+          margin-right: 5px;
+          padding-left: 15px;
+          height: 14px;
+          line-height: 14px;
+          font-size: 11px;
+          letter-spacing: 0;
+          background-size: 11px 11px;
+          background-position: left center;
+        }
+        .vote_active{
+          color: $keyColor;
+          background-image: url(https://everytime.kr/images/new/container.articles.vote.png);
+        }
+        .comment_active{
+          color: $comment_activeColor;
+          background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
+        }
+      }
+    }
+    .RightMenu__board-item2{
+      width: 100%;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding-left: 12px;
+      border-bottom: 1px solid #d6d6d6;
+      p{
+        font-size: 14px;
+        color: $fontColor;
+      }
+    }
+    .RightMenu__board-item3{
+      display: block;
+      padding: 10px;
+      .star{
+        width: 60px;
+        height: 12px;
+        float: left;
+        margin-bottom: 5px;
+        background: transparent url(https://everytime.kr/images/app.subject.rating.details.star.off.png) no-repeat;
+        background-size: 60px 12px;
+        .onStar{
+          background: transparent url(https://everytime.kr/images/app.subject.rating.details.star.on.png) no-repeat;
+          background-size: 60px 12px;
+        }
+      }
+      p{
+        line-height: 18px;
+        margin-bottom: 5px;
+        font-size: 13px;
+      }
+
+      p.title{
+        height: 18px;
+        margin-top: 18px;
+        font-weight: bold;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding-right: 20px;
+      }
+      p.small{
+        margin-top: 0;
+        height: 32px;
+        line-height: 16px;
+        color: $timeFontColor;
+        font-size: 12px;
+      }
+    }
+
   }
 
   .rightSide {
@@ -56,35 +259,30 @@ div {display: block}
     width: 325px;
     height: 400px;
 
-    .searchBar {
+    input {
+      width: 100%;
       height: 40px;
-    }
-    .sideNow {
-      margin-top: 5px;
-      height: 230px;
-    }
-    .sideHot {
-      margin-top: 5px;
-      height: 192px;
-    }
-    .sideBest {
-      margin-top: 5px;
-      height: 40px;
-    }
-    .sideSchool {
-      margin-top: 5px;
-      height: 116px;
-    }
-    .sideSchool {
-      margin-top: 5px;
-      height: 432px;
-    }
-    .sideLecEval {
-      margin-top: 5px;
-      height: 432px;
-    }
-  }
+      margin-bottom: 5px;
+      line-height: 20px;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 2px solid $borderColor;
+      background-repeat:no-repeat;
+      background-size: 50px;
+      background-position: right;
+      background-image: url(https://everytime.kr/images/new/aside.search.background.png);
 
+      &:focus{
+        outline: none;
+        border: 2px solid #797979;
+      }
+    }
+
+  }
+}
+
+li{
+  list-style: none;
 }
 
 

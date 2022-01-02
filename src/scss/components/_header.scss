@@ -17,15 +17,69 @@ nav.Header {
       float: left;
       margin-left: 24px;
       height: 100%;
-      background-color: yellow;
       width: 115px;
+      padding-top: 20px;
+
+      .logo_img{
+        width: 40px;
+        height: 40px;
+        vertical-align: middle;
+      }
+      p{
+        float: right;
+        margin: 0;
+        padding: 0;
+        display: block;
+        width: 60px;
+      }
+      span{
+        display: inline-block;
+        margin-right: 0;
+      }
+      .Header__title{
+        font-weight: bold;
+        margin-left: 5px;
+        font-size: 12px;
+        line-height: 15px;
+        width: 56px;
+        color: $keyColor;
+      }
+      .Header__schoolName{
+        line-height: 25px;
+        color: $HeadFontColor;
+        font-size: 22px;
+        width: 62px;
+      }
     }
 
     .Header__account {
       float: right;
       margin-right: 24px;
       height: 100%;
-      background-color: blue;
+      margin-top: 20px;
+      div{
+        position: relative;
+        display: inline-block;
+        margin-left: 4px;
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        box-sizing: border-box;
+        border: 1px solid #d6d6d6;
+        border-radius: 12px;
+        vertical-align: top;
+        background-repeat: no-repeat;
+      }
+      .message{
+        background-image: url(https://everytime.kr/images/common/icn_m_chat_gray800_light.png);
+        background-size: 24px 24px;
+        background-position: center;
+      }
+      .my{
+        background-image: url(https://everytime.kr/images/common/icn_m_account_gray800_light.png);
+        background-size: 24px 24px;
+        background-position: center;
+      }
     }
 
     .Header__menu {
