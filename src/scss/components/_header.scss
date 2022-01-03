@@ -27,17 +27,17 @@ nav.Header {
         height: 40px;
         vertical-align: middle;
       }
-      p{
+      .title__wrapper{
+        display: flex;
         float: right;
-        margin: 0;
-        padding: 0;
-        display: block;
-        width: 60px;
+        width: 65px;
+        flex-direction: column;
+        span{
+          display: inline-block;
+          margin-right: 0;
+        }
       }
-      span{
-        display: inline-block;
-        margin-right: 0;
-      }
+
       .Header__title{
         font-weight: bold;
         margin-left: 5px;

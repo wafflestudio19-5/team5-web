@@ -11,10 +11,10 @@ const Header = () => {
               className={'logo_img'}
             />
           </Link>
-          <p>
+          <div className={'title__wrapper'}>
             <span className={'Header__title'}>에브리타임</span>
             <span className={'Header__schoolName'}>서울대</span>
-          </p>
+          </div>
         </div>
         <ul className="Header__menu">
           <li className="active">
