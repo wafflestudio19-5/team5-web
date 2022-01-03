@@ -30,10 +30,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "winBuild": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
-    "deploy": "aws s3 sync ./build s3://waffle-mingyu --profile=mingyu",
-    "invalidate": "aws cloudfront create-invalidation --profile=mingyu --distribution-id E3S3X7A194SOI5 --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico",
-    "jyDeploy": "aws s3 sync ./build s3://t5frontendbucket --profile=designdefined",
-    "jyInvalidate": "aws cloudfront create-invalidation --profile=designdefined --distribution-id E29VZY20QCCFWR --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
+    "deploy": "aws s3 sync ./build s3://t5frontendbucket",
+    "invalidate": "aws cloudfront create-invalidation --distribution-id E29VZY20QCCFWR --paths / /index.html /error.html /service-worker.js /manifest.json /favicon.ico"
   },
   "eslintConfig": {
     "extends": [
