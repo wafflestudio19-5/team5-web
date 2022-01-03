@@ -12,13 +12,15 @@ nav.Header {
     margin: 0 auto;
     width: 1180px;
     height: 100%;
+    display: flex;
 
     .Header__logo {
+      display: flex;
       float: left;
-      margin-left: 24px;
       height: 100%;
       width: 115px;
-      padding-top: 20px;
+      align-items: center;
+      justify-content: space-between;
 
       .logo_img{
         width: 40px;
@@ -53,10 +55,9 @@ nav.Header {
     }
 
     .Header__account {
-      float: right;
-      margin-right: 24px;
       height: 100%;
-      margin-top: 20px;
+      display: flex;
+      align-items: center;
       div{
         position: relative;
         display: inline-block;

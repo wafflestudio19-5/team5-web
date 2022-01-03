@@ -16,14 +16,6 @@ const Header = () => {
             <span className={'Header__schoolName'}>서울대</span>
           </p>
         </div>
-        <div className="Header__account">
-          <Link to="/message">
-            <div className={'message'}></div>
-          </Link>
-          <Link to="/my">
-            <div className={'my'}></div>
-          </Link>
-        </div>
         <ul className="Header__menu">
           <li className="active">
             <Link to="/">게시판</Link>
@@ -35,6 +27,14 @@ const Header = () => {
             <Link to="/lecture">강의평가</Link>
           </li>
         </ul>
+        <div className="Header__account">
+          <Link to="/message">
+            <div className={'message'}></div>
+          </Link>
+          <Link to="/my">
+            <div className={'my'}></div>
+          </Link>
+        </div>
       </div>
     </nav>
   );
