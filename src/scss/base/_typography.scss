@@ -16,6 +16,18 @@ h2{
     font-weight: normal;
   }
 
+  &.medium_bold{
+    margin-bottom: 5px;
+    margin-top: 0;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+  }
+
+
+
   &.small{
 
   }

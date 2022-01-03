@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
+import Comment from "./Comment/Comment";
 
 interface PostViewParams {
   match: {
@@ -34,15 +35,18 @@ const PostView = ({ match }: PostViewParams) => {
   }, [setPostDetail, match.params.boardId, match.params.postId]);
 
   return (
-    <div className={"BoardView__post"}>
-      <div className={"BoardView__post__profile"}>
-        <div className={"BoardView__post__profile__img"}>사진</div>
-        <h3 className={"large"}>{postDetail.writer}</h3>
-        <ul className={"status"}></ul>
+    <div className={"PostView"}>
+      <div className={"BoardView__post"}>
+        <div className={"BoardView__post__profile"}>
+          <div className={"BoardView__post__profile__img"}>사진</div>
+          <h3 className={"large"}>{postDetail.writer}</h3>
+          <ul className={"status"}></ul>
+        </div>
+        <h2 className={"large"}>{postDetail.title}</h2>
+        <br />
+        <p className={"large"}>{postDetail.content}</p>
       </div>
-      <h2 className={"large"}>{postDetail.title}</h2>
-      <br />
-      <p className={"large"}>{postDetail.content}</p>
+      <Comment />
     </div>
   );
 };
