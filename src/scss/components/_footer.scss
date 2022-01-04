@@ -1,0 +1,28 @@
+.Footer{
+  margin: 0 auto 25px auto;
+  width: 1180px;
+  ul{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    li{
+      font-size: 12px;
+      margin-right: 8px;
+      a {
+        text-decoration:none;
+        color : $postViewColor;
+      }
+
+      &.policy{
+        font-weight: bold;
+        color: $timeFontColor;
+      }
+      &.copyright{
+        font-weight: bold;
+        color: $timeFontColor;
+      }
+    }
+  }
+}

@@ -1,0 +1,101 @@
+.leftBarWrapper{
+  width: 173px;
+  height: 300px;
+  flex-shrink: 0;
+  .userCard{
+    @include card-default;
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-size:16px;
+    justify-content: space-evenly;
+
+    .userImg{
+      display: block;
+      background: yellow;
+      margin: 15px auto;
+      width: 60px;
+      height: 60px;
+      border-radius: 6px;
+    }
+    .nickName{
+      margin-top: 0;
+      margin-bottom: 5px;
+      line-height: 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color:$nickNameFontColor;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+    }
+    .user{
+      line-height: 15px;
+      color: $postViewColor;
+      font-size: 12px;
+      text-align: center;
+      margin: 0;
+    }
+    .buttons{
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: 10px;
+    }
+
+    .buttons > button{
+        float: left;
+        display: block;
+        border: 1px solid $cardBorderColor;
+        border-radius: 3px;
+        line-height: 25px;
+        color: $timeFontColor;
+        font-size: 13px;
+        text-align: center;
+        cursor: pointer;
+        background-color: $cardColor;
+    }
+  }
+
+  .left_menu {
+    @include card-default;
+    padding: 0;
+    margin: 5px 0 5px 0;
+    flex-direction: column;
+    border-collapse: collapse;
+
+    li:not(:last-child){
+      border-bottom: 1px solid $cardBorderColor;
+    }
+
+    li{
+      @include li-default;
+      font-size: 14px;
+      display:flex;
+      align-items: center;
+      padding: 10px 0 10px 37px;
+      background-repeat:no-repeat;
+      background-size: 18px 15px;
+      background-position: 8%;
+      &#my_post{
+        background-image: url(https://everytime.kr/images/new/container.community.card.myarticle.png);
+      }
+      &#my_comment{
+        background-image: url(https://everytime.kr/images/new/container.community.card.mycommentarticle.png);
+      }
+      &#my_clip{
+        background-image: url(https://everytime.kr/images/new/container.community.card.myscrap.png);
+      }
+    }
+
+  }
+
+  .ad{
+    @include card-default;
+    width: 100%;
+    height: 115px;
+    margin-bottom: 5px;
+  }
+}

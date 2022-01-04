@@ -1,0 +1,36 @@
+.RightBarWrapper{
+  width: 325px;
+  flex-shrink: 0;
+
+  .cardNow, .cardHot, .cardBest, .cardLecture{
+    margin-bottom: 5px;
+    @include card-view-default('b');
+  }
+  .cardHot{
+    @include card-view-default('a');
+    h3{
+      color: $rightMenuColor;
+    }
+  }
+  .cardBest{
+    border-bottom: none;
+  }
+
+  .cardLecture{
+    .board-item{
+      .star{
+        width: 60px;
+        height: 12px;
+        float: left;
+        margin-bottom: 5px;
+        background: transparent url(https://everytime.kr/images/app.subject.rating.details.star.off.png) no-repeat;
+        background-size: 60px 12px;
+        .onStar{
+          background: transparent url(https://everytime.kr/images/app.subject.rating.details.star.on.png) no-repeat;
+          background-size: 60px 12px;
+        }
+      }
+    }
+  }
+
+}

@@ -1,6 +1,7 @@
-import { Route, Switch } from "react-router-dom";
-import Header from "./Header/Header";
-import Home from "./Home/Home";
+import { Route, Switch } from 'react-router-dom';
+import Header from './Header/Header';
+import Home from './Home/Home';
+import Footer from './Footer/Footer';
 
 const MainPage = () => {
   return (
@@ -11,6 +12,7 @@ const MainPage = () => {
         <Route path="/lecture" />
         <Route path="/" component={Home} />
       </Switch>
+      <Footer />
     </>
   );
 };

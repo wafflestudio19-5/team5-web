@@ -1,0 +1,20 @@
+.BoardView{
+  .BoardView__main{
+    display: flex;
+    flex-direction: column;
+    left:25px;
+    width:780px;
+    height:500px;
+  }
+
+  .BoardView__title{
+    width:748px;
+    height:29px;
+    left:25px;
+    padding:15px;
+    border: 1px solid $cardBorderColor;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+}
