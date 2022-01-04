@@ -1,5 +1,5 @@
 export const boardDummy = require("./board-dummy-data.json");
-
+export const commentDummy = require("./comment-dummy-data.json");
 const boardDetailDummy1 = require("./board-detail-1-dummy-data.json");
 const boardDetailDummy2 = require("./board-detail-2-dummy-data.json");
 const boardDetailDummy3 = require("./board-detail-3-dummy-data.json");
