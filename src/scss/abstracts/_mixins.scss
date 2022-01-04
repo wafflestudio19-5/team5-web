@@ -134,38 +134,41 @@
             font-weight: bold;
             letter-spacing: 0;
           }
-
           .status{
-            float: left;
-            padding: 0;
-            li{
-              display: flex;
-              align-items: center;
-              border: none;
-              background-repeat: no-repeat;
-              float: left;
-              margin-right: 5px;
-              padding-left: 15px;
-              height: 14px;
-              line-height: 14px;
-              font-size: 11px;
-              letter-spacing: 0;
-              background-size: 11px 11px;
-              background-position: left center;
-            }
-            .vote_active{
-              color: $keyColor;
-              background-image: url(https://everytime.kr/images/new/container.articles.vote.png);
-            }
-            .comment_active{
-              color: $comment_activeColor;
-              background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
-            }
+            @include stats-default;
           }
         }
 
       }
     }
   }
+}
 
+@mixin stats-default{
+  margin: 0;
+    float: left;
+    padding: 0;
+    li{
+      display: flex;
+      align-items: center;
+      border: none;
+      background-repeat: no-repeat;
+      float: left;
+      margin-right: 5px;
+      padding-left: 15px;
+      height: 14px;
+      line-height: 14px;
+      font-size: 11px;
+      letter-spacing: 0;
+      background-size: 11px 11px;
+      background-position: left center;
+    }
+    .vote_active{
+      color: $keyColor;
+      background-image: url(https://everytime.kr/images/new/container.articles.vote.png);
+    }
+    .comment_active{
+      color: $comment_activeColor;
+      background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
+    }
 }
