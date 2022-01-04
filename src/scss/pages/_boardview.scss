@@ -1,0 +1,77 @@
+.BoardView{
+  .BoardView__main{
+    display: flex;
+    flex-direction: column;
+    left:25px;
+    width:780px;
+    height:500px;
+  }
+
+  .BoardView__title{
+    width:748px;
+    height:29px;
+    left:25px;
+    padding:15px;
+    border: 1px solid $cardBorderColor;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .BoardView__list{
+    margin-top:5px;
+    list-style: none;
+    padding: 0px;
+
+    li{
+      height:93px;
+      border: 1px solid $cardBorderColor;
+      padding: 15px;
+      display:flex;
+      align-items: center;
+      .wrapper{
+        width: 748px;
+      }
+      &.BoardView__item{
+        a{
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    }
+
+  }
+
+  .BoardView__post{
+    width:748px;
+    left:25px;
+    display: block;
+    margin-top:5px;
+    padding:15px;
+    border: 1px solid $cardBorderColor;
+
+    .BoardView__post__profile__img{
+      float: left;
+      margin: 0 10px 15px 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      background-color: antiquewhite;
+    }
+
+    .BoardView__post__profile__writer{
+      display: block;
+      height: 20px;
+      max-width: 200px;
+      line-height: 20px;
+      font-size: 14px;
+      font-weight: bold;
+
+      color: #292929;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+
+  }
+}

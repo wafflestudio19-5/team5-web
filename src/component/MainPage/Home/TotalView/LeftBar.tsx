@@ -1,4 +1,15 @@
+import { useDispatch } from 'react-redux';
+import { deleteToken } from '../../../../function/localStorage';
+import { logout } from '../../../../redux/authorization';
+
 const LeftBar = () => {
+  const dispatch = useDispatch();
+
+  const tryLogout = () => {
+    deleteToken();
+    dispatch(logout());
+  };
+
   return (
     <div className={'leftBarWrapper'}>
       <div className={'userCard'}>
@@ -8,13 +19,7 @@ const LeftBar = () => {
         <p className={'user'}>id</p>
         <div className={'buttons'}>
           <button>내 정보</button>
-          <button
-          // onClick={() => {
-          //   tryLogout();
-          // }}
-          >
-            로그아웃
-          </button>
+          <button onClick={tryLogout}>로그아웃</button>
         </div>
       </div>
       <ul className={'left_menu'}>

@@ -7,7 +7,7 @@
     width:480px;
     padding:24px;
     margin-top:24px;
-    border: 1px solid $borderColor;
+    border: 1px solid $cardBorderColor;
     border-radius: 5px;
     color:$fontColor;
 
@@ -27,7 +27,7 @@
     select{
       height:32px;
       margin:5px;
-      border: 1px solid $borderColor;
+      border: 1px solid $cardBorderColor;
       border-radius: 10px;
       background-color: $cardColor;
     }

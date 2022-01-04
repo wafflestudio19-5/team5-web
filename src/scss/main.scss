@@ -1,32 +1,24 @@
 @import
-   "abstracts/variables",
-"abstracts/mixins"
-;
+  "abstracts/variables",
+  "abstracts/mixins";
 
 @import
-   "base/typography";
-
-@import "layout/TotalView/leftbar",
-"layout/TotalView/midview",
-"layout/TotalView/rightbar";
-
-//@import
-//   "components/loginandregister",
-//   "components/lobby",
-//   "components/login",
-//   "components/register",
-//   "components/header",
-//   "components/submenu",
-//   "components/bottom",
-//   "components/totalview",
-//   "components/boardview";
-
-@import "components/header",
-"components/submenu",
-"components/searchbar";
-
+  "base/typography";
 
 @import
-"pages/home";
-   //"pages/Home";
+  "components/TotalView/leftbar",
+  "components/TotalView/midview",
+  "components/TotalView/rightbar",
+  "components/header",
+  "components/submenu",
+  "components/searchbar",
+  "components/writepost";
+
+@import
+  "pages/Home",
+  "pages/lobby",
+  "pages/loginandregister",
+  "pages/login",
+  "pages/register",
+  "pages/boardview";
 
