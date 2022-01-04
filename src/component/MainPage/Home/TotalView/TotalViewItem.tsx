@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { boardDummy, getBoardDetailDummy } from "../../../../dummy/get-dummy";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { boardDummy, getBoardDetailDummy } from '../../../../dummy/get-dummy';
+import { Link } from 'react-router-dom';
 
 interface boardDummyItem {
   id: string;
@@ -27,8 +27,8 @@ interface boardDetailDummy {
 
 const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
   const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
-    id: "",
-    name: "",
+    id: '',
+    name: '',
     data: [],
   });
   useEffect(() => {
@@ -36,16 +36,22 @@ const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
   });
 
   return (
-    <div className="TotalView__card">
-      <ul className="TotalView__board">
-        <li key="label" className="TotalView__board-name">
-          <Link to={`/${item.id}`}>{item.name}</Link>
-        </li>
+    <div className="card">
+      <h3 key="label" className="board-name">
+        <Link to={`/${item.id}`}>{item.name}</Link>
+      </h3>
+      <ul className="board">
+        {/*<li key="label" className="board-name">*/}
+        {/*  <Link to={`/${item.id}`}>*/}
+        {/*    <h3>{item.name}</h3>*/}
+        {/*  </Link>*/}
+        {/*</li>*/}
         {boardDetail.data.map((item) => (
-          <li key={item.id} className="BoardView__item">
+          <li key={item.id} className="board-item">
             <Link to={`/${boardDetail.id}/${item.id}`}>
               <p>{item.title}</p>
             </Link>
+            <time>시간</time>
           </li>
         ))}
       </ul>

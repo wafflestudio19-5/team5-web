@@ -1,0 +1,171 @@
+@mixin card-default {
+  display: flex;
+  border: 1px solid $cardBorderColor;
+  background-color: $cardColor;
+  box-sizing: border-box;
+}
+
+@mixin board-default {
+  display: flex;
+  border: 1px solid $boardBorderColor;
+  background-color: $boardColor;
+  box-sizing: border-box;
+}
+
+@mixin li-default {
+  list-style: none;
+}
+
+@mixin card-view-default($type:'a'){
+  h3{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    height: 40px;
+    font-weight: bold;
+    box-sizing: border-box;
+    margin: 0;
+    font-size: 14px;
+    border-bottom: 1px solid $cardBorderColor;
+  }
+  a{
+    text-decoration: none;
+    color:inherit;
+  }
+  ul{
+    padding: 0;
+    margin: 0;
+  }
+  li{
+    box-sizing: border-box;
+    padding: 10px;
+    list-style: none;
+  }
+
+  li:not(:last-child){
+    border-bottom: 1px solid $cardBorderColor;
+  }
+
+  @if $type == 'a'{
+    @include card-default;
+    display: block;
+    h3{
+      color: $keyColor;
+    }
+    .board{
+      .board-item{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-size: 14px;
+        width: 100%;
+        p {
+          display: block;
+          margin: 0;
+          width: 235px;
+          height: 17px;
+          line-height: 18px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: $fontColor;
+        }
+        time{
+          display: block;
+          margin: 0 0 0 5px;
+          width: 29px;
+          height: 17px;
+          color: $timeFontColor;
+        }
+      }
+    }
+  }
+
+  @else{
+    @include board-default;
+    display: block;
+    h3{
+      display: flex;
+      justify-content: space-between;
+      color: $rightMenuColor;
+      span{
+        float: right;
+        line-height: 20px;
+        color: $postViewColor;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+    .board{
+      .board-item{
+        p{
+          margin: 0 0 5px 0;
+          height: 36px;
+          line-height: 18px;
+          white-space: normal;
+          overflow: hidden;
+          color: $fontColor;
+          font-size: 13px;
+          &.card-title{
+            font-weight: bold;
+            height: 18px;
+            font-weight: bold;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+          &.card-content{
+            height: 32px;
+            line-height: 16px;
+            color: $timeFontColor;
+            font-size: 12px;
+          }
+        }
+
+        .card-information{
+          display: flex;
+          align-items: center;
+          h4, time{
+            float: left;
+            margin: 0 10px 0 0;
+            height: 14px;
+            line-height: 14px;
+            color: $postViewColor;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 0;
+          }
+
+          .status{
+            float: left;
+            padding: 0;
+            li{
+              display: flex;
+              align-items: center;
+              border: none;
+              background-repeat: no-repeat;
+              float: left;
+              margin-right: 5px;
+              padding-left: 15px;
+              height: 14px;
+              line-height: 14px;
+              font-size: 11px;
+              letter-spacing: 0;
+              background-size: 11px 11px;
+              background-position: left center;
+            }
+            .vote_active{
+              color: $keyColor;
+              background-image: url(https://everytime.kr/images/new/container.articles.vote.png);
+            }
+            .comment_active{
+              color: $comment_activeColor;
+              background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+}

@@ -18,7 +18,7 @@ div {display: block}
   }
 
   .leftSide > div{
-    border : 1px solid $borderColor;
+    border : 1px solid $cardBorderColor;
     background-color: $cardColor;
   }
 
@@ -98,7 +98,7 @@ div {display: block}
         display:flex;
         align-items: center;
         padding: 10px 0 10px 37px;
-        border-bottom: 1px solid $borderColor;
+        border-bottom: 1px solid $cardBorderColor;
         background-repeat:no-repeat;
         background-size: 18px 15px;
         background-position: 8%;

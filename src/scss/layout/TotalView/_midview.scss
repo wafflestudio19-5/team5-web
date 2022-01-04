@@ -1,0 +1,28 @@
+.midViewWrapper{
+  width: 600px;
+  flex-shrink: 0;
+  .banner{
+    @include card-default;
+    width: 100%;
+    height: 159px;
+    margin-bottom: 5px;
+  }
+
+  .TotalView__main{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .card{
+    width: 295px;
+    @include card-view-default('a');
+    margin-bottom: 5px;
+    .board{
+      .board-name{
+        color:$keyColor;
+      }
+    }
+  }
+
+}
