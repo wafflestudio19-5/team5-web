@@ -1,0 +1,35 @@
+.Comment{
+
+
+
+  &.Comment__list{
+    margin-top:5px;
+    list-style: none;
+    padding: 0px;
+
+    li{
+      height:93px;
+      border: 1px solid $borderColor;
+      padding: 15px;
+      display:flex;
+      align-items: center;
+      .wrapper{
+        width: 748px;
+      }
+      &.Comment__item{
+        a{
+          color: inherit;
+          text-decoration: none;
+        }
+        &.Comment__header{
+
+          float:left;
+      }
+    }
+
+  }
+
+
+
+  }
+}
