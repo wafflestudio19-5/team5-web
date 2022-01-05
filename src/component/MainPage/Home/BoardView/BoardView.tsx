@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import request from "../../../../API/API";
 import axios from "axios";
 interface BoardParams {
-  match: {
-    path: string;
-  };
+  boardId: string;
 }
 
-interface boardDetail {
+interface BoardDetail {
   count: number;
   next: string;
   previous: string;
-  results: boardDetailItem[];
+  results: BoardDetailItem[];
 }
 
-interface boardDetailItem {
+interface BoardDetailItem {
   board: string;
   writer: string;
   title: string;
@@ -25,8 +23,8 @@ interface boardDetailItem {
   tags: string[];
 }
 
-const BoardView = ({ match }: BoardParams) => {
-  const [boardDetail, setBoardDetail] = useState<boardDetail>({
+const BoardView = () => {
+  const [boardDetail, setBoardDetail] = useState<BoardDetail>({
     count: 0,
     next: "",
     previous: "",
@@ -34,9 +32,12 @@ const BoardView = ({ match }: BoardParams) => {
   });
   const [showForm, setShowForm] = useState<boolean>(false);
 
+  const path: BoardParams = useParams();
+
   const getBoardDetail = () => {
+    console.log(path);
     request
-      .get(`/post/?board=${match.path.slice(1)}`)
+      .get(`/post/?limit=5&offset=0&board=${path.boardId}`)
       .then((response) => {
         setBoardDetail(response.data);
       })
@@ -45,7 +46,7 @@ const BoardView = ({ match }: BoardParams) => {
       });
   };
 
-  useEffect(getBoardDetail, [setBoardDetail, match.path]);
+  useEffect(getBoardDetail, [setBoardDetail, path]);
 
   const openWrite = () => setShowForm(!showForm);
 
@@ -114,7 +115,7 @@ const BoardView = ({ match }: BoardParams) => {
         <ul className="BoardView__list">
           {boardDetail.results.map((item) => (
             <li key={item.id} className="BoardView__item">
-              <Link to={`${match.path.slice(1)}/${item.id}`}>
+              <Link to={`${path}/${item.id}`}>
                 <div className={"wrapper"}>
                   <h2 className={"medium"}>{item.title}</h2> <br />
                   <p className={"small"}>{item.content}</p>
