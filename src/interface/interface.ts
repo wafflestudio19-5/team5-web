@@ -1,4 +1,4 @@
-export interface boardItem {
+export interface boardItemType {
   anonym_enabled: boolean;
   board_type: number;
   created_at: string;
@@ -10,6 +10,25 @@ export interface boardItem {
   question_enabled: boolean;
   title: string;
   title_enabled: boolean;
+}
+
+export interface postItemType {
+  id: number;
+  board: string;
+  writer: string;
+  title: string;
+  content: string;
+  tags: [];
+  images: [];
+  is_anonymous: boolean;
+  is_question: boolean;
+}
+
+export interface postListType {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: [postItemType] | [];
 }
 
 export default {};

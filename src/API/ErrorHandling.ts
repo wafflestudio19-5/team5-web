@@ -4,7 +4,7 @@ interface AxiosError extends Error {
 
 export const getErrorData = (inputError: unknown) => {
   const error = inputError as AxiosError;
-  if (error.response.data) {
+  if (error?.response?.data) {
     return error.response.data;
   } else {
     return null;

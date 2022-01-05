@@ -1,18 +1,18 @@
 import TotalViewItem from "./TotalViewItem";
 import { useEffect, useState } from "react";
-import { getBoard } from "../../../../API/boardAPI";
-import { boardItem } from "../../../../interface/interface";
+import { getBoardAPI } from "../../../../API/boardAPI";
+import { boardItemType } from "../../../../interface/interface";
 
 const MidView = () => {
   const [boardList, setBoardList] = useState([]);
   useEffect(() => {
-    getBoard().then((res) => setBoardList(res));
-  });
+    getBoardAPI().then((res) => setBoardList(res));
+  }, []);
   return (
     <div className={"midViewWrapper"}>
       <div className={"banner"} />
       <div className="TotalView__main">
-        {boardList.map((item: boardItem) => (
+        {boardList.map((item: boardItemType) => (
           <TotalViewItem key={item.id} item={item} />
         ))}
       </div>

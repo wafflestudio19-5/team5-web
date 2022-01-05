@@ -12,6 +12,15 @@ const getToken = () => {
   }
 };
 
+export const makeQuery = (queryObject: object) => {
+  let query = "?";
+  for (const [key, value] of Object.entries(queryObject)) {
+    query += `${key}=${value}&`;
+  }
+  query = query.slice(0, -1); // query가 비어있을 때의 ?나 key=value 마지막의 &을 삭제합니다
+  return query;
+};
+
 export const plainRequest: AxiosInstance = axios.create({
   baseURL: URL,
 });

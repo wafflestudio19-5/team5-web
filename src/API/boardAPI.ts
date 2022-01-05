@@ -1,7 +1,7 @@
 import { authRequest } from "./API";
 import { getErrorData } from "./ErrorHandling";
 
-export const getBoard = async () => {
+export const getBoardAPI = async () => {
   try {
     const response = await authRequest.get("/board/");
     return response.data;

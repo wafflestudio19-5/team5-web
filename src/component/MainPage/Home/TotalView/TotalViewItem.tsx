@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { boardItem } from "../../../../interface/interface";
-
-interface boardDetailDummyItem {
-  id: string;
-  writer: string;
-  title: string;
-  content: string;
-}
-
-interface boardDetailType {
-  id: string;
-  title: string;
-  data: boardDetailDummyItem[];
-}
+import { boardItemType, postListType } from "../../../../interface/interface";
+import { getPostAPI } from "../../../../API/postAPI";
 
 interface totalViewItemProps {
-  item: boardItem;
+  item: boardItemType;
 }
 
 const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
-  const [boardDetail, setBoardDetail] = useState<boardDetailType>({
-    id: "",
-    title: "",
-    data: [],
+  const [boardPreview, setBoardPreview] = useState<postListType>({
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
   });
-  useEffect(() => {});
+  useEffect(() => {
+    getPostAPI(item.id, 0, 4).then((res) => setBoardPreview(res));
+  }, []);
 
   return (
     <div className="card">
@@ -33,19 +24,14 @@ const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
         <Link to={`/${item.id}`}>{item.title}</Link>
       </h3>
       <ul className="board">
-        {/*<li key="label" className="board-name">*/}
-        {/*  <Link to={`/${item.id}`}>*/}
-        {/*    <h3>{item.name}</h3>*/}
-        {/*  </Link>*/}
-        {/*</li>*/}
-        {/*{boardDetail.data.map((item) => (*/}
-        {/*  <li key={item.id} className="board-item">*/}
-        {/*    <Link to={`/${boardDetail.id}/${item.id}`}>*/}
-        {/*      <p>{item.title}</p>*/}
-        {/*    </Link>*/}
-        {/*    <time>시간</time>*/}
-        {/*  </li>*/}
-        {/*))}*/}
+        {boardPreview.results.map((postItem) => (
+          <li key={postItem.id} className="board-item">
+            <Link to={`/${item.id}/${postItem.id}`}>
+              <p>{postItem.title}</p>
+            </Link>
+            <time>시간</time>
+          </li>
+        ))}
       </ul>
     </div>
   );
