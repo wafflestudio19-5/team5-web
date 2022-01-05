@@ -11,7 +11,17 @@ export const getPostAPI = async (
     );
     return response.data;
   } catch (e) {
-    console.log(getErrorData(e));
+    console.log("게시글 리스트 불러오기 실패!"); //테스트용
+    return [];
+  }
+};
+
+export const getPostWithURLAPI = async (URL: string) => {
+  try {
+    const response = await authRequest.get(URL);
+    return response.data;
+  } catch (e) {
+    console.log("게시글 리스트 불러오기 실패!"); //테스트용
     return [];
   }
 };

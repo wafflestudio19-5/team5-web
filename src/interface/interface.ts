@@ -28,7 +28,7 @@ export interface postListType {
   count: number;
   next: string | null;
   previous: string | null;
-  results: [postItemType] | [];
+  results: postItemType[] | [];
 }
 
 export default {};
