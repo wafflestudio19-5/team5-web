@@ -31,6 +31,8 @@ const BoardView = () => {
     results: [],
   });
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [postTitle, setPostTitle] = useState<string>("");
+  const [postContent, setPostContent] = useState<string>("");
 
   const path: BoardParams = useParams();
 
@@ -49,6 +51,28 @@ const BoardView = () => {
 
   const openWrite = () => setShowForm(!showForm);
 
+  const submitPost = () => {
+    if (postContent === "") {
+      window.alert("내용을 입력해주세요.");
+    } else if (postTitle === "") {
+      window.alert("제목을 입력해주세요.");
+    } else {
+      request
+        .post(`/post/`, {
+          title: postTitle,
+          content: postContent,
+          tags: [""],
+          is_anonymous: false,
+          is_question: false,
+        })
+        .then((response) => {})
+        .catch((err) => {
+          console.log(err.detail);
+          console.log("게시글 작성 실패!"); //테스트용
+        });
+    }
+  };
+
   return (
     <>
       {showForm ? (
@@ -59,6 +83,7 @@ const BoardView = () => {
               name={"title"}
               autoComplete={"off"}
               placeholder={"글 제목"}
+              onChange={(e) => setPostTitle(e.target.value)}
             />
           </p>
           <p className={"Write__content"}>
@@ -90,12 +115,13 @@ const BoardView = () => {
                 "- 음란물, 성적 수치심을 유발하는 행위 \n" +
                 "- 스포일러, 공포, 속임, 놀라게 하는 행위 "
               }
+              onChange={(e) => setPostContent(e.target.value)}
             />
           </p>
           <ul className={"option"}>
             <li title={"해시태그"} className={"hashtag"} />
             <li title={"첨부"} className={"attach"} />
-            <li title={"완료"} className={"submit"} />
+            <li title={"완료"} className={"submit"} onClick={submitPost} />
             <li title={"익명"} className={"anonymus"} />
             <li title={"질문"} className={"question"} />
           </ul>
@@ -116,8 +142,9 @@ const BoardView = () => {
             <li key={item.id} className="BoardView__item">
               <Link to={`${path.boardId}/${item.id}`}>
                 <div className={"wrapper"}>
-                  <h2 className={"medium"}>{item.title}</h2> <br />
+                  <h2 className={"medium"}>{item.title}</h2>
                   <p className={"small"}>{item.content}</p>
+                  <p className={"small"}>{item.writer}</p>
                 </div>
               </Link>
             </li>
