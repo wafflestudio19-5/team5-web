@@ -1,18 +1,35 @@
 import { useEffect, useState } from "react";
-import { commentDummy } from "../../../../../dummy/get-dummy";
+import { useParams } from "react-router-dom";
+import request from "../../../../../API/API";
 
 const Comment = () => {
-  interface commentItem {
+  interface CommentItem {
     id: number;
     writer: string;
     content: string;
     time: string;
     profile: string;
   }
+  interface PostViewParams {
+    boardId: string;
+    postId: string;
+  }
+  const path: PostViewParams = useParams();
 
-  const [commentList, setCommentList] = useState<commentItem[]>([]);
+  const getCommentList = () => {
+    request
+      .get(`/post/${path.postId}/comment`)
+      .then((response) => {
+        setCommentList(response.data);
+      })
+      .catch(() => {
+        console.log("댓 불러오기 실패!"); //테스트용
+      });
+  };
+
+  const [commentList, setCommentList] = useState<CommentItem[]>([]);
   useEffect(() => {
-    setCommentList(commentDummy);
+    getCommentList();
   });
 
   const [isAnonymous, setAnonymous] = useState<boolean>(false); //익명 여부
