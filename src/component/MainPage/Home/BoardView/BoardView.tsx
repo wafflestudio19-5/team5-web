@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import { Link } from "react-router-dom";
-import request from "../../../../API/API";
+import { plainRequest } from "../../../../API/API";
 import axios from "axios";
 interface BoardParams {
   match: {
@@ -35,7 +35,7 @@ const BoardView = ({ match }: BoardParams) => {
   const [showForm, setShowForm] = useState<boolean>(false);
 
   const getBoardDetail = () => {
-    request
+    plainRequest
       .get(`/post/?board=${match.path.slice(1)}`)
       .then((response) => {
         setBoardDetail(response.data);
