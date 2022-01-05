@@ -1,16 +1,6 @@
-import { useEffect, useState } from 'react';
-import { boardDummy, getBoardDetailDummy } from '../../../../dummy/get-dummy';
-import { Link } from 'react-router-dom';
-
-interface boardDummyItem {
-  id: string;
-  name: string;
-  available: boolean;
-}
-
-interface totalViewItemProps {
-  item: boardDummyItem;
-}
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { boardItem } from "../../../../interface/interface";
 
 interface boardDetailDummyItem {
   id: string;
@@ -19,26 +9,28 @@ interface boardDetailDummyItem {
   content: string;
 }
 
-interface boardDetailDummy {
+interface boardDetailType {
   id: string;
-  name: string;
+  title: string;
   data: boardDetailDummyItem[];
 }
 
+interface totalViewItemProps {
+  item: boardItem;
+}
+
 const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
-  const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
-    id: '',
-    name: '',
+  const [boardDetail, setBoardDetail] = useState<boardDetailType>({
+    id: "",
+    title: "",
     data: [],
   });
-  useEffect(() => {
-    setBoardDetail(getBoardDetailDummy(item.id));
-  });
+  useEffect(() => {});
 
   return (
     <div className="card">
       <h3 key="label" className="board-name">
-        <Link to={`/${item.id}`}>{item.name}</Link>
+        <Link to={`/${item.id}`}>{item.title}</Link>
       </h3>
       <ul className="board">
         {/*<li key="label" className="board-name">*/}
@@ -46,14 +38,14 @@ const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
         {/*    <h3>{item.name}</h3>*/}
         {/*  </Link>*/}
         {/*</li>*/}
-        {boardDetail.data.map((item) => (
-          <li key={item.id} className="board-item">
-            <Link to={`/${boardDetail.id}/${item.id}`}>
-              <p>{item.title}</p>
-            </Link>
-            <time>시간</time>
-          </li>
-        ))}
+        {/*{boardDetail.data.map((item) => (*/}
+        {/*  <li key={item.id} className="board-item">*/}
+        {/*    <Link to={`/${boardDetail.id}/${item.id}`}>*/}
+        {/*      <p>{item.title}</p>*/}
+        {/*    </Link>*/}
+        {/*    <time>시간</time>*/}
+        {/*  </li>*/}
+        {/*))}*/}
       </ul>
     </div>
   );
