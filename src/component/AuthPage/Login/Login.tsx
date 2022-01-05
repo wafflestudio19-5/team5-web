@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { plainRequest } from "../../../API/API";
+import request from "../../../API/API";
 import { AxiosResponse } from "axios";
 import { login } from "../../../redux/authorization";
 import { useHistory } from "react-router-dom";
@@ -25,7 +25,7 @@ const Login = () => {
     setLoginInput({ ...loginInput, password: input });
   };
   const tryLogin = (input: LoginInputType) => {
-    plainRequest
+    request
       .post<LoginInputType, AxiosResponse>("/user/login/", input)
       .then((response: AxiosResponse) => {
         if (response.data.success) {

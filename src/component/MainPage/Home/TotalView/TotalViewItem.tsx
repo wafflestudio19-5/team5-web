@@ -1,33 +1,55 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { boardItemType, postListType } from "../../../../interface/interface";
-import { getPostAPI } from "../../../../API/postAPI";
+import { useEffect, useState } from 'react';
+import { boardDummy, getBoardDetailDummy } from '../../../../dummy/get-dummy';
+import { Link } from 'react-router-dom';
+
+interface boardDummyItem {
+  id: string;
+  name: string;
+  available: boolean;
+}
 
 interface totalViewItemProps {
-  item: boardItemType;
+  item: boardDummyItem;
+}
+
+interface boardDetailDummyItem {
+  id: string;
+  writer: string;
+  title: string;
+  content: string;
+}
+
+interface boardDetailDummy {
+  id: string;
+  name: string;
+  data: boardDetailDummyItem[];
 }
 
 const TotalViewItem: React.FC<totalViewItemProps> = ({ item }) => {
-  const [boardPreview, setBoardPreview] = useState<postListType>({
-    count: 0,
-    next: null,
-    previous: null,
-    results: [],
+  const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
+    id: '',
+    name: '',
+    data: [],
   });
   useEffect(() => {
-    getPostAPI(item.id, 0, 4).then((res) => setBoardPreview(res));
-  }, []);
+    setBoardDetail(getBoardDetailDummy(item.id));
+  });
 
   return (
     <div className="card">
       <h3 key="label" className="board-name">
-        <Link to={`/${item.id}`}>{item.title}</Link>
+        <Link to={`/${item.id}`}>{item.name}</Link>
       </h3>
       <ul className="board">
-        {boardPreview.results.map((postItem) => (
-          <li key={postItem.id} className="board-item">
-            <Link to={`/${item.id}/${postItem.id}`}>
-              <p>{postItem.title}</p>
+        {/*<li key="label" className="board-name">*/}
+        {/*  <Link to={`/${item.id}`}>*/}
+        {/*    <h3>{item.name}</h3>*/}
+        {/*  </Link>*/}
+        {/*</li>*/}
+        {boardDetail.data.map((item) => (
+          <li key={item.id} className="board-item">
+            <Link to={`/${boardDetail.id}/${item.id}`}>
+              <p>{item.title}</p>
             </Link>
             <time>시간</time>
           </li>
