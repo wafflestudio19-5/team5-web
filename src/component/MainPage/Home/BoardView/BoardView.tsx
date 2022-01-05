@@ -42,7 +42,7 @@ const BoardView = () => {
   return (
     <>
       {showForm ? (
-        <Write />
+        <Write boardId={Number(params.boardId)} />
       ) : (
         <button className={"BoardView__writePost"} onClick={openWrite}>
           새 글을 작성해주세요!

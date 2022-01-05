@@ -1,12 +1,42 @@
-const Write = () => {
+import { useState } from "react";
+import { postInputType } from "../../../../interface/interface";
+import { postPostAPI } from "../../../../API/postAPI";
+
+interface WriteParams {
+  boardId: number;
+}
+
+const Write = ({ boardId }: WriteParams) => {
+  const [postInput, setPostInput] = useState<postInputType>({
+    title: "",
+    content: "",
+    tags: [],
+    is_anonymous: false,
+    is_question: false,
+  });
+
+  const writePost = (board: number, input: postInputType) => {
+    postPostAPI(board, input).then((response) => console.log(response));
+  };
+
   return (
-    <form className={"Write"}>
+    <form
+      className={"Write"}
+      onSubmit={(event) => {
+        event.preventDefault();
+        writePost(boardId, postInput);
+      }}
+    >
       <p className={"Write__title"}>
         <input
           className={"title"}
           name={"title"}
           autoComplete={"off"}
           placeholder={"글 제목"}
+          value={postInput.title}
+          onChange={(e) => {
+            setPostInput({ ...postInput, title: e.target.value });
+          }}
         />
       </p>
       <p className={"Write__content"}>
@@ -38,12 +68,18 @@ const Write = () => {
             "- 음란물, 성적 수치심을 유발하는 행위 \n" +
             "- 스포일러, 공포, 속임, 놀라게 하는 행위 "
           }
+          value={postInput.content}
+          onChange={(e) => {
+            setPostInput({ ...postInput, content: e.target.value });
+          }}
         />
       </p>
       <ul className={"option"}>
         <li title={"해시태그"} className={"hashtag"} />
         <li title={"첨부"} className={"attach"} />
-        <li title={"완료"} className={"submit"} />
+        <li title={"완료"} className={"submit"}>
+          <button type="submit"></button>
+        </li>
         <li title={"익명"} className={"anonymus"} />
         <li title={"질문"} className={"question"} />
       </ul>

@@ -31,4 +31,12 @@ export interface postListType {
   results: postItemType[] | [];
 }
 
+export interface postInputType {
+  title: string;
+  content: string;
+  tags: string[];
+  is_anonymous: boolean;
+  is_question: boolean;
+}
+
 export default {};

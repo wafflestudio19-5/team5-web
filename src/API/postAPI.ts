@@ -1,5 +1,6 @@
 import { authRequest, makeQuery } from "./API";
 import { getErrorData } from "./ErrorHandling";
+import { postInputType } from "../interface/interface";
 export const getPostAPI = async (
   board: number,
   offset: number = 0,
@@ -23,5 +24,18 @@ export const getPostWithURLAPI = async (URL: string) => {
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용
     return [];
+  }
+};
+
+export const postPostAPI = async (board: number, input: postInputType) => {
+  try {
+    const response = await authRequest.post(
+      `/post/${makeQuery({ board: board })}`,
+      input
+    );
+    return response.data;
+  } catch (e) {
+    console.log("게시글 업로드 실패!"); //테스트용
+    return e;
   }
 };
