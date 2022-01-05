@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import Comment from "./Comment/Comment";
+import { useParams } from "react-router-dom";
+import request from "../../../../API/API";
 
 interface PostViewParams {
-  match: {
-    params: {
-      boardId: string;
-      postId: string;
-    };
-  };
+  boardId: string;
+  postId: string;
 }
 
 interface BoardDetailDummyItem {
@@ -18,7 +16,19 @@ interface BoardDetailDummyItem {
   content: string;
 }
 
-const PostView = ({ match }: PostViewParams) => {
+const PostView = () => {
+  const getPostDetail = () => {
+    request
+      .get(`/post/${path.postId}`)
+      .then((response) => {
+        setPostDetail(response.data);
+      })
+      .catch(() => {
+        console.log("게시글 불러오기 실패!"); //테스트용
+      });
+  };
+
+  const path: PostViewParams = useParams();
   const [postDetail, setPostDetail] = useState<BoardDetailDummyItem>({
     id: "",
     writer: "",
@@ -27,12 +37,8 @@ const PostView = ({ match }: PostViewParams) => {
   });
 
   useEffect(() => {
-    setPostDetail(
-      getBoardDetailDummy(match.params.boardId).data.find(
-        (x: { id: string }) => x.id === match.params.postId
-      )
-    );
-  }, [setPostDetail, match.params.boardId, match.params.postId]);
+    getPostDetail();
+  }, [setPostDetail, path.boardId, path.postId]);
 
   return (
     <div className={"BoardView__post"}>

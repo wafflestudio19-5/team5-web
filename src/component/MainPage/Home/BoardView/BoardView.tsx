@@ -35,7 +35,6 @@ const BoardView = () => {
   const path: BoardParams = useParams();
 
   const getBoardDetail = () => {
-    console.log(path);
     request
       .get(`/post/?limit=5&offset=0&board=${path.boardId}`)
       .then((response) => {
@@ -115,7 +114,7 @@ const BoardView = () => {
         <ul className="BoardView__list">
           {boardDetail.results.map((item) => (
             <li key={item.id} className="BoardView__item">
-              <Link to={`${path}/${item.id}`}>
+              <Link to={`${path.boardId}/${item.id}`}>
                 <div className={"wrapper"}>
                   <h2 className={"medium"}>{item.title}</h2> <br />
                   <p className={"small"}>{item.content}</p>
