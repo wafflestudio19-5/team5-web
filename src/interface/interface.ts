@@ -39,4 +39,12 @@ export interface postInputType {
   is_question: boolean;
 }
 
+export interface CommentItemType {
+  id: number;
+  writer: string;
+  content: string;
+  time: string;
+  profile: string;
+}
+
 export default {};

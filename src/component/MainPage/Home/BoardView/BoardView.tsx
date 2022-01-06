@@ -24,7 +24,7 @@ const BoardView = () => {
     getPostAPI(Number(params.boardId)).then((response) =>
       setPostList(response)
     );
-  }, []);
+  }, [params]);
 
   const getURL = (input: string | null) => {
     if (input) {

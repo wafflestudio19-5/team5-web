@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
-import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import Comment from "./Comment/Comment";
+import { useHistory, useParams } from "react-router-dom";
+import request from "../../../../API/API";
+import { getPostDetailAPI } from "../../../../API/postDetailAPI";
 
 interface PostViewParams {
-  match: {
-    params: {
-      boardId: string;
-      postId: string;
-    };
-  };
+  boardId: string;
+  postId: string;
 }
 
 interface BoardDetailDummyItem {
@@ -18,7 +16,16 @@ interface BoardDetailDummyItem {
   content: string;
 }
 
-const PostView = ({ match }: PostViewParams) => {
+const PostView = () => {
+  const history = useHistory();
+
+  const getPostDetail = () => {
+    getPostDetailAPI(parseInt(path.postId)).then((response) =>
+      setPostDetail(response)
+    );
+  };
+
+  const path = useParams<PostViewParams>();
   const [postDetail, setPostDetail] = useState<BoardDetailDummyItem>({
     id: "",
     writer: "",
@@ -26,13 +33,26 @@ const PostView = ({ match }: PostViewParams) => {
     content: "",
   });
 
+  const goBack = () => {
+    history.push(`/${path.boardId}`);
+  };
+  /*
+  const deletePost = () => {
+    if (window.confirm("이 글을 삭제하시겠습니까?")) {
+      request
+        .delete(`/post/${path.postId}`)
+        .then(() => {
+          goBack();
+        })
+        .catch(() => {
+          console.log("게시글 삭제 실패!"); //테스트용
+        });
+    }
+  };
+*/
   useEffect(() => {
-    setPostDetail(
-      getBoardDetailDummy(match.params.boardId).data.find(
-        (x: { id: string }) => x.id === match.params.postId
-      )
-    );
-  }, [setPostDetail, match.params.boardId, match.params.postId]);
+    getPostDetail();
+  }, [setPostDetail, path.boardId, path.postId]);
 
   return (
     <div className={"BoardView__post"}>
@@ -43,8 +63,8 @@ const PostView = ({ match }: PostViewParams) => {
           <time>시간</time>
         </div>
         <ul>
-          <li>쪽지</li>
-          <li>신고</li>
+          <li>수정</li>
+          <li>삭제</li>
         </ul>
       </div>
       <h2 className={"large"}>{postDetail.title}</h2>
@@ -60,6 +80,7 @@ const PostView = ({ match }: PostViewParams) => {
         <span className={"scrap"}>스크랩</span>
       </div>
       <Comment />
+      <button onClick={goBack}>글 목록</button>
     </div>
   );
 };
