@@ -25,7 +25,7 @@ const PostView = () => {
     );
   };
 
-  const path: PostViewParams = useParams();
+  const path = useParams<PostViewParams>();
   const [postDetail, setPostDetail] = useState<BoardDetailDummyItem>({
     id: "",
     writer: "",
