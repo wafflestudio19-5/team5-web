@@ -34,7 +34,7 @@ const PostView = () => {
   });
 
   const goBack = () => {
-    history.goBack();
+    history.push(`/${path.boardId}`);
   };
   /*
   const deletePost = () => {
