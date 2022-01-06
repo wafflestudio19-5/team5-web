@@ -39,3 +39,5 @@ export const postPostAPI = async (board: number, input: postInputType) => {
     return e;
   }
 };
+
+
