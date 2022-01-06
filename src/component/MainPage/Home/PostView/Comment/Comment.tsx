@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
-import { commentDummy } from "../../../../../dummy/get-dummy";
+import { getCommentAPI } from "../../../../../API/commentAPI";
+import { CommentItemType } from "../../../../../interface/interface";
+import { useParams } from "react-router-dom";
 
 const Comment = () => {
-  interface commentItem {
-    id: number;
-    writer: string;
-    content: string;
-    time: string;
-    profile: string;
+  interface PostViewParams {
+    boardId: string;
+    postId: string;
   }
 
-  const [commentList, setCommentList] = useState<commentItem[]>([]);
+  const path: PostViewParams = useParams();
+
+  const getComment = () => {
+    getCommentAPI(parseInt(path.postId)).then((response) => {
+      console.log(response);
+    });
+  };
+
+  const [commentList, setCommentList] = useState<CommentItemType[]>([]);
   useEffect(() => {
-    setCommentList(commentDummy);
-  });
+    getComment();
+  }, []);
 
   const [isAnonymous, setAnonymous] = useState<boolean>(false); //익명 여부
 

@@ -1,6 +1,5 @@
-import { authRequest, makeQuery } from "./API";
+import { authRequest } from "./API";
 
-import { postInputType } from "../interface/interface";
 export const getPostDetailAPI = async (postID: number) => {
   try {
     const response = await authRequest.get(`/post/${postID}`);
