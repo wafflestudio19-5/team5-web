@@ -51,6 +51,7 @@ const Comment = () => {
     postCommentAPI(postId, form).then((response) => {
       console.log(response);
       setCommentList(response);
+      setCommentInput({ ...commentInput, content: "" });
     });
   }; // 댓글 작성 함수
 
@@ -80,6 +81,9 @@ const Comment = () => {
     if (window.confirm("이 댓글을 삭제하시겠습니까?")) {
       deleteCommentAPI(parseInt(path.postId), commentID).then((response) => {
         console.log(response);
+        if (response.is_success) {
+          setCommentList(response.comments);
+        }
       });
     }
   };
@@ -156,6 +160,7 @@ const Comment = () => {
             className={"content"}
             name={"content"}
             placeholder={"댓글을 입력하세요."}
+            value={commentInput.content}
             onChange={(e) => {
               setCommentInput({ ...commentInput, content: e.target.value });
             }}

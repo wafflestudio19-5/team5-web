@@ -35,7 +35,7 @@ export const postCommentVoteAPI = async (commentID: number) => {
 export const deleteCommentAPI = async (postID: number, commentID: number) => {
   try {
     const response = await authRequest.delete(
-      `/${postID}/comment/${commentID}/`
+      `/post/${postID}/comment/${commentID}/`
     );
     return response.data;
   } catch (e) {
