@@ -1,3 +1,10 @@
+//Login API
+export interface LoginInputType {
+  username: string;
+  password: string;
+}
+
+//Board API
 export interface boardItemType {
   anonym_enabled: boolean;
   board_type: number;
@@ -12,6 +19,7 @@ export interface boardItemType {
   title_enabled: boolean;
 }
 
+//Post API
 export interface postItemType {
   id: number;
   board: string;
@@ -39,6 +47,7 @@ export interface postInputType {
   is_question: boolean;
 }
 
+//Comment API
 export interface CommentItemType {
   id: number;
   writer: string;

@@ -5,14 +5,13 @@ import { login } from "../../../redux/authorization";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../../function/localStorage";
+import { LoginInputType } from "../../../interface/interface";
+import { postLoginAPI } from "../../../API/loginAPI";
+
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  interface LoginInputType {
-    username: string;
-    password: string;
-  }
   const [loginInput, setLoginInput] = useState<LoginInputType>({
     username: "",
     password: "",
@@ -25,15 +24,20 @@ const Login = () => {
     setLoginInput({ ...loginInput, password: input });
   };
   const tryLogin = (input: LoginInputType) => {
-    plainRequest
-      .post<LoginInputType, AxiosResponse>("/user/login/", input)
-      .then((response: AxiosResponse) => {
-        if (response.data.success) {
-          dispatch(login(response.data.token));
-          saveToken(response.data.token);
-          history.push("/");
-        }
-      });
+    postLoginAPI(loginInput).then((token) => {
+      dispatch(login(token));
+      saveToken(token);
+      history.push("/");
+    });
+    // plainRequest
+    //   .post<LoginInputType, AxiosResponse>("/user/login/", input)
+    //   .then((response: AxiosResponse) => {
+    //     if (response.data.success) {
+    //       dispatch(login(response.data.token));
+    //       saveToken(response.data.token);
+    //       history.push("/");
+    //     }
+    //   });
   };
 
   return (
