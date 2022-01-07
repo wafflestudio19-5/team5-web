@@ -1,5 +1,5 @@
 import { authRequest } from "./API";
-import { getErrorData } from "./ErrorHandling";
+import { getErrorData } from "./errorHandling";
 
 export const getBoardAPI = async () => {
   try {

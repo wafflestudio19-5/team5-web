@@ -1,20 +1,19 @@
-import { useState } from 'react';
-import { login } from '../../../redux/authorization';
-import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { saveToken } from '../../../function/localStorage';
-import { LoginInputType } from '../../../interface/interface';
-import { postLoginAPI } from '../../../API/loginAPI';
-import { Link } from 'react-router-dom';
-import { log } from 'util';
+import { useState } from "react";
+import { login } from "../../../redux/authorization";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { saveToken } from "../../../function/localStorage";
+import { LoginInputType } from "../../../interface/interface";
+import { postLoginAPI } from "../../../API/loginAPI";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const [loginInput, setLoginInput] = useState<LoginInputType>({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const changeUsername = (input: string) => {
@@ -34,7 +33,7 @@ const Login = () => {
     postLoginAPI(input).then((token) => {
       dispatch(login(token));
       saveToken(token);
-      history.push('/');
+      history.push("/");
     });
   };
 
@@ -43,7 +42,7 @@ const Login = () => {
       <div className="LoginBox">
         <h1 className="LoginLogo" />
         <form onSubmit={tryLogin}>
-          {' '}
+          {" "}
           <input
             type="text"
             name="아이디"
@@ -63,14 +62,14 @@ const Login = () => {
 
         <div className="LoginCheck">
           <label className="LoginAuto">
-            <input type={'checkbox'} />
+            <input type={"checkbox"} />
             로그인 유지
           </label>
           <p className="forgot">아이디/비밀번호 찾기</p>
         </div>
         <div className="register">
           <span>에브리타임에 처음이신가요?</span>
-          <Link to={'/register'}>
+          <Link to={"/register"}>
             <span>회원가입</span>
           </Link>
         </div>

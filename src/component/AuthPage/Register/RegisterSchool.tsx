@@ -24,11 +24,11 @@ const yearList = [
   "졸업생",
 ] as const;
 
-const RegisterSchool: React.FC<RegisterProps> = ({
+const RegisterSchool = ({
   changeRegisterInput,
   registerInput,
   setRegisterState,
-}) => {
+}: RegisterProps) => {
   return (
     <>
       <div className="Register__Text">
@@ -70,7 +70,20 @@ const RegisterSchool: React.FC<RegisterProps> = ({
           <option value="서울대학교">서울대학교</option>
         </select>
       </div>
-      <button onClick={() => {}}>다음</button>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          if (registerInput.admission_year.length < 1) {
+            alert("학번을 입력하세요");
+          } else if (registerInput.univ.length < 1) {
+            alert("학교를 입력하세요");
+          } else {
+            setRegisterState("user");
+          }
+        }}
+      >
+        다음
+      </button>
     </>
   );
 };

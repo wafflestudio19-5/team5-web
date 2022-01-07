@@ -5,11 +5,24 @@ import {
   RegisterInputType,
   RegisterKeyType,
 } from "../../../interface/interface";
+import { postSignupAPI } from "../../../API/registerAPI";
+import { useHistory } from "react-router-dom";
 
 const Register = () => {
+  const history = useHistory();
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
+  const [autoFillEmail, setAutoFillEmail] = useState<string | null>(null);
+
+  const tryRegister = (input: RegisterInputType) => {
+    postSignupAPI(input).then((res) => {
+      if (res) {
+        history.push("/");
+      } else {
+      }
+    });
+  };
 
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
     username: "",
@@ -27,7 +40,13 @@ const Register = () => {
 
   return (
     <section className="Register">
-      <form className="Register__Form">
+      <form
+        className="Register__Form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          tryRegister(registerInput);
+        }}
+      >
         {registerState === "school" ? (
           <RegisterSchool
             changeRegisterInput={changeRegisterInput}
@@ -35,7 +54,11 @@ const Register = () => {
             setRegisterState={setRegisterState}
           />
         ) : (
-          <RegisterUser />
+          <RegisterUser
+            changeRegisterInput={changeRegisterInput}
+            registerInput={registerInput}
+            setRegisterState={setRegisterState}
+          />
         )}
       </form>
     </section>
