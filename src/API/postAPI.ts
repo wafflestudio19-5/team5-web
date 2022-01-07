@@ -51,13 +51,9 @@ export const postEditAPI = async (input: FormData, postId: string) => {
   }
 };
 
-export const postDeleteAPI = async (
-  board: number,
-  input: FormData,
-  id: string,
-) => {
+export const postDeleteAPI = async (postId: string) => {
   try {
-    const response = await authRequest.post(`/post/${id}`, input);
+    const response = await authRequest.delete(`/post/${postId}/`);
     return response.data;
   } catch (e) {
     console.log(e); //테스트용

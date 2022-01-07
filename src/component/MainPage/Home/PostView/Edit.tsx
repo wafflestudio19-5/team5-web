@@ -1,10 +1,6 @@
 import { useEffect, useState } from 'react';
 import { postInputType } from '../../../../interface/interface';
-import {
-  postDeleteAPI,
-  postEditAPI,
-  postPostAPI,
-} from '../../../../API/postAPI';
+import { postDeleteAPI, postEditAPI } from '../../../../API/postAPI';
 
 interface BoardDetailItem {
   id: string;
