@@ -64,6 +64,7 @@ export interface CommentItemType {
 export interface CommentInputType {
   content: string;
   is_anonymous: boolean;
+  head_comment: number | null;
 }
 
 export default {};

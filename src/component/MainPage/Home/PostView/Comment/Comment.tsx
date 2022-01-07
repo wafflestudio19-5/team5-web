@@ -15,6 +15,7 @@ const Comment = () => {
   const [commentInput, setCommentInput] = useState<CommentInputType>({
     content: "",
     is_anonymous: false,
+    head_comment: null,
   });
 
   const path = useParams<PostViewParams>();
@@ -35,6 +36,9 @@ const Comment = () => {
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
+    if (input.head_comment) {
+      form.append("head_comment", JSON.stringify(input.head_comment));
+    }
     postCommentAPI(postId, form).then((response) => {
       console.log(response);
     });
@@ -48,7 +52,14 @@ const Comment = () => {
             <div className={"wrapper"}>
               <div className={"Comment__header"}>
                 <h2 className={"medium_bold"}>{item.nickname}</h2>
-                <p className={"small"}>대댓글</p>
+                <p
+                  className={"smallButton"}
+                  onClick={() => {
+                    setCommentInput({ ...commentInput, head_comment: item.id });
+                  }}
+                >
+                  대댓글
+                </p>
               </div>
               <p className={"medium"}>{item.content}</p>
               <p className={"small"}>{item.time}</p>
