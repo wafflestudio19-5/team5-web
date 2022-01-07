@@ -60,4 +60,9 @@ export interface CommentItemType {
   profile: string;
 }
 
+export interface CommentInputType {
+  content: string;
+  is_anonymous: boolean;
+}
+
 export default {};

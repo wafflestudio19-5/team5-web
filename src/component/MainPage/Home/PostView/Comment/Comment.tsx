@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { getCommentAPI } from "../../../../../API/commentAPI";
-import { CommentItemType } from "../../../../../interface/interface";
+import {
+  CommentItemType,
+  CommentInputType,
+} from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 
 const Comment = () => {
@@ -9,7 +12,12 @@ const Comment = () => {
     postId: string;
   }
 
-  const path: PostViewParams = useParams();
+  const [commentInput, setCommentInput] = useState<CommentInputType>({
+    content: "",
+    is_anonymous: false,
+  });
+
+  const path = useParams<PostViewParams>();
 
   const getComment = () => {
     getCommentAPI(parseInt(path.postId)).then((response) => {
@@ -24,7 +32,12 @@ const Comment = () => {
 
   const [isAnonymous, setAnonymous] = useState<boolean>(false); //익명 여부
 
-  const writeComment = () => {}; // 댓글 작성 함수; API 완성시 작성 예정
+  const writeComment = (postId: number, input: CommentInputType) => {
+    const form = new FormData();
+    form.append("content", input.content);
+    form.append("is_anonymous", JSON.stringify(input.is_anonymous));
+    console.log(input);
+  }; // 댓글 작성 함수; API 완성시 작성 예정
 
   return (
     <div className={"Comment"}>
@@ -43,14 +56,25 @@ const Comment = () => {
         ))}
       </ul>
 
-      <form className={"CommentWrite"}>
+      <form
+        className={"CommentWrite"}
+        onSubmit={(event) => {
+          event.preventDefault();
+          writeComment(parseInt(path.postId), commentInput);
+        }}
+      >
         <ul className={"option"}>
           <textarea
             className={"content"}
             name={"content"}
             placeholder={"댓글을 입력하세요."}
+            onChange={(e) => {
+              setCommentInput({ ...commentInput, content: e.target.value });
+            }}
           />
-          <li title={"완료"} className={"submit"} />
+          <li title={"완료"} className={"submit"}>
+            <button type={"submit"}></button>
+          </li>
           <li title={"익명"} className={"anonymus"} />
         </ul>
       </form>
