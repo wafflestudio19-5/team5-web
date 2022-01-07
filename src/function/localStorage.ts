@@ -15,5 +15,5 @@ export const loadToken = () => {
 };
 
 export const deleteToken = () => {
-  window.localStorage.setItem(tokenKey, "");
+  window.localStorage.removeItem(tokenKey);
 };
