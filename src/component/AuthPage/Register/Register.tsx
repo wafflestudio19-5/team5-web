@@ -1,33 +1,24 @@
 import RegisterUser from "./RegisterUser";
 import RegisterSchool from "./RegisterSchool";
 import { useState } from "react";
+import {
+  RegisterInputType,
+  RegisterKeyType,
+} from "../../../interface/interface";
 
 const Register = () => {
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
 
-  interface RegisterInputType {
-    username: string;
-    password: string;
-    email: string;
-    admission_year: string;
-    univ: string;
-  }
-
-  type RegisterKeyType =
-    | "username"
-    | "password"
-    | "email"
-    | "admission_year"
-    | "univ";
-
   const [registerInput, setRegisterInput] = useState<RegisterInputType>({
     username: "",
-    password: "",
+    password1: "",
+    password2: "",
     email: "",
-    admission_year: "",
+    nickname: "",
     univ: "",
+    admission_year: "",
   });
 
   const changeRegisterInput = (key: RegisterKeyType, input: string) => {
@@ -36,14 +27,17 @@ const Register = () => {
 
   return (
     <section className="Register">
-      {registerState === "school" ? (
-        <RegisterSchool
-          changeRegisterInput={changeRegisterInput}
-          setRegisterState={setRegisterState}
-        />
-      ) : (
-        <RegisterUser />
-      )}
+      <form className="Register__Form">
+        {registerState === "school" ? (
+          <RegisterSchool
+            changeRegisterInput={changeRegisterInput}
+            registerInput={registerInput}
+            setRegisterState={setRegisterState}
+          />
+        ) : (
+          <RegisterUser />
+        )}
+      </form>
     </section>
   );
 };
