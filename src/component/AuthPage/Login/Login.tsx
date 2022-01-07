@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { saveToken } from "../../../function/localStorage";
 import { LoginInputType } from "../../../interface/interface";
-import { postLoginAPI } from "../../../API/loginAPI";
 import { Link } from "react-router-dom";
+import { getKakaoLoginAPI, postLoginAPI } from "../../../API/loginAPI";
 
 const Login = () => {
   const history = useHistory();
@@ -35,6 +35,10 @@ const Login = () => {
       saveToken(token);
       history.push("/");
     });
+  };
+
+  const tryKakao = () => {
+    console.log(getKakaoLoginAPI());
   };
 
   return (
@@ -72,6 +76,11 @@ const Login = () => {
           <Link to={"/register"}>
             <span>회원가입</span>
           </Link>
+        </div>
+        <div className="Login__social">
+          <button className="Login__kakao" onClick={tryKakao}>
+            카카오
+          </button>
         </div>
       </div>
     </div>
