@@ -55,6 +55,12 @@ const Comment = () => {
     });
   }; // 댓글 작성 함수
 
+  const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter") {
+      writeComment(parseInt(path.postId), commentInput);
+    }
+  };
+
   const voteComment = (comment: CommentItemType) => {
     if (comment.is_mine) {
       window.alert("내가 쓴 댓글은 공감할 수 없습니다.");
@@ -158,6 +164,9 @@ const Comment = () => {
         <ul className={"option"}>
           <textarea
             className={"content"}
+            onKeyPress={(e) => {
+              onKeyPress(e);
+            }}
             name={"content"}
             placeholder={"댓글을 입력하세요."}
             value={commentInput.content}
