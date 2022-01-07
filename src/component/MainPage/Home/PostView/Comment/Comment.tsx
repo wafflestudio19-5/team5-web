@@ -49,23 +49,29 @@ const Comment = () => {
 
   return (
     <div className={"Comment"}>
-      <ul className={"BoardView__list"}>
+      <ul className={"Comment__list"}>
         {commentList.map((item) => (
-          <li key={item.id} className={"BoardView__item"}>
+          <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
-              <div className={"Comment__header"}>
-                <h2 className={"medium_bold"}>{item.nickname}</h2>
-                <p
-                  className={"smallButton"}
+              <h2 className={"medium_bold"}>{item.nickname}</h2>
+              <ul className={"status"}>
+                <li
                   onClick={() => {
                     setCommentInput({ ...commentInput, head_comment: item.id });
                   }}
                 >
-                  대댓글
-                </p>
-              </div>
-              <p className={"medium"}>{item.content}</p>
-              <p className={"small"}>{item.time}</p>
+                  {" "}
+                  대댓글{" "}
+                </li>
+                <li> 공감 </li>
+                {item.is_mine ? <li> 삭제 </li> : <li>신고</li>}
+              </ul>
+              <hr />
+              <p className={"comment"}>{item.content}</p>
+              <p className={"small"}>{item.created_at}</p>
+              <ul className="commentVoteStatus">
+                <li className="commentVote">{item.num_of_likes}</li>
+              </ul>
             </div>
           </li>
         ))}
