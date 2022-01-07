@@ -5,24 +5,82 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  input{
-    box-sizing: border-box;
-    width:360px;
-    height:40px;
-    margin-bottom:10px;
-    border: 1px solid $cardBorderColor;
-    border-radius: 0px;
-    padding-left:10px;
-    font-size:16px;
 
+  .LoginBox{
+    width: 360px;
+
+    .LoginLogo{
+      width: 360px;
+      height: 60px;
+      background-image: url(https://everytime.kr/images/index.login.logo.png);
+    }
+
+    input{
+      box-sizing: border-box;
+      width:360px;
+      height:40px;
+      margin-bottom:5px;
+      border: 1px solid $cardBorderColor;
+      border-radius: 0px;
+      padding-left:10px;
+      font-size:16px;
+
+    }
+    button{
+      box-sizing: border-box;
+      width:360px;
+      height:40px;
+      border: none;
+      background-color: $keyColor;
+      font-size:16px;
+      color:white;
+    }
+
+    .LoginCheck{
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      .LoginAuto{
+        float: left;
+        display: flex;
+        vertical-align: center;
+        justify-content: space-between;
+        padding-left: 10px;
+        height: 15px;
+        line-height: 15px;
+        color: $postViewColor;
+        font-size: 13px;
+        input{
+          width: 13px;
+          height: 13px;
+          margin: 1px 5px 0 0;
+        }
+      }
+      p{
+        display: inline-block;
+        margin: 0;
+        color: $fontColor;
+        line-height: 15px;
+        font-size: 13px;
+      }
+    }
+    .register{
+      margin-top: 35px;
+      text-align: center;
+      span{
+        color: $postViewColor;
+        margin-right: 15px;
+      }
+      a{
+        text-decoration: none;
+        span{
+          font-weight: bold;
+          color: $keyColor;
+          font-size: 16px;
+        }
+      }
+
+    }
   }
-  button{
-    box-sizing: border-box;
-    width:360px;
-    height:40px;
-    border: none;
-    background-color: $keyColor;
-    font-size:16px;
-    color:white;
-  }
+
 }
