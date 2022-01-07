@@ -31,6 +31,7 @@ const BoardView = () => {
 
   useEffect(() => {
     getPostWithPage(Number(pageNum));
+    console.log(params.boardId);
   }, [params]);
 
   const getPostWithPage = (page: number) => {
@@ -71,7 +72,7 @@ const BoardView = () => {
           <ul className="BoardView__list">
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
-                <Link to={`${params.boardId}/${item.id}`}>
+                <Link to={`/${params.boardId}/${item.id}`}>
                   <div className={"wrapper"}>
                     <h2 className={"medium"}>{item.title}</h2> <br />
                     <p className={"small"}>{item.content}</p>
