@@ -32,7 +32,10 @@ const Comment = () => {
   }, []);
 
   const writeComment = (postId: number, input: CommentInputType) => {
-    console.log(input);
+    if (!input.content) {
+      window.alert("내용을 입력해주세요.");
+      return;
+    }
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
