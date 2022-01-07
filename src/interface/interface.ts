@@ -58,6 +58,13 @@ export interface CommentItemType {
   content: string;
   time: string;
   profile: string;
+  nickname: string;
+}
+
+export interface CommentInputType {
+  content: string;
+  is_anonymous: boolean;
+  head_comment: number | null;
 }
 
 export default {};

@@ -55,6 +55,17 @@ p{
     font-size: 12px;
   }
 
+  &.smallButton{
+    margin-bottom: 5px;
+    max-height: 30px;
+    line-height: 15px;
+    white-space: normal;
+    overflow: hidden;
+    color: $postViewColor;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
   &.large{
     padding-bottom: 15px;
     line-height: 20px;
