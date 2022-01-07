@@ -1,9 +1,9 @@
-import { Link, Route, Switch, useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getBoardDetailDummy } from '../../../../dummy/get-dummy';
-import PostView from '../PostView/PostView';
-import BoardView from '../BoardView/BoardView';
-import RightBar from '../TotalView/RightBar';
+import { Link, Route, Switch, useHistory, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
+import PostView from "../PostView/PostView";
+import BoardView from "../BoardView/BoardView";
+import RightBar from "../TotalView/RightBar";
 
 interface BoardParams {
   boardId: string;
@@ -25,8 +25,8 @@ interface boardDetailDummyItem {
 
 const DetailView = () => {
   const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
-    id: '',
-    name: '',
+    id: "",
+    name: "",
     data: [],
   });
 
@@ -48,6 +48,7 @@ const DetailView = () => {
             <div className="BoardView__title">{boardDetail.name}</div>
             <Switch>
               <Route exact path={`/:boardId`} component={BoardView} />
+              <Route exact path={`/:boardId/p/:pageId`} component={BoardView} />
               <Route path={`/:boardId/:postId`} component={PostView} />
             </Switch>
           </div>

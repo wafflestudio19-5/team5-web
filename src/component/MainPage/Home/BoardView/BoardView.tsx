@@ -1,30 +1,42 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostAPI, getPostWithURLAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 
 const BoardView = () => {
+  const params = useParams() as paramsType;
+  const history = useHistory();
+
   const [postList, setPostList] = useState<postListType>({
     count: 0,
     next: null,
     previous: null,
     results: [],
   });
+  const [pageNum, setPageNum] = useState<number>(1);
   const [showForm, setShowForm] = useState<boolean>(false);
   const openWrite = () => setShowForm(!showForm);
 
   interface paramsType {
     boardId: string;
+    pageId?: string;
   }
 
-  const params = useParams() as paramsType;
-  // useEffect(getBoardDetail, [setBoardDetail, match.path]);
+  if (params.pageId) {
+    if (Number(params.pageId) !== pageNum) {
+      setPageNum(Number(params.pageId));
+    }
+  }
+
   useEffect(() => {
-    getPostAPI(Number(params.boardId)).then((response) =>
+    getPostWithPage(Number(pageNum));
+  }, [params]);
+
+  const getPostWithPage = (page: number) => {
+    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
-  }, [params]);
 
   const getURL = (input: string | null) => {
     if (input) {
@@ -71,7 +83,10 @@ const BoardView = () => {
             {postList.previous && (
               <button
                 className="BoardView__previous"
-                onClick={() => loadPage(postList.previous)}
+                onClick={() => {
+                  history.push(`/${params.boardId}/p/${pageNum - 1}`);
+                  setPageNum(pageNum - 1);
+                }}
               >
                 이전
               </button>
@@ -79,7 +94,10 @@ const BoardView = () => {
             {postList.next && (
               <button
                 className="BoardView__next"
-                onClick={() => loadPage(postList.next)}
+                onClick={() => {
+                  history.push(`/${params.boardId}/p/${pageNum + 1}`);
+                  setPageNum(pageNum + 1);
+                }}
               >
                 다음
               </button>
