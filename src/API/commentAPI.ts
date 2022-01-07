@@ -13,6 +13,7 @@ export const getCommentAPI = async (postID: number) => {
 };
 
 export const postCommentAPI = async (postID: number, input: FormData) => {
+  console.log(input);
   try {
     const response = await authRequest.post(`/post/${postID}/comment/`, input);
     return response.data;

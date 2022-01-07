@@ -30,9 +30,8 @@ const Comment = () => {
     getComment();
   }, []);
 
-  const [isAnonymous, setAnonymous] = useState<boolean>(false); //익명 여부
-
   const writeComment = (postId: number, input: CommentInputType) => {
+    console.log(input);
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
@@ -48,7 +47,7 @@ const Comment = () => {
           <li key={item.id} className={"BoardView__item"}>
             <div className={"wrapper"}>
               <div className={"Comment__header"}>
-                <h2 className={"medium_bold"}>{item.writer}</h2>
+                <h2 className={"medium_bold"}>{item.nickname}</h2>
                 <p className={"small"}>대댓글</p>
               </div>
               <p className={"medium"}>{item.content}</p>
@@ -79,13 +78,18 @@ const Comment = () => {
           </li>
           <li
             title={"익명"}
-            className={isAnonymous ? "anonymous" : "anonymousActive"}
+            className={
+              commentInput.is_anonymous ? "anonymous" : "anonymousActive"
+            }
           >
             <button
               type={"button"}
               className={"anonymousCheck"}
-              onClick={() => {
-                setAnonymous(!isAnonymous);
+              onClick={(e) => {
+                setCommentInput({
+                  ...commentInput,
+                  is_anonymous: !commentInput.is_anonymous,
+                });
               }}
             />
           </li>

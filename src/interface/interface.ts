@@ -58,6 +58,7 @@ export interface CommentItemType {
   content: string;
   time: string;
   profile: string;
+  nickname: string;
 }
 
 export interface CommentInputType {
