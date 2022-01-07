@@ -88,11 +88,17 @@
         background-image: url(https://everytime.kr/images/container.articles.write.question.png)
       }
 
-      &.anonymus{
+      &.anonymous{
         float: right;
         margin-right: 15px;
         background-image: url(https://everytime.kr/images/container.articles.write.anonym.png)
       }
+      &.anonymousActive{
+        float: right;
+        margin-right: 15px;
+        background-image: url(https://everytime.kr/images/container.articles.write.anonym.active.png)
+      }
+
       &.submit{
         float: right;
         background-color: $keyColor;
