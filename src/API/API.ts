@@ -6,7 +6,7 @@ const URL = "https://www.waffle-minkyu.shop" as const;
 const getToken = () => {
   const storedToken = store.getState().authorization.token;
   if (storedToken === null) {
-    return "No Token";
+    return { access: "No Access Token", refresh: "No Refresh Token" };
   } else {
     return storedToken;
   }
@@ -31,7 +31,7 @@ export const authRequest: AxiosInstance = axios.create({
 
 authRequest.interceptors.request.use(function (config: AxiosRequestConfig) {
   if (config?.headers) {
-    config.headers["Authorization"] = `JWT ${getToken()}`;
+    config.headers["Authorization"] = `Bearer ${getToken().access}`;
     return config;
   }
 });

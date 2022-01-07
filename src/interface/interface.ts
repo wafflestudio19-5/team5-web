@@ -1,4 +1,8 @@
 //Login API
+export interface TokenType {
+  access: string | null;
+  refresh: string | null;
+}
 export interface LoginInputType {
   username: string;
   password: string;

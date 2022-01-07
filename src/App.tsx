@@ -13,7 +13,6 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     if (loadToken()) {
-      console.log("새로고침 성공");
       dispatch(login(loadToken())); // 새로고침 시 로컬스토리지에 있는 토큰 확인
     }
   }, []);
