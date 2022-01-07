@@ -71,13 +71,35 @@
       &.question{
         float: right;
         margin-right: 15px;
-        background-image: url(https://everytime.kr/images/container.articles.write.question.png)
+        background-image: url(https://everytime.kr/images/container.articles.write.question.png);
       }
 
-      &.anonymus{
+      &.anonymous {
         float: right;
         margin-right: 15px;
-        background-image: url(https://everytime.kr/images/container.articles.write.anonym.png)
+        background-image: url(https://everytime.kr/images/container.articles.write.anonym.active.png);
+
+        button {
+          border: none;
+          background: none;
+          width: 50px;
+          height: 100%;
+          cursor: pointer;
+        }
+      }
+
+        &.anonymousActive{
+          float: right;
+          margin-right: 15px;
+          background-image: url(https://everytime.kr/images/container.articles.write.anonym.png);
+          button{
+            border: none;
+            background: none;
+            width:50px;
+            height:100%;
+            cursor:pointer;
+          }
+
       }
       &.submit{
         float: right;

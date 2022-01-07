@@ -36,11 +36,10 @@ const Comment = () => {
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
-    console.log(input);
     postCommentAPI(postId, form).then((response) => {
       console.log(response);
     });
-  }; // 댓글 작성 함수; API 완성시 작성 예정
+  }; // 댓글 작성 함수
 
   return (
     <div className={"Comment"}>
@@ -76,9 +75,20 @@ const Comment = () => {
             }}
           />
           <li title={"완료"} className={"submit"}>
-            <button type={"submit"}></button>
+            <button type={"submit"} />
           </li>
-          <li title={"익명"} className={"anonymus"} />
+          <li
+            title={"익명"}
+            className={isAnonymous ? "anonymous" : "anonymousActive"}
+          >
+            <button
+              type={"button"}
+              className={"anonymousCheck"}
+              onClick={() => {
+                setAnonymous(!isAnonymous);
+              }}
+            />
+          </li>
         </ul>
       </form>
     </div>
