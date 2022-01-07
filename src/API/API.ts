@@ -1,12 +1,16 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import store from "../redux/store";
+import { postRefreshAPI } from "./loginAPI";
+import { saveToken } from "../function/localStorage";
+import { login } from "../redux/authorization";
 
 const URL = "https://www.waffle-minkyu.shop" as const;
 
+//유용한 함수들
 const getToken = () => {
   const storedToken = store.getState().authorization.token;
   if (storedToken === null) {
-    return "No Token";
+    return { access: "No Access Token", refresh: "No Refresh Token" };
   } else {
     return storedToken;
   }
@@ -21,6 +25,9 @@ export const makeQuery = (queryObject: object) => {
   return query;
 };
 
+//API 관련 함수들
+
+//Axios 인스턴스들
 export const plainRequest: AxiosInstance = axios.create({
   baseURL: URL,
 });
@@ -29,12 +36,38 @@ export const authRequest: AxiosInstance = axios.create({
   baseURL: URL,
 });
 
+//인터셉터 이용하여 Axios 인스턴스에 토큰 추가
 authRequest.interceptors.request.use(function (config: AxiosRequestConfig) {
   if (config?.headers) {
-    config.headers["Authorization"] = `JWT ${getToken()}`;
+    config.headers["Authorization"] = `Bearer ${getToken().access}`;
     return config;
   }
 });
+
+authRequest.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async (error) => {
+    if (error.response.status === 403) {
+      const data = error.response.data;
+      if (data.code === "token_not_valid") {
+        const originalRequest = error.config;
+        console.log(getToken());
+        postRefreshAPI(getToken().refresh).then((newToken) => {
+          if (newToken) {
+            store.dispatch(login(newToken));
+            saveToken(newToken);
+            originalRequest.headers[
+              "Authorization"
+            ] = `Bearer ${newToken.access}`;
+            return axios(error.config);
+          }
+        });
+      }
+    }
+  }
+);
 
 export default {};
 

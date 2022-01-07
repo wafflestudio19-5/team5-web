@@ -1,4 +1,6 @@
-export const tempLoginToken = "Need Login" as const;
+import { TokenType } from "../interface/interface";
+
+export const tempLoginToken = { access: "Need Login", refresh: null } as const;
 
 //액션 타입
 const LOGIN = "authorization/LOGIN" as const;
@@ -6,7 +8,7 @@ const LOGOUT = "authorization/LOGOUT" as const;
 const TEMPLOGIN = "authorization/TEMPLOGIN" as const;
 
 //액션 생성함수
-export const login = (loginData: null | string) => ({
+export const login = (loginData: TokenType) => ({
   type: LOGIN,
   payload: loginData,
 });
@@ -26,7 +28,7 @@ type AuthorizationAction =
   | ReturnType<typeof tempLogin>;
 
 type AuthorizationState = {
-  token: null | string;
+  token: TokenType | null;
 };
 
 //초기 상태
