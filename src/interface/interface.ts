@@ -62,6 +62,8 @@ export interface CommentItemType {
   num_of_likes: number;
   is_mine: boolean;
   is_deleted: boolean;
+  head_comment: number | null;
+  replys: CommentItemType[];
 }
 
 export interface CommentInputType {

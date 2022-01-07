@@ -31,3 +31,15 @@ export const postCommentVoteAPI = async (commentID: number) => {
     return e;
   }
 };
+
+export const deleteCommentAPI = async (postID: number, commentID: number) => {
+  try {
+    const response = await authRequest.delete(
+      `/${postID}/comment/${commentID}/`
+    );
+    return response.data;
+  } catch (e) {
+    console.log("댓글 삭제 실패!");
+    return e;
+  }
+};

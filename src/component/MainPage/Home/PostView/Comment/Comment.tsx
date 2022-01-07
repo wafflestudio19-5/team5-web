@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  deleteCommentAPI,
   getCommentAPI,
   postCommentAPI,
   postCommentVoteAPI,
@@ -31,6 +32,7 @@ const Comment = () => {
   };
 
   const [commentList, setCommentList] = useState<CommentItemType[]>([]);
+  useEffect(() => {}, [commentList]);
   useEffect(() => {
     getComment();
   }, []);
@@ -48,6 +50,7 @@ const Comment = () => {
     }
     postCommentAPI(postId, form).then((response) => {
       console.log(response);
+      setCommentList(response);
     });
   }; // 댓글 작성 함수
 
@@ -73,6 +76,14 @@ const Comment = () => {
     }
   };
 
+  const deleteComment = (commentID: number) => {
+    if (window.confirm("이 댓글을 삭제하시겠습니까?")) {
+      deleteCommentAPI(parseInt(path.postId), commentID).then((response) => {
+        console.log(response);
+      });
+    }
+  };
+
   return (
     <div className={"Comment"}>
       <ul className={"Comment__list"}>
@@ -81,14 +92,22 @@ const Comment = () => {
             <div className={"wrapper"}>
               <h2 className={"medium_bold"}>{item.nickname}</h2>
               <ul className={"status"}>
-                <li
-                  onClick={() => {
-                    setCommentInput({ ...commentInput, head_comment: item.id });
-                  }}
-                >
-                  {" "}
-                  대댓글{" "}
-                </li>
+                {item.head_comment ? (
+                  <li />
+                ) : (
+                  <li
+                    onClick={() => {
+                      setCommentInput({
+                        ...commentInput,
+                        head_comment: item.id,
+                      });
+                    }}
+                  >
+                    {" "}
+                    대댓글{" "}
+                  </li>
+                )}
+
                 <li
                   onClick={() => {
                     voteComment(item);
@@ -97,7 +116,11 @@ const Comment = () => {
                   {" "}
                   공감{" "}
                 </li>
-                {item.is_mine ? <li> 삭제 </li> : <li>신고</li>}
+                {item.is_mine ? (
+                  <li onClick={() => deleteComment(item.id)}> 삭제 </li>
+                ) : (
+                  <li>신고</li>
+                )}
               </ul>
               <hr />
               <p className={"comment"}>{item.content}</p>
