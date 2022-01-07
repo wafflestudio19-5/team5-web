@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { getCommentAPI, postCommentAPI } from "../../../../../API/commentAPI";
+import {
+  getCommentAPI,
+  postCommentAPI,
+  postCommentVoteAPI,
+} from "../../../../../API/commentAPI";
 import {
   CommentItemType,
   CommentInputType,
@@ -47,6 +51,28 @@ const Comment = () => {
     });
   }; // 댓글 작성 함수
 
+  const voteComment = (comment: CommentItemType) => {
+    if (comment.is_mine) {
+      window.alert("내가 쓴 댓글은 공감할 수 없습니다.");
+      return;
+    }
+
+    if (window.confirm("이 댓글에 공감하십니까?")) {
+      postCommentVoteAPI(comment.id).then((response) => {
+        console.log(response);
+        if (!response.is_success) {
+          if (response.error_code === 1) {
+            window.alert("이미 공감한 댓글입니다.");
+          } else {
+            window.alert("오래된 댓글은 공감할 수 없습니다.");
+          }
+        }
+      });
+    } else {
+      return;
+    }
+  };
+
   return (
     <div className={"Comment"}>
       <ul className={"Comment__list"}>
@@ -63,15 +89,33 @@ const Comment = () => {
                   {" "}
                   대댓글{" "}
                 </li>
-                <li> 공감 </li>
+                <li
+                  onClick={() => {
+                    voteComment(item);
+                  }}
+                >
+                  {" "}
+                  공감{" "}
+                </li>
                 {item.is_mine ? <li> 삭제 </li> : <li>신고</li>}
               </ul>
               <hr />
               <p className={"comment"}>{item.content}</p>
               <p className={"small"}>{item.created_at}</p>
-              <ul className="commentVoteStatus">
-                <li className="commentVote">{item.num_of_likes}</li>
-              </ul>
+              {item.num_of_likes !== 0 ? (
+                <ul className="commentVoteStatus">
+                  <li
+                    className="commentVote"
+                    onClick={() => {
+                      voteComment(item);
+                    }}
+                  >
+                    {item.num_of_likes}
+                  </li>
+                </ul>
+              ) : (
+                <ul />
+              )}
             </div>
           </li>
         ))}
