@@ -1,5 +1,6 @@
 import { authRequest, makeQuery } from "./API";
 import exp from "constants";
+import { CommentInputType } from "../interface/interface";
 
 export const getCommentAPI = async (postID: number) => {
   try {
@@ -13,8 +14,7 @@ export const getCommentAPI = async (postID: number) => {
 
 export const postCommentAPI = async (postID: number, input: FormData) => {
   try {
-    console.log(input);
-    const response = await authRequest.post(`/post/${postID}/comment`, input);
+    const response = await authRequest.post(`/post/${postID}/comment/`, input);
     return response.data;
   } catch (e) {
     console.log("댓글 달기 실패!"); //테스트용

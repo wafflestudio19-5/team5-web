@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getCommentAPI } from "../../../../../API/commentAPI";
+import { getCommentAPI, postCommentAPI } from "../../../../../API/commentAPI";
 import {
   CommentItemType,
   CommentInputType,
@@ -21,7 +21,7 @@ const Comment = () => {
 
   const getComment = () => {
     getCommentAPI(parseInt(path.postId)).then((response) => {
-      console.log(response);
+      setCommentList(response);
     });
   };
 
@@ -37,6 +37,9 @@ const Comment = () => {
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
     console.log(input);
+    postCommentAPI(postId, form).then((response) => {
+      console.log(response);
+    });
   }; // 댓글 작성 함수; API 완성시 작성 예정
 
   return (
