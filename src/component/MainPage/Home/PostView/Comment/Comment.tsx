@@ -43,7 +43,7 @@ const Comment = () => {
         ))}
       </ul>
 
-      <form className={"Write"}>
+      <form className={"CommentWrite"}>
         <ul className={"option"}>
           <textarea
             className={"content"}
