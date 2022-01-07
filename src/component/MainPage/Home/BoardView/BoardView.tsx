@@ -37,6 +37,7 @@ const BoardView = () => {
     getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
+  };
 
   const getURL = (input: string | null) => {
     if (input) {
