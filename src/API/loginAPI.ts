@@ -12,7 +12,6 @@ export const postLoginAPI = async (input: LoginInputType) => {
 
 export const postRefreshAPI = async (refreshToken: string | null) => {
   try {
-    console.log(refreshToken);
     const response = await plainRequest.post("/token/refresh/", {
       refresh: refreshToken,
     });
@@ -28,3 +27,5 @@ export const postRefreshAPI = async (refreshToken: string | null) => {
     console.log("refresh failed!");
   }
 };
+
+export const getKakaoLoginAPI = () => {};
