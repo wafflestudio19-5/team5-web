@@ -68,6 +68,7 @@ const PostView = () => {
     getPostDetail();
   }, [setPostDetail, path.boardId, path.postId, postDetail]);
 
+
   return editPost == false ? (
     <div className={'BoardView__post'}>
       <div className={'BoardView__post__profile'}>
@@ -93,7 +94,7 @@ const PostView = () => {
         <span className={'sympathy'}>공감</span>
         <span className={'scrap'}>스크랩</span>
       </div>
-      <Comment />
+      <Comment writer={postDetail.writer} />
       <button onClick={goBack}>글 목록</button>
     </div>
   ) : (

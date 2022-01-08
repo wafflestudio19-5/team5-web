@@ -76,9 +76,14 @@ export interface CommentItemType {
   id: number;
   writer: string;
   content: string;
-  time: string;
+  created_at: string;
   profile: string;
   nickname: string;
+  num_of_likes: number;
+  is_mine: boolean;
+  is_deleted: boolean;
+  head_comment: number | null;
+  replys: CommentItemType[];
 }
 
 export interface CommentInputType {
