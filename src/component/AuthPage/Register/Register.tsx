@@ -1,6 +1,6 @@
 import RegisterUser from "./RegisterUser";
 import RegisterSchool from "./RegisterSchool";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RegisterInputType,
   RegisterKeyType,
@@ -8,11 +8,12 @@ import {
 import { postSignupAPI } from "../../../API/registerAPI";
 import { useHistory } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
   const history = useHistory();
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
+  const [isSocial, setIsSocial] = useState<boolean>(false);
   const [autoFillEmail, setAutoFillEmail] = useState<string | null>(null);
 
   const tryRegister = (input: RegisterInputType) => {
@@ -58,6 +59,7 @@ const Register = () => {
             changeRegisterInput={changeRegisterInput}
             registerInput={registerInput}
             setRegisterState={setRegisterState}
+            socialLoginData={socialLoginData}
           />
         )}
       </form>

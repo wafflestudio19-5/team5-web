@@ -8,7 +8,7 @@ import {
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 
-const BoardView = () => {
+const SearchBoardView = () => {
   const params = useParams() as paramsType;
   const history = useHistory();
 
@@ -19,11 +19,9 @@ const BoardView = () => {
     results: [],
   });
   const [pageNum, setPageNum] = useState<number>(1);
-  const [showForm, setShowForm] = useState<boolean>(false);
-  const openWrite = () => setShowForm(!showForm);
 
   interface paramsType {
-    boardId: string;
+    searchId: string;
     pageId?: string;
   }
 
@@ -38,7 +36,8 @@ const BoardView = () => {
   }, [params]);
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
+    const searchValue = params.searchId;
+    searchPostAPI(searchValue, 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
@@ -58,14 +57,6 @@ const BoardView = () => {
 
   return (
     <>
-      {showForm ? (
-        <Write boardId={Number(params.boardId)} />
-      ) : (
-        <button className={"BoardView__writePost"} onClick={openWrite}>
-          새 글을 작성해주세요!
-        </button>
-      )}
-
       {postList.results.length == 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
@@ -75,7 +66,7 @@ const BoardView = () => {
           <ul className="BoardView__list">
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
-                <Link to={`/${params.boardId}/${item.id}`}>
+                <Link to={`/${params.searchId}/${item.id}`}>
                   <div className={"wrapper"}>
                     <h2 className={"medium"}>{item.title}</h2> <br />
                     <p className={"small"}>{item.content}</p>
@@ -89,7 +80,7 @@ const BoardView = () => {
               <button
                 className="BoardView__previous"
                 onClick={() => {
-                  history.push(`/${params.boardId}/p/${pageNum - 1}`);
+                  history.push(`/${params.searchId}/p/${pageNum - 1}`);
                   setPageNum(pageNum - 1);
                 }}
               >
@@ -100,7 +91,7 @@ const BoardView = () => {
               <button
                 className="BoardView__next"
                 onClick={() => {
-                  history.push(`/${params.boardId}/p/${pageNum + 1}`);
+                  history.push(`/${params.searchId}/p/${pageNum + 1}`);
                   setPageNum(pageNum + 1);
                 }}
               >
@@ -114,4 +105,4 @@ const BoardView = () => {
   );
 };
 
-export default BoardView;
+export default SearchBoardView;
