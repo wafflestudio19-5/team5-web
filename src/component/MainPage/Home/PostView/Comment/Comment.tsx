@@ -23,6 +23,12 @@ const Comment = () => {
     head_comment: null,
   });
 
+  const [replyInput, setReplyInput] = useState<CommentInputType>({
+    content: "",
+    is_anonymous: false,
+    head_comment: null,
+  });
+
   const path = useParams<PostViewParams>();
 
   const getComment = () => {
@@ -30,7 +36,7 @@ const Comment = () => {
       setCommentList(response);
     });
   };
-  const [isReplyOpen, setReplyOpen] = useState<boolean>(false);
+  const [replyOpen, setReplyOpen] = useState<null | number>(null);
   const [commentList, setCommentList] = useState<CommentItemType[]>([]);
   useEffect(() => {}, [commentList]);
   useEffect(() => {
@@ -42,16 +48,19 @@ const Comment = () => {
       window.alert("내용을 입력해주세요.");
       return;
     }
+    console.log(input);
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
     if (input.head_comment) {
       form.append("head_comment", JSON.stringify(input.head_comment));
     }
+
     postCommentAPI(postId, form).then((response) => {
       console.log(response);
       setCommentList(response);
       setCommentInput({ ...commentInput, content: "" });
+      setReplyInput({ ...replyInput, content: "" });
     });
   }; // 댓글 작성 함수
 
@@ -105,7 +114,15 @@ const Comment = () => {
                 {item.head_comment ? (
                   <li />
                 ) : (
-                  <li onClick={() => {}}> 대댓글 </li>
+                  <li
+                    onClick={() => {
+                      setReplyOpen(item.id);
+                      setReplyInput({ ...replyInput, head_comment: item.id });
+                    }}
+                  >
+                    {" "}
+                    대댓글{" "}
+                  </li>
                 )}
 
                 <li
@@ -141,7 +158,7 @@ const Comment = () => {
               )}
             </div>
             {item.replys.map((reply) => (
-              <div className={"wrapperReply"}>
+              <div key={reply.id} className={"wrapperReply"}>
                 <h2 className={"medium_bold"}>{reply.nickname}</h2>
                 <ul className={"status"}>
                   <li
@@ -177,12 +194,63 @@ const Comment = () => {
                 )}
               </div>
             ))}
+            {replyOpen === item.id ? (
+              <form
+                className={"replyWrite"}
+                onSubmit={(event) => {
+                  event.preventDefault();
+
+                  writeComment(parseInt(path.postId), replyInput);
+                }}
+              >
+                {" "}
+                <ul className={"option"}>
+                  <textarea
+                    className={"content"}
+                    onKeyPress={(e) => {
+                      onKeyPress(e);
+                    }}
+                    name={"content"}
+                    placeholder={"대댓글을 입력하세요."}
+                    value={replyInput.content}
+                    onChange={(e) => {
+                      setReplyInput({
+                        ...replyInput,
+                        content: e.target.value,
+                      });
+                    }}
+                  />
+                  <li title={"완료"} className={"submit"}>
+                    <button type={"submit"} />
+                  </li>
+                  <li
+                    title={"익명"}
+                    className={
+                      replyInput.is_anonymous ? "anonymous" : "anonymousActive"
+                    }
+                  >
+                    <button
+                      type={"button"}
+                      className={"anonymousCheck"}
+                      onClick={(e) => {
+                        setReplyInput({
+                          ...replyInput,
+                          is_anonymous: !replyInput.is_anonymous,
+                        });
+                      }}
+                    />
+                  </li>
+                </ul>
+              </form>
+            ) : (
+              <div />
+            )}
           </li>
         ))}
       </ul>
 
       <form
-        className={"CommentWrite"}
+        className={"commentWrite"}
         onSubmit={(event) => {
           event.preventDefault();
           writeComment(parseInt(path.postId), commentInput);
