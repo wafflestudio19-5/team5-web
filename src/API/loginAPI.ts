@@ -40,8 +40,8 @@ export const getGoogleLoginAPI = () => {
 
 export const sendAuthCodeAPI = async (
   platform: string,
-  code: string,
-  state?: string
+  code: any,
+  state?: any
 ) => {
   if (state) {
     const response = await plainRequest.post(

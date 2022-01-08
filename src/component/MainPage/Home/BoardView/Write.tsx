@@ -33,7 +33,6 @@ const Write = ({ boardId }: WriteParams) => {
         });
       }
     });
-    console.log(newTag);
     return newTag;
   };
 
