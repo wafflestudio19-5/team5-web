@@ -11,9 +11,13 @@ type RegisterProps = {
 const RegisterUser = ({
   changeRegisterInput,
   registerInput,
+  socialLoginData,
 }: RegisterProps) => {
   const [isSocial, setIsSocial] = useState<boolean>(false);
-  const [hasEmail, setHasEmail] = useState<boolean>(false);
+  if (socialLoginData) {
+    setIsSocial(true);
+    changeRegisterInput("email", socialLoginData);
+  }
   return (
     <>
       <div className="Register__Text">
@@ -69,15 +73,18 @@ const RegisterUser = ({
       </div>
       <div className="Register__Input">
         <div className="Register__Label">이메일</div>
-        <input
-          type="text"
-          className="Register__email"
-          value={registerInput.email}
-          disabled={hasEmail}
-          onChange={(e) => {
-            changeRegisterInput("email", e.target.value);
-          }}
-        />
+        if(!isSocial)
+        {
+          <input
+            type="text"
+            className="Register__email"
+            value={registerInput.email}
+            disabled={hasEmail}
+            onChange={(e) => {
+              changeRegisterInput("email", e.target.value);
+            }}
+          />
+        }
       </div>
       <input type="submit" value="다음" />
     </>
