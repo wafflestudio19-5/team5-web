@@ -3,11 +3,14 @@
   list-style: none;
   padding: 0px;
 
+
   li{
-    height:93px;
+    height:100%;
     border: 1px solid $cardBorderColor;
     padding: 10px;
     display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     .wrapper{
       padding-top:20px;
@@ -65,6 +68,71 @@
       }
 
     }
+    .wrapperReply{
+      background: #f9f9f9;
+      padding-top:20px;
+      padding-left: 10px;
+
+      margin-left: 35px;
+      width: 748px;
+      border: solid 1px $boardBorderColor;
+      .reply{
+        background: #f9f9f9;
+      }
+
+      hr{
+        border: white;
+      }
+      .comment {
+        margin-bottom: 0;
+        padding-bottom: 5px;
+      }
+
+      .medium_bold{
+        float: left;
+      }
+      .small{
+        float: left;
+      }
+      .status{
+        float:right;
+        li{
+          padding: 0;
+          float: left;
+          margin-left: 8px;
+          height: 20px;
+          line-height: 20px;
+          color: #a6a6a6;
+          font-size: 12px;
+          cursor: pointer;
+          background-size: 12px 12px;
+        }
+      }
+
+      .commentVoteStatus{
+        list-style: none;
+        float: left;
+        padding-inline-start: 0;
+        li{
+          border: none;
+          color: #c62917;
+          float: left;
+          display: list-item;
+          letter-spacing: -0.5px;
+          background-size: 11px 11px;
+          background-repeat: no-repeat;
+          margin-left: 8px;
+          padding-left: 15px;
+          padding-bottom: 13px;
+          cursor: pointer;
+          height:20px;
+          background-image: url(https://everytime.kr/images/new/container.articles.vote.png);
+          background-position: left center;
+        }
+      }
+
+    }
+
 
     &.Comment__item{
 

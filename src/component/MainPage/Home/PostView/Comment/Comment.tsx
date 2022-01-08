@@ -30,7 +30,7 @@ const Comment = () => {
       setCommentList(response);
     });
   };
-
+  const [isReplyOpen, setReplyOpen] = useState<boolean>(false);
   const [commentList, setCommentList] = useState<CommentItemType[]>([]);
   useEffect(() => {}, [commentList]);
   useEffect(() => {
@@ -105,17 +105,7 @@ const Comment = () => {
                 {item.head_comment ? (
                   <li />
                 ) : (
-                  <li
-                    onClick={() => {
-                      setCommentInput({
-                        ...commentInput,
-                        head_comment: item.id,
-                      });
-                    }}
-                  >
-                    {" "}
-                    대댓글{" "}
-                  </li>
+                  <li onClick={() => {}}> 대댓글 </li>
                 )}
 
                 <li
@@ -150,6 +140,43 @@ const Comment = () => {
                 <ul />
               )}
             </div>
+            {item.replys.map((reply) => (
+              <div className={"wrapperReply"}>
+                <h2 className={"medium_bold"}>{reply.nickname}</h2>
+                <ul className={"status"}>
+                  <li
+                    onClick={() => {
+                      voteComment(reply);
+                    }}
+                  >
+                    {" "}
+                    공감{" "}
+                  </li>
+                  {reply.is_mine ? (
+                    <li onClick={() => deleteComment(reply.id)}> 삭제 </li>
+                  ) : (
+                    <li>신고</li>
+                  )}
+                </ul>
+                <hr />
+                <p className={"comment"}>{reply.content}</p>
+                <p className={"small"}>{reply.created_at}</p>
+                {reply.num_of_likes !== 0 ? (
+                  <ul className="commentVoteStatus">
+                    <li
+                      className="commentVote"
+                      onClick={() => {
+                        voteComment(reply);
+                      }}
+                    >
+                      {reply.num_of_likes}
+                    </li>
+                  </ul>
+                ) : (
+                  <ul />
+                )}
+              </div>
+            ))}
           </li>
         ))}
       </ul>
