@@ -42,7 +42,7 @@ const Comment = ({ writer }: commentProps) => {
   };
   const [replyOpen, setReplyOpen] = useState<null | number>(null);
   const [commentList, setCommentList] = useState<CommentItemType[]>([]);
-  useEffect(() => {}, [commentList]);
+
   useEffect(() => {
     getComment();
   }, []);
@@ -110,7 +110,7 @@ const Comment = ({ writer }: commentProps) => {
       });
     }
   };
-
+  useEffect(() => {}, [commentList, voteComment()]);
   return (
     <div className={"Comment"}>
       <ul className={"Comment__list"}>
@@ -189,7 +189,13 @@ const Comment = ({ writer }: commentProps) => {
                   {reply.is_mine ? (
                     <li onClick={() => deleteComment(reply.id)}> 삭제 </li>
                   ) : (
-                    <li>신고</li>
+                    <li
+                      onClick={() => {
+                        window.alert("아직 구현되지 않은 기능입니다.");
+                      }}
+                    >
+                      신고
+                    </li>
                   )}
                 </ul>
                 <hr />
