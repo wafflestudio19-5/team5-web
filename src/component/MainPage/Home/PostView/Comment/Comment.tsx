@@ -70,7 +70,7 @@ const Comment = ({ writer }: commentProps) => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
-      if (commentInput) {
+      if (commentInput.content) {
         writeComment(parseInt(path.postId), commentInput);
       } else {
         writeComment(parseInt(path.postId), replyInput);
