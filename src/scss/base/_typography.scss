@@ -24,9 +24,20 @@ h2{
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
+    font-weight: normal;
   }
 
+  &.medium_bold_writer{
+    margin-bottom: 5px;
+    margin-top: 0;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    color: #0ca5af;
 
+  }
 
   &.small{
 

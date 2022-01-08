@@ -13,7 +13,7 @@
     flex-wrap: wrap;
     align-items: center;
     .wrapper{
-      padding-top:20px;
+      padding-top:5px;
       width: 748px;
 
       hr{
@@ -24,9 +24,12 @@
         padding-bottom: 5px;
       }
 
-.medium_bold{
-  float: left;
-}
+      .medium_bold{
+        float: left;
+      }
+      .medium_bold_writer{
+        float: left;
+      }
       .small{
         float: left;
       }
@@ -88,6 +91,9 @@
       }
 
       .medium_bold{
+        float: left;
+      }
+      .medium_bold_writer{
         float: left;
       }
       .small{

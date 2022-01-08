@@ -11,7 +11,11 @@ import {
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 
-const Comment = () => {
+interface commentProps {
+  writer: string;
+}
+
+const Comment = ({ writer }: commentProps) => {
   interface PostViewParams {
     boardId: string;
     postId: string;
@@ -113,7 +117,11 @@ const Comment = () => {
         {commentList.map((item) => (
           <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
-              <h2 className={"medium_bold"}>{item.nickname}</h2>
+              {item.nickname === "익명(글쓴이)" || item.nickname === writer ? (
+                <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
+              ) : (
+                <h2 className={"medium_bold"}>{item.nickname}</h2>
+              )}
               <ul className={"status"}>
                 {item.head_comment ? (
                   <li />
@@ -163,7 +171,12 @@ const Comment = () => {
             </div>
             {item.replys.map((reply) => (
               <div key={reply.id} className={"wrapperReply"}>
-                <h2 className={"medium_bold"}>{reply.nickname}</h2>
+                {item.nickname === "익명(글쓴이)" ||
+                item.nickname === writer ? (
+                  <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
+                ) : (
+                  <h2 className={"medium_bold"}>{item.nickname}</h2>
+                )}
                 <ul className={"status"}>
                   <li
                     onClick={() => {
