@@ -66,7 +66,11 @@ const Comment = () => {
 
   const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter") {
-      writeComment(parseInt(path.postId), commentInput);
+      if (commentInput) {
+        writeComment(parseInt(path.postId), commentInput);
+      } else {
+        writeComment(parseInt(path.postId), replyInput);
+      }
     }
   };
 
