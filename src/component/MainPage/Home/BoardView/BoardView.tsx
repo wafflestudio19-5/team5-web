@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getPostAPI, getPostWithURLAPI } from "../../../../API/postAPI";
+import {
+  getPostAPI,
+  getPostWithURLAPI,
+  searchPostAPI,
+} from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 
@@ -34,9 +38,16 @@ const BoardView = () => {
   }, [params]);
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
-      setPostList(response)
-    );
+    if (params.boardId[0] === "s") {
+      const searchValue = params.boardId.slice(1);
+      searchPostAPI(searchValue, 10 * (page - 1)).then((response) =>
+        setPostList(response)
+      );
+    } else {
+      getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
+        setPostList(response)
+      );
+    }
   };
 
   const getURL = (input: string | null) => {

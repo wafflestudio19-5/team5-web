@@ -1,4 +1,4 @@
-import { authRequest, plainRequest } from "./API";
+import { plainRequest } from "./API";
 import { LoginInputType, TokenType } from "../interface/interface";
 
 export const postLoginAPI = async (input: LoginInputType) => {
@@ -28,6 +28,37 @@ export const postRefreshAPI = async (refreshToken: string | null) => {
   }
 };
 
+export const getNaverLoginAPI = () => {
+  window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+};
 export const getKakaoLoginAPI = () => {
   window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+};
+export const getGoogleLoginAPI = () => {
+  window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+};
+
+export const sendAuthCodeAPI = async (
+  platform: string,
+  code: string,
+  state?: string
+) => {
+  if (state) {
+    const response = await plainRequest.post(
+      `user/${platform}/login/callback`,
+      {
+        code: code,
+        state: state,
+      }
+    );
+    return response;
+  } else {
+    const response = await plainRequest.post(
+      `user/${platform}/login/callback`,
+      {
+        code: code,
+      }
+    );
+    return response;
+  }
 };

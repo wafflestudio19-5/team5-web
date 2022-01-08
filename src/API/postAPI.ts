@@ -61,3 +61,23 @@ export const postDeleteAPI = async (postId: string) => {
     return e;
   }
 };
+
+export const searchPostAPI = async (
+  query: string,
+  offset: number = 0,
+  limit: number = 10
+) => {
+  try {
+    const response = await authRequest.get(
+      `/post/search/${makeQuery({
+        query: query,
+        limit: limit,
+        offset: offset,
+      })}`
+    );
+    return response.data;
+  } catch (e) {
+    console.log("게시글 검색 실패!"); //테스트용
+    console.log(e);
+  }
+};
