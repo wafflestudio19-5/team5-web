@@ -1,14 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 
 const RightBar = () => {
+  const history = useHistory();
   const [searchValue, setSearchValue] = useState("");
-
+  const search = (input: string) => {
+    history.push(`/s/${input}`);
+  };
   return (
     <div className={"RightBarWrapper"}>
       <input
         className={"searchBar"}
         placeholder={"전체 게시판의 글을 검색하세요!"}
+        value={searchValue}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+        }}
+        onKeyPress={(e) => {
+          if (e.key == "Enter") {
+            search(searchValue);
+          }
+        }}
       />
       <div className={"cardNow"}>
         <h3 className={"board-name"}>실시간 인기 글</h3>
