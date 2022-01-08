@@ -28,4 +28,6 @@ export const postRefreshAPI = async (refreshToken: string | null) => {
   }
 };
 
-export const getKakaoLoginAPI = () => {};
+export const getKakaoLoginAPI = () => {
+  window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+};
