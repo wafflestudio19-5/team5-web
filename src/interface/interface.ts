@@ -8,6 +8,26 @@ export interface LoginInputType {
   password: string;
 }
 
+//Register API
+export type RegisterKeyType =
+  | "username"
+  | "password1"
+  | "password2"
+  | "email"
+  | "nickname"
+  | "admission_year"
+  | "univ";
+
+export interface RegisterInputType {
+  username: string;
+  password1: string;
+  password2: string;
+  email: string;
+  nickname: string;
+  univ: string;
+  admission_year: string;
+}
+
 //Board API
 export interface boardItemType {
   anonym_enabled: boolean;

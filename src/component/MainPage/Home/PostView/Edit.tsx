@@ -1,12 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { postInputType } from '../../../../interface/interface';
-import { postPostAPI } from '../../../../API/postAPI';
+import { postDeleteAPI, postEditAPI } from '../../../../API/postAPI';
 
-interface WriteParams {
-  boardId: number;
+interface BoardDetailItem {
+  id: string;
+  writer: string;
+  title: string;
+  content: string;
+  number_of_likes: number;
+  number_of_scrap: number;
+  number_of_comments: string;
+  images: string;
+  tags: any;
+  is_anonymous: boolean;
+  is_question: boolean;
 }
 
-const Write = ({ boardId }: WriteParams) => {
+interface post {
+  postDetail: BoardDetailItem;
+  boardId: string;
+  setEditPost: any;
+}
+
+const Edit = ({ postDetail, boardId, setEditPost }: post) => {
   const [postInput, setPostInput] = useState<postInputType>({
     title: '',
     content: '',
@@ -15,22 +31,34 @@ const Write = ({ boardId }: WriteParams) => {
     is_question: false,
   });
 
-  const writePost = (board: number, input: postInputType) => {
+  const updatePost = (input: postInputType) => {
     const form = new FormData();
+    form.append('id', postDetail.id);
     form.append('title', input.title);
     form.append('content', input.content);
     form.append('tags', JSON.stringify(input.tags));
     form.append('is_anonymous', JSON.stringify(input.is_anonymous));
     form.append('is_question', JSON.stringify(input.is_question));
-    postPostAPI(board, form).then((response) => console.log(response));
+    postEditAPI(form, postDetail.id).then((response) => console.log(response));
+    setEditPost(false);
   };
+
+  useEffect(() => {
+    setPostInput({
+      title: postDetail.title,
+      content: postDetail.content,
+      tags: postDetail.tags,
+      is_anonymous: postDetail.is_anonymous,
+      is_question: postDetail.is_question,
+    });
+  }, []);
 
   return (
     <form
       className={'Write'}
       onSubmit={(event) => {
         event.preventDefault();
-        writePost(boardId, postInput);
+        updatePost(postInput);
       }}
     >
       <p className={'Write__title'}>
@@ -86,10 +114,22 @@ const Write = ({ boardId }: WriteParams) => {
         <li title={'완료'} className={'submit'}>
           <button type="submit"></button>
         </li>
-        <li title={'익명'} className={'anonymous'} />
+        <li
+          title={'익명'}
+          className={postInput.is_anonymous ? 'anonymousActive' : 'anonymous'}
+          onClick={() =>
+            setPostInput((prev) => {
+              return {
+                ...prev,
+                is_anonymous: !prev.is_anonymous,
+              };
+            })
+          }
+        />
         <li title={'질문'} className={'question'} />
       </ul>
     </form>
   );
 };
-export default Write;
+
+export default Edit;

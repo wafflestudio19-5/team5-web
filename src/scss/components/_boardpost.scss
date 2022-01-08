@@ -79,4 +79,26 @@
       background-image: url(https://everytime.kr/images/container.articles.buttons.scrap.png);
     }
   }
+
+}
+
+.goBackList{
+  background-color: #d6d6d6;
+  display: block;
+  width: 110px;
+  margin-top: 10px;
+  margin-left: 5px;
+  padding: 0 10px 0 25px;
+  height: 35px;
+  line-height: 35px;
+  border: 1px solid $keyColor;
+  border-radius: 3px;
+  color: $keyColor;
+  font-size: 14px;
+  font-weight: bold;
+  background-position: 10px center;
+  background-size: 10px 10px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-image: url(https://everytime.kr/images/new/container.articles.pagination.prev.png);
 }

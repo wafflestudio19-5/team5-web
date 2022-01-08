@@ -2,7 +2,9 @@ import { TokenType } from "../interface/interface";
 const tokenKey = "auth_token" as const;
 
 export const saveToken = (input: TokenType) => {
-  window.localStorage.setItem(tokenKey, JSON.stringify(input));
+  if (input) {
+    window.localStorage.setItem(tokenKey, JSON.stringify(input));
+  }
 };
 
 export const loadToken = () => {

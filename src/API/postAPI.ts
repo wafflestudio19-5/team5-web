@@ -1,6 +1,7 @@
 import { authRequest, makeQuery } from "./API";
-import { getErrorData } from "./ErrorHandling";
+import { getErrorData } from "./errorHandling";
 import { postInputType } from "../interface/interface";
+
 export const getPostAPI = async (
   board: number,
   offset: number = 0,
@@ -41,4 +42,22 @@ export const postPostAPI = async (board: number, input: FormData) => {
   }
 };
 
+export const postEditAPI = async (input: FormData, postId: string) => {
+  try {
+    const response = await authRequest.put(`/post/${postId}/`, input);
+    return response.data;
+  } catch (e) {
+    console.log(e); //테스트용
+    return e;
+  }
+};
 
+export const postDeleteAPI = async (postId: string) => {
+  try {
+    const response = await authRequest.delete(`/post/${postId}/`);
+    return response.data;
+  } catch (e) {
+    console.log(e); //테스트용
+    return e;
+  }
+};

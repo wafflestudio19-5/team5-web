@@ -31,7 +31,6 @@ const BoardView = () => {
 
   useEffect(() => {
     getPostWithPage(Number(pageNum));
-    console.log(params.boardId);
   }, [params]);
 
   const getPostWithPage = (page: number) => {
