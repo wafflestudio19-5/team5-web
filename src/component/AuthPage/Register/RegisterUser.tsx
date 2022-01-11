@@ -11,9 +11,13 @@ type RegisterProps = {
 const RegisterUser = ({
   changeRegisterInput,
   registerInput,
+  socialLoginData,
 }: RegisterProps) => {
   const [isSocial, setIsSocial] = useState<boolean>(false);
   const [hasEmail, setHasEmail] = useState<boolean>(false);
+  if (socialLoginData) {
+    setIsSocial(true);
+  }
   return (
     <>
       <div className="Register__Text">

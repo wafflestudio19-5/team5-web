@@ -78,9 +78,9 @@ const Login = () => {
           </Link>
         </div>
         <div className="Login__social">
-          <button className="Login__kakao" onClick={tryKakao}>
-            카카오
-          </button>
+          {/*<button className="Login__kakao" onClick={tryKakao}>*/}
+          {/*  카카오*/}
+          {/*</button>*/}
         </div>
       </div>
     </div>

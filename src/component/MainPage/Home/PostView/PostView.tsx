@@ -64,7 +64,7 @@ const PostView = () => {
     }
   };
 
-  useEffect(() => {}, [postDetail]);
+  useEffect(() => {}, [editPost]);
   useEffect(() => {
     getPostDetail();
   }, [setPostDetail, path.boardId, path.postId, editPost]);

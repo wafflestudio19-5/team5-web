@@ -38,10 +38,9 @@ const Write = ({ boardId }: WriteParams) => {
 
   const writePost = (board: number, input: postInputType) => {
     const form = new FormData();
-    const checkedTags = checkHashtag(postInput.content);
     form.append("title", input.title);
     form.append("content", input.content);
-    form.append("tags", JSON.stringify(checkedTags));
+    form.append("tags", JSON.stringify(input.tags));
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
     form.append("is_question", JSON.stringify(input.is_question));
     postPostAPI(board, form).then((response) => console.log(response));
