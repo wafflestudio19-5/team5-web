@@ -9,7 +9,7 @@ interface BoardDetailItem {
   content: string;
   number_of_likes: number;
   number_of_scrap: number;
-  number_of_comments: string;
+  number_of_comments: number;
   images: string;
   tags: any;
   is_anonymous: boolean;
