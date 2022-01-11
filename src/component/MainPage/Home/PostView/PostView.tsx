@@ -67,8 +67,6 @@ const PostView = () => {
   useEffect(() => {}, [postDetail]);
   useEffect(() => {
     getPostDetail();
-    console.log(postDetail.title);
-    console.log(postDetail.number_of_likes);
   }, [setPostDetail, path.boardId, path.postId, editPost]);
 
   return editPost == false ? (
@@ -79,6 +77,7 @@ const PostView = () => {
           <h3 className={'large'}>{postDetail.writer}</h3>
           <time>시간</time>
         </div>
+        {}
         <ul>
           <li onClick={() => setEditPost(true)}>수정</li>
           <li onClick={deletePost}>삭제</li>
