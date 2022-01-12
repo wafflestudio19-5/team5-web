@@ -1,5 +1,5 @@
-import LoginAndRegister from '../../common/LoginAndRegister';
-import { Link } from 'react-router-dom';
+import LoginAndRegister from "../../common/LoginAndRegister";
+import { Link } from "react-router-dom";
 
 const Lobby = () => {
   return (
@@ -117,18 +117,18 @@ const Lobby = () => {
         </div>
       </section>
       <section className="footer">
-        <ul className={'links'}>
+        <ul className={"links"}>
           <li>
-            <Link to={'/'}>이용약관</Link>
+            <Link to={"/"}>이용약관</Link>
           </li>
-          <li className={'policy'}>
-            <Link to={'/'}>개인정보처리방침</Link>
+          <li className={"policy"}>
+            <Link to={"/"}>개인정보처리방침</Link>
           </li>
           <li>
-            <Link to={'/'}>문의하기</Link>
+            <Link to={"/"}>문의하기</Link>
           </li>
-          <li className={'copyright'}>
-            <Link to={'/'}>© 에브리타임</Link>
+          <li className={"copyright"}>
+            <Link to={"/"}>© 에브리타임</Link>
           </li>
         </ul>
       </section>

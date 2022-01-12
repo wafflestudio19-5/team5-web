@@ -1,9 +1,9 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const LoginAndRegister = () => {
   return (
     <div className="LoginAndRegister">
-      <div className={'LoginAndRegisterBox'}>
+      <div className={"LoginAndRegisterBox"}>
         <Link to="/login" className="LoginAndRegister__LoginButton">
           로그인
         </Link>

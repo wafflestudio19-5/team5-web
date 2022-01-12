@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
-import Comment from './Comment/Comment';
-import { useHistory, useParams } from 'react-router-dom';
-import request from '../../../../API/API';
-import { getPostDetailAPI } from '../../../../API/postDetailAPI';
-import Edit from './Edit';
-import { postDeleteAPI } from '../../../../API/postAPI';
+import { useEffect, useState } from "react";
+import Comment from "./Comment/Comment";
+import { useHistory, useParams } from "react-router-dom";
+import request from "../../../../API/API";
+import { getPostDetailAPI } from "../../../../API/postDetailAPI";
+import Edit from "./Edit";
+import { postDeleteAPI } from "../../../../API/postAPI";
 
 interface PostViewParams {
   boardId: string;
@@ -36,14 +36,14 @@ const PostView = () => {
 
   const path = useParams<PostViewParams>();
   const [postDetail, setPostDetail] = useState<BoardDetailItem>({
-    id: '',
-    writer: '',
-    title: '',
-    content: '',
+    id: "",
+    writer: "",
+    title: "",
+    content: "",
     number_of_likes: 0,
     number_of_scrap: 0,
     number_of_comments: 0,
-    images: '',
+    images: "",
     tags: [],
     is_anonymous: false,
     is_question: false,
@@ -56,8 +56,8 @@ const PostView = () => {
   };
 
   const deletePost = () => {
-    console.log('d');
-    const result = window.confirm('이 글을 삭제하시겠습니까?');
+    console.log("d");
+    const result = window.confirm("이 글을 삭제하시겠습니까?");
     if (result) {
       postDeleteAPI(path.postId);
       goBack();
@@ -69,11 +69,11 @@ const PostView = () => {
   }, [setPostDetail, path.boardId, path.postId, editPost]);
 
   return editPost == false ? (
-    <div className={'BoardView__post'}>
-      <div className={'BoardView__post__profile'}>
-        <div className={'BoardView__post__profile__img'}>사진</div>
-        <div className={'BoardView__post__profile__name'}>
-          <h3 className={'large'}>{postDetail.writer}</h3>
+    <div className={"BoardView__post"}>
+      <div className={"BoardView__post__profile"}>
+        <div className={"BoardView__post__profile__img"}>사진</div>
+        <div className={"BoardView__post__profile__name"}>
+          <h3 className={"large"}>{postDetail.writer}</h3>
           <time>시간</time>
         </div>
         {}
@@ -82,32 +82,32 @@ const PostView = () => {
           <li onClick={deletePost}>삭제</li>
         </ul>
       </div>
-      <h2 className={'large'}>{postDetail.title}</h2>
-      <p className={'large'}>{postDetail.content}</p>
-      <ul className={'status'}>
-        <li className={'vote_active'}>{postDetail.number_of_likes}</li>
-        <li className={'comment_active'}>{postDetail.number_of_comments}</li>
-        <li className={'scrap_active'}>{postDetail.number_of_scrap}</li>
+      <h2 className={"large"}>{postDetail.title}</h2>
+      <p className={"large"}>{postDetail.content}</p>
+      <ul className={"status"}>
+        <li className={"vote_active"}>{postDetail.number_of_likes}</li>
+        <li className={"comment_active"}>{postDetail.number_of_comments}</li>
+        <li className={"scrap_active"}>{postDetail.number_of_scrap}</li>
       </ul>
       <br />
-      <div className={'buttons'}>
-        <span className={'sympathy'}>공감</span>
-        <span className={'scrap'}>스크랩</span>
+      <div className={"buttons"}>
+        <span className={"sympathy"}>공감</span>
+        <span className={"scrap"}>스크랩</span>
       </div>
       <Comment writer={postDetail.writer} />
-      <button className={'post__button goBackList'} onClick={goBack}>
+      <button className={"post__button goBackList"} onClick={goBack}>
         글 목록
       </button>
     </div>
   ) : (
-    <div className={'BoardView__post'}>
+    <div className={"BoardView__post"}>
       <Edit
         postDetail={postDetail}
         boardId={path.boardId}
         setEditPost={setEditPost}
       />
       <button
-        className={'post__button cancelEdit'}
+        className={"post__button cancelEdit"}
         onClick={() => setEditPost(false)}
       >
         글 수정 취소

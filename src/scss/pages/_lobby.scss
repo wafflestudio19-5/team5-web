@@ -1,33 +1,37 @@
-.Lobby{
+.Lobby {
   display: inline-block;
   position: relative;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   min-width: 1010px;
 
-  aside{
-    width:300px;
+  aside {
+    width: 300px;
   }
-  .Lobby__RightBar{
-    top:0;
-    right:0;
-    position:absolute;
-    height:100%;
-    border-left:solid $cardBorderColor 1px;
+
+  .Lobby__RightBar {
+    top: 0;
+    right: 0;
+    position: fixed;
+    z-index: 9;
+    height: 100%;
+    border-left: solid $cardBorderColor 1px;
     background-color: $boardColor;
 
-    .Lobby__Login{
-      width:270px;
-      padding:15px;
-      padding-top:40px;
+    .Lobby__Login {
+      width: 270px;
+      padding: 15px;
+      padding-top: 40px;
       padding-bottom: 70px;
       border-bottom: 1px solid $boardBorderColor;
     }
-    .Lobby__Logo{
+
+    .Lobby__Logo {
       text-align: center;
-      width:100%;
-      height:70px;
-      img{
+      width: 100%;
+      height: 70px;
+
+      img {
         width: 28px;
         height: 30px;
         margin-bottom: 40px;
@@ -35,22 +39,23 @@
     }
   }
 
-  section{
+  section {
     box-sizing: border-box;
     width: 100%;
     padding-right: 300px;
     margin-right: 0;
   }
 
-  .introduce{
+  .introduce {
     background-color: #f5f5f5;
-    .wrap{
+
+    .wrap {
       position: relative;
       width: 674px;
       height: 622px;
       margin: 0 auto;
 
-      h1{
+      h1 {
         position: absolute;
         text-align: left;
         top: 271px;
@@ -59,16 +64,18 @@
         line-height: 30px;
         font-size: 24px;
         font-weight: normal;
-        strong{
+
+        strong {
           color: $keyColor;
         }
       }
 
-      .stores{
+      .stores {
         position: absolute;
         top: 371px;
         left: 354px;
-        a{
+
+        a {
           padding: 0 15px;
           height: 58px;
           line-height: 58px;
@@ -76,7 +83,8 @@
           border: 1px solid $boardBorderColor;
           border-radius: 6px;
           margin-right: 5px;
-          img{
+
+          img {
             margin-top: 15px;
             vertical-align: center;
             height: 30px;
@@ -85,12 +93,13 @@
 
       }
 
-      .Device__Active{
+      .Device__Active {
         position: absolute;
         top: 80px;
         left: 0;
         box-sizing: border-box;
-        .screen{
+
+        .screen {
           width: 270px;
           height: 540px;
           position: relative;
@@ -100,38 +109,64 @@
           background-color: #fff;
           overflow: hidden;
 
-          .image{
+          .image {
             width: 100%;
             height: 100%;
             background: transparent url(https://everytime.kr/images/about/screen.png) no-repeat;
             position: absolute;
             background-size: 840px auto;
           }
+
           @keyframes active-init-timetable {
-            0% { opacity: 0; }
-            26% { opacity: 0; }
-            34% { opacity: 1; }
-            67% { opacity: 1; }
-            68% { opacity: 0; }
-            100% { opacity: 0; }
+            0% {
+              opacity: 0;
+            }
+            26% {
+              opacity: 0;
+            }
+            34% {
+              opacity: 1;
+            }
+            67% {
+              opacity: 1;
+            }
+            68% {
+              opacity: 0;
+            }
+            100% {
+              opacity: 0;
+            }
           }
           @keyframes active-init-board {
-            0% { opacity: 0; }
-            59% { opacity: 0; }
-            67% { opacity: 1; }
-            92% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+              opacity: 0;
+            }
+            59% {
+              opacity: 0;
+            }
+            67% {
+              opacity: 1;
+            }
+            92% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+            }
           }
-          .home{
+
+          .home {
             opacity: 1;
             background-position: 0px 0px;
           }
-          .timetable{
+
+          .timetable {
             opacity: 0;
             background-position: -285px 0px;
             animation: active-init-timetable 6s infinite;
           }
-          .board{
+
+          .board {
             opacity: 0;
             background-position: -570px 0px;
             animation: active-init-board 9s infinite;
@@ -141,20 +176,23 @@
     }
   }
 
-  .white{
+  .white {
     background-color: #fff;
   }
 
 
-  .community{
+  .community {
     background-color: #f5f5f5;
-    .figure{
+
+    .figure {
       text-align: center;
       padding-bottom: 80px;
-      div{
-        margin : 0 36px;
+
+      div {
+        margin: 0 36px;
         display: inline-block;
-        .icon{
+
+        .icon {
           width: 80px;
           height: 80px;
           line-height: 80px;
@@ -162,12 +200,14 @@
           border-radius: 50px;
           background-color: #fff;
           text-align: center;
-          img{
+
+          img {
             height: 32px;
             vertical-align: middle;
           }
         }
-        .description{
+
+        .description {
           display: inline-block;
           margin-top: 10px;
           font-size: 14px;
@@ -177,29 +217,33 @@
     }
   }
 
-  .footer{
+  .footer {
     background-color: #fff;
-    ul{
+
+    ul {
       margin: 0;
       padding: 16px 0;
       display: flex;
       list-style: none;
       justify-content: center;
-      li{
+
+      li {
         font-size: 13px;
         margin-right: 8px;
+
         a {
-          text-decoration:none;
-          color : $postViewColor;
+          text-decoration: none;
+          color: $postViewColor;
           display: inline-block;
           line-height: 20px;
         }
 
-        &.policy{
+        &.policy {
           font-weight: bold;
           color: $timeFontColor;
         }
-        &.copyright{
+
+        &.copyright {
           font-weight: bold;
           color: $timeFontColor;
         }
@@ -208,20 +252,22 @@
 
   }
 
-  h2{
+  h2 {
     text-align: center;
     padding: 80px 0 30px 0;
-    margin:0 ;
+    margin: 0;
     font-weight: normal;
-    strong{
+
+    strong {
       color: $keyColor;
     }
   }
 
-  .paragraph{
+  .paragraph {
     padding-bottom: 60px;
     text-align: center;
-    p{
+
+    p {
       margin: 0;
       line-height: 25px;
       font-size: 16px;

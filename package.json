@@ -56,5 +56,9 @@
   "proxy": "https://www.waffle-minkyu.shop",
   "devDependencies": {
     "prettier": "2.4.1"
+  },
+  "prettier": {
+    "singleQuote": false,
+    "jsxSingleQuote": false
   }
 }
