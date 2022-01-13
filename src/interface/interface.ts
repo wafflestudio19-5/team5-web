@@ -83,6 +83,7 @@ export interface CommentItemType {
   is_mine: boolean;
   is_deleted: boolean;
   head_comment: number | null;
+  user_type: string;
   replys: CommentItemType[];
 }
 

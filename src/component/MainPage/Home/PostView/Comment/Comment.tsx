@@ -118,7 +118,7 @@ const Comment = ({ writer }: commentProps) => {
         {commentList.map((item) => (
           <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
-              {item.nickname === "익명(글쓴이)" || item.nickname === writer ? (
+              {item.user_type === "글쓴이" ? (
                 <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
               ) : (
                 <h2 className={"medium_bold"}>{item.nickname}</h2>
@@ -172,8 +172,7 @@ const Comment = ({ writer }: commentProps) => {
             </div>
             {item.replys.map((reply) => (
               <div key={reply.id} className={"wrapperReply"}>
-                {item.nickname === "익명(글쓴이)" ||
-                item.nickname === writer ? (
+                {reply.user_type === "글쓴이" ? (
                   <h2 className={"medium_bold_writer"}>{reply.nickname}</h2>
                 ) : (
                   <h2 className={"medium_bold"}>{reply.nickname}</h2>
