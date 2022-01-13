@@ -48,7 +48,7 @@ const Comment = ({ writer }: commentProps) => {
   }, []);
 
   const writeComment = (postId: number, input: CommentInputType) => {
-    if (!input.content) {
+    if (!input.content || input.content.replace(/\s|　/gi, "") === "") {
       window.alert("내용을 입력해주세요.");
       return;
     }
