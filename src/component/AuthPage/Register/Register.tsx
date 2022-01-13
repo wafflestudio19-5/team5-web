@@ -39,6 +39,12 @@ const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
     setRegisterInput({ ...registerInput, [key]: input });
   };
 
+  useEffect(() => {
+    if (socialLoginData) {
+      setIsSocial(true);
+    }
+  }, []);
+
   return (
     <section className="Register">
       <form

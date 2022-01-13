@@ -18,7 +18,7 @@ interface BoardDetailItem {
   content: string;
   number_of_likes: number;
   number_of_scrap: number;
-  number_of_comments: string;
+  number_of_comments: number;
   tags: any;
   images: string;
   is_anonymous: boolean;
@@ -42,7 +42,7 @@ const PostView = () => {
     content: "",
     number_of_likes: 0,
     number_of_scrap: 0,
-    number_of_comments: "",
+    number_of_comments: 0,
     images: "",
     tags: [],
     is_anonymous: false,
@@ -64,10 +64,9 @@ const PostView = () => {
     }
   };
 
-  useEffect(() => {}, [postDetail]);
   useEffect(() => {
     getPostDetail();
-  }, [setPostDetail, path.boardId, path.postId]);
+  }, [setPostDetail, path.boardId, path.postId, editPost]);
 
   return editPost == false ? (
     <div className={"BoardView__post"}>
@@ -77,6 +76,7 @@ const PostView = () => {
           <h3 className={"large"}>{postDetail.writer}</h3>
           <time>시간</time>
         </div>
+        {}
         <ul>
           <li onClick={() => setEditPost(true)}>수정</li>
           <li onClick={deletePost}>삭제</li>
@@ -85,9 +85,9 @@ const PostView = () => {
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
       <ul className={"status"}>
-        <li className={"vote_active"}>10</li>
-        <li className={"comment_active"}>10</li>
-        <li className={"scrap_active"}>10</li>
+        <li className={"vote_active"}>{postDetail.number_of_likes}</li>
+        <li className={"comment_active"}>{postDetail.number_of_comments}</li>
+        <li className={"scrap_active"}>{postDetail.number_of_scrap}</li>
       </ul>
       <br />
       <div className={"buttons"}>
@@ -95,19 +95,24 @@ const PostView = () => {
         <span className={"scrap"}>스크랩</span>
       </div>
       <Comment writer={postDetail.writer} />
-      <button onClick={goBack}>글 목록</button>
+      <button className={"post__button goBackList"} onClick={goBack}>
+        글 목록
+      </button>
     </div>
   ) : (
-    <>
+    <div className={"BoardView__post"}>
       <Edit
         postDetail={postDetail}
         boardId={path.boardId}
         setEditPost={setEditPost}
       />
-      <button className="goBackList" onClick={() => setEditPost(false)}>
+      <button
+        className={"post__button cancelEdit"}
+        onClick={() => setEditPost(false)}
+      >
         글 수정 취소
       </button>
-    </>
+    </div>
   );
 };
 

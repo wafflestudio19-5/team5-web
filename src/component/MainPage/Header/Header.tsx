@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,13 +7,13 @@ const Header = () => {
         <div className="Header__logo">
           <Link to="/">
             <img
-              src={'https://everytime.kr/images/new/nav.logo.png'}
-              className={'logo_img'}
+              src={"https://everytime.kr/images/new/nav.logo.png"}
+              className={"logo_img"}
             />
           </Link>
-          <div className={'title__wrapper'}>
-            <span className={'Header__title'}>에브리타임</span>
-            <span className={'Header__schoolName'}>서울대</span>
+          <div className={"title__wrapper"}>
+            <span className={"Header__title"}>에브리타임</span>
+            <span className={"Header__schoolName"}>서울대</span>
           </div>
         </div>
         <ul className="Header__menu">
@@ -29,10 +29,10 @@ const Header = () => {
         </ul>
         <div className="Header__account">
           <Link to="/message">
-            <div className={'message'}></div>
+            <div className={"message"}></div>
           </Link>
           <Link to="/my">
-            <div className={'my'}></div>
+            <div className={"my"}></div>
           </Link>
         </div>
       </div>

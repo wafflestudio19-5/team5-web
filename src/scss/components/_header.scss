@@ -18,13 +18,13 @@ nav.Header {
       display: flex;
       float: left;
       height: 100%;
-      width: 115px;
       align-items: center;
       justify-content: space-between;
 
       .logo_img{
         width: 40px;
         height: 40px;
+        margin-right: 10px;
         vertical-align: middle;
       }
       .title__wrapper{

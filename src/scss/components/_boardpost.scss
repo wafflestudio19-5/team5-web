@@ -10,13 +10,15 @@
     display: flex;
     justify-content: space-between;
     .BoardView__post__profile__img{
+      flex-shrink: 0;
       width: 40px;
       height: 40px;
       border-radius: 8px;
       background-color: antiquewhite;
     }
     .BoardView__post__profile__name{
-      margin-right: 580px;
+      position: absolute;
+      margin-left: 50px;
       time{
         line-height: 20px;
         font-size: 12px;
@@ -29,7 +31,9 @@
       margin: 0;
       padding: 0;
       list-style: none;
+      flex-shrink: 0;
       li{
+
         margin-left: 8px;
         padding: 0 2px;
         height: 20px;
@@ -83,22 +87,10 @@
 }
 
 .goBackList{
-  background-color: #d6d6d6;
-  display: block;
-  width: 110px;
-  margin-top: 10px;
-  margin-left: 5px;
-  padding: 0 10px 0 25px;
-  height: 35px;
-  line-height: 35px;
-  border: 1px solid $keyColor;
-  border-radius: 3px;
-  color: $keyColor;
-  font-size: 14px;
-  font-weight: bold;
-  background-position: 10px center;
-  background-size: 10px 10px;
-  cursor: pointer;
-  background-repeat: no-repeat;
+  background-image: url(https://everytime.kr/images/new/container.articles.pagination.list.png);
+}
+
+.cancelEdit{
+
   background-image: url(https://everytime.kr/images/new/container.articles.pagination.prev.png);
 }
