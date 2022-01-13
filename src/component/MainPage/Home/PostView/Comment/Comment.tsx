@@ -87,6 +87,7 @@ const Comment = ({ writer }: commentProps) => {
     if (window.confirm("이 댓글에 공감하십니까?")) {
       postCommentVoteAPI(comment.id).then((response) => {
         console.log(response);
+        getComment();
         if (!response.is_success) {
           if (response.error_code === 1) {
             window.alert("이미 공감한 댓글입니다.");
@@ -173,9 +174,9 @@ const Comment = ({ writer }: commentProps) => {
               <div key={reply.id} className={"wrapperReply"}>
                 {item.nickname === "익명(글쓴이)" ||
                 item.nickname === writer ? (
-                  <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
+                  <h2 className={"medium_bold_writer"}>{reply.nickname}</h2>
                 ) : (
-                  <h2 className={"medium_bold"}>{item.nickname}</h2>
+                  <h2 className={"medium_bold"}>{reply.nickname}</h2>
                 )}
                 <ul className={"status"}>
                   <li
