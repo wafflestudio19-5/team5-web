@@ -48,7 +48,7 @@ const Comment = ({ writer }: commentProps) => {
   }, []);
 
   const writeComment = (postId: number, input: CommentInputType) => {
-    if (!input.content) {
+    if (!input.content || input.content.replace(/\s|　/gi, "") === "") {
       window.alert("내용을 입력해주세요.");
       return;
     }
@@ -87,6 +87,7 @@ const Comment = ({ writer }: commentProps) => {
     if (window.confirm("이 댓글에 공감하십니까?")) {
       postCommentVoteAPI(comment.id).then((response) => {
         console.log(response);
+        getComment();
         if (!response.is_success) {
           if (response.error_code === 1) {
             window.alert("이미 공감한 댓글입니다.");
@@ -117,7 +118,7 @@ const Comment = ({ writer }: commentProps) => {
         {commentList.map((item) => (
           <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
-              {item.nickname === "익명(글쓴이)" || item.nickname === writer ? (
+              {item.user_type === "글쓴이" ? (
                 <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
               ) : (
                 <h2 className={"medium_bold"}>{item.nickname}</h2>
@@ -171,11 +172,10 @@ const Comment = ({ writer }: commentProps) => {
             </div>
             {item.replys.map((reply) => (
               <div key={reply.id} className={"wrapperReply"}>
-                {item.nickname === "익명(글쓴이)" ||
-                item.nickname === writer ? (
-                  <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
+                {reply.user_type === "글쓴이" ? (
+                  <h2 className={"medium_bold_writer"}>{reply.nickname}</h2>
                 ) : (
-                  <h2 className={"medium_bold"}>{item.nickname}</h2>
+                  <h2 className={"medium_bold"}>{reply.nickname}</h2>
                 )}
                 <ul className={"status"}>
                   <li
