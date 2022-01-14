@@ -1,12 +1,19 @@
 import { plainRequest } from "./API";
 import { LoginInputType, TokenType } from "../interface/interface";
+import { toast } from "../component/Toast/ToastManager";
 
 export const postLoginAPI = async (input: LoginInputType) => {
   try {
     const response = await plainRequest.post("/user/login/", input);
     return response.data.token;
   } catch (e) {
-    console.log(e);
+    toast.show({
+      // @ts-ignore
+      title: `${e.response.status}`,
+      // @ts-ignore
+      content: `${e.response.data.non_field_errors}`,
+      duration: 3000,
+    });
   }
 };
 
