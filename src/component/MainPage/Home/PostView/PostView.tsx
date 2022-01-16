@@ -6,6 +6,7 @@ import Edit from "./Edit";
 import { postDeleteAPI } from "../../../../API/postAPI";
 import { postItemType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
+import { toast } from "../../../../component/Toast/ToastManager";
 
 interface PostViewParams {
   boardId: string;
@@ -56,6 +57,14 @@ const PostView = () => {
     }
   };
 
+  const inforToast = () => {
+    toast.show({
+      title: `죄송합니다`,
+      content: `아직 지원하지 않는 기능입니다.`,
+      duration: 3000,
+    });
+  };
+
   useEffect(() => {
     getPostDetail();
   }, [setPostDetail, path.boardId, path.postId, editPost]);
@@ -68,10 +77,17 @@ const PostView = () => {
           <h3 className={"large"}>{postDetail.writer}</h3>
           <time>{time(postDetail.created_at)}</time>
         </div>
-        <ul>
-          <li onClick={() => setEditPost(true)}>수정</li>
-          <li onClick={deletePost}>삭제</li>
-        </ul>
+        {postDetail.is_mine ? (
+          <ul>
+            <li onClick={() => setEditPost(true)}>수정</li>
+            <li onClick={deletePost}>삭제</li>
+          </ul>
+        ) : (
+          <ul>
+            <li onClick={inforToast}>쪽지</li>
+            <li onClick={inforToast}>신고</li>
+          </ul>
+        )}
       </div>
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
