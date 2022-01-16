@@ -20,7 +20,6 @@ const PostView = () => {
       setPostDetail({
         ...response,
         tags: JSON.parse(response.tags),
-        created_at: time(response.created_at),
       });
     });
   };
@@ -67,7 +66,7 @@ const PostView = () => {
         <div className={"BoardView__post__profile__img"}>사진</div>
         <div className={"BoardView__post__profile__name"}>
           <h3 className={"large"}>{postDetail.writer}</h3>
-          <time>{postDetail.created_at}</time>
+          <time>{time(postDetail.created_at)}</time>
         </div>
         <ul>
           <li onClick={() => setEditPost(true)}>수정</li>
@@ -77,8 +76,6 @@ const PostView = () => {
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
       <ul className={"status"}>
-        <li>{postDetail.is_mine.toString()}</li>
-        <li>{}</li>
         <li className={"vote_active"}>{postDetail.num_of_likes}</li>
         <li className={"comment_active"}>{postDetail.num_of_comments}</li>
         <li className={"scrap_active"}>{postDetail.num_of_scrap}</li>

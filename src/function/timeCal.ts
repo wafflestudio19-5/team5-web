@@ -8,7 +8,6 @@ export const time = (created_at: string) => {
   const ft = dayjs(now);
   const tt = dayjs(created);
   const minDiff = ft.diff(tt, "minutes", true);
-  console.log(minDiff);
   if (minDiff < 1) return "방금";
   else if (minDiff < 60) return minDiff + "분 전";
   else {
