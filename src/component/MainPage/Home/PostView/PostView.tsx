@@ -1,28 +1,15 @@
 import { useEffect, useState } from "react";
 import Comment from "./Comment/Comment";
 import { useHistory, useParams } from "react-router-dom";
-import request from "../../../../API/API";
 import { getPostDetailAPI } from "../../../../API/postDetailAPI";
 import Edit from "./Edit";
 import { postDeleteAPI } from "../../../../API/postAPI";
+import { postItemType } from "../../../../interface/interface";
+import { time } from "../../../../function/timeCal";
 
 interface PostViewParams {
   boardId: string;
   postId: string;
-}
-
-interface BoardDetailItem {
-  id: string;
-  writer: string;
-  title: string;
-  content: string;
-  number_of_likes: number;
-  number_of_scrap: number;
-  number_of_comments: number;
-  tags: any;
-  images: string;
-  is_anonymous: boolean;
-  is_question: boolean;
 }
 
 const PostView = () => {
@@ -30,23 +17,29 @@ const PostView = () => {
 
   const getPostDetail = () => {
     getPostDetailAPI(parseInt(path.postId)).then((response) => {
-      setPostDetail({ ...response, tags: JSON.parse(response.tags) });
+      setPostDetail({
+        ...response,
+        tags: JSON.parse(response.tags),
+        created_at: time(response.created_at),
+      });
     });
   };
 
   const path = useParams<PostViewParams>();
-  const [postDetail, setPostDetail] = useState<BoardDetailItem>({
+  const [postDetail, setPostDetail] = useState<postItemType>({
     id: "",
     writer: "",
     title: "",
     content: "",
-    number_of_likes: 0,
-    number_of_scrap: 0,
-    number_of_comments: 0,
+    is_mine: false,
+    num_of_likes: 0,
+    num_of_scrap: 0,
+    num_of_comments: 0,
     images: "",
     tags: [],
     is_anonymous: false,
     is_question: false,
+    created_at: "",
   });
 
   const [editPost, setEditPost] = useState<boolean>(false);
@@ -74,9 +67,8 @@ const PostView = () => {
         <div className={"BoardView__post__profile__img"}>사진</div>
         <div className={"BoardView__post__profile__name"}>
           <h3 className={"large"}>{postDetail.writer}</h3>
-          <time>시간</time>
+          <time>{postDetail.created_at}</time>
         </div>
-        {}
         <ul>
           <li onClick={() => setEditPost(true)}>수정</li>
           <li onClick={deletePost}>삭제</li>
@@ -85,9 +77,11 @@ const PostView = () => {
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
       <ul className={"status"}>
-        <li className={"vote_active"}>{postDetail.number_of_likes}</li>
-        <li className={"comment_active"}>{postDetail.number_of_comments}</li>
-        <li className={"scrap_active"}>{postDetail.number_of_scrap}</li>
+        <li>{postDetail.is_mine.toString()}</li>
+        <li>{}</li>
+        <li className={"vote_active"}>{postDetail.num_of_likes}</li>
+        <li className={"comment_active"}>{postDetail.num_of_comments}</li>
+        <li className={"scrap_active"}>{postDetail.num_of_scrap}</li>
       </ul>
       <br />
       <div className={"buttons"}>
