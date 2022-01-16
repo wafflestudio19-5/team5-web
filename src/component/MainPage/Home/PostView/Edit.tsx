@@ -1,23 +1,10 @@
 import { useEffect, useState } from "react";
 import { postInputType } from "../../../../interface/interface";
 import { postDeleteAPI, postEditAPI } from "../../../../API/postAPI";
-
-interface BoardDetailItem {
-  id: string;
-  writer: string;
-  title: string;
-  content: string;
-  number_of_likes: number;
-  number_of_scrap: number;
-  number_of_comments: number;
-  images: string;
-  tags: any;
-  is_anonymous: boolean;
-  is_question: boolean;
-}
+import { postItemType } from "../../../../interface/interface";
 
 interface post {
-  postDetail: BoardDetailItem;
+  postDetail: postItemType;
   boardId: string;
   setEditPost: any;
 }

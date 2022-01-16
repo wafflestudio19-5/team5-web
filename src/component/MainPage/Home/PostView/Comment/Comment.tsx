@@ -10,6 +10,7 @@ import {
   CommentInputType,
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
+import { time } from "../../../../../function/timeCal";
 
 interface commentProps {
   writer: string;
@@ -154,7 +155,7 @@ const Comment = ({ writer }: commentProps) => {
               </ul>
               <hr />
               <p className={"comment"}>{item.content}</p>
-              <p className={"small"}>{item.created_at}</p>
+              <p className={"small"}>{time(item.created_at)}</p>
               {item.num_of_likes !== 0 ? (
                 <ul className="commentVoteStatus">
                   <li
@@ -194,7 +195,7 @@ const Comment = ({ writer }: commentProps) => {
                 </ul>
                 <hr />
                 <p className={"comment"}>{reply.content}</p>
-                <p className={"small"}>{reply.created_at}</p>
+                <p className={"small"}>{time(reply.created_at)}</p>
                 {reply.num_of_likes !== 0 ? (
                   <ul className="commentVoteStatus">
                     <li

@@ -1,9 +1,15 @@
-interface AxiosError extends Error {
-  response: { data: {}; headers: {} };
+export interface AxiosErrorType extends Error {
+  response: {
+    status: number;
+    data: {
+      non_field_errors?: string;
+    };
+    headers: {};
+  };
 }
 
 export const getErrorData = (inputError: unknown) => {
-  const error = inputError as AxiosError;
+  const error = inputError as AxiosErrorType;
   if (error?.response?.data) {
     return error.response.data;
   } else {

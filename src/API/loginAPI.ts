@@ -1,12 +1,21 @@
 import { plainRequest } from "./API";
 import { LoginInputType, TokenType } from "../interface/interface";
+import { toast } from "../component/Toast/ToastManager";
+import { AxiosErrorType, getErrorData } from "./errorHandling";
 
 export const postLoginAPI = async (input: LoginInputType) => {
   try {
     const response = await plainRequest.post("/user/login/", input);
     return response.data.token;
   } catch (e) {
-    console.log(e);
+    const error = e as AxiosErrorType;
+    if (error) {
+      toast.show({
+        title: `${error.response.status}`,
+        content: `${error.response.data.non_field_errors}`,
+        duration: 3000,
+      });
+    }
   }
 };
 

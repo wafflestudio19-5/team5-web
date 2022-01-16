@@ -45,15 +45,19 @@ export interface boardItemType {
 
 //Post API
 export interface postItemType {
-  id: number;
-  board: string;
+  id: string;
   writer: string;
   title: string;
   content: string;
-  tags: [];
-  images: [];
+  num_of_likes: number;
+  num_of_scrap: number;
+  num_of_comments: number;
+  tags: any;
+  images: string;
   is_anonymous: boolean;
   is_question: boolean;
+  is_mine: boolean;
+  created_at: string;
 }
 
 export interface postListType {
