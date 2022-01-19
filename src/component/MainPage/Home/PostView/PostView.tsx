@@ -57,7 +57,7 @@ const PostView = () => {
     }
   };
 
-  const inforToast = () => {
+  const informToast = () => {
     toast.show({
       title: `죄송합니다`,
       content: `아직 지원하지 않는 기능입니다.`,
@@ -69,7 +69,7 @@ const PostView = () => {
     getPostDetail();
   }, [setPostDetail, path.boardId, path.postId, editPost]);
 
-  return editPost == false ? (
+  return !editPost ? (
     <div className={"BoardView__post"}>
       <div className={"BoardView__post__profile"}>
         <div className={"BoardView__post__profile__img"}>사진</div>
@@ -84,8 +84,8 @@ const PostView = () => {
           </ul>
         ) : (
           <ul>
-            <li onClick={inforToast}>쪽지</li>
-            <li onClick={inforToast}>신고</li>
+            <li onClick={informToast}>쪽지</li>
+            <li onClick={informToast}>신고</li>
           </ul>
         )}
       </div>

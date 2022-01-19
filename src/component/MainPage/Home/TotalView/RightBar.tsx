@@ -1,9 +1,21 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
+import TotalViewItem from "./TotalViewItem";
+import { boardItemType, postItemType } from "../../../../interface/interface";
 
 const RightBar = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState("");
+  const [liveTopPost, setLiveTopPost] = useState([]);
+  const [hotPost, setHotPost] = useState<postItemType[]>([]);
+
+  useEffect(() => {
+    getPostAPI("hot", 0, 10).then((res) => {
+      setHotPost(res.results);
+    });
+  }, []);
+
   const search = (input: string) => {
     history.push(`/s/${input}`);
   };
@@ -17,7 +29,7 @@ const RightBar = () => {
           setSearchValue(e.target.value);
         }}
         onKeyPress={(e) => {
-          if (e.key == "Enter") {
+          if (e.key === "Enter") {
             search(searchValue);
           }
         }}
@@ -25,6 +37,8 @@ const RightBar = () => {
       <div className={"cardNow"}>
         <h3 className={"board-name"}>실시간 인기 글</h3>
         <ul className={"board"}>
+          {}
+
           <li className={"board-item"}>
             <Link to={"/"}>
               <p className={"card-title"}>제목</p>
@@ -55,37 +69,29 @@ const RightBar = () => {
       </div>
       <div className={"cardHot"}>
         <h3 className={"board-name"}>
-          <Link to={"/"}>HOT 게시물</Link>
-          <Link to={"/"}>
+          <Link to={"/hot"}>HOT 게시물</Link>
+          <Link to={"/hot"}>
             <span>더보기</span>
           </Link>
         </h3>
-        <ul className={"board"}>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-        </ul>
+
+        {hotPost.length === 0 ? (
+          <ul className={"board"}>
+            {" "}
+            <li> 아직 HOT 게시물이 없습니다.</li>
+          </ul>
+        ) : (
+          <ul className={"board"}>
+            {hotPost.map((item: postItemType) => (
+              <li className="board-item" key={item.id}>
+                <Link to={`/hot/${item.id}`}>
+                  <p>{item.title}</p>
+                </Link>
+                <time>{item.created_at}</time>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className={"cardBest"}>
         <h3 className={"board-name"}>

@@ -3,7 +3,7 @@ import { getErrorData } from "./errorHandling";
 import { postInputType } from "../interface/interface";
 
 export const getPostAPI = async (
-  board: number,
+  board: number | string,
   offset: number = 0,
   limit: number = 10
 ) => {
@@ -24,6 +24,17 @@ export const getPostWithURLAPI = async (URL: string) => {
     return response.data;
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용
+    return [];
+  }
+};
+
+export const getLiveTopAPI = async () => {
+  try {
+    const response = await authRequest.get("/post/livetop/");
+    console.log(response);
+    return response.data;
+  } catch (e) {
+    console.log(getErrorData(e));
     return [];
   }
 };
