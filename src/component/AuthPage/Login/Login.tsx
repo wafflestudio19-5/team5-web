@@ -5,7 +5,12 @@ import { useDispatch } from "react-redux";
 import { saveToken } from "../../../function/localStorage";
 import { LoginInputType } from "../../../interface/interface";
 import { Link } from "react-router-dom";
-import { getKakaoLoginAPI, postLoginAPI } from "../../../API/loginAPI";
+import {
+  getGoogleLoginAPI,
+  getKakaoLoginAPI,
+  getNaverLoginAPI,
+  postLoginAPI,
+} from "../../../API/loginAPI";
 
 const Login = () => {
   const history = useHistory();
@@ -37,16 +42,11 @@ const Login = () => {
     });
   };
 
-  const tryKakao = () => {
-    console.log(getKakaoLoginAPI());
-  };
-
   return (
     <div className="Login">
       <div className="LoginBox">
         <h1 className="LoginLogo" />
         <form onSubmit={tryLogin}>
-          {" "}
           <input
             type="text"
             name="아이디"
@@ -78,9 +78,15 @@ const Login = () => {
           </Link>
         </div>
         <div className="Login__social">
-          {/*<button className="Login__kakao" onClick={tryKakao}>*/}
-          {/*  카카오*/}
-          {/*</button>*/}
+          <button className="Login__kakao" onClick={getNaverLoginAPI}>
+            네이버
+          </button>
+          <button className="Login__kakao" onClick={getKakaoLoginAPI}>
+            카카오
+          </button>
+          <button className="Login__kakao" onClick={getGoogleLoginAPI}>
+            구글
+          </button>
         </div>
       </div>
     </div>

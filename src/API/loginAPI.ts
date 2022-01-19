@@ -41,33 +41,37 @@ export const getNaverLoginAPI = () => {
   window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
 };
 export const getKakaoLoginAPI = () => {
-  window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+  window.location.href = "https://waffle-minkyu.shop/user/kakao/login/";
 };
 export const getGoogleLoginAPI = () => {
-  window.location.href = "https://waffle-minkyu.shop/user/naver/login/";
+  window.location.href = "https://waffle-minkyu.shop/user/google/login/";
 };
 
 export const sendAuthCodeAPI = async (
   platform: string,
-  code: any,
-  state?: any
+  code: string | null | undefined,
+  state?: string | null | undefined
 ) => {
-  if (state) {
-    const response = await plainRequest.post(
-      `user/${platform}/login/callback`,
-      {
-        code: code,
-        state: state,
-      }
-    );
-    return response;
-  } else {
-    const response = await plainRequest.post(
-      `user/${platform}/login/callback`,
-      {
-        code: code,
-      }
-    );
-    return response;
+  try {
+    if (state) {
+      const response = await plainRequest.post(
+        `user/${platform}/login/callback/`,
+        {
+          code: code,
+       0   state: state,
+        }
+      );
+      return response.data;
+    } else {
+      const response = await plainRequest.post(
+        `user/${platform}/login/callback/`,
+        {
+          code: code,
+        }
+      );
+      return response.data;
+    }
+  } catch (e) {
+    return Promise.reject(e);
   }
 };

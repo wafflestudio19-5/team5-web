@@ -28,6 +28,15 @@ export interface RegisterInputType {
   admission_year: string;
 }
 
+export interface SocialRegisterInputType {
+  social_id: string;
+  provider: string;
+  email: string;
+  nickname: string;
+  admission_year: string;
+  univ: string;
+}
+
 //Board API
 export interface boardItemType {
   anonym_enabled: boolean;

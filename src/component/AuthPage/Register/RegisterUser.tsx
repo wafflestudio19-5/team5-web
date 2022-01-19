@@ -1,23 +1,18 @@
-import { RegisterInputType } from "../../../interface/interface";
-import { useState } from "react";
+import {
+  RegisterInputType,
+  SocialRegisterInputType,
+} from "../../../interface/interface";
 
 type RegisterProps = {
   changeRegisterInput: Function;
   registerInput: RegisterInputType;
   setRegisterState: Function;
-  socialLoginData: {} | undefined;
 };
 
 const RegisterUser = ({
   changeRegisterInput,
   registerInput,
-  socialLoginData,
 }: RegisterProps) => {
-  const [isSocial, setIsSocial] = useState<boolean>(false);
-  const [hasEmail, setHasEmail] = useState<boolean>(false);
-  if (socialLoginData) {
-    setIsSocial(true);
-  }
   return (
     <>
       <div className="Register__Text">
@@ -77,7 +72,6 @@ const RegisterUser = ({
           type="text"
           className="Register__email"
           value={registerInput.email}
-          disabled={hasEmail}
           onChange={(e) => {
             changeRegisterInput("email", e.target.value);
           }}

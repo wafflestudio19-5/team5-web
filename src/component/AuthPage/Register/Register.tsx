@@ -1,20 +1,28 @@
 import RegisterUser from "./RegisterUser";
 import RegisterSchool from "./RegisterSchool";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   RegisterInputType,
   RegisterKeyType,
 } from "../../../interface/interface";
 import { postSignupAPI } from "../../../API/registerAPI";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
+const initialRegisterInput = {
+  username: "",
+  password1: "",
+  password2: "",
+  email: "",
+  nickname: "",
+  univ: "",
+  admission_year: "",
+};
+
+const Register = () => {
   const history = useHistory();
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
-  const [isSocial, setIsSocial] = useState<boolean>(false);
-  const [autoFillEmail, setAutoFillEmail] = useState<string | null>(null);
 
   const tryRegister = (input: RegisterInputType) => {
     postSignupAPI(input).then((res) => {
@@ -25,25 +33,12 @@ const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
     });
   };
 
-  const [registerInput, setRegisterInput] = useState<RegisterInputType>({
-    username: "",
-    password1: "",
-    password2: "",
-    email: "",
-    nickname: "",
-    univ: "",
-    admission_year: "",
-  });
+  const [registerInput, setRegisterInput] =
+    useState<RegisterInputType>(initialRegisterInput);
 
   const changeRegisterInput = (key: RegisterKeyType, input: string) => {
     setRegisterInput({ ...registerInput, [key]: input });
   };
-
-  useEffect(() => {
-    if (socialLoginData) {
-      setIsSocial(true);
-    }
-  }, []);
 
   return (
     <section className="Register">
@@ -65,7 +60,6 @@ const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
             changeRegisterInput={changeRegisterInput}
             registerInput={registerInput}
             setRegisterState={setRegisterState}
-            socialLoginData={socialLoginData}
           />
         )}
       </form>

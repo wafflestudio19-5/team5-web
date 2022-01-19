@@ -1,25 +1,127 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import qs from "qs";
+import { useEffect, useMemo, useState } from "react";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { plainRequest } from "../../../API/API";
 import Register from "../Register/Register";
 import { sendAuthCodeAPI } from "../../../API/loginAPI";
+import RegisterSocialUser from "../Register/RegisterSocialUser";
+import {
+  RegisterKeyType,
+  SocialRegisterInputType,
+} from "../../../interface/interface";
+import { postSocialSignupAPI } from "../../../API/registerAPI";
+import { toast } from "../../Toast/ToastManager";
+import { login } from "../../../redux/authorization";
+import { saveToken } from "../../../function/localStorage";
+import { useDispatch } from "react-redux";
 interface SocialParams {
   platform: string;
 }
 
+const initialSocialRegisterInput = {
+  social_id: "",
+  provider: "",
+  email: "",
+  nickname: "",
+  admission_year: "",
+  univ: "",
+};
+
 const Social = () => {
   const params: SocialParams = useParams();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const platform = params.platform;
-  const query = qs.parse(window.location.search.slice(1));
-  const [socialLoginData, setSocialLoginData] = useState({});
+  const [socialLoginData, setSocialLoginData] = useState({
+    email: "",
+    login: false,
+    provider: "",
+    social_id: "",
+    token: { access: null, refresh: null },
+  });
+  const { search } = useLocation();
+  const query = new URLSearchParams(search);
+  const [socialRegisterInput, setSocialRegisterInput] =
+    useState<SocialRegisterInputType>(initialSocialRegisterInput);
+
+  const trySocialRegister = (input: SocialRegisterInputType) => {
+    postSocialSignupAPI(input).then(
+      (res) => {
+        if (res) {
+          history.push("/");
+          toast.show({
+            title: "소셜 회원가입",
+            content: "성공했습니다",
+            duration: 3000,
+          });
+        }
+        console.log(res);
+      },
+      () => {
+        toast.show({
+          title: "소셜 회원가입",
+          content: "실패했습니다",
+          duration: 3000,
+        });
+      }
+    );
+  };
+
+  const changeSocialRegisterInput = (key: RegisterKeyType, input: string) => {
+    setSocialRegisterInput({ ...socialRegisterInput, [key]: input });
+  };
 
   useEffect(() => {
-    sendAuthCodeAPI(platform, query.code, query.state).then((response) => {
-      setSocialLoginData(response);
-    });
-  });
-  return <Register socialLoginData={socialLoginData}></Register>;
+    if (query.has("state")) {
+      sendAuthCodeAPI(platform, query.get("code"), query.get("state")).then(
+        (response) => {
+          setSocialLoginData(response);
+        }
+      );
+    } else {
+      sendAuthCodeAPI(platform, query.get("code")).then((response) => {
+        setSocialLoginData(response);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (socialLoginData.login) {
+      console.log("로그인!!!");
+      console.log(socialLoginData);
+      const token = socialLoginData.token;
+      dispatch(login(token));
+      saveToken(token);
+      history.push("/");
+      console.log("로그인 성공!!!");
+    } else {
+      const newInput = {
+        ...socialRegisterInput,
+        social_id: socialLoginData.social_id,
+        provider: socialLoginData.provider,
+        email: socialLoginData.email,
+      };
+      console.log(newInput);
+      setSocialRegisterInput(newInput);
+    }
+  }, [socialLoginData]);
+
+  return (
+    <section className="Register">
+      <form
+        className="Register__Form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          trySocialRegister(socialRegisterInput);
+        }}
+      >
+        <RegisterSocialUser
+          changeSocialRegisterInput={changeSocialRegisterInput}
+          socialRegisterInput={socialRegisterInput}
+          disableEmail={socialLoginData.email !== ""}
+        />
+      </form>
+    </section>
+  );
 };
 
 export default Social;

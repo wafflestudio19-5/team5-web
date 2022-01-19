@@ -2,11 +2,12 @@ import {
   RegisterInputType,
   SocialRegisterInputType,
 } from "../../../interface/interface";
+import { useState } from "react";
 
 type RegisterProps = {
-  changeRegisterInput: Function;
-  registerInput: RegisterInputType;
-  setRegisterState: Function;
+  changeSocialRegisterInput: Function;
+  socialRegisterInput: SocialRegisterInputType;
+  disableEmail: boolean;
 };
 
 const yearList = [
@@ -27,10 +28,10 @@ const yearList = [
   "졸업생",
 ] as const;
 
-const RegisterSchool = ({
-  changeRegisterInput,
-  registerInput,
-  setRegisterState,
+const RegisterUser = ({
+  changeSocialRegisterInput,
+  socialRegisterInput,
+  disableEmail,
 }: RegisterProps) => {
   return (
     <>
@@ -44,9 +45,9 @@ const RegisterSchool = ({
       <div className="Register__Input">
         <div className="Register__Label">입학년도</div>
         <select
-          value={registerInput.admission_year}
+          value={socialRegisterInput.admission_year}
           onChange={(e) => {
-            changeRegisterInput("admission_year", e.target.value);
+            changeSocialRegisterInput("admission_year", e.target.value);
           }}
         >
           <option key="없음" value="">
@@ -64,31 +65,41 @@ const RegisterSchool = ({
       <div className="Register__Input">
         <div className="Register__Label">학교</div>
         <select
-          value={registerInput.univ}
+          value={socialRegisterInput.univ}
           onChange={(e) => {
-            changeRegisterInput("univ", e.target.value);
+            changeSocialRegisterInput("univ", e.target.value);
           }}
         >
           <option value="">학교 선택</option>
           <option value="서울대학교">서울대학교</option>
         </select>
       </div>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          if (registerInput.admission_year.length < 1) {
-            alert("학번을 입력하세요");
-          } else if (registerInput.univ.length < 1) {
-            alert("학교를 입력하세요");
-          } else {
-            setRegisterState("user");
-          }
-        }}
-      >
-        다음
-      </button>
+      <div className="Register__Input">
+        <div className="Register__Label">이름</div>
+        <input
+          type="text"
+          className="Register__nickname"
+          value={socialRegisterInput.nickname}
+          onChange={(e) => {
+            changeSocialRegisterInput("nickname", e.target.value);
+          }}
+        />
+      </div>
+      <div className="Register__Input">
+        <div className="Register__Label">이메일</div>
+        <input
+          type="text"
+          className="Register__email"
+          value={socialRegisterInput.email}
+          onChange={(e) => {
+            changeSocialRegisterInput("email", e.target.value);
+          }}
+          disabled={disableEmail}
+        />
+      </div>
+      <input type="submit" value="다음" />
     </>
   );
 };
 
-export default RegisterSchool;
+export default RegisterUser;
