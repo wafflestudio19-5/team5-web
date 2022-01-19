@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
 import TotalViewItem from "./TotalViewItem";
 import { boardItemType, postItemType } from "../../../../interface/interface";
+import { time } from "../../../../function/timeCal";
 
 const RightBar = () => {
   const history = useHistory();
@@ -13,6 +14,13 @@ const RightBar = () => {
   useEffect(() => {
     getPostAPI("hot", 0, 10).then((res) => {
       setHotPost(res.results);
+    });
+  }, []);
+
+  useEffect(() => {
+    getLiveTopAPI().then((res) => {
+      setLiveTopPost(res);
+      console.log(res);
     });
   }, []);
 
@@ -37,34 +45,32 @@ const RightBar = () => {
       <div className={"cardNow"}>
         <h3 className={"board-name"}>실시간 인기 글</h3>
         <ul className={"board"}>
-          {}
-
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-              <div className={"card-information"}>
-                <h4>게시판종류</h4>
-                <ul className={"status"}>
-                  <li className={"vote_active"}>10</li>
-                  <li className={"comment_active"}>10</li>
-                </ul>
-              </div>
-            </Link>
-          </li>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-              <div className={"card-information"}>
-                <h4>게시판종류</h4>
-                <ul className={"status"}>
-                  <li className={"vote_active"}>10</li>
-                  <li className={"comment_active"}>10</li>
-                </ul>
-              </div>
-            </Link>
-          </li>
+          {liveTopPost.length === 0 ? (
+            <ul className={"board"}>
+              {" "}
+              <li> 아직 실시간 인기글이 없습니다.</li>
+            </ul>
+          ) : (
+            <ul className={"board"}>
+              {liveTopPost.map((item: postItemType) => (
+                <li className={"board-item"} key={item.id}>
+                  <Link to={`/${item.id}`}>
+                    <p className={"card-title"}>{item.title}</p>
+                    <p className={"card-content"}>{item.content}</p>
+                    <div className={"card-information"}>
+                      <h4>게시판종류</h4>
+                      <ul className={"status"}>
+                        <li className={"vote_active"}>{item.num_of_likes}</li>
+                        <li className={"comment_active"}>
+                          {item.num_of_comments}
+                        </li>
+                      </ul>
+                    </div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </ul>
       </div>
       <div className={"cardHot"}>
@@ -87,7 +93,7 @@ const RightBar = () => {
                 <Link to={`/hot/${item.id}`}>
                   <p>{item.title}</p>
                 </Link>
-                <time>{item.created_at}</time>
+                <time className={"hotPostTime"}>{time(item.created_at)}</time>
               </li>
             ))}
           </ul>
