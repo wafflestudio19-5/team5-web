@@ -3,7 +3,7 @@ import Header from "./Header/Header";
 import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
 import Login from "../AuthPage/Login/Login";
-import MyPage from "../MyPage/MyPage";
+import MyPage from "../MyPage/My";
 
 const MainPage = () => {
   return (

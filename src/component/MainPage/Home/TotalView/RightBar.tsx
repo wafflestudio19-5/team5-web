@@ -101,8 +101,8 @@ const RightBar = () => {
       </div>
       <div className={"cardBest"}>
         <h3 className={"board-name"}>
-          <Link to={"/"}>BEST 게시판</Link>
-          <Link to={"/"}>
+          <Link to={"/best"}>BEST 게시판</Link>
+          <Link to={"/best"}>
             <span>더보기</span>
           </Link>
         </h3>

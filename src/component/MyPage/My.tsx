@@ -1,12 +1,17 @@
-import RegisterSchool from "../AuthPage/Register/RegisterSchool";
-import RegisterUser from "../AuthPage/Register/RegisterUser";
+import { useHistory } from "react-router-dom";
 
 const MyPage = () => {
+  const history = useHistory();
+
+  const passwordChange = () => {
+    history.push("/password");
+  };
+
   return (
     <div className={"MyPageMain"}>
       <section>
         <h2>계정</h2>
-        <a>비밀번호 변경</a>
+        <a onClick={passwordChange}>비밀번호 변경</a>
         <a>이메일 변경</a>
       </section>
 
