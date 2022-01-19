@@ -7,6 +7,8 @@ import { postDeleteAPI } from "../../../../API/postAPI";
 import { postItemType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
 import { toast } from "../../../../component/Toast/ToastManager";
+import { getCommentAPI, postCommentAPI } from "../../../../API/commentAPI";
+import comment from "./Comment/Comment";
 
 interface PostViewParams {
   boardId: string;
@@ -101,7 +103,7 @@ const PostView = () => {
         <span className={"sympathy"}>공감</span>
         <span className={"scrap"}>스크랩</span>
       </div>
-      <Comment writer={postDetail.writer} />
+      <Comment setPostDetail={setPostDetail} postDetail={postDetail} />
       <button className={"post__button goBackList"} onClick={goBack}>
         글 목록
       </button>
