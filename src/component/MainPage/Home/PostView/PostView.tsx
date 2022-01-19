@@ -7,8 +7,7 @@ import { postDeleteAPI } from "../../../../API/postAPI";
 import { postItemType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
 import { toast } from "../../../../component/Toast/ToastManager";
-import { getCommentAPI, postCommentAPI } from "../../../../API/commentAPI";
-import comment from "./Comment/Comment";
+import { authRequest } from "../../../../API/API";
 
 interface PostViewParams {
   boardId: string;
@@ -51,11 +50,35 @@ const PostView = () => {
   };
 
   const deletePost = () => {
-    console.log("d");
     const result = window.confirm("이 글을 삭제하시겠습니까?");
     if (result) {
       postDeleteAPI(path.postId);
       goBack();
+    }
+  };
+
+  const postLikeAPI = async (postId: string) => {
+    if (postDetail.is_mine) {
+      window.alert("자신의 글을 공감할 수 없습니다.");
+    } else {
+      try {
+        const response = await authRequest.post(`/post/${postId}/like/`);
+        if (response.data.is_success) {
+          setPostDetail({
+            ...postDetail,
+            num_of_likes: postDetail.num_of_likes + 1,
+          });
+        }
+      } catch (e) {
+        window.alert("이미 공감하였습니다.");
+      }
+    }
+  };
+
+  const likePost = () => {
+    const result = window.confirm("이 글에 공감하십니까?");
+    if (result) {
+      postLikeAPI(path.postId);
     }
   };
 
@@ -100,7 +123,9 @@ const PostView = () => {
       </ul>
       <br />
       <div className={"buttons"}>
-        <span className={"sympathy"}>공감</span>
+        <span className={"sympathy"} onClick={likePost}>
+          공감
+        </span>
         <span className={"scrap"}>스크랩</span>
       </div>
       <Comment setPostDetail={setPostDetail} postDetail={postDetail} />
