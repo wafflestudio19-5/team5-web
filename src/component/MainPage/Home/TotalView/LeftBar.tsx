@@ -1,13 +1,18 @@
 import { useDispatch } from "react-redux";
 import { deleteToken } from "../../../../function/localStorage";
 import { logout } from "../../../../redux/authorization";
+import { useHistory } from "react-router-dom";
 
 const LeftBar = () => {
   const dispatch = useDispatch();
-
+  const history = useHistory();
   const tryLogout = () => {
     deleteToken();
     dispatch(logout());
+  };
+
+  const gotoMyPage = () => {
+    history.push(`/my`);
   };
 
   return (
@@ -18,7 +23,7 @@ const LeftBar = () => {
         <p className={"user"}>이름</p>
         <p className={"user"}>id</p>
         <div className={"buttons"}>
-          <button>내 정보</button>
+          <button onClick={gotoMyPage}>내 정보</button>
           <button onClick={tryLogout}>로그아웃</button>
         </div>
       </div>

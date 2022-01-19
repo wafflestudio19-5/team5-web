@@ -1,0 +1,29 @@
+.MyPageMain{
+  margin-top: 100px;
+  margin-bottom: 50px;
+  section {
+    position: center;
+    margin: 8px auto 0 auto;
+    width: 480px;
+    padding: 12px 0;
+    box-sizing: border-box;
+    border: 1px solid #EDEDED;
+    border-radius: 12px;
+    h2{
+      line-height: 26px;
+      color: #292929;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 12px 24px;
+    }
+    a{
+      display: block;
+      line-height: 24px;
+      word-wrap: break-word;
+      color: #292929;
+      font-size: 16px;
+      padding: 12px 24px;
+
+    }
+  }
+}
