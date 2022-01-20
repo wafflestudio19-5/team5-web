@@ -4,16 +4,20 @@ import { postPostAPI } from "../../../../API/postAPI";
 
 interface WriteParams {
   boardId: number;
+  setReloading: Function;
+  openWrite: Function;
 }
 
-const Write = ({ boardId }: WriteParams) => {
-  const [postInput, setPostInput] = useState<postInputType>({
-    title: "",
-    content: "",
-    tags: [],
-    is_anonymous: false,
-    is_question: false,
-  });
+const initialPostInput = {
+  title: "",
+  content: "",
+  tags: [],
+  is_anonymous: false,
+  is_question: false,
+};
+
+const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
+  const [postInput, setPostInput] = useState<postInputType>(initialPostInput);
 
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
@@ -43,7 +47,14 @@ const Write = ({ boardId }: WriteParams) => {
     form.append("tags", JSON.stringify(input.tags));
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
     form.append("is_question", JSON.stringify(input.is_question));
-    postPostAPI(board, form).then((response) => console.log(response));
+    postPostAPI(board, form).then(
+      () => {
+        setPostInput(initialPostInput);
+        openWrite();
+        setReloading(true);
+      },
+      () => {}
+    );
   };
 
   return (

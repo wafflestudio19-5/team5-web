@@ -1,10 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import {
-  getPostAPI,
-  getPostWithURLAPI,
-  searchPostAPI,
-} from "../../../../API/postAPI";
+import { getPostAPI, getPostWithURLAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 
@@ -22,6 +18,8 @@ const BoardView = () => {
   const [showForm, setShowForm] = useState<boolean>(false);
   const openWrite = () => setShowForm(!showForm);
 
+  const [reloading, setReloading] = useState<boolean>(true);
+
   interface paramsType {
     boardId: string;
     pageId?: string;
@@ -34,8 +32,12 @@ const BoardView = () => {
   }
 
   useEffect(() => {
-    getPostWithPage(Number(pageNum));
-  }, [params]);
+    if (reloading) {
+      console.log("reloading!");
+      getPostWithPage(Number(pageNum));
+      setReloading(false);
+    }
+  }, [params, reloading]);
 
   const getPostWithPage = (page: number) => {
     getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
@@ -43,23 +45,14 @@ const BoardView = () => {
     );
   };
 
-  const getURL = (input: string | null) => {
-    if (input) {
-      const whereToSlice = input.indexOf("/", 8);
-      console.log(input.slice(whereToSlice));
-      return input.slice(whereToSlice);
-    } else {
-      return "";
-    }
-  };
-  const loadPage = (next: string | null) => {
-    getPostWithURLAPI(getURL(next)).then((response) => setPostList(response));
-  };
-
   return (
     <>
       {showForm ? (
-        <Write boardId={Number(params.boardId)} />
+        <Write
+          boardId={Number(params.boardId)}
+          setReloading={setReloading}
+          openWrite={openWrite}
+        />
       ) : (
         <button className={"BoardView__writePost"} onClick={openWrite}>
           새 글을 작성해주세요!
