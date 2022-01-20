@@ -66,6 +66,7 @@ authRequest.interceptors.response.use(
         });
       }
     }
+    throw error;
   }
 );
 

@@ -11,8 +11,8 @@ const Home = () => {
       <SubMenu />
       <Switch>
         <Route path="/" component={TotalView} exact />
+        {/*  my ~~~ */}
         <Route path="/s/:searchId" component={SearchDetailView} exact />
-        <Route path="/:boardId/:postId" component={DetailView} />
         <Route path="/:boardId" component={DetailView} />
       </Switch>
     </div>

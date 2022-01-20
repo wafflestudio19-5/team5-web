@@ -49,11 +49,14 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
     form.append("is_question", JSON.stringify(input.is_question));
     postPostAPI(board, form).then(
       () => {
+        console.log("then1번");
         setPostInput(initialPostInput);
         openWrite();
         setReloading(true);
       },
-      () => {}
+      () => {
+        console.log("then2번");
+      }
     );
   };
 

@@ -29,12 +29,16 @@ export const getPostWithURLAPI = async (URL: string) => {
 
 export const postPostAPI = async (board: number, input: FormData) => {
   try {
+    console.log("try성공?");
     const response = await authRequest.post(
       `/post/${makeQuery({ board: board })}`,
       input
     );
-    return response.data;
+    console.log(response);
+    console.log("try 성공");
+    return Promise.resolve(response);
   } catch (e) {
+    console.log("try실패");
     return Promise.reject(e);
   }
 };
