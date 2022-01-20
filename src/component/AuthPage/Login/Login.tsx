@@ -11,6 +11,7 @@ import {
   getNaverLoginAPI,
   postLoginAPI,
 } from "../../../API/loginAPI";
+import { toastErrorData } from "../../../API/errorHandling";
 
 const Login = () => {
   const history = useHistory();
@@ -35,11 +36,16 @@ const Login = () => {
       password: loginInput.password,
     };
 
-    postLoginAPI(input).then((token) => {
-      dispatch(login(token));
-      saveToken(token);
-      history.push("/");
-    });
+    postLoginAPI(input).then(
+      (token) => {
+        dispatch(login(token));
+        saveToken(token);
+        history.push("/");
+      },
+      (error) => {
+        toastErrorData(error.response.data);
+      }
+    );
   };
 
   return (

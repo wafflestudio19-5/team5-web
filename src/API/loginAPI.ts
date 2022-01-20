@@ -8,14 +8,7 @@ export const postLoginAPI = async (input: LoginInputType) => {
     const response = await plainRequest.post("/user/login/", input);
     return response.data.token;
   } catch (e) {
-    const error = e as AxiosErrorType;
-    if (error) {
-      toast.show({
-        title: `${error.response.status}`,
-        content: `${error.response.data.non_field_errors}`,
-        duration: 3000,
-      });
-    }
+    return Promise.reject(e);
   }
 };
 
@@ -58,7 +51,7 @@ export const sendAuthCodeAPI = async (
         `user/${platform}/login/callback/`,
         {
           code: code,
-       0   state: state,
+          state: state,
         }
       );
       return response.data;

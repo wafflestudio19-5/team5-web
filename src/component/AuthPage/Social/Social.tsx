@@ -1,7 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { plainRequest } from "../../../API/API";
-import Register from "../Register/Register";
 import { sendAuthCodeAPI } from "../../../API/loginAPI";
 import RegisterSocialUser from "../Register/RegisterSocialUser";
 import {
@@ -13,6 +11,7 @@ import { toast } from "../../Toast/ToastManager";
 import { login } from "../../../redux/authorization";
 import { saveToken } from "../../../function/localStorage";
 import { useDispatch } from "react-redux";
+import { toastErrorData } from "../../../API/errorHandling";
 interface SocialParams {
   platform: string;
 }
@@ -45,23 +44,18 @@ const Social = () => {
 
   const trySocialRegister = (input: SocialRegisterInputType) => {
     postSocialSignupAPI(input).then(
-      (res) => {
-        if (res) {
-          history.push("/");
-          toast.show({
-            title: "소셜 회원가입",
-            content: "성공했습니다",
-            duration: 3000,
-          });
-        }
-        console.log(res);
-      },
-      () => {
+      (token) => {
         toast.show({
           title: "소셜 회원가입",
-          content: "실패했습니다",
+          content: "성공했습니다",
           duration: 3000,
         });
+        dispatch(token);
+        saveToken(token);
+        history.push("/");
+      },
+      (error) => {
+        toastErrorData(error.response.data);
       }
     );
   };

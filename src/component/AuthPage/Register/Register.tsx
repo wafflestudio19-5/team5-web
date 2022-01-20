@@ -7,6 +7,11 @@ import {
 } from "../../../interface/interface";
 import { postSignupAPI } from "../../../API/registerAPI";
 import { useHistory, useParams } from "react-router-dom";
+import { toastErrorData } from "../../../API/errorHandling";
+import { toast } from "../../Toast/ToastManager";
+import { login } from "../../../redux/authorization";
+import { saveToken } from "../../../function/localStorage";
+import { useDispatch } from "react-redux";
 
 const initialRegisterInput = {
   username: "",
@@ -20,17 +25,27 @@ const initialRegisterInput = {
 
 const Register = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
 
   const tryRegister = (input: RegisterInputType) => {
-    postSignupAPI(input).then((res) => {
-      if (res) {
+    postSignupAPI(input).then(
+      (token) => {
+        toast.show({
+          title: "회원가입",
+          content: "성공하셨습니다",
+          duration: 3000,
+        });
+        dispatch(login(token));
+        saveToken(token);
         history.push("/");
-      } else {
+      },
+      (error) => {
+        toastErrorData(error.response.data);
       }
-    });
+    );
   };
 
   const [registerInput, setRegisterInput] =
