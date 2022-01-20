@@ -106,4 +106,19 @@ export interface CommentInputType {
   head_comment: number | null;
 }
 
+export interface liveTopItemType {
+  id: number;
+  board: { id: number; title: string };
+  content: string;
+  num_of_comments: number;
+  num_of_likes: number;
+  title: string;
+}
+
+export interface HotItemType {
+  created_at: string;
+  id: number;
+  title_content: string;
+}
+
 export default {};

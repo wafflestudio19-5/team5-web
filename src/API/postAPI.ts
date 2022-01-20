@@ -1,9 +1,7 @@
 import { authRequest, makeQuery } from "./API";
-import { getErrorData } from "./errorHandling";
-import { postInputType } from "../interface/interface";
 
 export const getPostAPI = async (
-  board: number,
+  board: number | string,
   offset: number = 0,
   limit: number = 10
 ) => {
@@ -11,6 +9,7 @@ export const getPostAPI = async (
     const response = await authRequest.get(
       `/post/${makeQuery({ board: board, limit: limit, offset: offset })}`
     );
+
     return response.data;
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용
@@ -79,5 +78,15 @@ export const searchPostAPI = async (
   } catch (e) {
     console.log("게시글 검색 실패!"); //테스트용
     console.log(e);
+  }
+};
+
+export const getLiveTopAPI = async () => {
+  try {
+    const response = await authRequest.get(`/post/livetop`);
+    return response.data;
+  } catch (e) {
+    console.log("실시간 인기 글 불러오기 실패!"); //테스트용
+    return [];
   }
 };

@@ -2,18 +2,34 @@
   width: 325px;
   flex-shrink: 0;
 
-  .cardNow, .cardHot, .cardBest, .cardLecture{
+  .cardB{
+    width: 100%;
+    h3{
+      color: $rightMenuColor;
+
+    }
+  }
+
+  .cardA{
+    width: 100%;
+    h3{
+      color: $rightMenuColor;
+      span{
+        float: right;
+        line-height: 20px;
+        color: $postViewColor;
+        font-size: 12px;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .cardLecture{
     margin-bottom: 5px;
     @include card-view-default('b');
-  }
-  .cardHot{
-    @include card-view-default('a');
     h3{
       color: $rightMenuColor;
     }
-  }
-  .cardBest{
-    border-bottom: none;
   }
 
   .cardLecture{
