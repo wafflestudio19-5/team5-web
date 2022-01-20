@@ -1,8 +1,8 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { time } from "../../../../function/timeCal";
 import { liveTopItemType, postListType } from "../../../../interface/interface";
 import { getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
+import CardTypeA from "./Card/CardTypeA";
 
 interface liveTopItems extends Array<liveTopItemType> {}
 
@@ -48,7 +48,7 @@ const RightBar = () => {
                 <p className={"card-title"}>{postItem.title}</p>
                 <p className={"card-content"}>{postItem.content}</p>
                 <div className={"card-information"}>
-                  <h4>{postItem.board}</h4>
+                  <h4>{postItem.board.title}</h4>
                   <ul className={"status"}>
                     <li className={"vote_active"}>{postItem.num_of_likes}</li>
                     <li className={"comment_active"}>
@@ -61,30 +61,9 @@ const RightBar = () => {
           ))}
         </ul>
       </div>
-      <div className={"cardA"}>
-        <h3 className={"board-name"}>
-          <Link to={"/"}>HOT 게시판</Link>
-          <Link to={"/"}>
-            <span>더보기</span>
-          </Link>
-        </h3>
-        <ul className={"board"}>
-          {hotPreView.count === 0 ? (
-            <li className="board-item">
-              <p>아직 게시글이 없습니다.</p>
-            </li>
-          ) : (
-            hotPreView.results.map((postItem) => (
-              <Link to={`/${postItem.id}/${postItem.id}`} key={postItem.id}>
-                <li className="board-item">
-                  <p>{postItem.content}</p>
-                  <time>{time(postItem.created_at)}</time>
-                </li>
-              </Link>
-            ))
-          )}
-        </ul>
-      </div>
+
+      <CardTypeA item={{ id: "hot", title: "hot 게시물" }} />
+
       <div className={"cardB"}>
         <h3 className={"board-name"}>
           <Link to={"/"}>BEST 게시판</Link>

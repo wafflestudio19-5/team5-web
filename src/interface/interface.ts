@@ -99,7 +99,7 @@ export interface CommentInputType {
 
 export interface liveTopItemType {
   id: number;
-  board: string;
+  board: { id: number; title: string };
   content: string;
   num_of_comments: number;
   num_of_likes: number;

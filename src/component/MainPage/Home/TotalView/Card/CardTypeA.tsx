@@ -7,8 +7,13 @@ import { useEffect, useState } from "react";
 import { getPostAPI } from "../../../../../API/postAPI";
 import { time } from "../../../../../function/timeCal";
 
+interface hotType {
+  id: string;
+  title: string;
+}
+
 interface totalViewItemProps {
-  item: boardItemType;
+  item: boardItemType | hotType;
 }
 const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
   const [boardPreview, setBoardPreview] = useState<postListType>({
@@ -19,7 +24,7 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
   });
   useEffect(() => {
     getPostAPI(item.id, 0, 4).then((res) => setBoardPreview(res));
-  }, []);
+  }, [item.id]);
 
   return (
     <div className="cardA">
@@ -41,7 +46,6 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
             </Link>
           ))
         )}
-        {}
       </ul>
     </div>
   );

@@ -21,7 +21,7 @@ const CardTypeB: React.FC<totalViewItemProps> = ({ item }) => {
 
   useEffect(() => {
     getPostAPI(item.id, 0, 2).then((res) => setBoardPreview(res));
-  }, []);
+  }, [item.id]);
 
   return (
     <div className={"cardB"}>
