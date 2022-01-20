@@ -1,49 +1,59 @@
 import RegisterUser from "./RegisterUser";
 import RegisterSchool from "./RegisterSchool";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   RegisterInputType,
   RegisterKeyType,
 } from "../../../interface/interface";
 import { postSignupAPI } from "../../../API/registerAPI";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { toastErrorData } from "../../../API/errorHandling";
+import { toast } from "../../Toast/ToastManager";
+import { login } from "../../../redux/authorization";
+import { saveToken } from "../../../function/localStorage";
+import { useDispatch } from "react-redux";
 
-const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
+const initialRegisterInput = {
+  username: "",
+  password1: "",
+  password2: "",
+  email: "",
+  nickname: "",
+  univ: "",
+  admission_year: "",
+};
+
+const Register = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const [registerState, setRegisterState] = useState<"school" | "user">(
     "school"
   );
-  const [isSocial, setIsSocial] = useState<boolean>(false);
-  const [autoFillEmail, setAutoFillEmail] = useState<string | null>(null);
 
   const tryRegister = (input: RegisterInputType) => {
-    postSignupAPI(input).then((res) => {
-      if (res) {
+    postSignupAPI(input).then(
+      (token) => {
+        toast.show({
+          title: "회원가입",
+          content: "성공하셨습니다",
+          duration: 3000,
+        });
+        dispatch(login(token));
+        saveToken(token);
         history.push("/");
-      } else {
+      },
+      (error) => {
+        toastErrorData(error.response.data);
       }
-    });
+    );
   };
 
-  const [registerInput, setRegisterInput] = useState<RegisterInputType>({
-    username: "",
-    password1: "",
-    password2: "",
-    email: "",
-    nickname: "",
-    univ: "",
-    admission_year: "",
-  });
+  const [registerInput, setRegisterInput] =
+    useState<RegisterInputType>(initialRegisterInput);
 
   const changeRegisterInput = (key: RegisterKeyType, input: string) => {
     setRegisterInput({ ...registerInput, [key]: input });
   };
-
-  useEffect(() => {
-    if (socialLoginData) {
-      setIsSocial(true);
-    }
-  }, []);
 
   return (
     <section className="Register">
@@ -65,7 +75,6 @@ const Register = ({ socialLoginData }: { socialLoginData?: {} }) => {
             changeRegisterInput={changeRegisterInput}
             registerInput={registerInput}
             setRegisterState={setRegisterState}
-            socialLoginData={socialLoginData}
           />
         )}
       </form>
