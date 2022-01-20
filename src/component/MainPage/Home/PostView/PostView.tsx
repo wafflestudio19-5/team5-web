@@ -6,7 +6,8 @@ import Edit from "./Edit";
 import { postDeleteAPI } from "../../../../API/postAPI";
 import { postItemType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
-import { toast } from "../../../../component/Toast/ToastManager";
+import { toast } from "../../../Toast/ToastManager";
+import { authRequest } from "../../../../API/API";
 
 interface PostViewParams {
   boardId: string;
@@ -49,11 +50,60 @@ const PostView = () => {
   };
 
   const deletePost = () => {
-    console.log("d");
     const result = window.confirm("이 글을 삭제하시겠습니까?");
     if (result) {
       postDeleteAPI(path.postId);
       goBack();
+    }
+  };
+
+  const postLikeAPI = async (postId: string) => {
+    if (postDetail.is_mine) {
+      window.alert("자신의 글을 공감할 수 없습니다.");
+    } else {
+      try {
+        const response = await authRequest.post(`/post/${postId}/like/`);
+        if (response.data.is_success) {
+          setPostDetail({
+            ...postDetail,
+            num_of_likes: postDetail.num_of_likes + 1,
+          });
+        }
+      } catch (e) {
+        window.alert("이미 공감하였습니다.");
+      }
+    }
+  };
+
+  const postScrapAPI = async (postId: string) => {
+    if (postDetail.is_mine) {
+      window.alert("자신의 글을 스크랩할 수 없습니다.");
+    } else {
+      try {
+        const response = await authRequest.post(`/post/${postId}/scrap/`);
+        if (response.data.is_success) {
+          setPostDetail({
+            ...postDetail,
+            num_of_scrap: postDetail.num_of_scrap + 1,
+          });
+        }
+      } catch (e) {
+        window.alert("이미 스크랩하였습니다.");
+      }
+    }
+  };
+
+  const likePost = () => {
+    const result = window.confirm("이 글에 공감하십니까?");
+    if (result) {
+      postLikeAPI(path.postId);
+    }
+  };
+
+  const scrapPost = () => {
+    const result = window.confirm("이 글을 스크랩하시겠습니까?");
+    if (result) {
+      postScrapAPI(path.postId);
     }
   };
 
@@ -69,7 +119,7 @@ const PostView = () => {
     getPostDetail();
   }, [setPostDetail, path.boardId, path.postId, editPost]);
 
-  return editPost == false ? (
+  return !editPost ? (
     <div className={"BoardView__post"}>
       <div className={"BoardView__post__profile"}>
         <div className={"BoardView__post__profile__img"}>사진</div>
@@ -98,10 +148,14 @@ const PostView = () => {
       </ul>
       <br />
       <div className={"buttons"}>
-        <span className={"sympathy"}>공감</span>
-        <span className={"scrap"}>스크랩</span>
+        <span className={"sympathy"} onClick={likePost}>
+          공감
+        </span>
+        <span className={"scrap"} onClick={scrapPost}>
+          스크랩
+        </span>
       </div>
-      <Comment writer={postDetail.writer} />
+      <Comment setPostDetail={setPostDetail} postDetail={postDetail} />
       <button className={"post__button goBackList"} onClick={goBack}>
         글 목록
       </button>

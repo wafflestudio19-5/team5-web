@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import {
   deleteCommentAPI,
   getCommentAPI,
@@ -8,15 +8,19 @@ import {
 import {
   CommentItemType,
   CommentInputType,
+  postItemType,
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 import { time } from "../../../../../function/timeCal";
 
 interface commentProps {
-  writer: string;
+  postDetail: postItemType;
+  setPostDetail: (
+    value: postItemType | ((prevState: postItemType) => postItemType)
+  ) => void;
 }
 
-const Comment = ({ writer }: commentProps) => {
+const Comment = ({ postDetail, setPostDetail }: commentProps) => {
   interface PostViewParams {
     boardId: string;
     postId: string;
@@ -66,6 +70,10 @@ const Comment = ({ writer }: commentProps) => {
       setCommentList(response);
       setCommentInput({ ...commentInput, content: "" });
       setReplyInput({ ...replyInput, content: "" });
+      setPostDetail({
+        ...postDetail,
+        num_of_comments: postDetail.num_of_comments + 1,
+      });
     });
   }; // 댓글 작성 함수
 
@@ -217,7 +225,6 @@ const Comment = ({ writer }: commentProps) => {
                 className={"replyWrite"}
                 onSubmit={(event) => {
                   event.preventDefault();
-
                   writeComment(parseInt(path.postId), replyInput);
                 }}
               >
