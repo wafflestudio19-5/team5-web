@@ -27,18 +27,14 @@ export const getPostWithURLAPI = async (URL: string) => {
   }
 };
 
-export const postPostAPI = async (board: number, input: FormData) => {
+export const postPostAPI = async (board: number, input: postInputType) => {
   try {
-    console.log("try성공?");
     const response = await authRequest.post(
       `/post/${makeQuery({ board: board })}`,
       input
     );
-    console.log(response);
-    console.log("try 성공");
-    return Promise.resolve(response);
+    return Promise.resolve(response.data);
   } catch (e) {
-    console.log("try실패");
     return Promise.reject(e);
   }
 };

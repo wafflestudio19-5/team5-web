@@ -33,7 +33,6 @@ const BoardView = () => {
 
   useEffect(() => {
     if (reloading) {
-      console.log("reloading!");
       getPostWithPage(Number(pageNum));
       setReloading(false);
     }

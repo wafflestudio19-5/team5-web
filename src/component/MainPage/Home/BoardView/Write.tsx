@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { postInputType } from "../../../../interface/interface";
 import { postPostAPI } from "../../../../API/postAPI";
+import { toastErrorData } from "../../../../API/errorHandling";
 
 interface WriteParams {
   boardId: number;
@@ -41,21 +42,14 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
   };
 
   const writePost = (board: number, input: postInputType) => {
-    const form = new FormData();
-    form.append("title", input.title);
-    form.append("content", input.content);
-    form.append("tags", JSON.stringify(input.tags));
-    form.append("is_anonymous", JSON.stringify(input.is_anonymous));
-    form.append("is_question", JSON.stringify(input.is_question));
-    postPostAPI(board, form).then(
+    postPostAPI(board, input).then(
       () => {
-        console.log("then1번");
         setPostInput(initialPostInput);
         openWrite();
         setReloading(true);
       },
-      () => {
-        console.log("then2번");
+      (error) => {
+        toastErrorData(error.response.data);
       }
     );
   };
@@ -115,14 +109,41 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
           }}
         />
       </p>
+      {postInput.is_question && (
+        <p className={"question_description"}>
+          질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱 빠르게
+          답변을 얻을 수 있게 됩니다.
+          <br />
+          또한, 다른 학우들이 정성껏 작성한 답변을 유지하기 위해, 댓글이 달린
+          이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
+        </p>
+      )}
       <ul className={"option"}>
         <li title={"해시태그"} className={"hashtag"} />
         <li title={"첨부"} className={"attach"} />
         <li title={"완료"} className={"submit"}>
           <button type="submit"></button>
         </li>
-        <li title={"익명"} className={"anonymous"} />
-        <li title={"질문"} className={"question"} />
+        <li
+          title={"익명"}
+          className={postInput.is_anonymous ? "anonymousActive" : "anonymous"}
+          onClick={() => {
+            setPostInput({
+              ...postInput,
+              is_anonymous: !postInput.is_anonymous,
+            });
+          }}
+        />
+        <li
+          title={"질문"}
+          className={postInput.is_question ? "questionActive" : "question"}
+          onClick={() => {
+            setPostInput({
+              ...postInput,
+              is_question: !postInput.is_question,
+            });
+          }}
+        />
       </ul>
     </form>
   );
