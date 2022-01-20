@@ -1,12 +1,28 @@
 import { Link, useHistory } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { time } from "../../../../function/timeCal";
+import { liveTopItemType, postListType } from "../../../../interface/interface";
+import { getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
+
+interface liveTopItems extends Array<liveTopItemType> {}
 
 const RightBar = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState("");
+  const [liveTop, setLiveTop] = useState<liveTopItems>([]);
+  const [hotPreView, setHotPreView] = useState<postListType>({
+    count: 0,
+    next: null,
+    previous: null,
+    results: [],
+  });
   const search = (input: string) => {
     history.push(`/s/${input}`);
   };
+  useEffect(() => {
+    getLiveTopAPI().then((res) => setLiveTop(res));
+    getPostAPI("hot", 0, 4).then((res) => setHotPreView(res));
+  }, []);
   return (
     <div className={"RightBarWrapper"}>
       <input
@@ -17,77 +33,59 @@ const RightBar = () => {
           setSearchValue(e.target.value);
         }}
         onKeyPress={(e) => {
-          if (e.key == "Enter") {
+          if (e.key === "Enter") {
             search(searchValue);
           }
         }}
       />
-      <div className={"cardNow"}>
+
+      <div className={"cardB"}>
         <h3 className={"board-name"}>실시간 인기 글</h3>
         <ul className={"board"}>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-              <div className={"card-information"}>
-                <h4>게시판종류</h4>
-                <ul className={"status"}>
-                  <li className={"vote_active"}>10</li>
-                  <li className={"comment_active"}>10</li>
-                </ul>
-              </div>
+          {liveTop.map((postItem) => (
+            <Link to={`/${postItem.id}/${postItem.id}`} key={postItem.id}>
+              <li className={"board-item"} key={postItem.id}>
+                <p className={"card-title"}>{postItem.title}</p>
+                <p className={"card-content"}>{postItem.content}</p>
+                <div className={"card-information"}>
+                  <h4>{postItem.board}</h4>
+                  <ul className={"status"}>
+                    <li className={"vote_active"}>{postItem.num_of_likes}</li>
+                    <li className={"comment_active"}>
+                      {postItem.num_of_comments}
+                    </li>
+                  </ul>
+                </div>
+              </li>
             </Link>
-          </li>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-              <div className={"card-information"}>
-                <h4>게시판종류</h4>
-                <ul className={"status"}>
-                  <li className={"vote_active"}>10</li>
-                  <li className={"comment_active"}>10</li>
-                </ul>
-              </div>
-            </Link>
-          </li>
+          ))}
         </ul>
       </div>
-      <div className={"cardHot"}>
+      <div className={"cardA"}>
         <h3 className={"board-name"}>
-          <Link to={"/"}>HOT 게시물</Link>
+          <Link to={"/"}>HOT 게시판</Link>
           <Link to={"/"}>
             <span>더보기</span>
           </Link>
         </h3>
         <ul className={"board"}>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
-          <li className="board-item">
-            <Link to={`/`}>
-              <p>내용</p>
-            </Link>
-            <time>시간</time>
-          </li>
+          {hotPreView.count === 0 ? (
+            <li className="board-item">
+              <p>아직 게시글이 없습니다.</p>
+            </li>
+          ) : (
+            hotPreView.results.map((postItem) => (
+              <Link to={`/${postItem.id}/${postItem.id}`} key={postItem.id}>
+                <li className="board-item">
+                  <p>{postItem.content}</p>
+                  <time>{time(postItem.created_at)}</time>
+                </li>
+              </Link>
+            ))
+          )}
         </ul>
       </div>
-      <div className={"cardBest"}>
+      <div className={"cardB"}>
         <h3 className={"board-name"}>
           <Link to={"/"}>BEST 게시판</Link>
           <Link to={"/"}>
@@ -95,6 +93,7 @@ const RightBar = () => {
           </Link>
         </h3>
       </div>
+
       <div className={"cardLecture"}>
         <h3 className={"board-name"}>
           <Link to={"/"}>최근 강의평</Link>
@@ -103,46 +102,16 @@ const RightBar = () => {
           </Link>
         </h3>
         <ul className={"board"}>
-          <li className={"board-item"}>
-            <Link to={"/"}>
+          <Link to={"/"}>
+            <li className={"board-item"}>
               <span className={"star"}>
                 <span className={"onStar"} />
               </span>
               <br />
               <p className={"card-title"}>제목</p>
               <p className={"card-content"}>내용</p>
-            </Link>
-          </li>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <span className={"star"}>
-                <span className={"onStar"} />
-              </span>
-              <br />
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-            </Link>
-          </li>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <span className={"star"}>
-                <span className={"onStar"} />
-              </span>
-              <br />
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-            </Link>
-          </li>
-          <li className={"board-item"}>
-            <Link to={"/"}>
-              <span className={"star"}>
-                <span className={"onStar"} />
-              </span>
-              <br />
-              <p className={"card-title"}>제목</p>
-              <p className={"card-content"}>내용</p>
-            </Link>
-          </li>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>

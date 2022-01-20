@@ -3,6 +3,26 @@
   border: 1px solid $cardBorderColor;
   background-color: $cardColor;
   box-sizing: border-box;
+  a{
+    text-decoration: none;
+    color:inherit;
+  }
+  ul{
+    padding: 0;
+    margin: 0;
+    a:not(:last-child){
+      li{
+        border-bottom: 1px solid $cardBorderColor;
+      }
+    }
+  }
+  li{
+    box-sizing: border-box;
+    padding: 10px;
+    list-style: none;
+  }
+
+
 }
 
 @mixin board-default {
@@ -28,29 +48,15 @@
     font-size: 14px;
     border-bottom: 1px solid $cardBorderColor;
   }
-  a{
-    text-decoration: none;
-    color:inherit;
-  }
-  ul{
-    padding: 0;
-    margin: 0;
-  }
-  li{
-    box-sizing: border-box;
-    padding: 10px;
-    list-style: none;
-  }
 
-  li:not(:last-child){
-    border-bottom: 1px solid $cardBorderColor;
-  }
 
   @if $type == 'a'{
     @include card-default;
     display: block;
     h3{
       color: $keyColor;
+      display: flex;
+      justify-content: space-between;
     }
     .board{
       .board-item{
@@ -59,10 +65,11 @@
         justify-content: space-between;
         font-size: 14px;
         width: 100%;
+
         p {
           display: block;
           margin: 0;
-          width: 235px;
+          width: 205px;
           height: 17px;
           line-height: 18px;
           white-space: nowrap;
@@ -71,23 +78,24 @@
           color: $fontColor;
         }
         time{
-          display: block;
+          display: inline-block;
           margin: 0 0 0 5px;
-          width: 29px;
+          vertical-align: center;
           height: 17px;
           color: $timeFontColor;
+          font-size: 11px;
         }
       }
     }
   }
 
   @else{
-    @include board-default;
+    @include card-default;
     display: block;
     h3{
       display: flex;
       justify-content: space-between;
-      color: $rightMenuColor;
+      color: $keyColor;
       span{
         float: right;
         line-height: 20px;
