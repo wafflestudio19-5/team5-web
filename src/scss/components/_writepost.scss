@@ -14,7 +14,6 @@
 
 .Write{
   width: 99.5%;
-  height: 480px;
   margin-top:5px;
   border: 2px solid $cardBorderColor;
 
@@ -31,6 +30,16 @@
 
     &.Write__content{
       height: 351px;
+    }
+
+    &.question_description{
+      height:30px;
+      padding: 30px;
+      border-radius: 8px;
+      line-height: 18px;
+      color: #0CA5AF;
+      font-size: 12px;
+      background-color: #EEFBFC;
     }
 
     input{
@@ -52,6 +61,7 @@
       width: 100%;
       height: 351px;
       border: 0;
+      resize:none;
       &:focus{
         outline: none;
       }
@@ -86,6 +96,11 @@
         float: right;
         margin-right: 15px;
         background-image: url(https://everytime.kr/images/container.articles.write.question.png)
+      }
+      &.questionActive{
+        float: right;
+        margin-right: 15px;
+        background-image: url(https://everytime.kr/images/container.articles.write.question.active.png)
       }
 
       &.anonymous{

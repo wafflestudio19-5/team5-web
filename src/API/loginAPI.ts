@@ -1,7 +1,5 @@
 import { plainRequest } from "./API";
 import { LoginInputType, TokenType } from "../interface/interface";
-import { toast } from "../component/Toast/ToastManager";
-import { AxiosErrorType, getErrorData } from "./errorHandling";
 
 export const postLoginAPI = async (input: LoginInputType) => {
   try {
@@ -25,8 +23,8 @@ export const postRefreshAPI = async (refreshToken: string | null) => {
     } else {
       throw "error";
     }
-  } catch {
-    console.log("refresh failed!");
+  } catch (e) {
+    return Promise.reject(e);
   }
 };
 

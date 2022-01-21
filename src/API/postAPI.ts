@@ -27,17 +27,15 @@ export const getPostWithURLAPI = async (URL: string) => {
   }
 };
 
-export const postPostAPI = async (board: number, input: FormData) => {
+export const postPostAPI = async (board: number, input: postInputType) => {
   try {
-    console.log(input);
     const response = await authRequest.post(
       `/post/${makeQuery({ board: board })}`,
       input
     );
-    return response.data;
+    return Promise.resolve(response.data);
   } catch (e) {
-    console.log("게시글 업로드 실패!"); //테스트용
-    return e;
+    return Promise.reject(e);
   }
 };
 

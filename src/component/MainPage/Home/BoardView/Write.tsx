@@ -1,49 +1,67 @@
 import { useState } from "react";
 import { postInputType } from "../../../../interface/interface";
 import { postPostAPI } from "../../../../API/postAPI";
+import { toastErrorData } from "../../../../API/errorHandling";
 
 interface WriteParams {
   boardId: number;
+  setReloading: Function;
+  openWrite: Function;
 }
 
-const Write = ({ boardId }: WriteParams) => {
-  const [postInput, setPostInput] = useState<postInputType>({
-    title: "",
-    content: "",
-    tags: [],
-    is_anonymous: false,
-    is_question: false,
-  });
+const initialPostInput = {
+  title: "",
+  content: "",
+  tags: [],
+  is_anonymous: false,
+  is_question: false,
+};
+
+const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
+  const [postInput, setPostInput] = useState<postInputType>(initialPostInput);
 
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
-    const content = inputContent.replace("\n", " ").split(" ");
+    const content = inputContent
+      .replace("\n", " ")
+      .split(" ")
+      .filter((word) => word.length > 0);
     content.forEach((word) => {
-      const firstSharp = word.indexOf("#");
-      if (firstSharp < 0) {
-      } else if (firstSharp === 0) {
-        const splitted = word.split("#");
-        splitted.forEach((tag) => {
-          newTag.push(tag);
-        });
-      } else {
-        const splitted = word.split("#");
-        splitted.slice(1).forEach((tag) => {
-          newTag.push(tag);
-        });
+      let source = word;
+      let target = source.indexOf("#");
+      while (target >= 0) {
+        const nextTarget = source.indexOf("#", target + 1);
+        if (nextTarget > 0) {
+          const newHash = source.substring(target, nextTarget);
+          if (newHash.length > 1) {
+            newTag.push(newHash);
+          }
+        } else {
+          if (source.length > 1) {
+            newTag.push(source);
+          }
+        }
+        target = nextTarget;
+        source = source.slice(nextTarget);
       }
     });
     return newTag;
   };
 
   const writePost = (board: number, input: postInputType) => {
-    const form = new FormData();
-    form.append("title", input.title);
-    form.append("content", input.content);
-    form.append("tags", JSON.stringify(input.tags));
-    form.append("is_anonymous", JSON.stringify(input.is_anonymous));
-    form.append("is_question", JSON.stringify(input.is_question));
-    postPostAPI(board, form).then((response) => console.log(response));
+    postPostAPI(board, input).then(
+      () => {
+        setPostInput({
+          ...initialPostInput,
+          tags: checkHashtag(input.content),
+        });
+        openWrite();
+        setReloading(true);
+      },
+      (error) => {
+        toastErrorData(error.response.data);
+      }
+    );
   };
 
   return (
@@ -101,14 +119,47 @@ const Write = ({ boardId }: WriteParams) => {
           }}
         />
       </p>
+      {postInput.is_question && (
+        <p className={"question_description"}>
+          질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱 빠르게
+          답변을 얻을 수 있게 됩니다.
+          <br />
+          또한, 다른 학우들이 정성껏 작성한 답변을 유지하기 위해, 댓글이 달린
+          이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
+        </p>
+      )}
       <ul className={"option"}>
-        <li title={"해시태그"} className={"hashtag"} />
+        <li
+          title={"해시태그"}
+          className={"hashtag"}
+          onClick={() => {
+            setPostInput({ ...postInput, content: postInput.content + "#" });
+          }}
+        />
         <li title={"첨부"} className={"attach"} />
         <li title={"완료"} className={"submit"}>
-          <button type="submit"></button>
+          <button type="submit" />
         </li>
-        <li title={"익명"} className={"anonymous"} />
-        <li title={"질문"} className={"question"} />
+        <li
+          title={"익명"}
+          className={postInput.is_anonymous ? "anonymousActive" : "anonymous"}
+          onClick={() => {
+            setPostInput({
+              ...postInput,
+              is_anonymous: !postInput.is_anonymous,
+            });
+          }}
+        />
+        <li
+          title={"질문"}
+          className={postInput.is_question ? "questionActive" : "question"}
+          onClick={() => {
+            setPostInput({
+              ...postInput,
+              is_question: !postInput.is_question,
+            });
+          }}
+        />
       </ul>
     </form>
   );

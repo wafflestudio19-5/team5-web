@@ -30,12 +30,10 @@ const Login = () => {
   };
   const tryLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
-
     const input = {
       username: loginInput.username,
       password: loginInput.password,
     };
-
     postLoginAPI(input).then(
       (token) => {
         dispatch(login(token));
