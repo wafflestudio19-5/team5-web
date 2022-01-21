@@ -22,20 +22,27 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
 
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
-    const content = inputContent.replace("\n", " ").split(" ");
+    const content = inputContent
+      .replace("\n", " ")
+      .split(" ")
+      .filter((word) => word.length > 0);
     content.forEach((word) => {
-      const firstSharp = word.indexOf("#");
-      if (firstSharp < 0) {
-      } else if (firstSharp === 0) {
-        const splitted = word.split("#");
-        splitted.forEach((tag) => {
-          newTag.push(tag);
-        });
-      } else {
-        const splitted = word.split("#");
-        splitted.slice(1).forEach((tag) => {
-          newTag.push(tag);
-        });
+      let source = word;
+      let target = source.indexOf("#");
+      while (target >= 0) {
+        const nextTarget = source.indexOf("#", target + 1);
+        if (nextTarget > 0) {
+          const newHash = source.substring(target, nextTarget);
+          if (newHash.length > 1) {
+            newTag.push(newHash);
+          }
+        } else {
+          if (source.length > 1) {
+            newTag.push(source);
+          }
+        }
+        target = nextTarget;
+        source = source.slice(nextTarget);
       }
     });
     return newTag;
@@ -44,7 +51,10 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
   const writePost = (board: number, input: postInputType) => {
     postPostAPI(board, input).then(
       () => {
-        setPostInput(initialPostInput);
+        setPostInput({
+          ...initialPostInput,
+          tags: checkHashtag(input.content),
+        });
         openWrite();
         setReloading(true);
       },
@@ -119,10 +129,16 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
         </p>
       )}
       <ul className={"option"}>
-        <li title={"해시태그"} className={"hashtag"} />
+        <li
+          title={"해시태그"}
+          className={"hashtag"}
+          onClick={() => {
+            setPostInput({ ...postInput, content: postInput.content + "#" });
+          }}
+        />
         <li title={"첨부"} className={"attach"} />
         <li title={"완료"} className={"submit"}>
-          <button type="submit"></button>
+          <button type="submit" />
         </li>
         <li
           title={"익명"}
