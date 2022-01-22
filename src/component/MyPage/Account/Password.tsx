@@ -8,7 +8,13 @@ const Password = () => {
   const [isLongEnough, setLongEnough] = useState<boolean>(true);
   const [isPasswordSame, setPasswordSame] = useState<boolean>(true);
   const changePassword = () => {
-    window.alert("아직 구현되지 않은 기능입니다.");
+    if (!isPasswordSame) {
+      window.alert("비밀번호가 일치하지 않습니다.");
+    } else if (!isLongEnough || newPassword.length === 0) {
+      window.alert("비밀번호는 8~20자만 가능합니다.");
+    } else {
+      window.alert("아직 구현되지 않은 기능입니다.");
+    }
   };
 
   const checkValidPW = () => {
@@ -83,7 +89,9 @@ const Password = () => {
           </span>
         </div>
 
-        <button className={"changePWButton"}>비밀번호 변경</button>
+        <button className={"changePWButton"} onClick={changePassword}>
+          비밀번호 변경
+        </button>
       </section>
     </div>
   );
