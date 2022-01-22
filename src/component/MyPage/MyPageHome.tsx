@@ -19,8 +19,13 @@ const MyPageHome = () => {
   return (
     <div className={"MyPageMain"}>
       <section>
-        <h2>내 정보</h2>
-        <button onClick={tryLogout}>로그아웃</button>
+        <div className={"titleSection"}>
+          <h1>내 정보</h1>
+          <button onClick={tryLogout} className={"logOutButton"}>
+            로그아웃
+          </button>{" "}
+        </div>
+        <div className={"myInfo"}>프사 이름 학번 등등</div>
       </section>
       <section>
         <h2>계정</h2>

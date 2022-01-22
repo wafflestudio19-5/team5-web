@@ -1,35 +1,17 @@
 import { useEffect, useState } from "react";
-import { toast } from "../../Toast/ToastManager";
 
-const Password = () => {
-  const [newPassword, setNewPassword] = useState<string>("");
-  const [passwordCheck, setPasswordCheck] = useState<string>("");
+const Email = () => {
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLongEnough, setLongEnough] = useState<boolean>(true);
-  const [isPasswordSame, setPasswordSame] = useState<boolean>(true);
-  const changePassword = () => {
+
+  const changeEmail = () => {
     window.alert("아직 구현되지 않은 기능입니다.");
   };
-
-  const checkValidPW = () => {
-    if (newPassword.length > 0 && newPassword.length < 8) {
-      setLongEnough(false);
-    } else {
-      setLongEnough(true);
-    }
-    if (newPassword !== passwordCheck && passwordCheck.length !== 0) {
-      setPasswordSame(false);
-    } else {
-      setPasswordSame(true);
-    }
-  };
-
-  useEffect(checkValidPW, [newPassword, passwordCheck, password]);
 
   return (
     <div className={"MyPageMain"}>
       <section>
-        <h2>비밀번호 변경</h2>
+        <h2>이메일일 경</h2>
         <div className="passwordInput">
           <div className="label">
             <label> 새 비밀번호 </label>

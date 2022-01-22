@@ -5,16 +5,37 @@
     position: center;
     margin: 8px auto 0 auto;
     width: 480px;
-    padding: 12px 0;
+    padding: 12px 24px;
     box-sizing: border-box;
     border: 1px solid #EDEDED;
     border-radius: 12px;
+
+    span{ color:$keyColor;}
+
+    button{
+      padding: 0 12px;
+      border-radius: 15px;
+      line-height: 30px;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      background: $keyColor;
+      border: none;
+      cursor: pointer;
+    }
     h2{
       line-height: 26px;
       color: #292929;
       font-size: 18px;
       font-weight: bold;
-      padding: 12px 24px;
+      padding: 12px 0;
+    }
+    h1{
+        line-height: 24px;
+        color: #292929;
+        font-size: 22px;
+        font-weight: bold;;
+        flex:auto;
     }
     a{
       display: block;
@@ -22,8 +43,73 @@
       word-wrap: break-word;
       color: #292929;
       font-size: 16px;
-      padding: 12px 24px;
+      padding: 12px 0;
       cursor: pointer;
+
+    }
+    .titleSection{
+      padding: 12px 0;
+      display: flex;
+    }
+
+    .changePWButton{
+      width:100%;
+      height: 40px;
+      margin-top: 24px;
+      margin-bottom: 24px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .rules{
+      color: #737373;
+      line-height: 18px;
+      margin-top: 24px;
+      font-size: 12px;
+
+      strong{
+        color: #737373;
+      }
+
+
+    }
+
+    .passwordInput{
+      margin-top: 24px;
+      input{
+        display: block;
+        box-sizing: border-box;
+        margin-top: 4px;
+        padding: 8px;
+        border: 1px solid #EDEDED;
+        border-radius: 12px;
+        width: 100%;
+        height: 40px;
+        line-height: 24px;
+        color: #292929;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        background-position: right 8px center;
+        background-size: 24px 24px;
+      }
+      .label{
+        display: flex;
+        label{
+          flex: auto;
+          line-height: 20px;
+          color: #737373;
+          font-size: 12px;
+          font-weight: bold;
+        }
+        p{
+          display: block;
+          color: #a6a6a6;
+          line-height: 20px;
+          margin: 0;
+        }
+
+
+      }
 
     }
   }
