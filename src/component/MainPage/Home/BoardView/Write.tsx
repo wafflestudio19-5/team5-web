@@ -23,7 +23,7 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
     const content = inputContent
-      .replace("\n", " ")
+      .replaceAll("\n", " ")
       .split(" ")
       .filter((word) => word.length > 0);
     content.forEach((word) => {
@@ -37,24 +37,23 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
             newTag.push(newHash);
           }
         } else {
-          if (source.length > 1) {
-            newTag.push(source);
+          const newHash = source.substring(target);
+          if (newHash.length > 1) {
+            newTag.push(newHash);
           }
         }
         target = nextTarget;
-        source = source.slice(nextTarget);
       }
     });
     return newTag;
   };
 
   const writePost = (board: number, input: postInputType) => {
-    postPostAPI(board, input).then(
+    postPostAPI(board, {
+      ...input,
+      tags: checkHashtag(input.content),
+    }).then(
       () => {
-        setPostInput({
-          ...initialPostInput,
-          tags: checkHashtag(input.content),
-        });
         openWrite();
         setReloading(true);
       },

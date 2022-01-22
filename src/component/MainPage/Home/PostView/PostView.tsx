@@ -21,7 +21,7 @@ const PostView = () => {
     getPostDetailAPI(parseInt(path.postId)).then((response) => {
       setPostDetail({
         ...response,
-        tags: JSON.parse(response.tags),
+        tags: response.tags,
       });
     });
   };

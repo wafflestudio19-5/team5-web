@@ -1,4 +1,5 @@
 import { authRequest, makeQuery } from "./API";
+import { postInputType } from "../interface/interface";
 
 export const getPostAPI = async (
   board: number | string,
