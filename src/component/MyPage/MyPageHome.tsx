@@ -1,14 +1,27 @@
 import { useHistory } from "react-router-dom";
+import { deleteToken } from "../../function/localStorage";
+import { logout } from "../../redux/authorization";
+import { useDispatch } from "react-redux";
 
-const MyPage = () => {
+const MyPageHome = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const passwordChange = () => {
-    history.push("/password");
+    history.push("/my/password");
+  };
+  const tryLogout = () => {
+    deleteToken();
+    dispatch(logout());
+    history.push("/");
   };
 
   return (
     <div className={"MyPageMain"}>
+      <section>
+        <h2>내 정보</h2>
+        <button onClick={tryLogout}>로그아웃</button>
+      </section>
       <section>
         <h2>계정</h2>
         <a onClick={passwordChange}>비밀번호 변경</a>
@@ -29,4 +42,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default MyPageHome;
