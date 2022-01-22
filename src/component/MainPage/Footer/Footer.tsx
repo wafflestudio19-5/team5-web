@@ -11,7 +11,7 @@ const Footer = () => {
           <Link to={"/"}>개인정보처리방침</Link>
         </li>
         <li>
-          <Link to={"/"}>커뮤니티이용규칙</Link>
+          <Link to={"/my/rules"}>커뮤니티이용규칙</Link>
         </li>
         <li>
           <Link to={"/"}>공지사항</Link>

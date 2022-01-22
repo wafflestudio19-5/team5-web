@@ -18,7 +18,9 @@ const MyPageHome = () => {
   const nicknameChange = () => {
     history.push("/my/nickname");
   };
-
+  const communityRule = () => {
+    history.push("/my/rules");
+  };
   const withdrawal = () => {
     history.push("/my/withdrawal");
   };
@@ -49,7 +51,7 @@ const MyPageHome = () => {
       <section>
         <h2>커뮤니티</h2>
         <a onClick={nicknameChange}>닉네임 설정</a>
-        <a>커뮤니티 이용규칙</a>
+        <a onClick={communityRule}>커뮤니티 이용규칙</a>
       </section>
 
       <section>
