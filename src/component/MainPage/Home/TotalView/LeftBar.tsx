@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { deleteToken } from "../../../../function/localStorage";
 import { logout } from "../../../../redux/authorization";
+import { Link } from "react-router-dom";
 
 const LeftBar = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,15 @@ const LeftBar = () => {
         </div>
       </div>
       <ul className={"left_menu"}>
-        <li id={"my_post"}>내가 쓴 글</li>
-        <li id={"my_comment"}>댓글 단 글</li>
-        <li id={"my_clip"}>내 스크랩</li>
+        <Link to="/myarticle">
+          <li id={"my_post"}>내가 쓴 글</li>
+        </Link>
+        <Link to={"/"}>
+          <li id={"my_comment"}>댓글 단 글</li>
+        </Link>
+        <Link to={"/"}>
+          <li id={"my_clip"}>내 스크랩</li>
+        </Link>
       </ul>
       <div className={"ad"}>광고</div>
       <div className={"ad"}>광고</div>

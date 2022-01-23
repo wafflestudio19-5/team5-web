@@ -58,7 +58,7 @@ const BoardView = () => {
         </button>
       )}
 
-      {postList.results.length == 0 ? (
+      {postList.results.length === 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
         </ul>
