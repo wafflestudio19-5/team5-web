@@ -12,6 +12,7 @@ import {
   postLoginAPI,
 } from "../../../API/loginAPI";
 import { toastErrorData } from "../../../API/errorHandling";
+import { toast } from "../../Toast/ToastManager";
 
 const Login = () => {
   const history = useHistory();
@@ -41,7 +42,15 @@ const Login = () => {
         history.push("/");
       },
       (error) => {
-        toastErrorData(error.response.data);
+        if (error.response) {
+          toastErrorData(error.response.data);
+        } else {
+          toast.show({
+            title: "주의",
+            content: "알 수 없는 에러입니다",
+            duration: 3000,
+          });
+        }
       }
     );
   };
