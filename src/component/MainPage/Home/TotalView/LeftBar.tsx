@@ -29,13 +29,13 @@ const LeftBar = () => {
         </div>
       </div>
       <ul className={"left_menu"}>
-        <Link to="/myarticle">
+        <Link to="/mypost">
           <li id={"my_post"}>내가 쓴 글</li>
         </Link>
-        <Link to={"/"}>
+        <Link to="/mycomment">
           <li id={"my_comment"}>댓글 단 글</li>
         </Link>
-        <Link to={"/"}>
+        <Link to="/myscrap">
           <li id={"my_clip"}>내 스크랩</li>
         </Link>
       </ul>

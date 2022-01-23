@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getPostAPI, getPostWithURLAPI } from "../../../../API/postAPI";
+import { getPostAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 

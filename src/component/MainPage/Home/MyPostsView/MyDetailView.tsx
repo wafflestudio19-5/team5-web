@@ -1,8 +1,6 @@
-import exp from "constants";
-import { Route, Switch } from "react-router-dom";
-import BoardView from "../BoardView/BoardView";
-import PostView from "../PostView/PostView";
+import { Route, Switch, useParams } from "react-router-dom";
 import RightBar from "../TotalView/RightBar";
+import myArticles from "./MyArticles";
 
 const MyDetailView = () => {
   return (
@@ -10,10 +8,14 @@ const MyDetailView = () => {
       <div className="BoardView">
         <div id="container">
           <div className="BoardView__main">
-            {/*<Switch>*/}
-            {/*  <Route exact path={`/:boardId`} component={BoardView} />*/}
-            {/*  <Route exact path={`/:boardId/p/:pageId`} component={BoardView} />*/}
-            {/*</Switch>*/}
+            <Switch>
+              <Route exact path={"/my" + ":myMenu"} component={myArticles} />
+              <Route
+                exact
+                path={"/my" + ":myMenu/p/:pageId"}
+                component={myArticles}
+              />
+            </Switch>
           </div>
           <RightBar />
         </div>

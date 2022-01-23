@@ -97,7 +97,7 @@ export const getMyContentsAPI = async (
 ) => {
   try {
     const response = await authRequest.get(
-      `user/${menu}/${makeQuery({ limit: limit, offset: offset })}`
+      `user/my${menu}/${makeQuery({ limit: limit, offset: offset })}`
     );
     console.log(response.data);
     return response.data;

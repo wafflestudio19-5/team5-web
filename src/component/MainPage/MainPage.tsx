@@ -4,6 +4,7 @@ import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
 import Login from "../AuthPage/Login/Login";
 import MyPage from "../MyPage/MyPage";
+import RightBar from "./Home/TotalView/RightBar";
 
 const MainPage = () => {
   return (

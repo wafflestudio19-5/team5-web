@@ -12,7 +12,7 @@ const Home = () => {
       <Switch>
         <Route path="/" component={TotalView} exact />
         <Route path="/s/:searchId" component={SearchDetailView} exact />
-        <Route path={`/my` + ":boardId"} component={MyDetailView} />
+        <Route path={"/my" + ":myMenu"} component={MyDetailView} />
         <Route path="/:boardId" component={DetailView} />
       </Switch>
     </div>
