@@ -19,6 +19,7 @@ const SearchBoardView = () => {
     results: [],
   });
   const [pageNum, setPageNum] = useState<number>(1);
+  const [reloading, setReloading] = useState<boolean>(true);
 
   interface paramsType {
     searchId: string;
@@ -31,16 +32,23 @@ const SearchBoardView = () => {
     }
   }
 
-  useEffect(() => {
-    getPostWithPage(Number(pageNum));
-  }, [params]);
-
   const getPostWithPage = (page: number) => {
     const searchValue = params.searchId;
     searchPostAPI(searchValue, 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
+
+  useEffect(() => {
+    setReloading(true);
+  }, [params]);
+
+  useEffect(() => {
+    if (reloading) {
+      getPostWithPage(Number(pageNum));
+      setReloading(false);
+    }
+  }, [reloading]);
 
   const getURL = (input: string | null) => {
     if (input) {
