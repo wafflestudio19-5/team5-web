@@ -17,6 +17,10 @@ const BoardView = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const [showForm, setShowForm] = useState<boolean>(false);
   const openWrite = () => setShowForm(!showForm);
+  const [searchValue, setSearchValue] = useState("");
+  const search = (input: string) => {
+    history.push(`/s/${input}`);
+  };
 
   const [reloading, setReloading] = useState<boolean>(true);
 
@@ -31,18 +35,22 @@ const BoardView = () => {
     }
   }
 
+  const getPostWithPage = (page: number) => {
+    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
+      setPostList(response)
+    );
+  };
+
+  useEffect(() => {
+    setReloading(true);
+  }, [params]);
+
   useEffect(() => {
     if (reloading) {
       getPostWithPage(Number(pageNum));
       setReloading(false);
     }
   }, [params, reloading]);
-
-  const getPostWithPage = (page: number) => {
-    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
-      setPostList(response)
-    );
-  };
 
   return (
     <>
@@ -77,6 +85,19 @@ const BoardView = () => {
             ))}
           </ul>
           <div className="BoardView__bottomBar">
+            <input
+              className={"searchBarMini"}
+              placeholder={"게시판의 글을 검색하세요!"}
+              value={searchValue}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  search(searchValue);
+                }
+              }}
+            />
             {postList.previous && (
               <button
                 className="BoardView__previous"
