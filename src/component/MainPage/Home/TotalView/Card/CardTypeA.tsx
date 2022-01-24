@@ -38,7 +38,7 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
           </li>
         ) : (
           boardPreview.results.map((postItem) => (
-            <Link to={`/${item.id}/${postItem.id}`} key={postItem.id}>
+            <Link to={`/${postItem.board.id}/${postItem.id}`} key={postItem.id}>
               <li key={postItem.id} className="board-item">
                 <p>{postItem.title}</p>
                 <time>{time(postItem.created_at)}</time>

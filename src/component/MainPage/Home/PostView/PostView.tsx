@@ -29,6 +29,7 @@ const PostView = () => {
   const path = useParams<PostViewParams>();
   const [postDetail, setPostDetail] = useState<postItemType>({
     id: "",
+    board: { id: 0, title: "" },
     writer: "",
     title: "",
     content: "",
