@@ -63,7 +63,7 @@ const BoardView = () => {
           <ul className="BoardView__list">
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
-                <Link to={`/${params.myMenu}/${item.id}`}>
+                <Link to={`/${item.board.id}/${item.id}`}>
                   <div className={"wrapper"}>
                     <h2 className={"medium"}>{item.title}</h2> <br />
                     <p className={"small"}>{item.content}</p>

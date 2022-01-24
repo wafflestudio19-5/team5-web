@@ -55,6 +55,7 @@ export interface boardItemType {
 //Post API
 export interface postItemType {
   id: string;
+  board: { id: number; title: string };
   writer: string;
   title: string;
   content: string;
@@ -117,7 +118,7 @@ export interface liveTopItemType {
 
 export interface HotItemType {
   created_at: string;
-  id: number;
+  id: { id: number; title: string };
   title_content: string;
 }
 
