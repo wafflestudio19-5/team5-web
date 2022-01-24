@@ -46,16 +46,16 @@
     }
 
     .buttons > button{
-        float: left;
-        display: block;
-        border: 1px solid $cardBorderColor;
-        border-radius: 3px;
-        line-height: 25px;
-        color: $timeFontColor;
-        font-size: 13px;
-        text-align: center;
-        cursor: pointer;
-        background-color: $cardColor;
+      float: left;
+      display: block;
+      border: 1px solid $cardBorderColor;
+      border-radius: 3px;
+      line-height: 25px;
+      color: $timeFontColor;
+      font-size: 13px;
+      text-align: center;
+      cursor: pointer;
+      background-color: $cardColor;
     }
   }
 
@@ -66,9 +66,12 @@
     flex-direction: column;
     border-collapse: collapse;
 
-    li:not(:last-child){
-      border-bottom: 1px solid $cardBorderColor;
+    a:not(:last-child){
+      li{
+        border-bottom: 1px solid $cardBorderColor;
+      }
     }
+
 
     li{
       @include li-default;

@@ -10,7 +10,7 @@ export const getPostAPI = async (
     const response = await authRequest.get(
       `/post/${makeQuery({ board: board, limit: limit, offset: offset })}`
     );
-
+    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용
@@ -87,5 +87,21 @@ export const getLiveTopAPI = async () => {
   } catch (e) {
     console.log("실시간 인기 글 불러오기 실패!"); //테스트용
     return [];
+  }
+};
+
+export const getMyContentsAPI = async (
+  menu: string,
+  offset: number = 0,
+  limit: number = 10
+) => {
+  try {
+    const response = await authRequest.get(
+      `user/my${menu}/${makeQuery({ limit: limit, offset: offset })}`
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    console.log(e);
   }
 };

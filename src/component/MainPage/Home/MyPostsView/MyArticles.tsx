@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import { getPostAPI } from "../../../../API/postAPI";
+import { getMyContentsAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
-import Write from "./Write";
 
 const BoardView = () => {
   const params = useParams() as paramsType;
@@ -15,17 +14,10 @@ const BoardView = () => {
     results: [],
   });
   const [pageNum, setPageNum] = useState<number>(1);
-  const [showForm, setShowForm] = useState<boolean>(false);
-  const openWrite = () => setShowForm(!showForm);
-  const [searchValue, setSearchValue] = useState("");
-  const search = (input: string) => {
-    history.push(`/s/${input}`);
-  };
-
   const [reloading, setReloading] = useState<boolean>(true);
 
   interface paramsType {
-    boardId: string;
+    myMenu: string;
     pageId?: string;
   }
 
@@ -36,12 +28,13 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
+    getMyContentsAPI(params.myMenu, 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
 
   useEffect(() => {
+    console.log(params.myMenu);
     setReloading(true);
   }, [params]);
 
@@ -54,18 +47,13 @@ const BoardView = () => {
 
   return (
     <>
-      {showForm ? (
-        <Write
-          boardId={Number(params.boardId)}
-          setReloading={setReloading}
-          openWrite={openWrite}
-        />
-      ) : (
-        <button className={"BoardView__writePost"} onClick={openWrite}>
-          새 글을 작성해주세요!
-        </button>
-      )}
-
+      <div className="BoardView__title">
+        {params.myMenu === "post"
+          ? "내가 쓴 글"
+          : params.myMenu === "scrap"
+          ? "내 스크랩"
+          : "댓글 단 글"}
+      </div>
       {postList.results.length === 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
@@ -75,7 +63,7 @@ const BoardView = () => {
           <ul className="BoardView__list">
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
-                <Link to={`/${params.boardId}/${item.id}`}>
+                <Link to={`/${params.myMenu}/${item.id}`}>
                   <div className={"wrapper"}>
                     <h2 className={"medium"}>{item.title}</h2> <br />
                     <p className={"small"}>{item.content}</p>
@@ -85,24 +73,11 @@ const BoardView = () => {
             ))}
           </ul>
           <div className="BoardView__bottomBar">
-            <input
-              className={"searchBarMini"}
-              placeholder={"게시판의 글을 검색하세요!"}
-              value={searchValue}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-              }}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  search(searchValue);
-                }
-              }}
-            />
             {postList.previous && (
               <button
                 className="BoardView__previous"
                 onClick={() => {
-                  history.push(`/${params.boardId}/p/${pageNum - 1}`);
+                  history.push(`/my${params.myMenu}/p/${pageNum - 1}`);
                   setPageNum(pageNum - 1);
                 }}
               >
@@ -113,7 +88,7 @@ const BoardView = () => {
               <button
                 className="BoardView__next"
                 onClick={() => {
-                  history.push(`/${params.boardId}/p/${pageNum + 1}`);
+                  history.push(`/my${params.myMenu}/p/${pageNum + 1}`);
                   setPageNum(pageNum + 1);
                 }}
               >

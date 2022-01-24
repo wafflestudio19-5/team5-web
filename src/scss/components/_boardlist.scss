@@ -3,9 +3,15 @@
   list-style: none;
   padding: 0px;
 
+  li:last-child{
+    border-bottom: 1px solid $cardBorderColor;
+  }
+
   li{
     height:93px;
-    border: 1px solid $cardBorderColor;
+    border-top: 1px solid $cardBorderColor;
+    border-right: 1px solid $cardBorderColor;
+    border-left: 1px solid $cardBorderColor;
     padding: 15px;
     display:flex;
     align-items: center;
