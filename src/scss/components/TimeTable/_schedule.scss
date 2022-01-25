@@ -1,0 +1,52 @@
+@mixin gridItem{
+  display: flex;
+  color: $scheduleColor;
+  justify-content: center;
+  align-items: center;
+  font-size:14px;
+  border:1px solid $boardBorderColor;
+}
+
+.Schedule{
+  position: relative;
+  width: calc(100% - $timeTableMenuWidth);
+  background-color: $timetableBackgroundColor;
+  padding-top: 15px;
+  padding-bottom: 15px;
+
+  .Schedule__label--hider{
+    position:fixed;
+    width:calc(100% - $timeTableMenuWidth - 15px);
+    top:0px;
+    height:100px;
+    background-color: $timetableBackgroundColor;
+  }
+  .Schedule__label--container{
+    position:fixed;
+    display:grid;
+    grid-template-columns: 80px repeat(5, 1fr) 80px;
+    grid-template-rows: 40px;
+    width:calc(100% - $timeTableMenuWidth - 15px);
+    height:40px;
+    border: 1px solid $boardBorderColor;
+    border-bottom: 0;
+    background-color: $timetableLabelColor;
+
+    .Schedule__label{
+      @include gridItem;
+    }
+  }
+
+  .Schedule__container{
+    display:grid;
+    grid-template-columns: 80px repeat(5, 1fr) 80px;
+    grid-template-rows: repeat(15, 60px);
+    width:calc(100% - 15px);
+    border:1px solid $boardBorderColor;
+    margin-top: 40px;
+
+    .Schedule__item{
+      @include gridItem;
+    }
+  }
+}
