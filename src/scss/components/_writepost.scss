@@ -32,14 +32,16 @@
       height: 351px;
     }
 
-    &.question_description{
+    &.question_description_Box{
       height:30px;
-      padding: 30px;
-      border-radius: 8px;
-      line-height: 18px;
-      color: #0CA5AF;
-      font-size: 12px;
-      background-color: #EEFBFC;
+      padding: 15px;
+      div{
+        border-radius: 8px;
+        line-height: 18px;
+        color: #0CA5AF;
+        font-size: 12px;
+        background-color: #EEFBFC;
+      }
     }
 
     input{
@@ -129,4 +131,12 @@
     }
 
   }
+}
+
+.question_description{
+    border-radius: 8px;
+    line-height: 18px;
+    color: #0CA5AF;
+    font-size: 12px;
+    background-color: #EEFBFC;
 }
