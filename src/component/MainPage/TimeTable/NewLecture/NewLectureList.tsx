@@ -20,53 +20,19 @@ const emptyTimeTableSearchQuery = {
   ordering: "",
 };
 
-const emptyLectureItem = {
-  id: 1,
-  lecture_time: [
-    {
-      day: "수",
-      start: 1300,
-      end: 1550,
-      location: "301-B119",
-    },
-  ],
-  course: {
-    title: "(공유)AI기초프로그래밍",
-    instructor: "",
-    rating: 4.4,
-  },
-  classification: "전선",
-  degree: "학사",
-  grade: 1,
-  course_code: "M3500.000100",
-  lecture_code: 1,
-  credits: 3,
-  lecture: 3,
-  laboratory: 0,
-  cart: 3,
-  quota: 40,
-  remark: null,
-  semester: 1,
-};
-
 const NewLecture = ({
   currentSemester,
-  resizeContainer,
+  changeOpenMode,
   addLectureToTable,
 }: {
   currentSemester: string;
-  resizeContainer: Function;
+  changeOpenMode: Function;
   addLectureToTable: Function;
 }) => {
   const [lectureList, setLectureList] = useState<LectureType[]>([]);
   const [timeTableSearchQuery, setTimeTableSearchQuery] =
     useState<TimeTableSearchQueryType>(emptyTimeTableSearchQuery);
   const [reloadSearch, setReloadSearch] = useState(false);
-
-  //functions
-  const addNewLecture = () => {};
-
-  useEffect(() => {});
 
   useEffect(() => {
     getSearchedLecture({
@@ -132,6 +98,14 @@ const NewLecture = ({
           );
         })}
       </ul>
+      <button
+        className="close"
+        onClick={() => {
+          changeOpenMode("button");
+        }}
+      >
+        닫기
+      </button>
     </div>
   );
 };

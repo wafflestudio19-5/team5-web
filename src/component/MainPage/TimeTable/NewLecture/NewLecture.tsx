@@ -14,6 +14,15 @@ const NewLecture = ({
     "button"
   );
 
+  const changeOpenMode = (input: "button" | "search" | "create") => {
+    setIsOpen(input);
+    if (input === "search") {
+      resizeContainer(true);
+    } else {
+      resizeContainer(false);
+    }
+  };
+
   const addLecture = () => {};
 
   return (
@@ -47,7 +56,7 @@ const NewLecture = ({
       {isOpen === "search" && (
         <NewLectureList
           currentSemester={currentSemester}
-          resizeContainer={resizeContainer}
+          changeOpenMode={changeOpenMode}
           addLectureToTable={addLectureToTable}
         />
       )}
