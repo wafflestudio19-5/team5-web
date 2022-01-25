@@ -184,4 +184,39 @@ export interface TimeTableSearchQueryType {
   ordering: string;
 }
 
+//Lecture에서 사용
+export interface EvalType {
+  id: number;
+  course: string;
+  rating: number;
+  semester: string;
+  content: string;
+  is_mine: boolean;
+  num_of_likes: number;
+}
+
+export interface SearchedLectureType {
+  id: number;
+  title: string;
+  instructor: string;
+  rating: number;
+}
+
+export interface LectureInformationType {
+  id: number;
+  title: string;
+  instructor: string;
+  semester: string;
+  sem_options: string[];
+}
+
+export interface LectureSummaryType {
+  has_evals: boolean;
+  rating: number;
+  assignment: string;
+  team: string;
+  grade: string;
+  attendance: string;
+  exam_freq: string;
+}
 export default {};

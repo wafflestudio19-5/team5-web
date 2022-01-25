@@ -6,7 +6,6 @@ interface HeaderParams {
 
 const Header = () => {
   const params: HeaderParams = useParams();
-  console.log(params);
   return (
     <nav className="Header">
       <div className="Header__wrapper">

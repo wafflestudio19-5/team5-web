@@ -1,0 +1,78 @@
+.Lecture-wrapper{
+  width:100%;
+  padding-top:104px;
+  display: flex;
+  justify-content: center;
+}
+
+.Lecture{
+  width:780px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: hidden;
+  .Lecture__my{
+    box-sizing: border-box;
+    width:100%;
+  }
+  form{
+    width:100%;
+    .Lecture__search{
+      box-sizing: border-box;
+      width:100%;
+      height:48px;
+      border: 0px;
+      border-radius: 12px;
+      background-color: $lectureBorderColor;
+    }
+  }
+  .Lecture__list{
+    width:100%;
+    appearance: none;
+    list-style: none;
+    margin-top:8px;
+    padding:0;
+    box-sizing: border-box;
+    height:720px;
+    overflow-y: scroll;
+
+    .Lecture__item-label{
+      height:40px;
+      border-radius: 20px 20px 0px 0px;
+      border: 1px solid $lectureBorderColor;
+      border-bottom: 0;
+      padding: 15px;
+      padding-top:20px;
+      font-size: 18px;
+      font-weight: bold;
+      &.search{
+        padding:0px;
+        height:10px;
+      }
+    }
+    .Lecture__item{
+      box-sizing: border-box;
+      border: 1px solid $lectureBorderColor;
+      border-top:0;
+      padding:15px;
+      p{
+        margin:0;
+        font-size:14px;
+        &.title{
+          font-size:16px;
+          font-weight: bold;
+          margin-bottom: 5px;
+          span{
+            color:gray;
+            font-weight: normal;
+          }
+        }
+        &.semester{
+          color:gray;
+          font-size: 12px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
