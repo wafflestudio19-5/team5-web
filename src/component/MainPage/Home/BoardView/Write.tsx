@@ -119,12 +119,14 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
         />
       </p>
       {postInput.is_question && (
-        <div className={"question_description"}>
-          질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱 빠르게
-          답변을 얻을 수 있게 됩니다.
-          <br />
-          또한, 다른 학우들이 정성껏 작성한 답변을 유지하기 위해, 댓글이 달린
-          이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
+        <div className={"question_description_Box"}>
+          <p className={"question_description"}>
+            질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱
+            빠르게 답변을 얻을 수 있게 됩니다.
+            <br />
+            또한, 다른 학우들이 정성껏 작성한 답변을 유지하기 위해, 댓글이 달린
+            이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
+          </p>
         </div>
       )}
       <ul className={"option"}>

@@ -55,8 +55,8 @@ export const postDeleteAPI = async (postId: string) => {
     const response = await authRequest.delete(`/post/${postId}/`);
     return response.data;
   } catch (e) {
-    console.log(e); //테스트용
-    return e;
+    // console.log(e); //테스트용
+    return Promise.reject(e);
   }
 };
 
