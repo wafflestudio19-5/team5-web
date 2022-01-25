@@ -9,7 +9,7 @@ import TimeTableRoute from "./TimeTable/TimeTableRoute";
 const MainPage = () => {
   return (
     <>
-      <Header />
+      <Route path="/:state" component={Header} />
       <Switch>
         <Route path="/login" component={Login} exact />
         <Route path="/my" component={MyPage} />

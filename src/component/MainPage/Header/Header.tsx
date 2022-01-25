@@ -1,6 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+
+interface HeaderParams {
+  state: string;
+}
 
 const Header = () => {
+  const params: HeaderParams = useParams();
+  console.log(params);
   return (
     <nav className="Header">
       <div className="Header__wrapper">
@@ -17,13 +23,13 @@ const Header = () => {
           </div>
         </div>
         <ul className="Header__menu">
-          <li className="active">
+          <li className={!params.state ? "active" : ""}>
             <Link to="/">게시판</Link>
           </li>
-          <li>
+          <li className={params.state === "timetable" ? "active" : ""}>
             <Link to="/timetable">시간표</Link>
           </li>
-          <li>
+          <li className={params.state === "lecture" ? "active" : ""}>
             <Link to="/lecture">강의평가</Link>
           </li>
         </ul>
