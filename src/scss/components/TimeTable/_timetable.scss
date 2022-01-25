@@ -1,16 +1,28 @@
 $menuDistance:5px;
 
+.TimeTable{
+  position: relative;
+  display: grid;
+  width:100%;
+  height:calc(100% - 16px);
+  grid-template-rows: 1fr 0px;
+  background-color: $timetableBackgroundColor;
+
+  &.search-open-size{
+    grid-template-rows: 1fr 400px;
+  }
+}
+
 .TimeTable__container {
   position: relative;
   display: flex;
-  top:81px;
-  width:100% ;
-  height:100%;
+  margin-top:81px;
+  width:100%;
   box-sizing: border-box;
+  overflow-y: auto;
 
   .TimeTable__menu-wrapper{
     width: $timeTableMenuWidth;
-    background-color: $timetableBackgroundColor;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -93,15 +105,6 @@ $menuDistance:5px;
     }
   }
 
-  .TimeTable__button-wrapper{
-    position:fixed;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width:100%;
-    height:40px;
-    bottom:40px;
-  }
 
   .TimeTable__modal-wrapper{
     position:fixed;

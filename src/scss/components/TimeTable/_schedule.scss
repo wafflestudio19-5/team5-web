@@ -16,7 +16,7 @@
 
   .Schedule__label--hider{
     position:fixed;
-    width:calc(100% - $timeTableMenuWidth - 15px);
+    width:calc(100% - $timeTableMenuWidth - 20px);
     top:0;
     height:100px;
     background-color: $timetableBackgroundColor;
@@ -26,7 +26,7 @@
     display:grid;
     grid-template-columns: 80px repeat(5, 1fr) 80px;
     grid-template-rows: 40px;
-    width:calc(100% - $timeTableMenuWidth - 15px);
+    width:calc(100% - $timeTableMenuWidth - 32px);
     height:40px;
     border: 1px solid $boardBorderColor;
     border-bottom: 0;
