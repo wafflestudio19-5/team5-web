@@ -31,7 +31,7 @@ const NewLecture = ({
 }) => {
   const [lectureList, setLectureList] = useState<LectureType[]>([]);
   const [timeTableSearchQuery, setTimeTableSearchQuery] =
-    useState<TimeTableSearchQueryType>(emptyTimeTableSearchQuery);
+    useState<TimeTableSearchQueryType>({ semester: "" });
   const [reloadSearch, setReloadSearch] = useState(false);
 
   useEffect(() => {

@@ -10,7 +10,10 @@ import LectureRoute from "./Lecture/LectureRoute";
 const MainPage = () => {
   return (
     <>
-      <Route path="/:state" component={Header} />
+      <Switch>
+        <Route path="/:state" component={Header} />
+        <Route path="/" component={Header} />
+      </Switch>
       <Switch>
         <Route path="/login" component={Login} exact />
         <Route path="/my" component={MyPage} />

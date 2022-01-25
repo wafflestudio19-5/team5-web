@@ -175,13 +175,13 @@ export interface LectureTimeType {
 
 export interface TimeTableSearchQueryType {
   semester: string;
-  credits: string;
-  department: string;
-  title: string;
-  instructor: string;
-  course_code: string;
-  location: string;
-  ordering: string;
+  credits?: string;
+  department?: string;
+  title?: string;
+  instructor?: string;
+  course_code?: string;
+  location?: string;
+  ordering?: string;
 }
 
 //Lecture에서 사용
