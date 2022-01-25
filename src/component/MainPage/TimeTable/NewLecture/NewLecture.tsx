@@ -1,10 +1,21 @@
 import { useState } from "react";
 import NewLectureList from "./NewLectureList";
 
-const NewLecture = ({ resizeContainer }: { resizeContainer: Function }) => {
+const NewLecture = ({
+  currentSemester,
+  resizeContainer,
+  addLectureToTable,
+}: {
+  currentSemester: string;
+  resizeContainer: Function;
+  addLectureToTable: Function;
+}) => {
   const [isOpen, setIsOpen] = useState<"button" | "search" | "create">(
     "button"
   );
+
+  const addLecture = () => {};
+
   return (
     <>
       {isOpen !== "search" && (
@@ -34,7 +45,11 @@ const NewLecture = ({ resizeContainer }: { resizeContainer: Function }) => {
         </div>
       )}
       {isOpen === "search" && (
-        <NewLectureList resizeContainer={resizeContainer} />
+        <NewLectureList
+          currentSemester={currentSemester}
+          resizeContainer={resizeContainer}
+          addLectureToTable={addLectureToTable}
+        />
       )}
     </>
   );

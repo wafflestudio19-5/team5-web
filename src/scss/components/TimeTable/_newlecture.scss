@@ -1,13 +1,16 @@
 @mixin searchItemGrid{
   display:grid;
-  grid-template-columns: 1.2fr 1fr 2fr 1.2fr 3fr 5fr 2fr 1fr 1fr 1fr 5fr 2fr 2fr 2fr 1.5fr 4fr;
+  grid-template-columns: 1.2fr 1fr 2fr 1.2fr 3fr 5fr 2fr 1fr 1fr 1fr 5fr 2fr 2fr 2fr 1.5fr 4fr ;
   padding-left:8px;
   p{
-    height:32px;
     margin:0;
+    margin-right:10px;
     font-size:13px;
     display: flex;
     align-items: center;
+    padding-top:8px;
+    padding-bottom:8px;
+
   }
 }
 
@@ -56,21 +59,29 @@
     width:100%;
     height:80px;
     border-bottom: 1px solid $timetableBorderColor;
-
     .NewLecture__search-filter {
       display:flex;
-      background-color: red;
       height:40px;
       margin-bottom:3px;
    }
     .NewLecture__search-list-label{
       @include searchItemGrid;
-
+      height:auto;
     }
   }
   .NewLecture__search-list{
+    height:320px;
+    margin-top:80px;
+    padding:0;
+    overflow-y: auto;
     .NewLecture__search-item{
       @include searchItemGrid;
+      border-bottom: 1px solid $timetableBorderColor;
+      height:auto;
+      cursor:pointer;
+      &:hover{
+        background-color: white;
+      }
     }
   }
 }

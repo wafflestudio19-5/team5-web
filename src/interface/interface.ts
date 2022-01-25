@@ -138,4 +138,44 @@ export interface TimeTableSettingsType {
   is_default: boolean;
 }
 
+export interface LectureType {
+  id: number;
+  lecture_time: LectureTimeType[];
+  course: {
+    title: string;
+    instructor: string;
+    rating: number;
+  };
+  classification: string;
+  degree: string;
+  grade: number;
+  course_code: string;
+  lecture_code: number;
+  credits: number;
+  lecture: number;
+  laboratory: number;
+  cart: number;
+  quota: number;
+  remark: null | any;
+  semester: number;
+}
+
+export interface LectureTimeType {
+  day: string;
+  start: number;
+  end: number;
+  location: string;
+}
+
+export interface TimeTableSearchQueryType {
+  semester: string;
+  credits: string;
+  department: string;
+  title: string;
+  instructor: string;
+  course_code: string;
+  location: string;
+  ordering: string;
+}
+
 export default {};

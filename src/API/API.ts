@@ -19,7 +19,11 @@ const getToken = () => {
 export const makeQuery = (queryObject: object) => {
   let query = "?";
   for (const [key, value] of Object.entries(queryObject)) {
-    query += `${key}=${value}&`;
+    if (value.length > 0) {
+      query += `${key}=${value}&`;
+    } else {
+      query += `${key}&`;
+    }
   }
   query = query.slice(0, -1); // query가 비어있을 때의 ?나 key=value 마지막의 &을 삭제합니다
   return query;

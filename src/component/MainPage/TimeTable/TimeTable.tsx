@@ -6,6 +6,7 @@ import {
   getTimeTableById,
   getTimeTableBySemester,
   postTimeTable,
+  postTimeTableLecture,
   putTimeTable,
 } from "../../../API/timetableAPI";
 import {
@@ -75,6 +76,16 @@ const TimeTable = () => {
       );
       setModalIsOpen(false);
     });
+  };
+  const addLectureToTable = (lectureId: number) => {
+    postTimeTableLecture(selectedTable.id, lectureId).then(
+      (response) => {
+        setReloadingSelected(true);
+      },
+      (error) => {
+        toastErrorData(error.response.data);
+      }
+    );
   };
 
   //useEffects
@@ -290,7 +301,11 @@ const TimeTable = () => {
           </div>
         )}
       </div>
-      <NewLecture resizeContainer={setResizeContainer} />
+      <NewLecture
+        currentSemester={currentSemester.name}
+        resizeContainer={setResizeContainer}
+        addLectureToTable={addLectureToTable}
+      />
     </div>
   );
 };
