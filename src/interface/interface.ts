@@ -122,4 +122,20 @@ export interface HotItemType {
   title_content: string;
 }
 
+//timetable API
+export interface TimeTableType {
+  created_at: string;
+  id: number;
+  is_default: boolean;
+  name: string;
+  private: string;
+  updated_at: string;
+}
+
+export interface TimeTableSettingsType {
+  name: string;
+  private: string;
+  is_default: boolean;
+}
+
 export default {};
