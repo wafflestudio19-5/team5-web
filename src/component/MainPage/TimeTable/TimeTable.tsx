@@ -1,7 +1,17 @@
 import Schedule from "./Schedule/Schedule";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+
+interface TimeTableParams {
+  year: string;
+  season: string;
+  scheduleId: string;
+}
 
 const TimeTable = () => {
+  const params: TimeTableParams = useParams();
+  console.log(params);
+
   const [selectedTable, setSelectedTable] = useState<number>(1);
 
   return (

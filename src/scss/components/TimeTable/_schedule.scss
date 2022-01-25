@@ -17,7 +17,7 @@
   .Schedule__label--hider{
     position:fixed;
     width:calc(100% - $timeTableMenuWidth - 15px);
-    top:0px;
+    top:0;
     height:100px;
     background-color: $timetableBackgroundColor;
   }

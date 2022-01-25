@@ -4,8 +4,7 @@ import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
 import Login from "../AuthPage/Login/Login";
 import MyPage from "../MyPage/MyPage";
-
-import TimeTable from "./TimeTable/TimeTable";
+import TimeTableRoute from "./TimeTable/TimeTableRoute";
 
 const MainPage = () => {
   return (
@@ -14,7 +13,7 @@ const MainPage = () => {
       <Switch>
         <Route path="/login" component={Login} exact />
         <Route path="/my" component={MyPage} />
-        <Route path="/timetable" component={TimeTable} />
+        <Route path="/timetable" component={TimeTableRoute} />
         <Route path="/lecture" />
         <Route path="/" component={Home} />
       </Switch>
