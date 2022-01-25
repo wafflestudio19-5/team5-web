@@ -80,10 +80,10 @@ const BoardView = () => {
                   <div className={"wrapper"}>
                     <h2 className={"medium"}>{item.title}</h2>
                     <p className={"small"}>{item.content}</p>
-                    <p className={"small info"}>
+                    <div className={"small info"}>
                       <time>{time(item.created_at)}</time>
                       <div className={"writer"}>{item.writer}</div>
-                    </p>
+                    </div>
                   </div>
                   <ul className="status">
                     <li className={"vote_active"}>{item.num_of_likes}</li>
