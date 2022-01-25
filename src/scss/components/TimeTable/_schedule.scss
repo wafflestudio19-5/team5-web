@@ -20,6 +20,8 @@
     top:0;
     height:100px;
     background-color: $timetableBackgroundColor;
+    z-index: 20;
+
   }
   .Schedule__label--container{
     position:fixed;
@@ -31,22 +33,76 @@
     border: 1px solid $boardBorderColor;
     border-bottom: 0;
     background-color: $timetableLabelColor;
+    z-index: 20;
 
     .Schedule__label{
       @include gridItem;
     }
   }
 
-  .Schedule__container{
-    display:grid;
-    grid-template-columns: 80px repeat(5, 1fr) 80px;
-    grid-template-rows: repeat(15, 60px);
-    width:calc(100% - 15px);
-    border:1px solid $boardBorderColor;
+  .Schedule__wrapper{
+    width:100%;
+    height:100%;
     margin-top: 40px;
+    .Schedule__background-container{
+      position: absolute;
+      display:grid;
+      grid-template-columns: 80px repeat(5, 1fr) 80px;
+      grid-template-rows: repeat(15, 60px);
+      width:calc(100% - 15px);
+      border:1px solid $boardBorderColor;
+      .Schedule__item{
+        @include gridItem;
+      }
+    }
+    .Schedule__lecture-container{
+      position: absolute;
+      display:grid;
+      grid-template-columns: 80px repeat(5, 1fr) 80px;
+      grid-template-rows: 1fr ;
+      width:calc(100% - 15px);
+      height:100%;
+      z-index: 10;
+      .Schedule__lecture-row{
+        box-sizing: border-box;
+        height:100%;
+        position:relative;
+        display:flex;
+        flex-direction: column;
+        .Schedule__lecture-item{
+          position:absolute;
+          font-size:12px;
+          width:100%;
+          box-sizing: border-box;
+          padding:10px;
+          border: 1px solid $timetableBorderColor;
+          p{
+            margin:0;
+          }
+          .title{
+            color:black;
+            font-weight:bold;
+          }
+          button{
+            position: absolute;
+            display: none;
+            top:10px;
+            right:10px;
+            background:url("https://everytime.kr/images/container.timetable.del.png") no-repeat center center;
+            width:15px;
+            height:15px;
+            border: 0;
+            color:grey;
+            cursor: pointer;
+          }
+          &:hover{
+            button{
+              display: block;
 
-    .Schedule__item{
-      @include gridItem;
+            }
+          }
+        }
+      }
     }
   }
 }

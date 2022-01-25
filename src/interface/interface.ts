@@ -130,6 +130,7 @@ export interface TimeTableType {
   name: string;
   private: string;
   updated_at: string;
+  lecture?: LectureScheduleType[];
 }
 
 export interface TimeTableSettingsType {
@@ -137,7 +138,13 @@ export interface TimeTableSettingsType {
   private: string;
   is_default: boolean;
 }
-
+export interface LectureScheduleType {
+  id: number;
+  title: string;
+  instructor: string;
+  credits: number;
+  lecture_time: LectureTimeType[];
+}
 export interface LectureType {
   id: number;
   lecture_time: LectureTimeType[];
@@ -159,7 +166,6 @@ export interface LectureType {
   remark: null | any;
   semester: number;
 }
-
 export interface LectureTimeType {
   day: string;
   start: number;

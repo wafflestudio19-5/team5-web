@@ -69,3 +69,16 @@ export const postTimeTableLecture = async (
     return Promise.reject(e);
   }
 };
+export const deleteTimeTableLecture = async (
+  timeTableId: number,
+  lectureId: number
+) => {
+  try {
+    const response = await authRequest.delete(
+      `/timetable/${timeTableId}/lecture/${lectureId}/`
+    );
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};

@@ -22,3 +22,35 @@ export const convertLocationToString = (lectureTime: LectureTimeType[]) => {
   result = result.slice(0, -1);
   return result;
 };
+
+const timeToHeight = (time: number) => {
+  const hour = Math.floor(time / 100) - 9;
+  const min = time % 100;
+  return hour * 60 + min;
+};
+const selectColor = [
+  "#e599f7",
+  "#ffc9c9",
+  "#ffec99",
+  "#d8f5a2",
+  "#66d9e8",
+  "#74c0fc",
+  "#b197fc",
+  "#fcc2d7",
+  "#ffd8a8",
+  "#faa2c1",
+];
+export const convertTimeToStyle = (
+  start: number,
+  end: number,
+  index: number
+) => {
+  console.log(start);
+  console.log(timeToHeight(start));
+  const style = {
+    top: `${timeToHeight(start)}px`,
+    height: `${timeToHeight(end) - timeToHeight(start)}px`,
+    background: `${selectColor[index % 10]}`,
+  };
+  return style;
+};

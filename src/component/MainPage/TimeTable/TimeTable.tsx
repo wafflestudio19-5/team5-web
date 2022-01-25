@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {
   deleteTimeTable,
+  deleteTimeTableLecture,
   getTimeTableById,
   getTimeTableBySemester,
   postTimeTable,
@@ -70,22 +71,36 @@ const TimeTable = () => {
     });
   };
   const deleteTable = () => {
-    deleteTimeTable(String(selectedTable.id)).then(() => {
-      history.push(
-        `/timetable/${currentSemester.year}/${currentSemester.season}/`
-      );
-      setModalIsOpen(false);
-    });
+    if (window.confirm("시간표를 삭제하시겠습니까?")) {
+      deleteTimeTable(String(selectedTable.id)).then(() => {
+        history.push(
+          `/timetable/${currentSemester.year}/${currentSemester.season}/`
+        );
+        setModalIsOpen(false);
+      });
+    }
   };
   const addLectureToTable = (lectureId: number) => {
     postTimeTableLecture(selectedTable.id, lectureId).then(
       (response) => {
-        setReloadingSelected(true);
+        setSelectedTable(response);
       },
       (error) => {
         toastErrorData(error.response.data);
       }
     );
+  };
+  const deleteLectureFromTable = (lectureId: number) => {
+    if (window.confirm("강의를 삭제하시겠습니까?")) {
+      deleteTimeTableLecture(selectedTable.id, lectureId).then(
+        (response) => {
+          setSelectedTable(response);
+        },
+        (error) => {
+          toastErrorData(error.response.data);
+        }
+      );
+    }
   };
 
   //useEffects
@@ -132,7 +147,18 @@ const TimeTable = () => {
     } else {
       const targetTable = currentTables.find((table) => table.is_default);
       if (targetTable) {
-        setSelectedTable(targetTable);
+        getTimeTableById(String(targetTable.id)).then(
+          (response) => {
+            console.log("why?");
+            setSelectedTable(response);
+          },
+          (error) => {
+            history.push(
+              `/timetable/${currentSemester.year}/${currentSemester.season}`
+            );
+            toastErrorData(error.response.data);
+          }
+        );
       }
     }
   }, [params, currentTables, reloadingSelected]);
@@ -201,7 +227,10 @@ const TimeTable = () => {
             </li>
           </ul>
         </div>
-        <Schedule />
+        <Schedule
+          lectures={selectedTable.lecture}
+          deleteLectureFromTable={deleteLectureFromTable}
+        />
         {modalIsOpen && (
           <div
             className="TimeTable__modal-wrapper"

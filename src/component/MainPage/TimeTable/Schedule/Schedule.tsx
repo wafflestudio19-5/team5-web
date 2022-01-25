@@ -1,3 +1,7 @@
+import { LectureScheduleType } from "../../../../interface/interface";
+import { convertTimeToStyle } from "../../../../function/lecture";
+import { deleteTimeTableLecture } from "../../../../API/timetableAPI";
+
 const weekday = ["월", "화", "수", "목", "금"];
 const classToTime = (classNo: number) => {
   if (classNo <= 0) {
@@ -22,7 +26,215 @@ const renderGrid = () => {
   return result;
 };
 
-const Schedule = () => {
+const renderLecture = (
+  lecture: LectureScheduleType,
+  start: number,
+  end: number,
+  location: string,
+  index: number
+) => {
+  return (
+    <div
+      className="Schedule__lecture-item"
+      style={{ ...convertTimeToStyle(start, end, index) }}
+    >
+      <p className="title">{lecture.title}</p>
+      <p>
+        {lecture.instructor} {location}
+      </p>
+      <button />
+    </div>
+  );
+};
+
+const renderLectures = (lectureArray: LectureScheduleType[]) => {
+  const mon = [<div />];
+  const tue = [<div />];
+  const wed = [<div />];
+  const thu = [<div />];
+  const fri = [<div />];
+  lectureArray.forEach((lecture, lectureIndex) => {
+    lecture.lecture_time.forEach((time) => {
+      switch (time.day) {
+        case "월":
+          mon.push(
+            renderLecture(
+              lecture,
+              time.start,
+              time.end,
+              time.location,
+              lectureIndex
+            )
+          );
+          break;
+        case "화":
+          tue.push(
+            renderLecture(
+              lecture,
+              time.start,
+              time.end,
+              time.location,
+              lectureIndex
+            )
+          );
+          break;
+        case "수":
+          wed.push(
+            renderLecture(
+              lecture,
+              time.start,
+              time.end,
+              time.location,
+              lectureIndex
+            )
+          );
+          break;
+        case "목":
+          thu.push(
+            renderLecture(
+              lecture,
+              time.start,
+              time.end,
+              time.location,
+              lectureIndex
+            )
+          );
+          break;
+        case "금":
+          fri.push(
+            renderLecture(
+              lecture,
+              time.start,
+              time.end,
+              time.location,
+              lectureIndex
+            )
+          );
+          break;
+      }
+    });
+  });
+  return (
+    <>
+      <div className="Schedule__lecture-row">{mon}</div>
+      <div className="Schedule__lecture-row">{tue}</div>
+      <div className="Schedule__lecture-row">{wed}</div>
+      <div className="Schedule__lecture-row">{thu}</div>
+      <div className="Schedule__lecture-row">{fri}</div>)
+    </>
+  );
+};
+
+const Schedule = ({
+  lectures,
+  deleteLectureFromTable,
+}: {
+  lectures: LectureScheduleType[] | undefined;
+  deleteLectureFromTable: Function;
+}) => {
+  const renderLecture = (
+    lecture: LectureScheduleType,
+    start: number,
+    end: number,
+    location: string,
+    index: number
+  ) => {
+    return (
+      <div
+        className="Schedule__lecture-item"
+        style={{ ...convertTimeToStyle(start, end, index) }}
+      >
+        <p className="title">{lecture.title}</p>
+        <p>
+          {lecture.instructor} {location}
+        </p>
+        <button
+          onClick={() => {
+            deleteLectureFromTable(lecture.id);
+          }}
+        />
+      </div>
+    );
+  };
+
+  const renderLectures = (lectureArray: LectureScheduleType[]) => {
+    const mon = [<div />];
+    const tue = [<div />];
+    const wed = [<div />];
+    const thu = [<div />];
+    const fri = [<div />];
+    lectureArray.forEach((lecture, lectureIndex) => {
+      lecture.lecture_time.forEach((time) => {
+        switch (time.day) {
+          case "월":
+            mon.push(
+              renderLecture(
+                lecture,
+                time.start,
+                time.end,
+                time.location,
+                lectureIndex
+              )
+            );
+            break;
+          case "화":
+            tue.push(
+              renderLecture(
+                lecture,
+                time.start,
+                time.end,
+                time.location,
+                lectureIndex
+              )
+            );
+            break;
+          case "수":
+            wed.push(
+              renderLecture(
+                lecture,
+                time.start,
+                time.end,
+                time.location,
+                lectureIndex
+              )
+            );
+            break;
+          case "목":
+            thu.push(
+              renderLecture(
+                lecture,
+                time.start,
+                time.end,
+                time.location,
+                lectureIndex
+              )
+            );
+            break;
+          case "금":
+            fri.push(
+              renderLecture(
+                lecture,
+                time.start,
+                time.end,
+                time.location,
+                lectureIndex
+              )
+            );
+            break;
+        }
+      });
+    });
+    return (
+      <>
+        <div className="Schedule__lecture-row">{mon}</div>
+        <div className="Schedule__lecture-row">{tue}</div>
+        <div className="Schedule__lecture-row">{wed}</div>
+        <div className="Schedule__lecture-row">{thu}</div>
+        <div className="Schedule__lecture-row">{fri}</div>
+      </>
+    );
+  };
+
   return (
     <div className="Schedule">
       <div className="Schedule__label--hider" />
@@ -33,7 +245,14 @@ const Schedule = () => {
         ))}
         <div className="Schedule__label" />
       </div>
-      <div className="Schedule__container">{renderGrid()}</div>
+      <div className="Schedule__wrapper">
+        <div className="Schedule__background-container">{renderGrid()}</div>
+        <div className="Schedule__lecture-container">
+          <div />
+          {lectures && renderLectures(lectures)}
+          <div />
+        </div>
+      </div>
     </div>
   );
 };
