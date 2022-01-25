@@ -1,4 +1,4 @@
-import { LectureTimeType } from "../interface/interface";
+import { LectureScheduleType, LectureTimeType } from "../interface/interface";
 
 export const convertTimeToString = (lectureTime: LectureTimeType[]) => {
   let result = "";
@@ -53,4 +53,16 @@ export const convertTimeToStyle = (
     background: `${selectColor[index % 10]}`,
   };
   return style;
+};
+
+export const calculateCredit = (
+  lectures: LectureScheduleType[] | undefined
+) => {
+  let result = 0;
+  if (lectures) {
+    lectures.forEach((lecture) => {
+      result = result + lecture.credits;
+    });
+  }
+  return result;
 };

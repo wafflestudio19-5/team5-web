@@ -16,6 +16,8 @@ import {
 } from "../../../interface/interface";
 import { toastErrorData } from "../../../API/errorHandling";
 import NewLecture from "./NewLecture/NewLecture";
+import { time } from "../../../function/timeCal";
+import { calculateCredit } from "../../../function/lecture";
 
 interface TimeTableParams {
   year: string;
@@ -182,7 +184,10 @@ const TimeTable = () => {
           </select>
           <div className="TimeTable__menu__info">
             <h3>{selectedTable.name}</h3>
-            <p>{selectedTable.updated_at}</p>
+            <p>
+              {calculateCredit(selectedTable.lecture)}학점{" "}
+              {time(selectedTable.updated_at)}
+            </p>
             <div className="TimeTable__menu__buttons">
               <button className="image">이미지</button>
               <button
@@ -263,6 +268,7 @@ const TimeTable = () => {
                 type="radio"
                 name="private"
                 value="전체공개"
+                checked={tableSettings.private === "전체공개"}
                 onChange={(e) => {
                   setTableSettings({
                     ...tableSettings,
@@ -275,6 +281,7 @@ const TimeTable = () => {
                 type="radio"
                 name="private"
                 value="친구공개"
+                checked={tableSettings.private === "친구공개"}
                 onChange={(e) => {
                   setTableSettings({
                     ...tableSettings,
@@ -287,6 +294,7 @@ const TimeTable = () => {
                 type="radio"
                 name="private"
                 value="비공개"
+                checked={tableSettings.private === "비공개"}
                 onChange={(e) => {
                   setTableSettings({
                     ...tableSettings,
