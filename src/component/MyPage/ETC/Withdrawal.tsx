@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { patchMyProfileAPI, postDeleteUserAPI } from "../../../API/userAPI";
 
 const Withdrawal = () => {
   const [password, setPassword] = useState<string>("");
 
   const withdrawal = () => {
-    window.alert("아직 구현되지 않은 기능입니다.");
+    const form = new FormData();
+    form.append("password", password);
+    postDeleteUserAPI(form).then((res) => {});
   };
 
   return (

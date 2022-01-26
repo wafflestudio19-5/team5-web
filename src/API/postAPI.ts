@@ -7,11 +7,18 @@ export const getPostAPI = async (
   limit: number = 10
 ) => {
   try {
-    const response = await authRequest.get(
-      `/post/${makeQuery({ board: board, limit: limit, offset: offset })}`
-    );
-    console.log(response.data);
-    return response.data;
+    if (board === "hot") {
+      const response = await authRequest.get(`/post/hot`);
+      console.log(response.data);
+      console.log("is hot");
+      return response.data;
+    } else {
+      const response = await authRequest.get(
+        `/post/${makeQuery({ board: board, limit: limit, offset: offset })}`
+      );
+      console.log(response.data);
+      return response.data;
+    }
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용
     return [];

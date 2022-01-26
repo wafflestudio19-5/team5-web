@@ -121,4 +121,23 @@ export interface HotItemType {
   title_content: string;
 }
 
+export interface UserType {
+  admission_year: string;
+  email: string;
+  id: number;
+  nickname: string;
+  profile_picture: string;
+  univ: string;
+  username: string;
+}
+
+export interface UserPatchType {
+  origin_password: string;
+  nickname: string;
+  new_password1: string;
+  new_password2: string;
+  email: string;
+  profile_picture: string;
+}
+
 export default {};

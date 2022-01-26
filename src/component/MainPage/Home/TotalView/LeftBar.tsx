@@ -3,6 +3,9 @@ import { deleteToken } from "../../../../function/localStorage";
 import { logout } from "../../../../redux/authorization";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getMyProfileAPI } from "../../../../API/userAPI";
+import { UserType } from "../../../../interface/interface";
 
 const LeftBar = () => {
   const dispatch = useDispatch();
@@ -13,16 +16,28 @@ const LeftBar = () => {
     dispatch(logout());
   };
 
+  const [userInfo, setUserInfo] = useState<UserType>();
+
+  useEffect(() => {
+    getMyProfileAPI().then((res) => {
+      setUserInfo(res);
+    });
+  }, []);
+
   const gotoMyPage = () => {
     history.push("/my");
   };
   return (
     <div className={"leftBarWrapper"}>
       <div className={"userCard"}>
-        <img className={"userImg"} />
-        <p className={"nickName"}>자하연 금도끼</p>
-        <p className={"user"}>이름</p>
-        <p className={"user"}>id</p>
+        <img
+          className={"userImg"}
+          src={userInfo?.profile_picture}
+          alt={"유저 프로필"}
+        />
+        <p className={"nickName"}>{userInfo?.nickname}</p>
+        <p className={"user"}>{userInfo?.username}</p>
+
         <div className={"buttons"}>
           <button onClick={gotoMyPage}>내 정보</button>
           <button onClick={tryLogout}>로그아웃</button>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { toast } from "../../Toast/ToastManager";
+import { patchMyProfileAPI } from "../../../API/userAPI";
 
 const Password = () => {
   const [newPassword, setNewPassword] = useState<string>("");
@@ -13,7 +13,11 @@ const Password = () => {
     } else if (!isLongEnough || newPassword.length === 0) {
       window.alert("비밀번호는 8~20자만 가능합니다.");
     } else {
-      window.alert("아직 구현되지 않은 기능입니다.");
+      const form = new FormData();
+      form.append("origin_password", password);
+      form.append("new_password2", passwordCheck);
+      form.append("new_password1", newPassword);
+      patchMyProfileAPI(form).then((res) => {});
     }
   };
 
@@ -69,7 +73,14 @@ const Password = () => {
           <div className="label">
             <label> 현재 비밀번호 </label>
           </div>
-          <input placeholder="현재 비밀번호" type={"password"} maxLength={20} />
+          <input
+            placeholder="현재 비밀번호"
+            type={"password"}
+            maxLength={20}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </div>
 
         <div className={"rules"}>

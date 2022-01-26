@@ -23,7 +23,9 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
     results: [],
   });
   useEffect(() => {
-    getPostAPI(item.id, 0, 4).then((res) => setBoardPreview(res));
+    getPostAPI(item.id, 0, 4).then((res) => {
+      setBoardPreview(res);
+    });
   }, [item.id]);
 
   return (
@@ -32,7 +34,7 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
         <Link to={`/${item.id}`}>{item.title}</Link>
       </h3>
       <ul className="board">
-        {boardPreview.count === 0 ? (
+        {!boardPreview || boardPreview.count === 0 ? (
           <li className="board-item">
             <p>아직 게시글이 없습니다.</p>
           </li>
