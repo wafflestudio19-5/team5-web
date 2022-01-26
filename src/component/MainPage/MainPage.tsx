@@ -4,17 +4,21 @@ import Home from "./Home/Home";
 import Footer from "./Footer/Footer";
 import Login from "../AuthPage/Login/Login";
 import MyPage from "../MyPage/MyPage";
-import RightBar from "./Home/TotalView/RightBar";
+import TimeTableRoute from "./TimeTable/TimeTableRoute";
+import LectureRoute from "./Lecture/LectureRoute";
 
 const MainPage = () => {
   return (
     <>
-      <Header />
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route path="/:state" component={Header} />
+        <Route path="/" component={Header} />
+      </Switch>
+      <Switch>
+        <Route path="/login" component={Login} exact />
         <Route path="/my" component={MyPage} />
-        <Route path="/timetable" />
-        <Route path="/lecture" />
+        <Route path="/timetable" component={TimeTableRoute} />
+        <Route path="/lecture" component={LectureRoute} />
         <Route path="/" component={Home} />
       </Switch>
       <Footer />

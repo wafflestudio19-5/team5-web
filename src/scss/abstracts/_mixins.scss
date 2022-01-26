@@ -180,3 +180,9 @@
       background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
     }
 }
+
+@mixin timetable-card{
+  border: 1px solid $cardBorderColor;
+  background-color: white;
+  box-sizing: border-box;
+}

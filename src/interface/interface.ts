@@ -122,4 +122,101 @@ export interface HotItemType {
   title_content: string;
 }
 
+//timetable API
+export interface TimeTableType {
+  created_at: string;
+  id: number;
+  is_default: boolean;
+  name: string;
+  private: string;
+  updated_at: string;
+  lecture?: LectureScheduleType[];
+}
+
+export interface TimeTableSettingsType {
+  name: string;
+  private: string;
+  is_default: boolean;
+}
+export interface LectureScheduleType {
+  id: number;
+  title: string;
+  instructor: string;
+  credits: number;
+  lecture_time: LectureTimeType[];
+}
+export interface LectureType {
+  id: number;
+  lecture_time: LectureTimeType[];
+  course: {
+    title: string;
+    instructor: string;
+    rating: number;
+  };
+  classification: string;
+  degree: string;
+  grade: number;
+  course_code: string;
+  lecture_code: number;
+  credits: number;
+  lecture: number;
+  laboratory: number;
+  cart: number;
+  quota: number;
+  remark: null | any;
+  semester: number;
+}
+export interface LectureTimeType {
+  day: string;
+  start: number;
+  end: number;
+  location: string;
+}
+
+export interface TimeTableSearchQueryType {
+  semester: string;
+  credits?: string;
+  department?: string;
+  title?: string;
+  instructor?: string;
+  course_code?: string;
+  location?: string;
+  ordering?: string;
+}
+
+//Lecture에서 사용
+export interface EvalType {
+  id: number;
+  course: string;
+  rating: number;
+  semester: string;
+  content: string;
+  is_mine: boolean;
+  num_of_likes: number;
+}
+
+export interface SearchedLectureType {
+  id: number;
+  title: string;
+  instructor: string;
+  rating: number;
+}
+
+export interface LectureInformationType {
+  id: number;
+  title: string;
+  instructor: string;
+  semester: string;
+  sem_options: string[];
+}
+
+export interface LectureSummaryType {
+  has_evals: boolean;
+  rating: number;
+  assignment: string;
+  team: string;
+  grade: string;
+  attendance: string;
+  exam_freq: string;
+}
 export default {};
