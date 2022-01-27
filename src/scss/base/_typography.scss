@@ -14,6 +14,7 @@ h2{
     text-overflow: ellipsis;
     font-size: 14px;
     font-weight: normal;
+    color: #444444;
   }
 
   &.medium_bold{
@@ -24,7 +25,7 @@ h2{
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 14px;
-    font-weight: normal;
+    font-weight: bold;
   }
 
   &.medium_bold_writer{
@@ -47,15 +48,25 @@ h2{
 h3{
   &.large{
     height: 20px;
-    max-width: 200px;
+    //max-width: 200px;
     line-height: 20px;
     font-size: 14px;
     font-weight: bold;
     margin: 0;
   }
+  &.medium{
+    //max-width: 100px;
+    margin: 0 10px 5px 0;
+    height: 20px;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: bold;
+  }
 }
 
-p{
+p, div{
+  word-break: break-all;
+
   &.small{
     margin-bottom: 5px;
     max-height: 30px;
@@ -64,6 +75,16 @@ p{
     overflow: hidden;
     color: $postViewColor;
     font-size: 12px;
+  }
+
+  &.medium{
+    margin: 0 0 5px 0;
+    max-height: 100px;
+    line-height: 20px;
+    white-space: normal;
+    overflow: hidden;
+    color: #444444;
+    font-size: 14px;
   }
 
   &.smallButton{
@@ -83,5 +104,6 @@ p{
     color: $fontColor;
     font-size: 14px;
     white-space: pre-wrap;
+    margin: 0;
   }
 }

@@ -12,6 +12,7 @@ const BoardView = () => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
   const [pageNum, setPageNum] = useState<number>(1);
   const [reloading, setReloading] = useState<boolean>(true);
@@ -63,10 +64,18 @@ const BoardView = () => {
           <ul className="BoardView__list">
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
-                <Link to={`/${params.myMenu}/${item.id}`}>
+                <Link to={`/${item.board.id}/${item.id}`}>
                   <div className={"wrapper"}>
-                    <h2 className={"medium"}>{item.title}</h2> <br />
-                    <p className={"small"}>{item.content}</p>
+                    <h3 className={"medium"}>{item.writer}</h3>
+                    <h2 className={"medium_bold"}>{item.title}</h2>
+                    <p className={"medium"}>{item.content}</p>
+                    <p className={"small"}>{item.board.title}</p>
+                    <ul className="status">
+                      <li className={"vote_active"}>{item.num_of_likes}</li>
+                      <li className={"comment_active"}>
+                        {item.num_of_comments}
+                      </li>
+                    </ul>
                   </div>
                 </Link>
               </li>

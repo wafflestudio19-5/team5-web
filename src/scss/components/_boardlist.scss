@@ -8,20 +8,40 @@
   }
 
   li{
-    height:93px;
     border-top: 1px solid $cardBorderColor;
     border-right: 1px solid $cardBorderColor;
     border-left: 1px solid $cardBorderColor;
     padding: 15px;
-    display:flex;
-    align-items: center;
+    box-sizing: border-box;
+    .small{
+      margin: 0 0 5px 0;
+      //display: inline-block;
+    }
+
+    &:hover{
+      background-color: $cardColor;
+    }
     .wrapper{
       width: 748px;
     }
     &.BoardView__item{
+      position: relative;
+
+      .writer{
+        display: inline-block;
+        margin-left:10px;
+      }
       a{
         color: inherit;
         text-decoration: none;
+      }
+      .status{
+        box-sizing: border-box;
+        @include stats-default;
+        float: right;
+        position: absolute;
+        right:0;
+        bottom:0;
       }
     }
   }

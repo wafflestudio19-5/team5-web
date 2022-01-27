@@ -8,6 +8,7 @@ import { postItemType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
 import { toast } from "../../../Toast/ToastManager";
 import { authRequest } from "../../../../API/API";
+import { toastErrorData } from "../../../../API/errorHandling";
 
 interface PostViewParams {
   boardId: string;
@@ -29,6 +30,8 @@ const PostView = () => {
   const path = useParams<PostViewParams>();
   const [postDetail, setPostDetail] = useState<postItemType>({
     id: "",
+    board: { id: 0, title: "" },
+    title_exist: true,
     writer: "",
     title: "",
     content: "",
@@ -52,8 +55,16 @@ const PostView = () => {
   const deletePost = () => {
     const result = window.confirm("이 글을 삭제하시겠습니까?");
     if (result) {
-      postDeleteAPI(path.postId);
-      goBack();
+      postDeleteAPI(path.postId).then(
+        (res) => {
+          goBack();
+        },
+        (error) => {
+          if (error.response) {
+            toastErrorData(error.response.data);
+          }
+        }
+      );
     }
   };
 
@@ -141,6 +152,17 @@ const PostView = () => {
       </div>
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
+      {postDetail.is_question && (
+        <div className={"question_description_Box"}>
+          <p className={"question_description"}>
+            질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱
+            빠르게 답변을 얻을 수 있게 됩니다.
+            <br />
+            또한, 다른 학우들이 정성껏 작성한 답변을 유지하기 위해, 댓글이 달린
+            이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
+          </p>
+        </div>
+      )}
       <ul className={"status"}>
         <li className={"vote_active"}>{postDetail.num_of_likes}</li>
         <li className={"comment_active"}>{postDetail.num_of_comments}</li>

@@ -15,6 +15,7 @@ const RightBar = () => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
   const search = (input: string) => {
     history.push(`/s/${input}`);
@@ -44,9 +45,11 @@ const RightBar = () => {
         <h3 className={"board-name"}>실시간 인기 글</h3>
         <ul className={"board"}>
           {liveTop.map((postItem) => (
-            <Link to={`/${postItem.id}/${postItem.id}`} key={postItem.id}>
+            <Link to={`/${postItem.board.id}/${postItem.id}`} key={postItem.id}>
               <li className={"board-item"} key={postItem.id}>
-                <p className={"card-title"}>{postItem.title}</p>
+                {postItem.board.title_exist && (
+                  <p className={"card-title"}>{postItem.title}</p>
+                )}
                 <p className={"card-content"}>{postItem.content}</p>
                 <div className={"card-information"}>
                   <h4>{postItem.board.title}</h4>
