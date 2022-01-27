@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostAPI } from "../../../../API/postAPI";
-import { postListType } from "../../../../interface/interface";
+import { postItemType, postListType } from "../../../../interface/interface";
 import Write from "./Write";
+import { time } from "../../../../function/timeCal";
 
 const BoardView = () => {
   const params = useParams() as paramsType;
@@ -13,6 +14,7 @@ const BoardView = () => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
   const [pageNum, setPageNum] = useState<number>(1);
   const [showForm, setShowForm] = useState<boolean>(false);
@@ -76,14 +78,38 @@ const BoardView = () => {
             {postList.results.map((item) => (
               <li key={item.id} className="BoardView__item">
                 <Link to={`/${params.boardId}/${item.id}`}>
-                  <div className={"wrapper"}>
-                    <h2 className={"medium"}>{item.title}</h2> <br />
-                    <p className={"small"}>{item.content}</p>
-                  </div>
+                  {postList.title_exist ? (
+                    <div className={"wrapper"}>
+                      <h2 className={"medium"}>{item.title}</h2>
+                      <p className={"small"}>{item.content}</p>
+                      <div className={"small info"}>
+                        <time>{time(item.created_at)}</time>
+                        <div className={"writer"}>{item.writer}</div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={"wrapper"}>
+                      <h3 className={"medium"}>{item.writer}</h3>
+                      <h2 className={"medium_bold"}>{item.title}</h2>
+                      <p className={"medium"}>{item.content}</p>
+                      <p className={"small"}>{item.board.title}</p>
+                      <ul className="status">
+                        <li className={"vote_active"}>{item.num_of_likes}</li>
+                        <li className={"comment_active"}>
+                          {item.num_of_comments}
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                  <ul className="status">
+                    <li className={"vote_active"}>{item.num_of_likes}</li>
+                    <li className={"comment_active"}>{item.num_of_comments}</li>
+                  </ul>
                 </Link>
               </li>
             ))}
           </ul>
+
           <div className="BoardView__bottomBar">
             <input
               className={"searchBarMini"}

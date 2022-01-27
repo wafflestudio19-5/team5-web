@@ -17,6 +17,7 @@ const CardTypeB: React.FC<totalViewItemProps> = ({ item }) => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
 
   useEffect(() => {
