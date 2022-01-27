@@ -31,6 +31,7 @@ const PostView = () => {
   const [postDetail, setPostDetail] = useState<postItemType>({
     id: "",
     board: { id: 0, title: "" },
+    title_exist: true,
     writer: "",
     title: "",
     content: "",
@@ -151,7 +152,7 @@ const PostView = () => {
       </div>
       <h2 className={"large"}>{postDetail.title}</h2>
       <p className={"large"}>{postDetail.content}</p>
-      {postDetail.is_question ? (
+      {postDetail.is_question && (
         <div className={"question_description_Box"}>
           <p className={"question_description"}>
             질문 글을 작성하면 게시판 상단에 일정 기간 동안 노출되어, 더욱
@@ -161,7 +162,7 @@ const PostView = () => {
             이후에는 <b>글을 수정 및 삭제할 수 없습니다.</b>
           </p>
         </div>
-      ) : null}
+      )}
       <ul className={"status"}>
         <li className={"vote_active"}>{postDetail.num_of_likes}</li>
         <li className={"comment_active"}>{postDetail.num_of_comments}</li>
