@@ -109,26 +109,6 @@ const BoardView = () => {
               </li>
             ))}
           </ul>
-          {/*<ul className="BoardView__list">*/}
-          {/*  {postList.results.map((item) => (*/}
-          {/*    <li key={item.id} className="BoardView__item">*/}
-          {/*      <Link to={`/${item.board.id}/${item.id}`}>*/}
-          {/*        <div className={"wrapper"}>*/}
-          {/*          <h3 className={"medium"}>{item.writer}</h3>*/}
-          {/*          <h2 className={"medium_bold"}>{item.title}</h2>*/}
-          {/*          <p className={"medium"}>{item.content}</p>*/}
-          {/*          <p className={"small"}>{item.board.title}</p>*/}
-          {/*          <ul className="status">*/}
-          {/*            <li className={"vote_active"}>{item.num_of_likes}</li>*/}
-          {/*            <li className={"comment_active"}>*/}
-          {/*              {item.num_of_comments}*/}
-          {/*            </li>*/}
-          {/*          </ul>*/}
-          {/*        </div>*/}
-          {/*      </Link>*/}
-          {/*    </li>*/}
-          {/*  ))}*/}
-          {/*</ul>*/}
 
           <div className="BoardView__bottomBar">
             <input
