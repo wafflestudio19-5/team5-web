@@ -24,6 +24,7 @@ const RightBar = () => {
     getLiveTopAPI().then((res) => setLiveTop(res));
     getPostAPI("hot", 0, 4).then((res) => setHotPreView(res));
   }, []);
+
   return (
     <div className={"RightBarWrapper"}>
       <input
@@ -65,7 +66,7 @@ const RightBar = () => {
         </ul>
       </div>
 
-      <CardTypeA item={{ id: "hot", title: "hot 게시물" }} />
+      <CardTypeA item={{ id: "hot", title: "HOT 게시물" }} />
 
       <div className={"cardB"}>
         <h3 className={"board-name"}>

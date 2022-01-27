@@ -124,6 +124,26 @@ export interface HotItemType {
   title_content: string;
 }
 
+export interface UserType {
+  admission_year: string;
+  email: string;
+  id: number;
+  nickname: string;
+  profile_picture: string;
+  univ: string;
+  username: string;
+}
+
+export interface UserPatchType {
+  origin_password: string;
+  nickname: string;
+  new_password1: string;
+  new_password2: string;
+  email: string;
+  profile_picture: string;
+}
+
+
 //timetable API
 export interface TimeTableType {
   created_at: string;
@@ -221,4 +241,5 @@ export interface LectureSummaryType {
   attendance: string;
   exam_freq: string;
 }
+
 export default {};

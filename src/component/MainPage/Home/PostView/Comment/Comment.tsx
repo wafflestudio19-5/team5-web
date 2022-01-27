@@ -50,7 +50,7 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
   useEffect(() => {}, [commentList]);
   useEffect(() => {
     getComment();
-  }, []);
+  }, [postDetail]);
 
   const writeComment = (postId: number, input: CommentInputType) => {
     if (!input.content || input.content.replace(/\s|　/gi, "") === "") {
