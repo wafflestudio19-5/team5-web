@@ -56,6 +56,7 @@ export interface boardItemType {
 export interface postItemType {
   id: string;
   board: { id: number; title: string };
+  title_exist: boolean;
   writer: string;
   title: string;
   content: string;
@@ -75,6 +76,7 @@ export interface postListType {
   next: string | null;
   previous: string | null;
   results: postItemType[] | [];
+  title_exist: boolean;
 }
 
 export interface postInputType {
@@ -109,7 +111,7 @@ export interface CommentInputType {
 
 export interface liveTopItemType {
   id: number;
-  board: { id: number; title: string };
+  board: { id: number; title: string; title_exist: boolean };
   content: string;
   num_of_comments: number;
   num_of_likes: number;

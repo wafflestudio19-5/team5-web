@@ -21,6 +21,7 @@ const CardTypeA: React.FC<totalViewItemProps> = ({ item }) => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
   useEffect(() => {
     getPostAPI(item.id, 0, 4).then((res) => setBoardPreview(res));

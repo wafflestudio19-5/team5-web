@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
-import {
-  getPostAPI,
-  getPostWithURLAPI,
-  searchPostAPI,
-} from "../../../../API/postAPI";
+import { getPostWithURLAPI, searchPostAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
-import Write from "./Write";
 
 const SearchBoardView = () => {
   const params = useParams() as paramsType;
@@ -17,6 +12,7 @@ const SearchBoardView = () => {
     next: null,
     previous: null,
     results: [],
+    title_exist: true,
   });
   const [pageNum, setPageNum] = useState<number>(1);
   const [reloading, setReloading] = useState<boolean>(true);
