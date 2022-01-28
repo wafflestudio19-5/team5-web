@@ -1,6 +1,4 @@
 //Login API
-import exp from "constants";
-
 export interface TokenType {
   access: string | null;
   refresh: string | null;
@@ -42,6 +40,28 @@ export interface SocialRegisterInputType {
   admission_year: string;
   univ: string;
 }
+
+export interface boardListType {
+  id: number;
+  title: string;
+  description: string;
+  anonym_enabled: boolean;
+  is_market: boolean;
+  title_enabled: boolean;
+  question_enabled: boolean;
+  notice_enabled: boolean;
+  board_type: number;
+  sub_boards: Array<subBoard>;
+  created_at: string;
+  manager: string;
+  head_board: string;
+}
+
+interface subBoard {
+  id: number;
+  title: string;
+}
+
 export interface mainPostItemType {
   id: number;
   title: string;
