@@ -50,7 +50,20 @@ const NewLecture = ({
         setNextQuery("");
       }
     });
-    setReloadSearch(false);
+  };
+
+  const resetLecture = () => {
+    getSearchedLecture("", {
+      ...timeTableSearchQuery,
+      semester: currentSemester,
+    }).then((response) => {
+      setLectureList([...response.results]);
+      if (response.next) {
+        setNextQuery(response.next.split("?")[1]);
+      } else {
+        setNextQuery("");
+      }
+    });
   };
 
   const handleScroll = () => {
@@ -65,7 +78,7 @@ const NewLecture = ({
   };
 
   useEffect(() => {
-    loadLecture();
+    resetLecture();
   }, [currentSemester, reloadSearch]);
 
   useEffect(() => {
