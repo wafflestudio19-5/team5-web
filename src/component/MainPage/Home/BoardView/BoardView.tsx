@@ -168,6 +168,7 @@ const BoardView = () => {
                 onClick={() => {
                   history.push(`/${params.boardId}/p/${pageNum - 1}`);
                   setPageNum(pageNum - 1);
+                  window.scrollTo(0, 0);
                 }}
               >
                 이전
@@ -179,6 +180,7 @@ const BoardView = () => {
                 onClick={() => {
                   history.push(`/${params.boardId}/p/${pageNum + 1}`);
                   setPageNum(pageNum + 1);
+                  window.scrollTo(0, 0);
                 }}
               >
                 다음
