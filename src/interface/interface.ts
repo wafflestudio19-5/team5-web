@@ -280,6 +280,27 @@ export interface TimeTableSearchQueryType {
   ordering?: string;
 }
 
+export interface newLectureTimeType {
+  day: string;
+  startH: string;
+  startM: string;
+  endH: string;
+  endM: string;
+  location: string;
+}
+
+export interface newLectureType {
+  title: string;
+  instructor: string;
+  time: newLectureTimeType[];
+}
+
+export interface newLectureRequestType {
+  title: string;
+  instructor: string;
+  time: string[];
+}
+
 //Lecture에서 사용
 export interface EvalType {
   id: number;

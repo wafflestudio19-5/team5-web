@@ -20,6 +20,8 @@
   width:100%;
   padding:0;
   overflow: visible;
+  display:flex;
+  justify-content: center;
   z-index:30;
 
   .NewLecture__button{
@@ -39,6 +41,113 @@
       &.create{
 
       }
+    }
+  }
+  .NewLecture__create{
+    width:540px;
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    p{
+      font-weight: bold;
+    }
+    .close{
+      position: absolute;
+      width:40px;
+      height:40px;
+      background: #a6a6a6 url("https://everytime.kr/images/subjects.close.icon.png") no-repeat center center;
+      top:-20px;
+      right:10px;
+      border-radius: 20px;
+      cursor:pointer;
+      &:hover{
+        background: $keyColor url("https://everytime.kr/images/subjects.close.icon.png") no-repeat center center;
+      }
+    }
+    .label{
+      display: inline-block;
+      width:80px;
+      font-size: 12px;
+      color:grey;
+      font-weight: bold;
+    }
+    input[type="text"]{
+      width: calc(100% - 80px);
+      height:30px;
+      padding:5px;
+      border: 1px solid $timetableBorderColor;
+      background-color: $timetableBackgroundColor;
+      border-radius: 0;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+    }
+    .more-time{
+      color:$keyColor;
+      font-weight: bold;
+      cursor: pointer;
+      font-size:12px;
+      margin-top:8px;
+      margin-left:80px;
+      width:100px;
+    }
+    .NewLecture__time-wrapper{
+      display: inline-flex;
+      flex-direction: column;
+      width: calc(100% - 80px);
+      box-sizing: border-box;
+      border: 1px solid $timetableBorderColor;
+      padding: 5px;
+      .day{
+        list-style: none;
+        appearance: none;
+        padding: 0px;
+        margin: 0;
+        margin-bottom:5px;
+        display: flex;
+        box-sizing: border-box;
+        li{
+          width:15px;
+          height:20px;
+          padding: 5px;
+          font-size: 14px;
+          font-weight: bold;
+          color:gray;
+          background-color: $timetableBackgroundColor;
+          margin-right: 3px;
+          cursor: pointer;
+          &.selected{
+            background-color: $keyColor;
+            color:white;
+          }
+        }
+      }
+      .timeplace{
+        font-size: 12px;
+        select{
+          font-size:12px;
+          height:30px;
+          border: 1px solid $timetableBorderColor;
+          margin-right: 5px;
+        }
+        input[type="text"]{
+          width:90px;
+          margin-left: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+    input[type="submit"]{
+      position: absolute;
+      right:20px;
+      bottom:10px;
+      width:40px;
+      height:30px;
+      background-color: $keyColor;
+      color:white;
+      border: 0;
+      cursor: pointer;
     }
   }
 }
@@ -73,6 +182,8 @@
     width:100%;
     height:80px;
     border-bottom: 1px solid $timetableBorderColor;
+    box-shadow:0px 0px 10px 0px rgba(0,0,0,0.3);
+
     .NewLecture__search-filter {
       display:flex;
       height:40px;
