@@ -38,6 +38,7 @@ const PostView = () => {
     is_mine: false,
     num_of_likes: 0,
     num_of_scrap: 0,
+    profile_picture: "",
     num_of_comments: 0,
     images: "",
     tags: [],
@@ -133,7 +134,11 @@ const PostView = () => {
   return !editPost ? (
     <div className={"BoardView__post"}>
       <div className={"BoardView__post__profile"}>
-        <div className={"BoardView__post__profile__img"}>사진</div>
+        <img
+          src={postDetail.profile_picture}
+          alt={"프로필 사진"}
+          className={"BoardView__post__profile__img"}
+        />
         <div className={"BoardView__post__profile__name"}>
           <h3 className={"large"}>{postDetail.writer}</h3>
           <time>{time(postDetail.created_at)}</time>

@@ -64,6 +64,7 @@ export interface postItemType {
   num_of_scrap: number;
   num_of_comments: number;
   tags: any;
+  profile_picture: string;
   images: string;
   is_anonymous: boolean;
   is_question: boolean;
@@ -95,6 +96,7 @@ export interface CommentItemType {
   created_at: string;
   profile: string;
   nickname: string;
+  profile_picture: string;
   num_of_likes: number;
   is_mine: boolean;
   is_deleted: boolean;
@@ -142,7 +144,6 @@ export interface UserPatchType {
   email: string;
   profile_picture: string;
 }
-
 
 //timetable API
 export interface TimeTableType {

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostAPI } from "../../../../API/postAPI";
 import { postItemType, postListType } from "../../../../interface/interface";
-import Write from "./Write";
 import { time } from "../../../../function/timeCal";
 
 const BoardView = () => {
@@ -18,7 +17,6 @@ const BoardView = () => {
   });
   const [pageNum, setPageNum] = useState<number>(1);
   const [showForm, setShowForm] = useState<boolean>(false);
-  const openWrite = () => setShowForm(!showForm);
   const [searchValue, setSearchValue] = useState("");
   const search = (input: string) => {
     history.push(`/s/${input}`);
@@ -38,7 +36,7 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(params.boardId, 10 * (page - 1)).then((response) =>
+    getPostAPI("hot", 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
@@ -56,18 +54,7 @@ const BoardView = () => {
 
   return (
     <>
-      {showForm ? (
-        <Write
-          boardId={Number(params.boardId)}
-          setReloading={setReloading}
-          openWrite={openWrite}
-        />
-      ) : (
-        <button className={"BoardView__writePost"} onClick={openWrite}>
-          새 글을 작성해주세요!
-        </button>
-      )}
-
+      <div className="BoardView__title">HOT 게시판</div>
       {postList.results.length === 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
@@ -89,11 +76,6 @@ const BoardView = () => {
                     </div>
                   ) : (
                     <div className={"wrapper"}>
-                      <img
-                        src={item.profile_picture}
-                        alt={"프로필 사진"}
-                        className={"BoardView__profile__img"}
-                      />
                       <h3 className={"medium"}>{item.writer}</h3>
                       <h2 className={"medium_bold"}>{item.title}</h2>
                       <p className={"medium"}>{item.content}</p>

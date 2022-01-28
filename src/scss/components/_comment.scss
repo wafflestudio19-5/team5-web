@@ -16,6 +16,15 @@
       padding-top:5px;
       width: 748px;
 
+      .Comment__Img{
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        float: left;
+        margin-right: 5px;
+      }
+
       hr{
         border: white;
       }
@@ -73,7 +82,7 @@
     }
     .wrapperReply{
       background: #f9f9f9;
-      padding-top:20px;
+      padding-top:10px;
       padding-left: 10px;
 
       margin-left: 35px;
@@ -81,7 +90,14 @@
       border: solid 1px $boardBorderColor;
 
 
-
+      .Reply__Img{
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        border-radius: 4px;
+        float: left;
+        margin-right: 5px;
+      }
       hr{
         border: white;
       }
