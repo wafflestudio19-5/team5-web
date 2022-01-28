@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   LectureType,
   TimeTableSearchQueryType,
@@ -29,20 +29,47 @@ const NewLecture = ({
   changeOpenMode: Function;
   addLectureToTable: Function;
 }) => {
+  const scrollRef = useRef<HTMLUListElement>(null);
   const [lectureList, setLectureList] = useState<LectureType[]>([]);
   const [timeTableSearchQuery, setTimeTableSearchQuery] =
     useState<TimeTableSearchQueryType>({ semester: "" });
   const [reloadSearch, setReloadSearch] = useState(false);
+  const [nextQuery, setNextQuery] = useState<string>("");
 
-  useEffect(() => {
-    getSearchedLecture({
+  const loadLecture = () => {
+    getSearchedLecture(nextQuery, {
       ...timeTableSearchQuery,
       semester: currentSemester,
     }).then((response) => {
-      setLectureList(response.results);
+      setLectureList([...lectureList, ...response.results]);
+      if (response.next) {
+        setNextQuery(response.next.split("?")[1]);
+      } else {
+        setNextQuery("");
+      }
     });
     setReloadSearch(false);
+  };
+
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollHeight = scrollRef.current.scrollHeight;
+      const scrollTop = scrollRef.current.scrollTop;
+      const clientHeight = scrollRef.current.clientHeight;
+      if (scrollTop + clientHeight >= scrollHeight) {
+        loadLecture();
+      }
+    }
+  };
+
+  useEffect(() => {
+    loadLecture();
   }, [currentSemester, reloadSearch]);
+
+  useEffect(() => {
+    setNextQuery("");
+  }, [timeTableSearchQuery]);
+
   return (
     <div className="NewLecture__search">
       <div className="NewLecture__search-label">
@@ -66,7 +93,11 @@ const NewLecture = ({
           <p>비고</p>
         </div>
       </div>
-      <ul className="NewLecture__search-list">
+      <ul
+        className="NewLecture__search-list"
+        ref={scrollRef}
+        onScroll={handleScroll}
+      >
         {lectureList.map((item) => {
           return (
             <li

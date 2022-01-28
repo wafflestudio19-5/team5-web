@@ -3,11 +3,12 @@ import { authRequest } from "./API";
 import { makeQuery } from "./API";
 
 export const getSearchedLecture = async (
+  next: string,
   searchQuery: TimeTableSearchQueryType
 ) => {
   try {
     const response = await authRequest.get(
-      `/lecture/table/search/${makeQuery(searchQuery)}`
+      `/lecture/table/search/${makeQuery(searchQuery)}${next}`
     );
     return response.data;
   } catch (e) {
