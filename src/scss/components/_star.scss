@@ -1,0 +1,15 @@
+.star-background{
+  position: relative;
+  background: url("https://everytime.kr/images/app.subject.rating.details.star.off.png") no-repeat left center;
+  background-size: 100%;
+  .star-filled{
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    background: url("https://everytime.kr/images/app.subject.rating.details.star.on.png") no-repeat left center;
+    background-size: 100%;
+  }
+}
+
+

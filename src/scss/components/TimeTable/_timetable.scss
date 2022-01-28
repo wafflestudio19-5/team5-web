@@ -33,10 +33,10 @@ $menuDistance:5px;
       width:calc(100% - 30px);
       height:40px;
       margin-bottom:$menuDistance;
-      appearance: none;
       background-color: $timetableBackgroundColor;
       border: 2px solid $boardBorderColor;
       cursor: pointer;
+      padding-left:10px;
     }
 
     .TimeTable__menu__info{
@@ -83,6 +83,7 @@ $menuDistance:5px;
       padding:0px;
 
       .TimeTable__menu__item{
+        position: relative;
         height:50px;
         display:flex;
         align-items: center;
@@ -100,6 +101,12 @@ $menuDistance:5px;
         }
         &.addItem{
           color:$keyColor;
+        }
+        .default{
+          position: absolute;
+          right:10px;
+          font-size:12px;
+          color:gray;
         }
       }
     }

@@ -252,6 +252,9 @@ const TimeTable = () => {
                   }}
                 >
                   {table.name}
+                  {table.is_default ? (
+                    <div className="default">기본시간표</div>
+                  ) : null}
                 </li>
               );
             })}
