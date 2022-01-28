@@ -105,6 +105,10 @@ const TimeTable = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(selectedTable);
+  }, [selectedTable]);
+
   //useEffects
   useEffect(() => {
     if (params.year) {
