@@ -5,21 +5,24 @@
   z-index: 9999999;
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 300px;
+
 }
 
 #toast-container-main > div {
-  background-color: rgba(0, 0, 0, 0.15);
+  background-color: $cardColor;
   color: $fontColor;
   width: 100%;
   margin-bottom: 10px;
-  min-height: 50px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 12px;
   animation: slide-in 0.2s;
   transition: all 0.3s ease;
+  border-radius: 20px;
+  border : 2px solid $keyColor;
 }
 
 .toast-header {
@@ -27,6 +30,10 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  color : $keyColor;
+  border-bottom: 1px solid $keyColor;
+  margin-bottom: 15px;
+
 }
 
 @keyframes slide-in {
