@@ -1,11 +1,24 @@
 import { useEffect, useState } from "react";
+import { getMyProfileAPI, patchMyProfileAPI } from "../../../API/userAPI";
+import { UserPatchType } from "../../../interface/interface";
 
 const Email = () => {
   const [nickname, setNickname] = useState<string>("");
 
   const changeNickname = () => {
-    window.alert("아직 구현되지 않은 기능입니다.");
+    const form = new FormData();
+    form.append("nickname", nickname);
+    patchMyProfileAPI(form).then((res) => {});
   };
+
+  const getCurrentNickname = () => {
+    getMyProfileAPI().then((res) => {
+      setNickname(res.nickname);
+    });
+  };
+  useEffect(() => {
+    getCurrentNickname();
+  }, []);
 
   return (
     <div className={"MyPageMain"}>
@@ -17,7 +30,7 @@ const Email = () => {
           </div>
           <input
             placeholder="닉네임"
-            type={"password"}
+            value={nickname}
             onChange={(e) => {
               setNickname(e.target.value);
             }}

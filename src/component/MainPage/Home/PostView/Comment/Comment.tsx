@@ -9,6 +9,7 @@ import {
   CommentItemType,
   CommentInputType,
   postItemType,
+  MessageType,
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 import { time } from "../../../../../function/timeCal";
@@ -18,9 +19,18 @@ interface commentProps {
   setPostDetail: (
     value: postItemType | ((prevState: postItemType) => postItemType)
   ) => void;
+  setMsgModalOpen: (value: boolean | ((prevState: boolean) => boolean)) => void;
+  setMsgType: (
+    value: MessageType | ((prevState: MessageType) => MessageType)
+  ) => void;
 }
 
-const Comment = ({ postDetail, setPostDetail }: commentProps) => {
+const Comment = ({
+  postDetail,
+  setPostDetail,
+  setMsgModalOpen,
+  setMsgType,
+}: commentProps) => {
   interface PostViewParams {
     boardId: string;
     postId: string;
@@ -50,7 +60,7 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
   useEffect(() => {}, [commentList]);
   useEffect(() => {
     getComment();
-  }, []);
+  }, [postDetail]);
 
   const writeComment = (postId: number, input: CommentInputType) => {
     if (!input.content || input.content.replace(/\s|　/gi, "") === "") {
@@ -127,6 +137,11 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
         {commentList.map((item) => (
           <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
+              <img
+                className={"Comment__Img"}
+                src={item.profile_picture}
+                alt={"프로필 사진"}
+              />
               {item.user_type === "글쓴이" ? (
                 <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
               ) : (
@@ -158,7 +173,17 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                 {item.is_mine ? (
                   <li onClick={() => deleteComment(item.id)}> 삭제 </li>
                 ) : (
-                  <li>신고</li>
+                  <li
+                    onClick={() => {
+                      setMsgModalOpen(true);
+                      setMsgType({
+                        id: item.id,
+                        started_from: "comment",
+                      });
+                    }}
+                  >
+                    쪽지
+                  </li>
                 )}
               </ul>
               <hr />
@@ -181,6 +206,11 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
             </div>
             {item.replys.map((reply) => (
               <div key={reply.id} className={"wrapperReply"}>
+                <img
+                  className={"Reply__Img"}
+                  src={reply.profile_picture}
+                  alt={"프로필 사진"}
+                />
                 {reply.user_type === "글쓴이" ? (
                   <h2 className={"medium_bold_writer"}>{reply.nickname}</h2>
                 ) : (
@@ -198,7 +228,17 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                   {reply.is_mine ? (
                     <li onClick={() => deleteComment(reply.id)}> 삭제 </li>
                   ) : (
-                    <li>신고</li>
+                    <li
+                      onClick={() => {
+                        setMsgModalOpen(true);
+                        setMsgType({
+                          id: reply.id,
+                          started_from: "comment",
+                        });
+                      }}
+                    >
+                      쪽지
+                    </li>
                   )}
                 </ul>
                 <hr />

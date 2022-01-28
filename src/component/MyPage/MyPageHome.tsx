@@ -1,7 +1,10 @@
 import { useHistory } from "react-router-dom";
 import { deleteToken } from "../../function/localStorage";
 import { logout } from "../../redux/authorization";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { getMyProfileAPI } from "../../API/userAPI";
+import { UserType } from "../../interface/interface";
 
 const MyPageHome = () => {
   const history = useHistory();
@@ -31,6 +34,14 @@ const MyPageHome = () => {
     history.push("/");
   };
 
+  const [profile, setProfile] = useState<UserType>();
+
+  useEffect(() => {
+    getMyProfileAPI().then((res) => {
+      setProfile(res);
+    });
+  }, []);
+
   return (
     <div className={"MyPageMain"}>
       <section>
@@ -40,7 +51,19 @@ const MyPageHome = () => {
             로그아웃
           </button>{" "}
         </div>
-        <div className={"myInfo"}>프사 이름 학번 등등</div>
+        <div className={"myInfo"}>
+          <img
+            className={"profileImg"}
+            src={profile?.profile_picture}
+            alt={"프로필 사진"}
+          />
+          <p className={"nickname"}> {profile?.nickname} </p>
+          <p className={"info"}> {profile?.username} </p>
+          <p className={"info"}>
+            {" "}
+            {profile?.univ} {profile?.admission_year}{" "}
+          </p>
+        </div>
       </section>
       <section>
         <h2>계정</h2>

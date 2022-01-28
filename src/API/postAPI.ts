@@ -20,7 +20,6 @@ export const getPostAPI = async (
     const response = await authRequest.get(
       `/post/${makeQuery({ board: board, limit: limit, offset: offset })}`
     );
-    console.log(response.data);
     return response.data;
   } catch (e) {
     console.log("게시글 리스트 불러오기 실패!"); //테스트용

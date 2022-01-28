@@ -28,13 +28,26 @@
       background-color: $cardColor;
     }
 
+    .wrapper{
+      width: 748px;
+    }
 
+    .BoardView__profile__img{
+      width: 20px;
+      float: left;
+      margin-right: 5px;
+      border-radius: 4px;
+    }
     &.BoardView__item{
       position: relative;
       .wrapper{
         width: 748px;
         display: flex;
         justify-content: space-between;
+
+        .majorContents{
+          min-width: 500px;
+        }
 
         .subContents{
           display: flex;
@@ -60,6 +73,7 @@
       .writer{
         display: inline-block;
         margin-left:10px;
+        color: #292929;
       }
       a{
         color: inherit;

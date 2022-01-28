@@ -36,6 +36,7 @@
         font-size: 22px;
         font-weight: bold;;
         flex:auto;
+        margin:0;
     }
     a{
       display: block;
@@ -71,6 +72,33 @@
         color: #737373;
       }
 
+
+    }
+
+    .myInfo{
+      img{
+        width: 56px;
+        border-radius: 18px;
+        float: left;
+        margin-right: 20px;
+      }
+      .nickname{
+        line-height: 20px;
+        color: #292929;
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: 10px;
+      }
+      .info{
+        line-height: 18px;
+        color: #a6a6a6;
+        font-size: 12px;
+        margin:0;
+        padding:0;
+
+      }
 
     }
 

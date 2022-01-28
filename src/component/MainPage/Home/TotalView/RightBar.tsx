@@ -1,10 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {
-  hotItemType,
-  liveTopItemType,
-  postListType,
-} from "../../../../interface/interface";
+import { hotItemType, liveTopItemType } from "../../../../interface/interface";
 import { getHotAPI, getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
 import { time } from "../../../../function/timeCal";
 
@@ -22,6 +18,7 @@ const RightBar = () => {
     getLiveTopAPI().then((res) => setLiveTop(res));
     getHotAPI().then((res) => setHotPreView(res));
   }, []);
+
   return (
     <div className={"RightBarWrapper"}>
       <input
@@ -78,10 +75,11 @@ const RightBar = () => {
           ))}
         </ul>
       </div>
+
       <div className={"cardB"}>
         <h3 className={"board-name"}>
-          <Link to={"/"}>BEST 게시판</Link>
-          <Link to={"/"}>
+          <Link to={"/best"}>BEST 게시판</Link>
+          <Link to={"/best"}>
             <span>더보기</span>
           </Link>
         </h3>
