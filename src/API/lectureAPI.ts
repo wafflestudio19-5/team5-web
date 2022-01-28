@@ -100,3 +100,14 @@ export const getMyPoint = async () => {
     return Promise.reject(e);
   }
 };
+
+export const postEvalLike = async (lectureId: number, evalId: number) => {
+  try {
+    const response = await authRequest.post(
+      `/lecture/${lectureId}/eval/${evalId}/like/`
+    );
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};

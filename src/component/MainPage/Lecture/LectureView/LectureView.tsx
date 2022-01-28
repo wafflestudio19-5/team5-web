@@ -4,12 +4,14 @@ import {
   getLectureEval,
   getLectureInformation,
   getLectureSummary,
+  postEvalLike,
 } from "../../../../API/lectureAPI";
 import {
   EvalType,
   LectureInformationType,
   LectureSummaryType,
 } from "../../../../interface/interface";
+import { toastErrorData } from "../../../../API/errorHandling";
 
 interface LectureViewParams {
   id: string;
@@ -24,18 +26,35 @@ const LectureView = () => {
   const [lectureSummary, setLectureSummary] =
     useState<LectureSummaryType>(emptySummary);
   const [lectureEval, setLectureEval] = useState<EvalType[]>([]);
+  const [reloading, setReloading] = useState<boolean>(true);
+
+  const recommendEval = (evalId: number) => {
+    if (window.confirm("이 강의평을 추천하시겠습니까?")) {
+      postEvalLike(lectureInfo.id, evalId).then(
+        () => {
+          setReloading(true);
+        },
+        (error) => {
+          toastErrorData(error.response.data);
+        }
+      );
+    }
+  };
 
   useEffect(() => {
-    getLectureInformation(params.id).then((response) => {
-      setLectureInfo(response);
-    });
-    getLectureSummary(params.id).then((response) => {
-      setLectureSummary(response);
-    });
-    getLectureEval(params.id).then((response) => {
-      setLectureEval(response);
-    });
-  }, [params.id]);
+    if (reloading) {
+      getLectureInformation(params.id).then((response) => {
+        setLectureInfo(response);
+      });
+      getLectureSummary(params.id).then((response) => {
+        setLectureSummary(response);
+      });
+      getLectureEval(params.id).then((response) => {
+        setLectureEval(response);
+      });
+      setReloading(false);
+    }
+  }, [params.id, reloading]);
 
   return (
     <div className="Lecture-wrapper">
@@ -70,9 +89,25 @@ const LectureView = () => {
             <ul className="LectureView__evaluation-list">
               {lectureEval.map((item) => {
                 return (
-                  <li key={item.id}>
+                  <li key={item.id} className="LectureView__evaluation-item">
+                    <div className="buttons">
+                      <button
+                        className="recommand"
+                        onClick={() => {
+                          recommendEval(item.id);
+                        }}
+                      >
+                        추천
+                      </button>
+                      <button className="report">신고</button>
+                    </div>
                     <p>{item.rating}</p>
-                    <p>{item.semester}</p>
+                    <p>
+                      {item.semester}
+                      {item.num_of_likes > 0 ? (
+                        <div className="likes">{item.num_of_likes}</div>
+                      ) : null}
+                    </p>
                     <p>{item.content}</p>
                   </li>
                 );
