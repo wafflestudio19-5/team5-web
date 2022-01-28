@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { EvalType, myLectureType } from "../../../interface/interface";
 import { getMyLecture, getRecentLecture } from "../../../API/lectureAPI";
 import { Link, useHistory } from "react-router-dom";
+import { generateStar } from "../../../function/star";
 
 const LectureList = () => {
   const history = useHistory();
@@ -85,7 +86,7 @@ const LectureList = () => {
               }}
             >
               <p className="title">{lecture.course}</p>
-              <p className="rating">{lecture.rating}</p>
+              <div className="star">{generateStar(lecture.rating)}</div>
               <p className="semester">{lecture.semester}</p>
               <p>{lecture.content}</p>
             </li>

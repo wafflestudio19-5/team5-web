@@ -21,6 +21,7 @@ import {
 } from "../../../../interface/interface";
 import { toastErrorData } from "../../../../API/errorHandling";
 import { newEvalForm, newTestForm } from "../../../../function/eval";
+import { generateStar } from "../../../../function/star";
 
 interface LectureViewParams {
   id: string;
@@ -163,7 +164,12 @@ const LectureView = () => {
                 <>
                   <div className="LectureView__evaluation-summary">
                     <p className="mini-title">강의평</p>
-                    <p>평점: {lectureSummary.rating}</p>
+                    <div>
+                      <div className="star">
+                        {generateStar(lectureSummary.rating)}
+                      </div>
+                      <span className="rating">{lectureSummary.rating}</span>
+                    </div>
                     <div className="labels">
                       <p>과제</p>
                       <p>조모임</p>
@@ -197,8 +203,10 @@ const LectureView = () => {
                             </button>
                             <button className="report">신고</button>
                           </div>
-                          <p>{item.rating}</p>
-                          <p>
+                          <div className="star">
+                            {generateStar(item.rating)}
+                          </div>
+                          <p className="semester">
                             {item.semester}
                             {item.num_of_likes > 0 ? (
                               <div className="likes">{item.num_of_likes}</div>

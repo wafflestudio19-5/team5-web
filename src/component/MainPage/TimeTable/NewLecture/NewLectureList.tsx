@@ -8,6 +8,7 @@ import {
   convertLocationToString,
   convertTimeToString,
 } from "../../../../function/lecture";
+import { generateStar } from "../../../../function/star";
 
 const emptyTimeTableSearchQuery = {
   semester: "",
@@ -150,8 +151,8 @@ const NewLecture = ({
               <p>{item.laboratory}</p>
               <p>{convertTimeToString(item.lecture_time)}</p>
               <p>{convertLocationToString(item.lecture_time)}</p>
-              <p>{item.course.rating}</p>
-              <p>담은인원</p>
+              {generateStar(item.course.rating)}
+              <p>{item.cart}</p>
               <p>{item.quota}</p>
               <p>{item.remark}</p>
             </li>

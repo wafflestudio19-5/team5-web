@@ -1,6 +1,6 @@
 @mixin searchItemGrid{
   display:grid;
-  grid-template-columns: 1.2fr 1fr 2fr 1.2fr 3fr 5fr 2fr 1fr 1fr 1fr 5fr 2fr 2fr 2fr 1.5fr 4fr ;
+  grid-template-columns: 1.2fr 1fr 2fr 1.2fr 3fr 5fr 2fr 1fr 1fr 1fr 5fr 2.5fr 2fr 2fr 1.5fr 4fr ;
   padding-left:8px;
   p{
     margin:0;
@@ -192,6 +192,7 @@
     .NewLecture__search-list-label{
       @include searchItemGrid;
       height:auto;
+      margin-right:15px;
     }
   }
   .NewLecture__search-list{
