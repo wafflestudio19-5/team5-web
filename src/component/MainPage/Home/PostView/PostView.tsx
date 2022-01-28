@@ -44,6 +44,7 @@ const PostView = () => {
     is_anonymous: false,
     is_question: false,
     created_at: "",
+    thumbnail_picture: "",
   });
 
   const [editPost, setEditPost] = useState<boolean>(false);
@@ -154,7 +155,12 @@ const PostView = () => {
       <p className={"large"}>{postDetail.content}</p>
       <div id={"images"}>
         {postDetail.images.map((item, index) => (
-          <img className={"image"} key={index} src={item.image} />
+          <img
+            className={"image"}
+            key={index}
+            src={item.image}
+            alt={"attachedImg"}
+          />
         ))}
       </div>
 

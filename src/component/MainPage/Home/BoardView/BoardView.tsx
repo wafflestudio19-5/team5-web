@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostAPI } from "../../../../API/postAPI";
-import { postItemType, postListType } from "../../../../interface/interface";
+import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 import { time } from "../../../../function/timeCal";
 
@@ -81,34 +81,63 @@ const BoardView = () => {
                 <Link to={`/${params.boardId}/${item.id}`}>
                   {postList.title_exist ? (
                     <div className={"wrapper"}>
-                      <h2 className={"medium"}>{item.title}</h2>
-                      <p className={"small"}>{item.content}</p>
-                      <div className={"small info"}>
-                        <time>{time(item.created_at)}</time>
-                        <div className={"writer"}>{item.writer}</div>
+                      <div className={"majorContents"}>
+                        <h2 className={"medium"}>{item.title}</h2>
+                        <p className={"small"}>{item.content}</p>
+                        <div className={"small info"}>
+                          <time>{time(item.created_at)}</time>
+                          <div className={"writer"}>{item.writer}</div>
+                        </div>
+                      </div>
+                      <div className={"subContents"}>
+                        <ul className="status">
+                          {item.images.length !== 0 && (
+                            <li className={"attach_active"}>
+                              {item.images.length}
+                            </li>
+                          )}
+                          <li className={"vote_active"}>{item.num_of_likes}</li>
+                          <li className={"comment_active"}>
+                            {item.num_of_comments}
+                          </li>
+                        </ul>
+                        {item.thumbnail_picture && (
+                          <img
+                            className={"thumnailPic"}
+                            src={item.thumbnail_picture}
+                          />
+                        )}
                       </div>
                     </div>
                   ) : (
                     <div className={"wrapper"}>
-                      <h3 className={"medium"}>{item.writer}</h3>
-                      <h2 className={"medium_bold"}>{item.title}</h2>
-                      <p className={"medium"}>{item.content}</p>
-                      <p className={"small"}>{item.board.title}</p>
-                      <ul className="status">
-                        <li className={"vote_active"}>{item.num_of_likes}</li>
-                        <li className={"comment_active"}>
-                          {item.num_of_comments}
-                        </li>
-                      </ul>
+                      <div className={"majorContents"}>
+                        <h3 className={"medium"}>{item.writer}</h3>
+                        <h2 className={"medium_bold"}>{item.title}</h2>
+                        <p className={"medium"}>{item.content}</p>
+                        <p className={"small"}>{item.board.title}</p>
+                      </div>
+                      <div className={"subContents"}>
+                        <ul className="status">
+                          {item.images.length !== 0 && (
+                            <li className={"attach_active"}>
+                              {item.images.length}
+                            </li>
+                          )}
+                          <li className={"vote_active"}>{item.num_of_likes}</li>
+                          <li className={"comment_active"}>
+                            {item.num_of_comments}
+                          </li>
+                        </ul>
+                        {item.thumbnail_picture && (
+                          <img
+                            className={"thumnailPic"}
+                            src={item.thumbnail_picture}
+                          />
+                        )}
+                      </div>
                     </div>
                   )}
-                  <ul className="status">
-                    {item.images.length !== 0 && (
-                      <li className={"attach_active"}>{item.images.length}</li>
-                    )}
-                    <li className={"vote_active"}>{item.num_of_likes}</li>
-                    <li className={"comment_active"}>{item.num_of_comments}</li>
-                  </ul>
                 </Link>
               </li>
             ))}

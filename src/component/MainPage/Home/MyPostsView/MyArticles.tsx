@@ -89,7 +89,7 @@ const BoardView = () => {
           <div className="BoardView__bottomBar">
             {postList.previous && (
               <button
-                className="BoardView__previous"
+                className="BoardView__next"
                 onClick={() => {
                   history.push(`/my${params.myMenu}/p/${pageNum - 1}`);
                   setPageNum(pageNum - 1);

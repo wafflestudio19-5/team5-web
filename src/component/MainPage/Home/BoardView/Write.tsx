@@ -157,7 +157,14 @@ const Write = ({ boardId, setReloading, openWrite, postList }: WriteParams) => {
       {fileImage[0] && (
         <div className={"thumnails"}>
           {imageUrl.map((item, index) => {
-            return <img key={`${index}`} className={"thumnail"} src={item} />;
+            return (
+              <img
+                key={`${index}`}
+                className={"thumnail"}
+                src={item}
+                alt={"attachedImg"}
+              />
+            );
           })}
           <div className={"addNew"} onClick={handleFileButtonClick} />
         </div>

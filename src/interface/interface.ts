@@ -69,6 +69,7 @@ export interface postItemType {
   is_question: boolean;
   is_mine: boolean;
   created_at: string;
+  thumbnail_picture: string;
 }
 
 interface imagesItem {
