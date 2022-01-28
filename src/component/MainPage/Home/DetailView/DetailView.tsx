@@ -4,48 +4,43 @@ import { getBoardDetailDummy } from "../../../../dummy/get-dummy";
 import PostView from "../PostView/PostView";
 import BoardView from "../BoardView/BoardView";
 import RightBar from "../TotalView/RightBar";
+import { getBoardAPI } from "../../../../API/boardAPI";
 
 interface BoardParams {
   boardId: string;
   postId: string;
 }
 
-interface boardDetailDummy {
-  id: string;
-  name: string;
-  data: boardDetailDummyItem[];
-}
-
-interface boardDetailDummyItem {
-  id: string;
-  writer: string;
+interface BoardData {
+  id: number;
   title: string;
-  content: string;
+  description: string;
 }
 
 const DetailView = () => {
-  const [boardDetail, setBoardDetail] = useState<boardDetailDummy>({
-    id: "",
-    name: "",
-    data: [],
+  const [boardDetail, setBoardDetail] = useState<BoardData>({
+    id: 0,
+    title: "",
+    description: "",
   });
 
   const params: BoardParams = useParams();
 
   useEffect(() => {
-    const data = getBoardDetailDummy(params.boardId);
-    console.log(data);
-    if (data) {
-      setBoardDetail(data);
-    }
-  }, [setBoardDetail, params.boardId]);
+    getBoardAPI().then((response) => {
+      const boardDetail = response.find(
+        (board: any) => board.id === Number(params.boardId)
+      );
+      setBoardDetail(boardDetail);
+    });
+  }, [params.boardId]);
 
   return (
     <>
       <div className="BoardView">
         <div id="container">
           <div className="BoardView__main">
-            <div className="BoardView__title">{boardDetail.name}</div>
+            <div className="BoardView__title">{boardDetail.title}</div>
             <Switch>
               <Route exact path={`/:boardId`} component={BoardView} />
               <Route exact path={`/:boardId/p/:pageId`} component={BoardView} />
