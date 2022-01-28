@@ -163,7 +163,7 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                 {item.is_mine ? (
                   <li onClick={() => deleteComment(item.id)}> 삭제 </li>
                 ) : (
-                  <li>신고</li>
+                  <li>쪽지</li>
                 )}
               </ul>
               <hr />
@@ -208,7 +208,7 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                   {reply.is_mine ? (
                     <li onClick={() => deleteComment(reply.id)}> 삭제 </li>
                   ) : (
-                    <li>신고</li>
+                    <li>쪽지</li>
                   )}
                 </ul>
                 <hr />

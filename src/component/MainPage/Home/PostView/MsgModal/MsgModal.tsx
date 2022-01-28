@@ -1,42 +1,65 @@
 import { useState } from "react";
+import { postMessage } from "../../../../../API/messageAPI";
+import { MessageType } from "../../../../../interface/interface";
 
 const MsgModal = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isMsgModalOpen, setMsgModalOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [msgType, setMsgType] = useState<MessageType>({
+    started_from: "",
+    id: 0,
+  });
+
+  const sendMessage = () => {
+    const form = new FormData();
+    form.append("content", message);
+    console.log(form);
+    console.log(message);
+    postMessage(msgType.started_from, msgType.id, form).then((res) => {
+      closeModal();
+    });
+  };
+
+  const closeModal = () => {
+    setMsgModalOpen(false);
+    setMessage("");
+  };
 
   return (
-    <div
-      className="TimeTable__modal-wrapper"
-      onClick={() => {
-        setModalOpen(false);
-      }}
-    >
-      {/*<div className="TimeTable__modal-export"></div>*/}
-      <form
-        className="TimeTable__modal settings"
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
-        <div className="modal-buttons">
-          <button
+    <div>
+      {isMsgModalOpen ? (
+        <div className={"Modal_Wrapper"} onClick={() => closeModal()}>
+          <div
+            className={"Modal"}
             onClick={(e) => {
-              e.preventDefault();
+              e.stopPropagation();
             }}
           >
-            삭제
-          </button>
-          <input type="submit" value="설정 저장" />
+            <h3>쪽지 보내기</h3>
+            <p>
+              <textarea
+                name="message"
+                className={"text"}
+                placeholder={"내용을 입력해주세요"}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </p>
+            <button className={"sendButton"} onClick={sendMessage}>
+              전송
+            </button>
+            <div
+              className="close"
+              onClick={() => {
+                closeModal();
+              }}
+            />
+          </div>
         </div>
-        <div
-          className="close"
-          onClick={() => {
-            setModalOpen(false);
-          }}
-        />
-      </form>
+      ) : (
+        <div />
+      )}
     </div>
   );
 };

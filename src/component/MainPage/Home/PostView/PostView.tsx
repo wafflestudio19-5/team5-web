@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { getPostDetailAPI } from "../../../../API/postDetailAPI";
 import Edit from "./Edit";
 import { postDeleteAPI } from "../../../../API/postAPI";
-import { postItemType } from "../../../../interface/interface";
+import { postItemType, MessageType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
 import { toast } from "../../../Toast/ToastManager";
 import { authRequest } from "../../../../API/API";
@@ -14,11 +14,6 @@ import { postMessage } from "../../../../API/messageAPI";
 interface PostViewParams {
   boardId: string;
   postId: string;
-}
-
-interface MessageType {
-  started_from: string;
-  id: number;
 }
 
 const PostView = () => {

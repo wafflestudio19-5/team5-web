@@ -145,6 +145,30 @@ export interface UserPatchType {
   profile_picture: string;
 }
 
+export interface ChatType {
+  id: number;
+  partner: string;
+  updated_at: string;
+  recent_chat: string;
+}
+
+export interface MessageType {
+  started_from: string;
+  id: number;
+}
+
+export interface ChatDetailType {
+  id: number;
+  messages: ChatMessageType[];
+}
+
+export interface ChatMessageType {
+  is_mine: boolean;
+  is_notice: boolean;
+  content: string;
+  created_at: string;
+}
+
 //timetable API
 export interface TimeTableType {
   created_at: string;

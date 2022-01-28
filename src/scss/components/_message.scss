@@ -21,6 +21,50 @@
       top:16px;
       left: 24px;
     }
+    .item{
+      display: block;
+      color: #666;
+      text-decoration: none;
+      cursor: pointer;
+      width:310px;
+      height: 50px;
+      padding: 12px 16px;
+      time{
+        float: right;
+        margin-left: 8px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #a6a6a6;
+      }
+      h3{
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+      }
+    }
+
+    .item_active{
+      display: block;
+      text-decoration: none;
+      cursor: pointer;
+      width:310px;
+      height: 50px;
+      padding: 12px 16px;
+      background-color: $keyColor;
+      color:white;
+      h3{
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+      }
+      time{
+        float: right;
+        margin-left: 8px;
+        line-height: 20px;
+        font-size: 12px;
+        color:white;
+      }
+    }
   }
 
   .Message__Detail{
@@ -30,10 +74,42 @@
     height: 840px;
     padding: 60px 0 12px 0;
     .title{
-      display: flex;
       position: absolute;
       left: 24px;
       top:16px;
+      h2{
+        margin-top: 0;
+      }
+    }
+
+    .Message__Detail__Item{
+
+      padding: 12px 8px;
+      margin: 0 8px;
+      border-bottom: 1px solid #EDEDED;
+
+
+      time{
+        float: right;
+        margin-left: 8px;
+        line-height: 20px;
+        font-size: 12px;
+        color: #a6a6a6;
+      }
+      .sent{
+        color: #ffcc1c;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+
+      }
+      .received{
+        color: #0ca5af;
+        font-weight: bold;
+        font-size: 14px;
+        margin: 0;
+      }
+
     }
 
   }
