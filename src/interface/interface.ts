@@ -1,4 +1,6 @@
 //Login API
+import exp from "constants";
+
 export interface TokenType {
   access: string | null;
   refresh: string | null;
@@ -26,6 +28,10 @@ export interface RegisterInputType {
   nickname: string;
   univ: string;
   admission_year: string;
+}
+
+export interface EmailVerifyType {
+  email: string;
 }
 
 export interface SocialRegisterInputType {
@@ -143,6 +149,30 @@ export interface UserPatchType {
   new_password2: string;
   email: string;
   profile_picture: string;
+}
+
+export interface ChatType {
+  id: number;
+  partner: string;
+  updated_at: string;
+  recent_chat: string;
+}
+
+export interface MessageType {
+  started_from: string;
+  id: number;
+}
+
+export interface ChatDetailType {
+  id: number;
+  messages: ChatMessageType[];
+}
+
+export interface ChatMessageType {
+  is_mine: boolean;
+  is_notice: boolean;
+  content: string;
+  created_at: string;
 }
 
 //timetable API

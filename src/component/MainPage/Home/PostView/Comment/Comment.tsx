@@ -9,6 +9,7 @@ import {
   CommentItemType,
   CommentInputType,
   postItemType,
+  MessageType,
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 import { time } from "../../../../../function/timeCal";
@@ -18,9 +19,18 @@ interface commentProps {
   setPostDetail: (
     value: postItemType | ((prevState: postItemType) => postItemType)
   ) => void;
+  setMsgModalOpen: (value: boolean | ((prevState: boolean) => boolean)) => void;
+  setMsgType: (
+    value: MessageType | ((prevState: MessageType) => MessageType)
+  ) => void;
 }
 
-const Comment = ({ postDetail, setPostDetail }: commentProps) => {
+const Comment = ({
+  postDetail,
+  setPostDetail,
+  setMsgModalOpen,
+  setMsgType,
+}: commentProps) => {
   interface PostViewParams {
     boardId: string;
     postId: string;
@@ -163,7 +173,17 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                 {item.is_mine ? (
                   <li onClick={() => deleteComment(item.id)}> 삭제 </li>
                 ) : (
-                  <li>신고</li>
+                  <li
+                    onClick={() => {
+                      setMsgModalOpen(true);
+                      setMsgType({
+                        id: item.id,
+                        started_from: "comment",
+                      });
+                    }}
+                  >
+                    쪽지
+                  </li>
                 )}
               </ul>
               <hr />
@@ -208,7 +228,17 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
                   {reply.is_mine ? (
                     <li onClick={() => deleteComment(reply.id)}> 삭제 </li>
                   ) : (
-                    <li>신고</li>
+                    <li
+                      onClick={() => {
+                        setMsgModalOpen(true);
+                        setMsgType({
+                          id: reply.id,
+                          started_from: "comment",
+                        });
+                      }}
+                    >
+                      쪽지
+                    </li>
                   )}
                 </ul>
                 <hr />
