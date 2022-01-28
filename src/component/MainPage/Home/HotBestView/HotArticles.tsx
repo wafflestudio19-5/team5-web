@@ -62,41 +62,51 @@ const HotArticles = () => {
                 <Link to={`/${params.boardId}/${item.id}`}>
                   {postList.title_exist ? (
                     <div className={"wrapper"}>
-                      <img
-                        src={item.profile_picture}
-                        alt={"프로필 사진"}
-                        className={"BoardView__profile__img"}
-                      />
-                      <h2 className={"medium"}>{item.title}</h2>
-                      <p className={"small"}>{item.content}</p>
-                      <div className={"small info"}>
-                        <time>{time(item.created_at)}</time>
-                        <div className={"writer"}>{item.writer}</div>
+                      <div className={"majorContents"}>
+                        <img
+                          src={item.profile_picture}
+                          alt={"프로필 사진"}
+                          className={"BoardView__profile__img"}
+                        />
+                        <h2 className={"medium"}>{item.title}</h2>
+                        <p className={"small"}>{item.content}</p>
+                        <div className={"small info"}>
+                          <time>{time(item.created_at)}</time>
+                          <div className={"writer"}>{item.writer}</div>
+                        </div>
+                      </div>
+                      <div className={"subContents"}>
+                        <ul className="status">
+                          <li className={"vote_active"}>{item.num_of_likes}</li>
+                          <li className={"comment_active"}>
+                            {item.num_of_comments}
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   ) : (
                     <div className={"wrapper"}>
-                      <img
-                        src={item.profile_picture}
-                        alt={"프로필 사진"}
-                        className={"BoardView__profile__img"}
-                      />
-                      <h3 className={"medium"}>{item.writer}</h3>
-                      <h2 className={"medium_bold"}>{item.title}</h2>
-                      <p className={"medium"}>{item.content}</p>
-                      <p className={"small"}>{item.board.title}</p>
-                      <ul className="status">
-                        <li className={"vote_active"}>{item.num_of_likes}</li>
-                        <li className={"comment_active"}>
-                          {item.num_of_comments}
-                        </li>
-                      </ul>
+                      <div className={"majorContents"}>
+                        <img
+                          src={item.profile_picture}
+                          alt={"프로필 사진"}
+                          className={"BoardView__profile__img"}
+                        />
+                        <h3 className={"medium"}>{item.writer}</h3>
+                        <h2 className={"medium_bold"}>{item.title}</h2>
+                        <p className={"medium"}>{item.content}</p>
+                        <p className={"small"}>{item.board.title}</p>
+                      </div>
+                      <div className={"subContents"}>
+                        <ul className="status">
+                          <li className={"vote_active"}>{item.num_of_likes}</li>
+                          <li className={"comment_active"}>
+                            {item.num_of_comments}
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   )}
-                  <ul className="status">
-                    <li className={"vote_active"}>{item.num_of_likes}</li>
-                    <li className={"comment_active"}>{item.num_of_comments}</li>
-                  </ul>
                 </Link>
               </li>
             ))}
