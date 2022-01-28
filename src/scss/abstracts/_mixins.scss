@@ -179,6 +179,10 @@
       color: $comment_activeColor;
       background-image: url(https://everytime.kr/images/new/container.articles.comment.png);
     }
+  .attach_active{
+    color: $timeFontColor;
+    background-image: url(https://everytime.kr/images/new/container.articles.attach.png);
+  }
 }
 
 @mixin timetable-card{

@@ -71,6 +71,11 @@ const BoardView = () => {
                     <p className={"medium"}>{item.content}</p>
                     <p className={"small"}>{item.board.title}</p>
                     <ul className="status">
+                      {item.images.length !== 0 && (
+                        <li className={"attach_active"}>
+                          {item.images.length}
+                        </li>
+                      )}
                       <li className={"vote_active"}>{item.num_of_likes}</li>
                       <li className={"comment_active"}>
                         {item.num_of_comments}

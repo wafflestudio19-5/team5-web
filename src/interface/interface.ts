@@ -64,11 +64,15 @@ export interface postItemType {
   num_of_scrap: number;
   num_of_comments: number;
   tags: any;
-  images: string;
+  images: Array<imagesItem>;
   is_anonymous: boolean;
   is_question: boolean;
   is_mine: boolean;
   created_at: string;
+}
+
+interface imagesItem {
+  image: string;
 }
 
 export interface postListType {
