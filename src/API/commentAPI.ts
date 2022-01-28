@@ -15,8 +15,7 @@ export const postCommentAPI = async (postID: number, input: FormData) => {
     const response = await authRequest.post(`/post/${postID}/comment/`, input);
     return response.data;
   } catch (e) {
-    console.log("댓글 달기 실패!"); //테스트용
-    return e;
+    return Promise.reject(e);
   }
 };
 
@@ -25,8 +24,7 @@ export const postCommentVoteAPI = async (commentID: number) => {
     const response = await authRequest.post(`/comment/${commentID}/like/`);
     return response.data;
   } catch (e) {
-    console.log("댓글 좋아요 실패!");
-    return e;
+    return Promise.reject(e);
   }
 };
 
@@ -37,7 +35,6 @@ export const deleteCommentAPI = async (postID: number, commentID: number) => {
     );
     return response.data;
   } catch (e) {
-    console.log("댓글 삭제 실패!");
-    return e;
+    return Promise.reject(e);
   }
 };

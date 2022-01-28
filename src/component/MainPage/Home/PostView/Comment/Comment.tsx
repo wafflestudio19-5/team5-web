@@ -13,6 +13,7 @@ import {
 } from "../../../../../interface/interface";
 import { useParams } from "react-router-dom";
 import { time } from "../../../../../function/timeCal";
+import { toastErrorData } from "../../../../../API/errorHandling";
 
 interface commentProps {
   postDetail: postItemType;
@@ -104,17 +105,17 @@ const Comment = ({
     }
 
     if (window.confirm("이 댓글에 공감하십니까?")) {
-      postCommentVoteAPI(comment.id).then((response) => {
-        console.log(response);
-        getComment();
-        if (!response.is_success) {
-          if (response.error_code === 1) {
-            window.alert("이미 공감한 댓글입니다.");
-          } else {
-            window.alert("오래된 댓글은 공감할 수 없습니다.");
+      postCommentVoteAPI(comment.id).then(
+        (response) => {
+          console.log(response);
+          getComment();
+        },
+        (error) => {
+          if (error.response) {
+            toastErrorData(error.response.data);
           }
         }
-      });
+      );
     } else {
       return;
     }
@@ -122,12 +123,19 @@ const Comment = ({
 
   const deleteComment = (commentID: number) => {
     if (window.confirm("이 댓글을 삭제하시겠습니까?")) {
-      deleteCommentAPI(parseInt(path.postId), commentID).then((response) => {
-        console.log(response);
-        if (response.is_success) {
-          setCommentList(response.comments);
+      deleteCommentAPI(parseInt(path.postId), commentID).then(
+        (response) => {
+          console.log(response);
+          if (response.is_success) {
+            setCommentList(response.comments);
+          }
+        },
+        (error) => {
+          if (error.response) {
+            toastErrorData(error.response.data);
+          }
         }
-      });
+      );
     }
   };
 

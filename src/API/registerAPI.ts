@@ -1,5 +1,4 @@
 import {
-  EmailVerifyType,
   RegisterInputType,
   SocialRegisterInputType,
 } from "../interface/interface";
@@ -23,9 +22,9 @@ export const postSocialSignupAPI = async (input: SocialRegisterInputType) => {
   }
 };
 
-export const postSchoolMainAPI = async (input: EmailVerifyType) => {
+export const postSchoolMailAPI = async (input: FormData) => {
   try {
-    const response = await authRequest.post("/user/verify/send", input);
+    const response = await authRequest.post("/user/verify/send/", input);
     return response.data;
   } catch (e) {
     return Promise.reject(e);

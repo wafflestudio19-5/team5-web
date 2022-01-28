@@ -1,15 +1,27 @@
 import { useEffect, useState } from "react";
 import { getMyProfileAPI, patchMyProfileAPI } from "../../../API/userAPI";
+import { toastErrorData } from "../../../API/errorHandling";
+import { useHistory } from "react-router-dom";
 
 const Email = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const history = useHistory();
   const changeEmail = () => {
     const form = new FormData();
     form.append("email", email);
     form.append("origin_password", password);
-    patchMyProfileAPI(form).then((res) => {});
+    patchMyProfileAPI(form).then(
+      (res) => {
+        window.alert("이메일이 변경되었습니다.");
+        history.push("/");
+      },
+      (error) => {
+        if (error.response) {
+          toastErrorData(error.response.data);
+        }
+      }
+    );
   };
   useEffect(() => {
     getMyProfileAPI().then((res) => {
