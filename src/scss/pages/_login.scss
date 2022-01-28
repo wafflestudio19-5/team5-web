@@ -7,12 +7,19 @@
   align-items: center;
 
   .LoginBox{
-    width: 360px;
+    width: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     .LoginLogo{
       width: 360px;
       height: 60px;
       background-image: url(https://everytime.kr/images/index.login.logo.png);
+    }
+
+    form{
+      width: 360px;
     }
 
     input{
@@ -37,6 +44,7 @@
     }
 
     .LoginCheck{
+      width: 360px;
       margin-top: 20px;
       display: flex;
       justify-content: space-between;
@@ -93,13 +101,13 @@
 
   .Login__social{
     display:flex;
-    width:360px;
+
     margin-top:20px;
-    button{
-      width:80px;
+    .Login__kakao{
+      cursor: pointer;
+      margin-right: 10px;
+      width:150px;
       height:40px;
-      color:$fontColor;
-      border:1px solid black;
       background: none;
     }
   }
