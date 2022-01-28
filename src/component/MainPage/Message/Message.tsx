@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import { getMessageDetail, getMessageList } from "../../../API/messageAPI";
-import { ChatDetailType, ChatType } from "../../../interface/interface";
+import {
+  getMessageDetail,
+  getMessageList,
+  postMessage,
+} from "../../../API/messageAPI";
+import {
+  ChatDetailType,
+  ChatType,
+  MessageType,
+} from "../../../interface/interface";
 import { time } from "../../../function/timeCal";
+import MsgModal from "../Home/PostView/MsgModal/MsgModal";
+import { useHistory } from "react-router-dom";
 
 const Message = () => {
   const [messageList, setMessageList] = useState<ChatType[]>([]);
@@ -9,6 +19,23 @@ const Message = () => {
     undefined
   );
   const [chatDetail, setChatDetail] = useState<ChatDetailType | undefined>();
+  const [isMsgModalOpen, setMsgModalOpen] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
+  const [reloading, setReloading] = useState<boolean>(true);
+  const sendMessage = () => {
+    const form = new FormData();
+    form.append("content", message);
+    console.log(form);
+    console.log(message);
+    postMessage("id", selectedChat?.id, form).then((res) => {
+      closeModal();
+    });
+  };
+
+  const closeModal = () => {
+    setMsgModalOpen(false);
+    setMessage("");
+  };
 
   const selectChat = (chat: ChatType) => {
     if (chat === selectedChat) {
@@ -31,10 +58,43 @@ const Message = () => {
 
   return (
     <div className={"Message__Main"}>
+      {isMsgModalOpen ? (
+        <div className={"Modal_Wrapper"} onClick={() => closeModal()}>
+          <div
+            className={"Modal"}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <h3>쪽지 보내기</h3>
+            <p>
+              <textarea
+                name="message"
+                className={"text"}
+                placeholder={"내용을 입력해주세요"}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              />
+            </p>
+            <button className={"sendButton"} onClick={sendMessage}>
+              전송
+            </button>
+            <div
+              className="close"
+              onClick={() => {
+                closeModal();
+              }}
+            />
+          </div>
+        </div>
+      ) : (
+        <div />
+      )}
       <section className={"Message__List"}>
         <h2>쪽지함</h2>
         {messageList.length === 0 ? (
-          <div>쪽지가 없습니다. </div>
+          <div className={"noMessage"}>쪽지가 없습니다. </div>
         ) : (
           <div>
             {messageList.map((item) => (
@@ -54,6 +114,7 @@ const Message = () => {
       </section>
       <section className={"Message__Detail"}>
         <div className={"title"}>
+          <a className={"sendButton"} onClick={() => setMsgModalOpen(true)} />
           <h2>{selectedChat?.partner}</h2>
         </div>
         <div>
@@ -63,6 +124,8 @@ const Message = () => {
               <time>{time(message.created_at)}</time>
               {message.is_mine ? (
                 <h3 className={"sent"}>보낸 쪽지</h3>
+              ) : message.is_notice ? (
+                <h3 className={"notice"}>안내</h3>
               ) : (
                 <h3 className={"received"}>받은 쪽지</h3>
               )}

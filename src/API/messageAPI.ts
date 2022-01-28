@@ -12,15 +12,20 @@ export const getMessageList = async () => {
 
 export const postMessage = async (
   msgType: string,
-  id: number,
+  id: number | undefined,
   input: FormData
 ) => {
   try {
-    const response = await authRequest.post(
-      `chat/?channel=${msgType}&${msgType}_id=${id}`,
-      input
-    );
-    return response.data;
+    if (msgType === "id") {
+      const response = await authRequest.post(`chat/${id}/`, input);
+      return response.data;
+    } else {
+      const response = await authRequest.post(
+        `chat/?channel=${msgType}&${msgType}_id=${id}`,
+        input
+      );
+      return response.data;
+    }
   } catch (e) {
     console.log(e);
   }

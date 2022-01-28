@@ -250,7 +250,12 @@ const PostView = () => {
             스크랩
           </span>
         </div>
-        <Comment setPostDetail={setPostDetail} postDetail={postDetail} />
+        <Comment
+          setPostDetail={setPostDetail}
+          postDetail={postDetail}
+          setMsgModalOpen={setMsgModalOpen}
+          setMsgType={setMsgType}
+        />
         <button className={"post__button goBackList"} onClick={goBack}>
           글 목록
         </button>
