@@ -27,7 +27,6 @@
       }
     }
 
-
     ul{
       display: flex;
       margin: 0;
@@ -55,7 +54,6 @@
     li{
       margin-right: 10px;
     }
-
     .scrap_active{
       color: $scrap_color;
       background-image: url(https://everytime.kr/images/new/container.articles.scrap.png);
@@ -97,6 +95,20 @@
   background-image: url(https://everytime.kr/images/new/container.articles.pagination.prev.png);
 }
 
+#images{
+  margin: 0 -15px 0 -15px;
+  padding: 0 10px 10px 15px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  display: flex;
+  box-sizing: border-box;
+  .image{
+    margin-right: 5px ;
+    margin-bottom: 5px ;
+    width: 183px;
+    height: 183px;
+  }
+}
 .Modal_Wrapper{
   position: fixed;
   background: rgba(0,0,0,0.5);

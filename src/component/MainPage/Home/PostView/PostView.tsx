@@ -64,11 +64,12 @@ const PostView = () => {
     num_of_scrap: 0,
     profile_picture: "",
     num_of_comments: 0,
-    images: "",
+    images: [],
     tags: [],
     is_anonymous: false,
     is_question: false,
     created_at: "",
+    thumbnail_picture: "",
   });
 
   const [editPost, setEditPost] = useState<boolean>(false);
@@ -225,6 +226,17 @@ const PostView = () => {
         </div>
         <h2 className={"large"}>{postDetail.title}</h2>
         <p className={"large"}>{postDetail.content}</p>
+        <div id={"images"}>
+          {postDetail.images.map((item, index) => (
+            <img
+              className={"image"}
+              key={index}
+              src={item.image}
+              alt={"attachedImg"}
+            />
+          ))}
+        </div>
+
         {postDetail.is_question && (
           <div className={"question_description_Box"}>
             <p className={"question_description"}>
@@ -237,6 +249,9 @@ const PostView = () => {
           </div>
         )}
         <ul className={"status"}>
+          {postDetail.images.length !== 0 && (
+            <li className={"attach_active"}>{postDetail.images.length}</li>
+          )}
           <li className={"vote_active"}>{postDetail.num_of_likes}</li>
           <li className={"comment_active"}>{postDetail.num_of_comments}</li>
           <li className={"scrap_active"}>{postDetail.num_of_scrap}</li>
@@ -249,16 +264,16 @@ const PostView = () => {
           <span className={"scrap"} onClick={scrapPost}>
             스크랩
           </span>
+          <Comment
+            setPostDetail={setPostDetail}
+            postDetail={postDetail}
+            setMsgModalOpen={setMsgModalOpen}
+            setMsgType={setMsgType}
+          />
+          <button className={"post__button goBackList"} onClick={goBack}>
+            글 목록
+          </button>
         </div>
-        <Comment
-          setPostDetail={setPostDetail}
-          postDetail={postDetail}
-          setMsgModalOpen={setMsgModalOpen}
-          setMsgType={setMsgType}
-        />
-        <button className={"post__button goBackList"} onClick={goBack}>
-          글 목록
-        </button>
       </div>
     </div>
   ) : (

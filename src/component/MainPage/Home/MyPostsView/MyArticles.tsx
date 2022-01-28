@@ -66,21 +66,30 @@ const BoardView = () => {
               <li key={item.id} className="BoardView__item">
                 <Link to={`/${item.board.id}/${item.id}`}>
                   <div className={"wrapper"}>
-                    <img
-                      src={item.profile_picture}
-                      alt={"프로필 사진"}
-                      className={"BoardView__profile__img"}
-                    />
-                    <h3 className={"medium"}>{item.writer}</h3>
-                    <h2 className={"medium_bold"}>{item.title}</h2>
-                    <p className={"medium"}>{item.content}</p>
-                    <p className={"small"}>{item.board.title}</p>
-                    <ul className="status">
-                      <li className={"vote_active"}>{item.num_of_likes}</li>
-                      <li className={"comment_active"}>
-                        {item.num_of_comments}
-                      </li>
-                    </ul>
+                    <div className={"majorContents"}>
+                      <img
+                        src={item.profile_picture}
+                        alt={"프로필 사진"}
+                        className={"BoardView__profile__img"}
+                      />
+                      <h3 className={"medium"}>{item.writer}</h3>
+                      <h2 className={"medium_bold"}>{item.title}</h2>
+                      <p className={"medium"}>{item.content}</p>
+                      <p className={"small"}>{item.board.title}</p>
+                    </div>
+                    <div className={"subContents"}>
+                      <ul className="status">
+                        {item.images.length !== 0 && (
+                          <li className={"attach_active"}>
+                            {item.images.length}
+                          </li>
+                        )}
+                        <li className={"vote_active"}>{item.num_of_likes}</li>
+                        <li className={"comment_active"}>
+                          {item.num_of_comments}
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </Link>
               </li>
@@ -89,7 +98,7 @@ const BoardView = () => {
           <div className="BoardView__bottomBar">
             {postList.previous && (
               <button
-                className="BoardView__previous"
+                className="BoardView__next"
                 onClick={() => {
                   history.push(`/my${params.myMenu}/p/${pageNum - 1}`);
                   setPageNum(pageNum - 1);

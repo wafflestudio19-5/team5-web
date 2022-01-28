@@ -1,8 +1,8 @@
 import { Link, useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { liveTopItemType, postListType } from "../../../../interface/interface";
-import { getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
-import CardTypeA from "./Card/CardTypeA";
+import { hotItemType, liveTopItemType } from "../../../../interface/interface";
+import { getHotAPI, getLiveTopAPI, getPostAPI } from "../../../../API/postAPI";
+import { time } from "../../../../function/timeCal";
 
 interface liveTopItems extends Array<liveTopItemType> {}
 
@@ -10,19 +10,13 @@ const RightBar = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState("");
   const [liveTop, setLiveTop] = useState<liveTopItems>([]);
-  const [hotPreView, setHotPreView] = useState<postListType>({
-    count: 0,
-    next: null,
-    previous: null,
-    results: [],
-    title_exist: true,
-  });
+  const [hotPreView, setHotPreView] = useState<Array<hotItemType>>([]);
   const search = (input: string) => {
     history.push(`/s/${input}`);
   };
   useEffect(() => {
     getLiveTopAPI().then((res) => setLiveTop(res));
-    getPostAPI("hot", 0, 4).then((res) => setHotPreView(res));
+    getHotAPI().then((res) => setHotPreView(res));
   }, []);
 
   return (
@@ -66,7 +60,21 @@ const RightBar = () => {
         </ul>
       </div>
 
-      <CardTypeA item={{ id: "hot", title: "HOT 게시물" }} />
+      <div className="cardA">
+        <h3 key="label" className="board-name">
+          <Link to={`/hot`}>HOT 게시물</Link>
+        </h3>
+        <ul className="board">
+          {hotPreView.map((postItem) => (
+            <Link to={`/${postItem.board.id}/${postItem.id}`} key={postItem.id}>
+              <li key={postItem.id} className="board-item">
+                <p>{postItem.title_content}</p>
+                <time>{time(postItem.created_at)}</time>
+              </li>
+            </Link>
+          ))}
+        </ul>
+      </div>
 
       <div className={"cardB"}>
         <h3 className={"board-name"}>

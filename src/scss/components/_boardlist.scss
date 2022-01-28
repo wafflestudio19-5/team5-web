@@ -3,6 +3,10 @@
   list-style: none;
   padding: 0px;
 
+  .BoardView__noItem{
+    width: 100%;
+  }
+
   li:last-child{
     border-bottom: 1px solid $cardBorderColor;
   }
@@ -13,6 +17,8 @@
     border-left: 1px solid $cardBorderColor;
     padding: 15px;
     box-sizing: border-box;
+    display: inline-block;
+
     .small{
       margin: 0 0 5px 0;
       //display: inline-block;
@@ -21,6 +27,7 @@
     &:hover{
       background-color: $cardColor;
     }
+
     .wrapper{
       width: 748px;
     }
@@ -33,6 +40,35 @@
     }
     &.BoardView__item{
       position: relative;
+      .wrapper{
+        width: 748px;
+        display: flex;
+        justify-content: space-between;
+
+        .majorContents{
+          min-width: 500px;
+        }
+
+        .subContents{
+          display: flex;
+          box-sizing: border-box;
+          .status{
+            display: flex;
+            li{
+              margin-top: 50px;
+            }
+            box-sizing: border-box;
+            @include stats-default;
+          }
+
+        }
+        .thumnailPic{
+          float: right;
+          margin: -7px -5px -5px 15px;
+          width: 80px;
+          height: 80px;
+        }
+      }
 
       .writer{
         display: inline-block;
@@ -43,15 +79,22 @@
         color: inherit;
         text-decoration: none;
       }
-      .status{
-        box-sizing: border-box;
-        @include stats-default;
-        float: right;
-        position: absolute;
-        right:0;
-        bottom:0;
-      }
+
     }
   }
 
+}
+.BoardView__bottomBar{
+  .BoardView__next{
+    height: 35px;
+    line-height: 35px;
+    border: 1px solid $keyColor;
+    border-radius: 3px;
+    color: $keyColor;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: white;
+    cursor: pointer;
+    margin-right: 10px;
+  }
 }

@@ -42,20 +42,28 @@ export interface SocialRegisterInputType {
   admission_year: string;
   univ: string;
 }
-
-//Board API
-export interface boardItemType {
-  anonym_enabled: boolean;
-  board_type: number;
-  created_at: string;
-  description: string;
+export interface mainPostItemType {
   id: number;
-  is_market: boolean;
-  manager: null | string;
-  notice_enabled: boolean;
-  question_enabled: boolean;
   title: string;
-  title_enabled: boolean;
+  posts: Array<mainNoTitleBoardType | mainTitleBoardType>;
+}
+
+export interface mainTitleBoardType {
+  id: number;
+  created_at: string;
+  title: string;
+  content?: undefined;
+  num_of_likes?: undefined;
+  num_of_comments?: undefined;
+}
+
+export interface mainNoTitleBoardType {
+  id: number;
+  created_at: string;
+  title?: undefined;
+  content: string;
+  num_of_likes: number;
+  num_of_comments: number;
 }
 
 //Post API
@@ -70,12 +78,17 @@ export interface postItemType {
   num_of_scrap: number;
   num_of_comments: number;
   tags: any;
+  images: Array<imagesItem>;
   profile_picture: string;
-  images: string;
   is_anonymous: boolean;
   is_question: boolean;
   is_mine: boolean;
   created_at: string;
+  thumbnail_picture: string;
+}
+
+interface imagesItem {
+  image: string;
 }
 
 export interface postListType {
@@ -84,6 +97,16 @@ export interface postListType {
   previous: string | null;
   results: postItemType[] | [];
   title_exist: boolean;
+}
+
+export interface hotItemType {
+  id: number;
+  board: {
+    id: number;
+    title: string;
+  };
+  title_content: string;
+  created_at: string;
 }
 
 export interface postInputType {
