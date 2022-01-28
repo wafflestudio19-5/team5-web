@@ -108,6 +108,10 @@
       border: 1px solid $lectureBorderColor;
       border-top:0;
       padding:15px;
+      cursor: pointer;
+      &:hover{
+      background-color: $timetableBackgroundColor;
+      }
       p{
         margin:0;
         font-size:14px;
