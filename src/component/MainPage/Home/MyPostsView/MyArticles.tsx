@@ -66,6 +66,11 @@ const BoardView = () => {
               <li key={item.id} className="BoardView__item">
                 <Link to={`/${item.board.id}/${item.id}`}>
                   <div className={"wrapper"}>
+                    <img
+                      src={item.profile_picture}
+                      alt={"프로필 사진"}
+                      className={"BoardView__profile__img"}
+                    />
                     <h3 className={"medium"}>{item.writer}</h3>
                     <h2 className={"medium_bold"}>{item.title}</h2>
                     <p className={"medium"}>{item.content}</p>

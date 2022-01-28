@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostAPI } from "../../../../API/postAPI";
 import { postItemType, postListType } from "../../../../interface/interface";
-import Write from "./Write";
 import { time } from "../../../../function/timeCal";
 
-const BoardView = () => {
+const HotArticles = () => {
   const params = useParams() as paramsType;
   const history = useHistory();
 
@@ -17,12 +16,6 @@ const BoardView = () => {
     title_exist: true,
   });
   const [pageNum, setPageNum] = useState<number>(1);
-  const [showForm, setShowForm] = useState<boolean>(false);
-  const openWrite = () => setShowForm(!showForm);
-  const [searchValue, setSearchValue] = useState("");
-  const search = (input: string) => {
-    history.push(`/s/${input}`);
-  };
 
   const [reloading, setReloading] = useState<boolean>(true);
 
@@ -38,7 +31,7 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(params.boardId, 10 * (page - 1)).then((response) =>
+    getPostAPI("hot", 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
@@ -56,18 +49,7 @@ const BoardView = () => {
 
   return (
     <>
-      {showForm ? (
-        <Write
-          boardId={Number(params.boardId)}
-          setReloading={setReloading}
-          openWrite={openWrite}
-        />
-      ) : (
-        <button className={"BoardView__writePost"} onClick={openWrite}>
-          새 글을 작성해주세요!
-        </button>
-      )}
-
+      <div className="BoardView__title">HOT 게시판</div>
       {postList.results.length === 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
@@ -80,6 +62,11 @@ const BoardView = () => {
                 <Link to={`/${params.boardId}/${item.id}`}>
                   {postList.title_exist ? (
                     <div className={"wrapper"}>
+                      <img
+                        src={item.profile_picture}
+                        alt={"프로필 사진"}
+                        className={"BoardView__profile__img"}
+                      />
                       <h2 className={"medium"}>{item.title}</h2>
                       <p className={"small"}>{item.content}</p>
                       <div className={"small info"}>
@@ -116,19 +103,6 @@ const BoardView = () => {
           </ul>
 
           <div className="BoardView__bottomBar">
-            <input
-              className={"searchBarMini"}
-              placeholder={"게시판의 글을 검색하세요!"}
-              value={searchValue}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-              }}
-              onKeyPress={(e) => {
-                if (e.key === "Enter") {
-                  search(searchValue);
-                }
-              }}
-            />
             {postList.previous && (
               <button
                 className="BoardView__previous"
@@ -158,4 +132,4 @@ const BoardView = () => {
   );
 };
 
-export default BoardView;
+export default HotArticles;

@@ -24,12 +24,20 @@
     .wrapper{
       width: 748px;
     }
+
+    .BoardView__profile__img{
+      width: 20px;
+      float: left;
+      margin-right: 5px;
+      border-radius: 4px;
+    }
     &.BoardView__item{
       position: relative;
 
       .writer{
         display: inline-block;
         margin-left:10px;
+        color: #292929;
       }
       a{
         color: inherit;

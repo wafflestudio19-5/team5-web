@@ -127,6 +127,11 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
         {commentList.map((item) => (
           <li key={item.id} className={"Comment__item"}>
             <div className={"wrapper"}>
+              <img
+                className={"Comment__Img"}
+                src={item.profile_picture}
+                alt={"프로필 사진"}
+              />
               {item.user_type === "글쓴이" ? (
                 <h2 className={"medium_bold_writer"}>{item.nickname}</h2>
               ) : (
@@ -181,6 +186,11 @@ const Comment = ({ postDetail, setPostDetail }: commentProps) => {
             </div>
             {item.replys.map((reply) => (
               <div key={reply.id} className={"wrapperReply"}>
+                <img
+                  className={"Reply__Img"}
+                  src={reply.profile_picture}
+                  alt={"프로필 사진"}
+                />
                 {reply.user_type === "글쓴이" ? (
                   <h2 className={"medium_bold_writer"}>{reply.nickname}</h2>
                 ) : (
