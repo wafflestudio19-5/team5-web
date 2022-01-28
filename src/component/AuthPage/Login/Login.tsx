@@ -91,15 +91,21 @@ const Login = () => {
           </Link>
         </div>
         <div className="Login__social">
-          <button className="Login__kakao" onClick={getNaverLoginAPI}>
-            네이버
-          </button>
-          <button className="Login__kakao" onClick={getKakaoLoginAPI}>
-            카카오
-          </button>
-          <button className="Login__kakao" onClick={getGoogleLoginAPI}>
-            구글
-          </button>
+          <img
+            className="Login__kakao"
+            src="naver_login.png"
+            onClick={getNaverLoginAPI}
+          />
+          <img
+            className="Login__kakao"
+            src="kakao_login.png"
+            onClick={getKakaoLoginAPI}
+          />
+          <img
+            className="Login__kakao"
+            src="google_login.png"
+            onClick={getGoogleLoginAPI}
+          />
         </div>
       </div>
     </div>

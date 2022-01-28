@@ -1,19 +1,16 @@
 import { Link } from "react-router-dom";
+import { boardListType } from "../../../../interface/interface";
 
-interface boardDummyItem {
-  id: string;
-  name: string;
-  available: boolean;
-}
 interface SubMenuItemProps {
-  key: string;
-  item: boardDummyItem;
+  item: boardListType;
 }
 
 const SubMenuItem: React.FC<SubMenuItemProps> = ({ item }) => {
   return (
     <li>
-      <Link to={`/${item.id}`}>{item.name}</Link>
+      <Link to={`/${item.id}`}>
+        {item.title} : {item.description}
+      </Link>
     </li>
   );
 };
