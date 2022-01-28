@@ -6,7 +6,9 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMyProfileAPI } from "../../../../API/userAPI";
 import { UserType } from "../../../../interface/interface";
-
+import ad_1 from "../../../../image/ad_1.jpg";
+import ad_2 from "../../../../image/ad_2.jpg";
+import ad_3 from "../../../../image/ad_3.jpg";
 const LeftBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -54,9 +56,9 @@ const LeftBar = () => {
           <li id={"my_clip"}>내 스크랩</li>
         </Link>
       </ul>
-      <div className={"ad"}>광고</div>
-      <div className={"ad"}>광고</div>
-      <div className={"ad"}>광고</div>
+      <img className={"ad"} src={ad_1} alt={"광고"} />
+      <img className={"ad"} src={ad_2} alt={"광고"} />
+      <img className={"ad"} src={ad_3} alt={"광고"} />
     </div>
   );
 };
