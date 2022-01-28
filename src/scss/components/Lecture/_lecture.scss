@@ -5,6 +5,15 @@
   justify-content: center;
 }
 
+.LecturePoint-wrapper{
+  width:100%;
+  padding-top:104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 .Lecture{
   width:780px;
   display: flex;
@@ -14,6 +23,50 @@
   .Lecture__my{
     box-sizing: border-box;
     width:100%;
+    border-radius: 12px;
+    border: 1px solid $lectureBorderColor;
+    margin-top:8px;
+    padding:15px;
+    position: relative;
+
+    .Lecture__my-list{
+      appearance: none;
+      list-style: none;
+      padding: 0;
+      li{
+        font-size: 12px;
+        margin-bottom: 10px;
+        .title{
+          margin-right: 15px;
+          font-size: 16px;
+        }
+        cursor: pointer;
+        button{
+          position: absolute;
+          height:25px;
+          right:20px;
+          appearance: none;
+          border:0px;
+          color:white;
+          background-color: $keyColor;
+          border-radius: 15px;
+          cursor: pointer;
+
+        }
+      }
+
+
+    }
+    .Lecture__my-point{
+      position: absolute;
+      top: 20px;
+      right:20px;
+      a{
+        appearance: none;
+        text-decoration: none;
+        color:$keyColor;
+      }
+    }
   }
   form{
     width:100%;
@@ -73,6 +126,76 @@
           margin-bottom: 5px;
         }
       }
+    }
+  }
+}
+
+.LecturePoint{
+  position:relative;
+  width:780px;
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  border: 1px solid $lectureBorderColor;
+  border-radius: 12px;
+  h3{
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+  .LecturePoint__sum{
+    position:absolute;
+    top:26px;
+    right:26px;
+    .point{
+      font-weight: bold;
+      color:$keyColor;
+    }
+  }
+  .LecturePoint__history{
+    appearance: none;
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    li{
+      font-size: 16px;
+      padding: 15px 0px;
+      border-bottom:1px solid $lectureBorderColor;
+      .point{
+        display: inline-block;
+        color:#0ca5af;
+        font-weight: bold;
+        width:50px;
+        &.minus{
+          color:$keyColor;
+        }
+      }
+      .name{
+        display: inline-block;
+      }
+      .date{
+        display: inline-block;
+        font-size:14px;
+        position: absolute;
+        right:10px;
+        color:grey;
+      }
+    }
+  }
+}
+
+.LecturePoint-guide{
+  margin-top:10px;
+  width:780px;
+  padding: 16px;
+  border: 1px solid $lectureBorderColor;
+  border-radius: 12px;
+  ul{
+    font-size:13px;
+    padding-left:20px;
+    li{
+      padding:5px 0px;
     }
   }
 }

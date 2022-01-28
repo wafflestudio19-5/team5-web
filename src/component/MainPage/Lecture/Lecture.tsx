@@ -35,6 +35,7 @@ const Lecture = () => {
             }}
           />
         </form>
+
         <Switch>
           <Route
             path="/lecture/search/:searchValue"

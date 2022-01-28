@@ -46,9 +46,6 @@ const LectureView = () => {
             <p>교수명 {lectureInfo.instructor}</p>
             <p>개설학기 {lectureInfo.sem_options.map((item) => item)}</p>
           </div>
-          <div className="LectureView__books">
-            <p className="mini-title">교재 정보</p>
-          </div>
           <div className="LectureView__evaluation">
             {lectureSummary.has_evals && (
               <div className="LectureView__evaluation-summary">

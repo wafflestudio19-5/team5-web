@@ -304,12 +304,20 @@ export interface newLectureRequestType {
 //Lecture에서 사용
 export interface EvalType {
   id: number;
+  course_id: number;
   course: string;
   rating: number;
   semester: string;
   content: string;
   is_mine: boolean;
   num_of_likes: number;
+}
+
+export interface myLectureType {
+  id: number;
+  instructor: string;
+  is_evaluated: boolean;
+  title: string;
 }
 
 export interface SearchedLectureType {
@@ -335,6 +343,17 @@ export interface LectureSummaryType {
   grade: string;
   attendance: string;
   exam_freq: string;
+}
+
+export interface myPointType {
+  sum: number;
+  details: pointHistoryType[];
+}
+export interface pointHistoryType {
+  id: number;
+  point: number;
+  reason: string;
+  created_at: string;
 }
 
 export default {};
