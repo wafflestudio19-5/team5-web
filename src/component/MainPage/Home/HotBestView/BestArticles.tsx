@@ -4,7 +4,7 @@ import { getPostAPI } from "../../../../API/postAPI";
 import { postItemType, postListType } from "../../../../interface/interface";
 import { time } from "../../../../function/timeCal";
 
-const HotArticles = () => {
+const BestArticles = () => {
   const params = useParams() as paramsType;
   const history = useHistory();
 
@@ -31,7 +31,7 @@ const HotArticles = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI("hot", 10 * (page - 1)).then((response) =>
+    getPostAPI("best", 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
@@ -49,7 +49,7 @@ const HotArticles = () => {
 
   return (
     <>
-      <div className="BoardView__title">HOT 게시판</div>
+      <div className="BoardView__title">BEST 게시판</div>
       {postList.results.length === 0 ? (
         <ul className="BoardView__list">
           <li className="BoardView__noItem">아직 글이 없습니다.</li>
@@ -132,4 +132,4 @@ const HotArticles = () => {
   );
 };
 
-export default HotArticles;
+export default BestArticles;

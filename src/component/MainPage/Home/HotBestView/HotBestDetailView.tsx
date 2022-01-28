@@ -1,8 +1,9 @@
 import { Route, Switch, useParams } from "react-router-dom";
 import RightBar from "../TotalView/RightBar";
 import HotArticles from "./HotArticles";
+import BestArticles from "./BestArticles";
 
-const MyDetailView = () => {
+const HotBestDetailView = () => {
   return (
     <>
       <div className="BoardView">
@@ -10,6 +11,7 @@ const MyDetailView = () => {
           <div className="BoardView__main">
             <Switch>
               <Route exact path={"/hot"} component={HotArticles} />
+              <Route exact path={"/best"} component={BestArticles} />
             </Switch>
           </div>
           <RightBar />
@@ -19,4 +21,4 @@ const MyDetailView = () => {
   );
 };
 
-export default MyDetailView;
+export default HotBestDetailView;
