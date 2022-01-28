@@ -66,21 +66,25 @@ const BoardView = () => {
               <li key={item.id} className="BoardView__item">
                 <Link to={`/${item.board.id}/${item.id}`}>
                   <div className={"wrapper"}>
-                    <h3 className={"medium"}>{item.writer}</h3>
-                    <h2 className={"medium_bold"}>{item.title}</h2>
-                    <p className={"medium"}>{item.content}</p>
-                    <p className={"small"}>{item.board.title}</p>
-                    <ul className="status">
-                      {item.images.length !== 0 && (
-                        <li className={"attach_active"}>
-                          {item.images.length}
+                    <div className={"majorContents"}>
+                      <h3 className={"medium"}>{item.writer}</h3>
+                      <h2 className={"medium_bold"}>{item.title}</h2>
+                      <p className={"medium"}>{item.content}</p>
+                      <p className={"small"}>{item.board.title}</p>
+                    </div>
+                    <div className={"subContents"}>
+                      <ul className="status">
+                        {item.images.length !== 0 && (
+                          <li className={"attach_active"}>
+                            {item.images.length}
+                          </li>
+                        )}
+                        <li className={"vote_active"}>{item.num_of_likes}</li>
+                        <li className={"comment_active"}>
+                          {item.num_of_comments}
                         </li>
-                      )}
-                      <li className={"vote_active"}>{item.num_of_likes}</li>
-                      <li className={"comment_active"}>
-                        {item.num_of_comments}
-                      </li>
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
                 </Link>
               </li>

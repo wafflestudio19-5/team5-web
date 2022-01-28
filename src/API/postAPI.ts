@@ -1,6 +1,16 @@
 import { authRequest, makeQuery } from "./API";
 import { postInputType } from "../interface/interface";
 
+export const getMainPostAPI = async () => {
+  try {
+    const response = await authRequest.get(`/post/main/`);
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    console.log("Main 불러오기 실패");
+  }
+};
+
 export const getPostAPI = async (
   board: number | string,
   offset: number = 0,
@@ -86,6 +96,16 @@ export const getLiveTopAPI = async () => {
     return response.data;
   } catch (e) {
     console.log("실시간 인기 글 불러오기 실패!"); //테스트용
+    return [];
+  }
+};
+
+export const getHotAPI = async () => {
+  try {
+    const response = await authRequest.get(`/post/hot`);
+    return response.data;
+  } catch (e) {
+    console.log("핫게시물 불러오기 실패!"); //테스트용
     return [];
   }
 };

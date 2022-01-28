@@ -3,6 +3,10 @@
   list-style: none;
   padding: 0px;
 
+  .BoardView__noItem{
+    width: 100%;
+  }
+
   li:last-child{
     border-bottom: 1px solid $cardBorderColor;
   }

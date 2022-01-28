@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { postInputType, postListType } from "../../../../interface/interface";
-import { postPostAPI } from "../../../../API/postAPI";
+import { postDeleteAPI, postPostAPI } from "../../../../API/postAPI";
 import { toastErrorData } from "../../../../API/errorHandling";
 
 interface WriteParams {
@@ -36,7 +36,6 @@ const Write = ({ boardId, setReloading, openWrite, postList }: WriteParams) => {
     e.preventDefault();
     fileRef.current?.click();
   };
-
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
     const content = inputContent
