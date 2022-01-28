@@ -28,7 +28,7 @@ export const getPostWithURLAPI = async (URL: string) => {
   }
 };
 
-export const postPostAPI = async (board: number, input: postInputType) => {
+export const postPostAPI = async (board: number, input: any) => {
   try {
     const response = await authRequest.post(
       `/post/${makeQuery({ board: board })}`,

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { postInputType } from "../../../../interface/interface";
+import React, { useRef, useState } from "react";
+import { postInputType, postListType } from "../../../../interface/interface";
 import { postPostAPI } from "../../../../API/postAPI";
 import { toastErrorData } from "../../../../API/errorHandling";
 
@@ -7,6 +7,7 @@ interface WriteParams {
   boardId: number;
   setReloading: Function;
   openWrite: Function;
+  postList: postListType;
 }
 
 const initialPostInput = {
@@ -17,8 +18,24 @@ const initialPostInput = {
   is_question: false,
 };
 
-const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
+const Write = ({ boardId, setReloading, openWrite, postList }: WriteParams) => {
   const [postInput, setPostInput] = useState<postInputType>(initialPostInput);
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [fileImage, setFileImage] = useState<File[]>([]);
+  const [imageUrl, setImageUrl] = useState<string[]>([]);
+  const formData = new FormData();
+
+  const saveFileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null && e.target.files.length === 1) {
+      setFileImage([...fileImage, e.target.files[0]]);
+      setImageUrl([...imageUrl, URL.createObjectURL(e.target.files[0])]);
+    }
+  };
+
+  const handleFileButtonClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    fileRef.current?.click();
+  };
 
   const checkHashtag = (inputContent: string) => {
     const newTag: string[] = [];
@@ -49,10 +66,16 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
   };
 
   const writePost = (board: number, input: postInputType) => {
-    postPostAPI(board, {
-      ...input,
-      tags: checkHashtag(input.content),
-    }).then(
+    formData.append(`title`, `${input.title}`);
+    formData.append(`content`, `${input.content}`);
+    formData.append(`is_anonymous`, `${input.is_anonymous}`);
+    formData.append(`is_anonymous`, `${input.is_question}`);
+    formData.append(`tags`, `${checkHashtag(input.content)}`);
+    fileImage.map((item) => {
+      formData.append(`image`, item);
+    });
+
+    postPostAPI(board, formData).then(
       () => {
         openWrite();
         setReloading(true);
@@ -71,18 +94,20 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
         writePost(boardId, postInput);
       }}
     >
-      <p className={"Write__title"}>
-        <input
-          className={"title"}
-          name={"title"}
-          autoComplete={"off"}
-          placeholder={"글 제목"}
-          value={postInput.title}
-          onChange={(e) => {
-            setPostInput({ ...postInput, title: e.target.value });
-          }}
-        />
-      </p>
+      {postList.title_exist && (
+        <p className={"Write__title"}>
+          <input
+            className={"title"}
+            name={"title"}
+            autoComplete={"off"}
+            placeholder={"글 제목"}
+            value={postInput.title}
+            onChange={(e) => {
+              setPostInput({ ...postInput, title: e.target.value });
+            }}
+          />
+        </p>
+      )}
       <p className={"Write__content"}>
         <textarea
           className={"content"}
@@ -129,6 +154,15 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
           </p>
         </div>
       )}
+      {fileImage[0] && (
+        <div className={"thumnails"}>
+          {imageUrl.map((item, index) => {
+            return <img key={`${index}`} className={"thumnail"} src={item} />;
+          })}
+          <div className={"addNew"} onClick={handleFileButtonClick} />
+        </div>
+      )}
+
       <ul className={"option"}>
         <li
           title={"해시태그"}
@@ -137,7 +171,20 @@ const Write = ({ boardId, setReloading, openWrite }: WriteParams) => {
             setPostInput({ ...postInput, content: postInput.content + "#" });
           }}
         />
-        <li title={"첨부"} className={"attach"} />
+        <input
+          ref={fileRef}
+          hidden={true}
+          className={"attach"}
+          type={"file"}
+          accept={"image/*"}
+          onChange={saveFileImage}
+          multiple
+        />
+        <li
+          title={"첨부"}
+          className={"attach"}
+          onClick={handleFileButtonClick}
+        />
         <li title={"완료"} className={"submit"}>
           <button type="submit" />
         </li>

@@ -61,6 +61,7 @@ const BoardView = () => {
           boardId={Number(params.boardId)}
           setReloading={setReloading}
           openWrite={openWrite}
+          postList={postList}
         />
       ) : (
         <button className={"BoardView__writePost"} onClick={openWrite}>
