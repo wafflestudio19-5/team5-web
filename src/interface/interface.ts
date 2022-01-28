@@ -1,4 +1,6 @@
 //Login API
+import exp from "constants";
+
 export interface TokenType {
   access: string | null;
   refresh: string | null;
@@ -26,6 +28,10 @@ export interface RegisterInputType {
   nickname: string;
   univ: string;
   admission_year: string;
+}
+
+export interface EmailVerifyType {
+  email: string;
 }
 
 export interface SocialRegisterInputType {
