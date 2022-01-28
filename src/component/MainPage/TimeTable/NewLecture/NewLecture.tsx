@@ -54,11 +54,13 @@ const NewLecture = ({
   resizeContainer,
   addLectureToTable,
   addCustomLectureToTable,
+  setPreviewLectures,
 }: {
   currentSemester: string;
   resizeContainer: Function;
   addLectureToTable: Function;
   addCustomLectureToTable: Function;
+  setPreviewLectures: Function;
 }) => {
   const [newLecture, setNewLecture] = useState<newLectureType>(emptyLecture);
   const [isOpen, setIsOpen] = useState<"button" | "search" | "create">(
@@ -343,6 +345,7 @@ const NewLecture = ({
           currentSemester={currentSemester}
           changeOpenMode={changeOpenMode}
           addLectureToTable={addLectureToTable}
+          setPreviewLectures={setPreviewLectures}
         />
       )}
     </>

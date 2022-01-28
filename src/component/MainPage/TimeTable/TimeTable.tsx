@@ -14,7 +14,7 @@ import {
   TimeTableType,
   TimeTableSettingsType,
   newLectureType,
-  newLectureRequestType,
+  LectureScheduleType,
 } from "../../../interface/interface";
 import { toastErrorData } from "../../../API/errorHandling";
 import NewLecture from "./NewLecture/NewLecture";
@@ -57,6 +57,9 @@ const TimeTable = () => {
   });
   const [currentTables, setCurrentTables] = useState<TimeTableType[]>([]);
   const [selectedTable, setSelectedTable] = useState<TimeTableType>(emptyTable);
+  const [previewLectures, setPreviewLectures] = useState<LectureScheduleType[]>(
+    []
+  );
 
   //수정할것
   const [resizeContainer, setResizeContainer] = useState(false);
@@ -264,6 +267,7 @@ const TimeTable = () => {
         <Schedule
           lectures={selectedTable.lecture}
           deleteLectureFromTable={deleteLectureFromTable}
+          previewLectures={previewLectures}
         />
         {modalIsOpen && (
           <div
@@ -372,6 +376,7 @@ const TimeTable = () => {
         resizeContainer={setResizeContainer}
         addLectureToTable={addLectureToTable}
         addCustomLectureToTable={addCustomLectureToTable}
+        setPreviewLectures={setPreviewLectures}
       />
     </div>
   );

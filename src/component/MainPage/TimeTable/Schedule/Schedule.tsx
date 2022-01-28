@@ -47,90 +47,14 @@ const renderLecture = (
   );
 };
 
-const renderLectures = (lectureArray: LectureScheduleType[]) => {
-  const mon = [<div />];
-  const tue = [<div />];
-  const wed = [<div />];
-  const thu = [<div />];
-  const fri = [<div />];
-  lectureArray.forEach((lecture, lectureIndex) => {
-    lecture.lecture_time.forEach((time) => {
-      switch (time.day) {
-        case "월":
-          mon.push(
-            renderLecture(
-              lecture,
-              time.start,
-              time.end,
-              time.location,
-              lectureIndex
-            )
-          );
-          break;
-        case "화":
-          tue.push(
-            renderLecture(
-              lecture,
-              time.start,
-              time.end,
-              time.location,
-              lectureIndex
-            )
-          );
-          break;
-        case "수":
-          wed.push(
-            renderLecture(
-              lecture,
-              time.start,
-              time.end,
-              time.location,
-              lectureIndex
-            )
-          );
-          break;
-        case "목":
-          thu.push(
-            renderLecture(
-              lecture,
-              time.start,
-              time.end,
-              time.location,
-              lectureIndex
-            )
-          );
-          break;
-        case "금":
-          fri.push(
-            renderLecture(
-              lecture,
-              time.start,
-              time.end,
-              time.location,
-              lectureIndex
-            )
-          );
-          break;
-      }
-    });
-  });
-  return (
-    <>
-      <div className="Schedule__lecture-row">{mon}</div>
-      <div className="Schedule__lecture-row">{tue}</div>
-      <div className="Schedule__lecture-row">{wed}</div>
-      <div className="Schedule__lecture-row">{thu}</div>
-      <div className="Schedule__lecture-row">{fri}</div>)
-    </>
-  );
-};
-
 const Schedule = ({
   lectures,
   deleteLectureFromTable,
+  previewLectures,
 }: {
   lectures: LectureScheduleType[] | undefined;
   deleteLectureFromTable: Function;
+  previewLectures: LectureScheduleType[] | undefined;
 }) => {
   const renderLecture = (
     lecture: LectureScheduleType,
@@ -157,13 +81,23 @@ const Schedule = ({
     );
   };
 
-  const renderLectures = (lectureArray: LectureScheduleType[]) => {
+  const renderLectures = (
+    lectureArray: LectureScheduleType[] | undefined,
+    previewArray: LectureScheduleType[] | undefined
+  ) => {
     const mon = [<div />];
     const tue = [<div />];
     const wed = [<div />];
     const thu = [<div />];
     const fri = [<div />];
-    lectureArray.forEach((lecture, lectureIndex) => {
+    const targetArray: LectureScheduleType[] = [];
+    if (lectureArray) {
+      lectureArray.forEach((item) => targetArray.push(item));
+    }
+    if (Array.isArray(previewArray)) {
+      previewArray.forEach((item) => targetArray.push(item));
+    }
+    targetArray.forEach((lecture, lectureIndex) => {
       lecture.lecture_time.forEach((time) => {
         switch (time.day) {
           case "월":
@@ -249,7 +183,9 @@ const Schedule = ({
         <div className="Schedule__background-container">{renderGrid()}</div>
         <div className="Schedule__lecture-container">
           <div />
-          {lectures && renderLectures(lectures)}
+          {lectures || previewLectures
+            ? renderLectures(lectures, previewLectures)
+            : null}
           <div />
         </div>
       </div>
