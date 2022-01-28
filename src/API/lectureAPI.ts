@@ -1,4 +1,5 @@
 import {
+  NewEvalType,
   newLectureRequestType,
   TimeTableSearchQueryType,
 } from "../interface/interface";
@@ -105,6 +106,18 @@ export const postEvalLike = async (lectureId: number, evalId: number) => {
   try {
     const response = await authRequest.post(
       `/lecture/${lectureId}/eval/${evalId}/like/`
+    );
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postNewEval = async (lectureId: number, input: NewEvalType) => {
+  try {
+    const response = await authRequest.post(
+      `/lecture/${lectureId}/eval/`,
+      input
     );
     return response.data;
   } catch (e) {

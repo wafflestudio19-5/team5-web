@@ -356,4 +356,15 @@ export interface pointHistoryType {
   created_at: string;
 }
 
+export interface NewEvalType {
+  semester: string;
+  assignment: number;
+  team_project: number;
+  grade: number;
+  attendance: number;
+  exam: number;
+  rating: number;
+  content: string;
+}
+
 export default {};
