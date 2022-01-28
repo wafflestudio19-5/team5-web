@@ -24,10 +24,12 @@ const NewLecture = ({
   currentSemester,
   changeOpenMode,
   addLectureToTable,
+  setPreviewLectures,
 }: {
   currentSemester: string;
   changeOpenMode: Function;
   addLectureToTable: Function;
+  setPreviewLectures: Function;
 }) => {
   const scrollRef = useRef<HTMLUListElement>(null);
   const [lectureList, setLectureList] = useState<LectureType[]>([]);
@@ -105,6 +107,20 @@ const NewLecture = ({
               key={item.id}
               onClick={() => {
                 addLectureToTable(item.id);
+              }}
+              onMouseEnter={(e) => {
+                setPreviewLectures([
+                  {
+                    id: -1,
+                    title: item.course.title,
+                    instructor: item.course.instructor,
+                    credits: item.credits,
+                    lecture_time: item.lecture_time,
+                  },
+                ]);
+              }}
+              onMouseLeave={(e) => {
+                setPreviewLectures({});
               }}
             >
               <p>조회</p>
