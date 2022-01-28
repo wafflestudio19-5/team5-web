@@ -93,9 +93,29 @@ export const getLectureEval = async (id: string) => {
   }
 };
 
+export const getLectureTest = async (id: string) => {
+  try {
+    const response = await authRequest.get(`/lecture/${id}/examinfo/`);
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
 export const getMyPoint = async () => {
   try {
     const response = await authRequest.get("/lecture/mypoint/");
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postTestPoint = async (lectureId: number, testId: number) => {
+  try {
+    const response = await authRequest.post(
+      `/lecture/${lectureId}/examinfo/${testId}/point/`
+    );
     return response.data;
   } catch (e) {
     return Promise.reject(e);
@@ -106,6 +126,17 @@ export const postEvalLike = async (lectureId: number, evalId: number) => {
   try {
     const response = await authRequest.post(
       `/lecture/${lectureId}/eval/${evalId}/like/`
+    );
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postTestLike = async (lectureId: number, testId: number) => {
+  try {
+    const response = await authRequest.post(
+      `/lecture/${lectureId}/examinfo/${testId}/like/`
     );
     return response.data;
   } catch (e) {

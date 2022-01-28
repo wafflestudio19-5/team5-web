@@ -96,6 +96,9 @@
             font-size:12px;
             cursor: pointer;
             padding:5px;
+                    &:hover{
+              color:$keyColor;
+            }
           }
         }
       }
@@ -108,6 +111,91 @@
     width:480px;
     margin-left:10px;
     padding:15px;
+    .LectureView__test-list{
+      list-style: none;
+      padding: 0;
+      .LectureView__test-item {
+        margin:20px 0;
+        padding:10px 0;
+        border-top: solid 1px $lectureBorderColor;
+        position: relative;
+        button{
+          position: absolute;
+          top:10px;
+          right:10px;margin-left: 5px;
+          border: 0;
+          border-radius: 5px;
+          background-color: $lectureBorderColor;
+          color: gray;
+          font-size: 12px;
+          cursor: pointer;
+          padding: 5px;
+          &:hover{
+            color:$keyColor;
+          }
+        }
+        .mini-title {
+          font-size: 16px;
+          margin: 0;
+        }
+        .contents{
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          &.blur{
+            color:gray;
+            filter: blur(5px);
+          }
+        }
+        .unlock{
+          position: absolute;
+          top:60px;
+          font-size: 14px;
+          font-weight: bold;
+          color:gray;
+        }
+        .use-point{
+          padding: 3px 8px;
+          color: $keyColor;
+          border: 1px solid $keyColor;
+          border-radius:10px;
+          background-color: transparent;
+          cursor: pointer;
+          &:hover{
+            background-color: $keyColor;
+            color:white;
+          }
+
+        }
+        .semester {
+          font-size: 14px;
+          color: grey;
+          display: inline-block;
+          margin-bottom:8px;
+        }
+        .likes {
+          margin-left: 15px;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: url("https://everytime.kr/images/new/container.articles.vote.png") no-repeat left center;
+          background-size: 11px 11px;
+          padding-left: 15px;
+          font-size: 15px;
+          color: $keyColor;
+        }
+        .content-block{
+          display:flex;
+          font-size: 12px;
+          .label{
+            width:72px;
+          }
+          .p{
+            background-color: $lectureBorderColor;
+          }
+        }
+      }
+    }
   }
 }
 
