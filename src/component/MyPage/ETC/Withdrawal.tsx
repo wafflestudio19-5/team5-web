@@ -1,13 +1,30 @@
 import { useEffect, useState } from "react";
 import { patchMyProfileAPI, postDeleteUserAPI } from "../../../API/userAPI";
+import { useHistory } from "react-router-dom";
+import { deleteToken } from "../../../function/localStorage";
+import { logout } from "../../../redux/authorization";
+import { useDispatch } from "react-redux";
+import { toastErrorData } from "../../../API/errorHandling";
 
 const Withdrawal = () => {
   const [password, setPassword] = useState<string>("");
-
+  const history = useHistory();
+  const dispatch = useDispatch();
   const withdrawal = () => {
     const form = new FormData();
     form.append("password", password);
-    postDeleteUserAPI(form).then((res) => {});
+    postDeleteUserAPI(form).then(
+      (res) => {
+        deleteToken();
+        dispatch(logout());
+        history.push("/");
+      },
+      (error) => {
+        if (error.response) {
+          toastErrorData(error.response.data);
+        }
+      }
+    );
   };
 
   return (

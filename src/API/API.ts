@@ -3,6 +3,7 @@ import store from "../redux/store";
 import { postRefreshAPI } from "./loginAPI";
 import { saveToken } from "../function/localStorage";
 import { login } from "../redux/authorization";
+import { useHistory } from "react-router-dom";
 
 const URL = "https://www.waffle-minkyu.shop" as const;
 
@@ -64,6 +65,10 @@ authRequest.interceptors.response.use(
             return axios(error.config);
           }
         });
+      } else if (
+        data.detail === "You do not have permission to perform this action."
+      ) {
+        window.location.href = "verify";
       }
     }
     throw error;

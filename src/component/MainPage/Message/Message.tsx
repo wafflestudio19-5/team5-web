@@ -12,6 +12,7 @@ import {
 import { time } from "../../../function/timeCal";
 import MsgModal from "../Home/PostView/MsgModal/MsgModal";
 import { useHistory } from "react-router-dom";
+import { toastErrorData } from "../../../API/errorHandling";
 
 const Message = () => {
   const [messageList, setMessageList] = useState<ChatType[]>([]);
@@ -27,9 +28,16 @@ const Message = () => {
     form.append("content", message);
     console.log(form);
     console.log(message);
-    postMessage("id", selectedChat?.id, form).then((res) => {
-      closeModal();
-    });
+    postMessage("id", selectedChat?.id, form).then(
+      (res) => {
+        closeModal();
+      },
+      (error) => {
+        if (error.response) {
+          toastErrorData(error.response.data);
+        }
+      }
+    );
   };
 
   const closeModal = () => {
@@ -43,17 +51,31 @@ const Message = () => {
       setChatDetail(undefined);
     } else {
       setSelectedChat(chat);
-      getMessageDetail(chat.id).then((res) => {
-        setChatDetail(res);
-      });
+      getMessageDetail(chat.id).then(
+        (res) => {
+          setChatDetail(res);
+        },
+        (error) => {
+          if (error.response) {
+            toastErrorData(error.response.data);
+          }
+        }
+      );
     }
   };
 
   useEffect(() => {
-    getMessageList().then((res) => {
-      console.log(res);
-      setMessageList(res);
-    });
+    getMessageList().then(
+      (res) => {
+        console.log(res);
+        setMessageList(res);
+      },
+      (error) => {
+        if (error.response) {
+          toastErrorData(error.response.data);
+        }
+      }
+    );
   }, []);
 
   return (
@@ -114,7 +136,12 @@ const Message = () => {
       </section>
       <section className={"Message__Detail"}>
         <div className={"title"}>
-          <a className={"sendButton"} onClick={() => setMsgModalOpen(true)} />
+          {selectedChat === undefined ? (
+            <a />
+          ) : (
+            <a className={"sendButton"} onClick={() => setMsgModalOpen(true)} />
+          )}
+
           <h2>{selectedChat?.partner}</h2>
         </div>
         <div>

@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { patchMyProfileAPI } from "../../../API/userAPI";
+import { toastErrorData } from "../../../API/errorHandling";
+import { useHistory } from "react-router-dom";
 
 const Password = () => {
+  const history = useHistory();
   const [newPassword, setNewPassword] = useState<string>("");
   const [passwordCheck, setPasswordCheck] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -17,7 +20,17 @@ const Password = () => {
       form.append("origin_password", password);
       form.append("new_password2", passwordCheck);
       form.append("new_password1", newPassword);
-      patchMyProfileAPI(form).then((res) => {});
+      patchMyProfileAPI(form).then(
+        (res) => {
+          window.alert("비밀번호가 변경되었습니다.");
+          history.push("/");
+        },
+        (error) => {
+          if (error.response) {
+            toastErrorData(error.response.data);
+          }
+        }
+      );
     }
   };
 
