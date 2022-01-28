@@ -1,4 +1,4 @@
-import { NewEvalType } from "../interface/interface";
+import { NewEvalType, NewTestType } from "../interface/interface";
 
 interface formType {
   key:
@@ -75,6 +75,26 @@ const evalRatingData: formType = {
     { label: "5점", value: 5 },
   ],
 };
+
+const testTypeData: string[] = [
+  "중간고사",
+  "기말고사",
+  "1차",
+  "2차",
+  "3차",
+  "4차",
+  "기타",
+];
+
+const questionTypeData = [
+  "객관식",
+  "주관식",
+  "T/F형",
+  "약술형",
+  "논술형",
+  "구술",
+  "기타",
+];
 
 const dataToQuestion = (
   key:
@@ -163,6 +183,108 @@ export const newEvalForm = (
         />
       </div>
       <input type="submit" value="작성하기 (+10P)" />
+    </div>
+  );
+};
+
+export const newTestForm = (
+  setter: Function,
+  targetObject: NewTestType,
+  sem_option: string[]
+) => {
+  return (
+    <div className="eval-form">
+      <p className="mini-title">응시한 시험</p>
+      <div className="question">
+        <div className="question-name">수강학기</div>
+        <select
+          value={targetObject.semester}
+          onChange={(e) => {
+            setter({ ...targetObject, ["semester"]: e.target.value });
+          }}
+        >
+          <option value="">수강학기 선택</option>
+          {sem_option.map((opt) => {
+            return <option value={opt}>{opt}</option>;
+          })}
+        </select>
+      </div>
+      <div className="question">
+        <div className="question-name">종류</div>
+        <select
+          value={targetObject.exam}
+          onChange={(e) => {
+            setter({ ...targetObject, ["exam"]: e.target.value });
+          }}
+        >
+          {testTypeData.map((test, index) => {
+            return <option value={index}>{test}</option>;
+          })}
+        </select>
+      </div>
+      <p className="mini-title">시험 전략</p>
+      <textarea
+        onChange={(e) => {
+          setter({ ...targetObject, ["strategy"]: e.target.value });
+        }}
+        value={targetObject.strategy}
+        placeholder="시험에 대한 전략, 공부 방법, 노하우를 자유롭게 적어주세요."
+      />
+      <p className="mini-title">문제 유형</p>
+      <div className="question">
+        <div className="question-name">(복수 선택)</div>
+        {questionTypeData.map((option) => {
+          const isSelected = targetObject.types.indexOf(option);
+          return (
+            <div
+              className={`option ${isSelected >= 0 ? "selected" : null}`}
+              onClick={() => {
+                if (isSelected >= 0) {
+                  const deleteArray = targetObject.types;
+                  deleteArray.splice(isSelected, 1);
+                  setter({ ...targetObject, types: deleteArray });
+                } else {
+                  const addArray = targetObject.types;
+                  addArray.push(option);
+                  setter({ ...targetObject, types: addArray });
+                }
+              }}
+            >
+              {option}
+            </div>
+          );
+        })}
+      </div>
+      <p className="mini-title">문제 예시</p>
+      <p className="example-example">
+        예) 게임이론의 정의와 두 가지 이상의 사례를 작성하시오.
+      </p>
+      <ol>
+        {targetObject.examples.map((example, index) => {
+          return (
+            <li key={index}>
+              <input
+                type="text"
+                onChange={(e) => {
+                  const newArray = targetObject.examples;
+                  newArray.splice(index, 1, e.target.value);
+                  setter({ ...targetObject, examples: newArray });
+                }}
+                value={example}
+              />
+            </li>
+          );
+        })}
+      </ol>
+      <div
+        className="add-example"
+        onClick={() => {
+          setter({ ...targetObject, examples: [...targetObject.examples, ""] });
+        }}
+      >
+        +더 입력하기
+      </div>
+      <input type="submit" value="공유하기 (+20P)" />
     </div>
   );
 };

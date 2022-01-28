@@ -367,6 +367,14 @@ export interface NewEvalType {
   content: string;
 }
 
+export interface NewTestType {
+  semester: string;
+  exam: number;
+  types: string[];
+  examples: string[];
+  strategy: string;
+}
+
 export interface LectureTestType {
   id: number;
   is_readable: boolean;

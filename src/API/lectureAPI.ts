@@ -1,6 +1,7 @@
 import {
   NewEvalType,
   newLectureRequestType,
+  NewTestType,
   TimeTableSearchQueryType,
 } from "../interface/interface";
 import { authRequest } from "./API";
@@ -148,6 +149,18 @@ export const postNewEval = async (lectureId: number, input: NewEvalType) => {
   try {
     const response = await authRequest.post(
       `/lecture/${lectureId}/eval/`,
+      input
+    );
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postNewTest = async (lectureId: number, input: NewTestType) => {
+  try {
+    const response = await authRequest.post(
+      `/lecture/${lectureId}/examinfo/`,
       input
     );
     return response.data;

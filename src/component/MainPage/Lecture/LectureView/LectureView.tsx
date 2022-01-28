@@ -7,6 +7,7 @@ import {
   getLectureTest,
   postEvalLike,
   postNewEval,
+  postNewTest,
   postTestLike,
   postTestPoint,
 } from "../../../../API/lectureAPI";
@@ -16,9 +17,10 @@ import {
   LectureSummaryType,
   NewEvalType,
   LectureTestType,
+  NewTestType,
 } from "../../../../interface/interface";
 import { toastErrorData } from "../../../../API/errorHandling";
-import { newEvalForm } from "../../../../function/eval";
+import { newEvalForm, newTestForm } from "../../../../function/eval";
 
 interface LectureViewParams {
   id: string;
@@ -33,6 +35,13 @@ const emptyEval = {
   exam: 2,
   rating: 3,
   content: "",
+};
+const emptyTest = {
+  semester: "",
+  exam: 0,
+  types: [],
+  examples: ["", ""],
+  strategy: "",
 };
 
 const emptyInfo = {} as LectureInformationType;
@@ -50,7 +59,7 @@ const LectureView = () => {
   //modal
   const [modalState, setModalState] = useState<string>("no-modal");
   const [newEval, setNewEval] = useState<NewEvalType>(emptyEval);
-  const [newTest, setNewTest] = ["", ""];
+  const [newTest, setNewTest] = useState<NewTestType>(emptyTest);
 
   const readTest = (testId: number) => {
     if (window.confirm("5포인트를 차감하시겠습니까?")) {
@@ -93,6 +102,18 @@ const LectureView = () => {
       (response) => {
         setReloading(true);
         setNewEval(emptyEval);
+        setModalState("no-modal");
+      },
+      (error) => {
+        toastErrorData(error.response.data);
+      }
+    );
+  };
+  const writeTest = () => {
+    postNewTest(lectureInfo.id, newTest).then(
+      (response) => {
+        setReloading(true);
+        setNewTest(emptyTest);
         setModalState("no-modal");
       },
       (error) => {
@@ -193,21 +214,30 @@ const LectureView = () => {
             </div>
             <div className="LectureView__test">
               <p className="mini-title">시험 정보</p>
-              <button className="post-button">시험 정보 공유</button>
+              <button
+                className="post-button"
+                onClick={() => {
+                  setModalState("test");
+                }}
+              >
+                시험 정보 공유
+              </button>
               <ul className="LectureView__test-list">
                 {lectureTest.map((item) => {
                   return (
                     <li key={item.id}>
                       {item.is_readable ? (
                         <div className="LectureView__test-item">
-                          <button
-                            className="recommend"
-                            onClick={() => {
-                              recommendTest(item.id);
-                            }}
-                          >
-                            추천
-                          </button>
+                          {!item.is_mine && (
+                            <button
+                              className="recommend"
+                              onClick={() => {
+                                recommendTest(item.id);
+                              }}
+                            >
+                              추천
+                            </button>
+                          )}
                           <div className="mini-title">{item.exam}</div>
                           <div className="semester">{item.semester}</div>
                           {item.num_of_likes > 0 ? (
@@ -226,7 +256,7 @@ const LectureView = () => {
                               <div className="label">문제 예시</div>
                               <div className="examples">
                                 {item.examples?.map((example) => {
-                                  return <p>{example}하하하하</p>;
+                                  return <p>{example}</p>;
                                 })}
                               </div>
                             </div>
@@ -300,7 +330,22 @@ const LectureView = () => {
                   />
                 </form>
               ) : (
-                <div className="LectureView__modal test">시험정보</div>
+                <form
+                  className="LectureView__modal test"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    writeTest();
+                  }}
+                >
+                  <div className="title"> 시험 정보 공유</div>
+                  {newTestForm(setNewTest, newTest, lectureInfo.sem_options)}
+                  <div
+                    className="close"
+                    onClick={() => {
+                      setModalState("no-modal");
+                    }}
+                  />
+                </form>
               )}
             </div>
           )}

@@ -54,11 +54,11 @@ export const toastErrorData = (
       duration: 3000,
     });
   } else {
-    const data = errorData as AutoErrorType;
+    const data = errorData as object;
     for (const [key, value] of Object.entries(data)) {
       toast.show({
         title: key,
-        content: value,
+        content: String(value),
         duration: 3000,
       });
     }
