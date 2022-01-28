@@ -1,4 +1,7 @@
-import { TimeTableSearchQueryType } from "../interface/interface";
+import {
+  newLectureRequestType,
+  TimeTableSearchQueryType,
+} from "../interface/interface";
 import { authRequest } from "./API";
 import { makeQuery } from "./API";
 
@@ -35,6 +38,18 @@ export const postSearchLecture = async (searchValue: string) => {
     const response = await authRequest.post("/lecture/search/", {
       search: searchValue,
     });
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postCustomLecture = async (
+  id: number,
+  input: newLectureRequestType
+) => {
+  try {
+    const response = await authRequest.post(`/timetable/${id}/lecture/`, input);
     return response.data;
   } catch (e) {
     return Promise.reject(e);
