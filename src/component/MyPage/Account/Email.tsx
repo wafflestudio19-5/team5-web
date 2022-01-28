@@ -1,12 +1,21 @@
 import { useEffect, useState } from "react";
+import { getMyProfileAPI, patchMyProfileAPI } from "../../../API/userAPI";
 
 const Email = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
   const changeEmail = () => {
-    window.alert("아직 구현되지 않은 기능입니다.");
+    const form = new FormData();
+    form.append("email", email);
+    form.append("origin_password", password);
+    patchMyProfileAPI(form).then((res) => {});
   };
+  useEffect(() => {
+    getMyProfileAPI().then((res) => {
+      setEmail(res.email);
+    });
+  }, []);
 
   return (
     <div className={"MyPageMain"}>
@@ -18,10 +27,10 @@ const Email = () => {
           </div>
           <input
             placeholder="이메일"
-            type={"password"}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
+            value={email}
           />
         </div>
         <div className="passwordInput">

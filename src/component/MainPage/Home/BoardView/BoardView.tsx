@@ -38,7 +38,7 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(Number(params.boardId), 10 * (page - 1)).then((response) =>
+    getPostAPI(params.boardId, 10 * (page - 1)).then((response) =>
       setPostList(response)
     );
   };
@@ -112,6 +112,11 @@ const BoardView = () => {
                   ) : (
                     <div className={"wrapper"}>
                       <div className={"majorContents"}>
+                        <img
+                          src={item.profile_picture}
+                          alt={"프로필 사진"}
+                          className={"BoardView__profile__img"}
+                        />
                         <h3 className={"medium"}>{item.writer}</h3>
                         <h2 className={"medium_bold"}>{item.title}</h2>
                         <p className={"medium"}>{item.content}</p>

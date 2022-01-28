@@ -1,4 +1,6 @@
 //Login API
+import exp from "constants";
+
 export interface TokenType {
   access: string | null;
   refresh: string | null;
@@ -26,6 +28,10 @@ export interface RegisterInputType {
   nickname: string;
   univ: string;
   admission_year: string;
+}
+
+export interface EmailVerifyType {
+  email: string;
 }
 
 export interface SocialRegisterInputType {
@@ -73,6 +79,7 @@ export interface postItemType {
   num_of_comments: number;
   tags: any;
   images: Array<imagesItem>;
+  profile_picture: string;
   is_anonymous: boolean;
   is_question: boolean;
   is_mine: boolean;
@@ -118,6 +125,7 @@ export interface CommentItemType {
   created_at: string;
   profile: string;
   nickname: string;
+  profile_picture: string;
   num_of_likes: number;
   is_mine: boolean;
   is_deleted: boolean;
@@ -145,6 +153,49 @@ export interface HotItemType {
   created_at: string;
   id: { id: number; title: string };
   title_content: string;
+}
+
+export interface UserType {
+  admission_year: string;
+  email: string;
+  id: number;
+  nickname: string;
+  profile_picture: string;
+  univ: string;
+  username: string;
+}
+
+export interface UserPatchType {
+  origin_password: string;
+  nickname: string;
+  new_password1: string;
+  new_password2: string;
+  email: string;
+  profile_picture: string;
+}
+
+export interface ChatType {
+  id: number;
+  partner: string;
+  updated_at: string;
+  recent_chat: string;
+}
+
+export interface MessageType {
+  started_from: string;
+  id: number;
+}
+
+export interface ChatDetailType {
+  id: number;
+  messages: ChatMessageType[];
+}
+
+export interface ChatMessageType {
+  is_mine: boolean;
+  is_notice: boolean;
+  content: string;
+  created_at: string;
 }
 
 //timetable API
@@ -244,4 +295,5 @@ export interface LectureSummaryType {
   attendance: string;
   exam_freq: string;
 }
+
 export default {};

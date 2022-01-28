@@ -1,6 +1,4 @@
-import { authRequest, makeQuery } from "./API";
-import exp from "constants";
-import { CommentInputType } from "../interface/interface";
+import { authRequest } from "./API";
 
 export const getCommentAPI = async (postID: number) => {
   try {
