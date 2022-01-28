@@ -33,6 +33,15 @@ export const getRecentLecture = async (next?: string) => {
   }
 };
 
+export const getMyLecture = async () => {
+  try {
+    const response = await authRequest.get("/lecture/mine/");
+    return response.data;
+  } catch (e) {
+    Promise.reject(e);
+  }
+};
+
 export const postSearchLecture = async (searchValue: string) => {
   try {
     const response = await authRequest.post("/lecture/search/", {
@@ -77,6 +86,15 @@ export const getLectureSummary = async (id: string) => {
 export const getLectureEval = async (id: string) => {
   try {
     const response = await authRequest.get(`/lecture/${id}/eval/`);
+    return response.data;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const getMyPoint = async () => {
+  try {
+    const response = await authRequest.get("/lecture/mypoint/");
     return response.data;
   } catch (e) {
     return Promise.reject(e);
