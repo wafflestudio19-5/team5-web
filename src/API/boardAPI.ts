@@ -6,6 +6,6 @@ export const getBoardAPI = async () => {
     const response = await authRequest.get("/board/");
     return response.data;
   } catch (e) {
-    Promise.reject(e);
+    return Promise.reject(e);
   }
 };

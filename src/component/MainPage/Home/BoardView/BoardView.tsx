@@ -4,6 +4,7 @@ import { getPostAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 import { time } from "../../../../function/timeCal";
+import { toastErrorData } from "../../../../API/errorHandling";
 
 const BoardView = () => {
   const params = useParams() as paramsType;
@@ -31,10 +32,16 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(params.boardId, 10 * (page - 1)).then((response) => {
-      setPostList(response);
-      setReloading(false);
-    });
+    getPostAPI(params.boardId, 10 * (page - 1)).then(
+      (response) => {
+        setPostList(response);
+        setReloading(false);
+      },
+      (error) => {
+        toastErrorData(error);
+        setReloading(false);
+      }
+    );
   };
 
   useEffect(() => {
@@ -44,11 +51,12 @@ const BoardView = () => {
       }
     }
     setReloading(true);
-  }, [params.boardId, params.pageId]);
+  }, [params]);
 
   useEffect(() => {
     if (reloading) {
       getPostWithPage(Number(pageNum));
+      window.scrollTo(0, 0);
     }
   }, [reloading]);
 
