@@ -85,6 +85,25 @@ export interface mainNoTitleBoardType {
   num_of_likes: number;
   num_of_comments: number;
 }
+export interface SubBoardType {
+  id: number;
+  title: string;
+}
+export interface BoardType {
+  id: number;
+  title: string;
+  description: string;
+  anonym_enabled: boolean;
+  is_market: boolean;
+  title_enabled: boolean;
+  question_enabled: boolean;
+  notice_enabled: boolean;
+  board_type: number;
+  sub_boards: SubBoardType[];
+  created_at: string;
+  manager: any | null;
+  head_board: any | null;
+}
 
 //Post API
 export interface postItemType {
@@ -271,13 +290,14 @@ export interface LectureTimeType {
 
 export interface TimeTableSearchQueryType {
   semester: string;
-  credits?: string;
-  department?: string;
+  credits?: string[];
+  department?: string[];
   title?: string;
   instructor?: string;
   course_code?: string;
   location?: string;
   ordering?: string;
+  type?: string;
 }
 
 export interface newLectureTimeType {

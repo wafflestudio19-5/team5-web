@@ -26,6 +26,21 @@ export const makeQuery = (queryObject: object) => {
   return query;
 };
 
+export const makeQueryWithArray = (queryObject: object) => {
+  let query = "?";
+  for (const [key, value] of Object.entries(queryObject)) {
+    if (Array.isArray(value)) {
+      value.forEach((val) => {
+        query += `${key}=${val}&`;
+      });
+    } else {
+      query += `${key}=${value}&`;
+    }
+  }
+  query = query.slice(0, -1); // query가 비어있을 때의 ?나 key=value 마지막의 &을 삭제합니다
+  return query;
+};
+
 //API 관련 함수들
 
 //Axios 인스턴스들

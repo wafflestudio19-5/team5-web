@@ -288,3 +288,29 @@ export const newTestForm = (
     </div>
   );
 };
+
+export const timetableQueryQuestion = (
+  key: string,
+  label: string,
+  data: { name: string; val: string }[],
+  value: string | undefined,
+  setter: Function
+) => {
+  return (
+    <div className="question">
+      <div className="label">{label}</div>
+      <div className="options">
+        {data.map((datum) => (
+          <div
+            className={`option ${value === datum.val ? "selected" : ""}`}
+            onClick={() => {
+              setter(key, datum.val);
+            }}
+          >
+            {datum.name}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

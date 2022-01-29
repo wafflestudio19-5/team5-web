@@ -4,7 +4,7 @@ import {
   NewTestType,
   TimeTableSearchQueryType,
 } from "../interface/interface";
-import { authRequest } from "./API";
+import { authRequest, makeQueryWithArray } from "./API";
 import { makeQuery } from "./API";
 
 export const getSearchedLecture = async (
@@ -13,7 +13,7 @@ export const getSearchedLecture = async (
 ) => {
   try {
     const response = await authRequest.get(
-      `/lecture/table/search/${makeQuery(searchQuery)}${next}`
+      `/lecture/table/search/${makeQueryWithArray(searchQuery)}${next}`
     );
     return response.data;
   } catch (e) {

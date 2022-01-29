@@ -35,11 +35,19 @@
     button{
       margin-left:10px;
       margin-right:10px;
+      background-color: $keyColor;
+      color:white;
+      border: 0;
+      padding: 0 12px;
+      cursor: pointer;
+      &:hover{
+        color:$timetableBorderColor;
+      }
       &.search{
-
+        border-radius: 20px 0px 0px 20px;
       }
       &.create{
-
+        border-radius: 0px 20px 20px 0px;
       }
     }
   }
@@ -207,6 +215,41 @@
       cursor:pointer;
       &:hover{
         background-color: white;
+      }
+    }
+  }
+}
+
+.NewLecture__modal-wrapper{
+  position: absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.25);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .NewLecture__modal {
+    background: white;
+    width:720px;
+    padding:20px;
+    box-sizing: border-box;
+
+    .question {
+      width: 100%;
+      display: flex;
+      .label {
+        width: 120px;
+      }
+    }
+    .options{
+      display: flex;
+      .option{
+        padding:15px;
+        background-color:$boardBorderColor;
       }
     }
   }

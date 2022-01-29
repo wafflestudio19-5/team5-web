@@ -7,7 +7,7 @@ import { time } from "../../../../function/timeCal";
 import { toastErrorData } from "../../../../API/errorHandling";
 import { toast } from "../../../Toast/ToastManager";
 
-const BoardView = () => {
+const BoardView = ({ subId }: { subId: null | number }) => {
   const params = useParams() as paramsType;
   const history = useHistory();
 
@@ -33,16 +33,32 @@ const BoardView = () => {
   }
 
   const getPostWithPage = (page: number) => {
-    getPostAPI(params.boardId, 10 * (page - 1)).then(
-      (response) => {
-        setPostList(response);
-        setReloading(false);
-      },
-      (error) => {
-        toastErrorData(error);
-        setReloading(false);
+    if (subId) {
+      if (subId < 0) {
+      } else {
+        getPostAPI(subId, 10 * (page - 1)).then(
+          (response) => {
+            setPostList(response);
+            setReloading(false);
+          },
+          (error) => {
+            toastErrorData(error);
+            setReloading(false);
+          }
+        );
       }
-    );
+    } else {
+      getPostAPI(params.boardId, 10 * (page - 1)).then(
+        (response) => {
+          setPostList(response);
+          setReloading(false);
+        },
+        (error) => {
+          toastErrorData(error);
+          setReloading(false);
+        }
+      );
+    }
   };
 
   useEffect(() => {
@@ -52,14 +68,14 @@ const BoardView = () => {
       }
     }
     setReloading(true);
-  }, [params]);
+  }, [params, subId]);
 
   useEffect(() => {
     if (reloading) {
       getPostWithPage(Number(pageNum));
       window.scrollTo(0, 0);
     }
-  }, [reloading]);
+  }, [reloading, subId]);
 
   return (
     <>
@@ -69,6 +85,7 @@ const BoardView = () => {
           setReloading={setReloading}
           openWrite={openWrite}
           postList={postList}
+          subId={subId}
         />
       ) : (
         <button className={"BoardView__writePost"} onClick={openWrite}>
