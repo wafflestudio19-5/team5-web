@@ -45,8 +45,6 @@ export const convertTimeToStyle = (
   end: number,
   index: number
 ) => {
-  console.log(start);
-  console.log(timeToHeight(start));
   const style = {
     top: `${timeToHeight(start)}px`,
     height: `${timeToHeight(end) - timeToHeight(start)}px`,

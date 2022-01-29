@@ -14,7 +14,7 @@ export const getMainPostAPI = async () => {
 export const getPostAPI = async (
   board: number | string,
   offset: number = 0,
-  limit: number = 10
+  limit: number = 20
 ) => {
   try {
     const response = await authRequest.get(
@@ -22,8 +22,7 @@ export const getPostAPI = async (
     );
     return response.data;
   } catch (e) {
-    console.log("게시글 리스트 불러오기 실패!"); //테스트용
-    return [];
+    return Promise.reject(e);
   }
 };
 

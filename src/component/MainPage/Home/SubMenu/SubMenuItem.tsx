@@ -9,7 +9,8 @@ const SubMenuItem: React.FC<SubMenuItemProps> = ({ item }) => {
   return (
     <li>
       <Link to={`/${item.id}`}>
-        {item.title} : {item.description}
+        {item.title} <br />
+        <p> {item.description}</p>
       </Link>
     </li>
   );

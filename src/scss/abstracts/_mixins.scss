@@ -20,6 +20,9 @@
     box-sizing: border-box;
     padding: 10px;
     list-style: none;
+    &:hover{
+      background-color: #f0f0f0;
+    }
   }
 
 

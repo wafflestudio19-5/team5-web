@@ -8,6 +8,7 @@ interface WriteParams {
   setReloading: Function;
   openWrite: Function;
   postList: postListType;
+  subId?: null | number;
 }
 
 const initialPostInput = {
@@ -18,7 +19,13 @@ const initialPostInput = {
   is_question: false,
 };
 
-const Write = ({ boardId, setReloading, openWrite, postList }: WriteParams) => {
+const Write = ({
+  boardId,
+  setReloading,
+  openWrite,
+  postList,
+  subId,
+}: WriteParams) => {
   const [postInput, setPostInput] = useState<postInputType>(initialPostInput);
   const fileRef = useRef<HTMLInputElement>(null);
   const [fileImage, setFileImage] = useState<File[]>([]);
@@ -68,21 +75,32 @@ const Write = ({ boardId, setReloading, openWrite, postList }: WriteParams) => {
     formData.append(`title`, `${input.title}`);
     formData.append(`content`, `${input.content}`);
     formData.append(`is_anonymous`, `${input.is_anonymous}`);
-    formData.append(`is_anonymous`, `${input.is_question}`);
+    formData.append(`is_question`, `${input.is_question}`);
     formData.append(`tags`, `${checkHashtag(input.content)}`);
     fileImage.map((item) => {
       formData.append(`image`, item);
     });
-
-    postPostAPI(board, formData).then(
-      () => {
-        openWrite();
-        setReloading(true);
-      },
-      (error) => {
-        toastErrorData(error.response.data);
-      }
-    );
+    if (subId) {
+      postPostAPI(subId, formData).then(
+        () => {
+          openWrite();
+          setReloading(true);
+        },
+        (error) => {
+          toastErrorData(error.response.data);
+        }
+      );
+    } else {
+      postPostAPI(board, formData).then(
+        () => {
+          openWrite();
+          setReloading(true);
+        },
+        (error) => {
+          toastErrorData(error.response.data);
+        }
+      );
+    }
   };
 
   return (

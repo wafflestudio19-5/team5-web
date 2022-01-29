@@ -1,9 +1,18 @@
-import { plainRequest } from "./API";
+import { authRequest, plainRequest } from "./API";
 import { LoginInputType, TokenType } from "../interface/interface";
 
 export const postLoginAPI = async (input: LoginInputType) => {
   try {
     const response = await plainRequest.post("/user/login/", input);
+    return response.data.token;
+  } catch (e) {
+    return Promise.reject(e);
+  }
+};
+
+export const postLogoutAPI = async () => {
+  try {
+    const response = await authRequest.post("/user/logout/");
     return response.data.token;
   } catch (e) {
     return Promise.reject(e);

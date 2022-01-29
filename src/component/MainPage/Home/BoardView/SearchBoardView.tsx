@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { getPostWithURLAPI, searchPostAPI } from "../../../../API/postAPI";
 import { postListType } from "../../../../interface/interface";
+import { toast } from "../../../Toast/ToastManager";
 
 const SearchBoardView = () => {
   const params = useParams() as paramsType;

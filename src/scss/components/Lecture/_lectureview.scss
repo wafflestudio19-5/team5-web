@@ -15,11 +15,24 @@
     margin-bottom:10px;
   }
   .mini-title{
+    font-size:18px;
     font-weight: bold;
     margin-bottom: 10px;
   }
   p{
     margin: 0;
+  }
+  .post-button{
+    position: absolute;
+    padding:6px 12px;
+    border:0px;
+    border-radius: 15px;
+    background-color: $keyColor;
+    color:white;
+    cursor: pointer;
+    top:10px;
+    right:10px;
+    z-index: 30;
   }
 
 
@@ -31,19 +44,41 @@
   .LectureView__books{
     @include LectureViewBox;
   }
+  .LectureView__eval-test-container{
+    display:flex;
+  }
   .LectureView__evaluation{
     @include LectureViewBox;
     width:640px;
+    position: relative;
     .LectureView__evaluation-summary{
+      position:relative;
       font-size:14px;
       .labels{
         display: inline-block;
         width:100px;
+        p{
+          margin-top: 10px;
+          color:gray;
+        }
       }
       .summaries{
         display: inline-block;
         width:200px;
+        p{
+          margin-bottom: 10px;
+        }
       }
+      .star{
+        display: inline-block;
+        width:120px;
+        height:24px;
+      }
+      .rating{
+        font-size: 30px;
+        margin-left: 10px;
+      }
+
     }
     .LectureView__evaluation-list{
       appearance: none;
@@ -53,11 +88,275 @@
         padding-top:10px;
         padding-bottom:10px;
         border-top: 1px solid $lectureBorderColor;
+        position: relative;
+        .likes{
+          margin-left: 15px;
+          display: inline-block;
+          width:20px;
+          height:20px;
+          background: url("https://everytime.kr/images/new/container.articles.vote.png") no-repeat left center;
+          background-size: 11px 11px;
+          padding-left:15px;
+          font-size:15px;
+          color:$keyColor;
+        }
+        .star{
+          width:60px;
+          height:12px;
+          margin-bottom: 10px;
+        }
+        .semester{
+          font-size: 12px;
+          color:gray;
+        }
+        .buttons{
+          position: absolute;
+          top:10px;
+          right:10px;
+          button{
+            margin-left:5px;
+            border: 0;
+            border-radius: 5px;
+            background-color:$lectureBorderColor;
+            color:gray;
+            font-size:12px;
+            cursor: pointer;
+            padding:5px;
+                    &:hover{
+              color:$keyColor;
+            }
+          }
+        }
       }
     }
   }
   .LectureView__test{
     @include LectureViewBox;
-  }
+    position: relative;
+    box-sizing: border-box;
+    width:480px;
+    margin-left:10px;
+    padding:15px;
+    .LectureView__test-list{
+      list-style: none;
+      padding: 0;
+      .LectureView__test-item {
+        margin:20px 0;
+        padding:10px 0;
+        border-top: solid 1px $lectureBorderColor;
+        position: relative;
+        button{
+          position: absolute;
+          top:10px;
+          right:10px;margin-left: 5px;
+          border: 0;
+          border-radius: 5px;
+          background-color: $lectureBorderColor;
+          color: gray;
+          font-size: 12px;
+          cursor: pointer;
+          padding: 5px;
+          &:hover{
+            color:$keyColor;
+          }
+        }
+        .mini-title {
+          font-size: 16px;
+          margin: 0;
+        }
+        .contents{
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          &.blur{
+            color:gray;
+            filter: blur(5px);
+          }
+        }
+        .unlock{
+          position: absolute;
+          top:60px;
+          font-size: 14px;
+          font-weight: bold;
+          color:gray;
+        }
+        .use-point{
+          padding: 3px 8px;
+          color: $keyColor;
+          border: 1px solid $keyColor;
+          border-radius:10px;
+          background-color: transparent;
+          cursor: pointer;
+          &:hover{
+            background-color: $keyColor;
+            color:white;
+          }
 
+        }
+        .semester {
+          font-size: 14px;
+          color: grey;
+          display: inline-block;
+          margin-bottom:8px;
+        }
+        .likes {
+          margin-left: 15px;
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background: url("https://everytime.kr/images/new/container.articles.vote.png") no-repeat left center;
+          background-size: 11px 11px;
+          padding-left: 15px;
+          font-size: 15px;
+          color: $keyColor;
+        }
+        .content-block{
+          display:flex;
+          font-size: 12px;
+          .label{
+            width:72px;
+          }
+          .p{
+            background-color: $lectureBorderColor;
+          }
+        }
+      }
+    }
+  }
 }
+
+.LectureView__modal-wrapper{
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.25);
+  z-index: 100;
+
+  .LectureView__modal {
+    box-sizing: border-box;
+    position: relative;
+    padding:24px;
+    width:720px;
+    background-color: white;
+    .close{
+      position: absolute;
+      width:20px;
+      height:20px;
+      top:25px;
+      right:25px;
+      border: 0;
+      cursor: pointer;
+      background: transparent url("https://everytime.kr/images/new/container.modal.close.png") no-repeat center center;
+    }
+    .mini-title{
+      border-top:1px solid $lectureBorderColor;
+      margin-top:16px;
+      padding-top:16px;
+    }
+    .question{
+      display: flex;
+      padding:5px 0px;
+      font-size:12px;
+      .question-name{
+        width:72px;
+        display: flex;
+        align-items: center;
+      }
+      .option{
+        padding: 8px 12px;
+        margin-right: 8px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $lectureBorderColor;
+        color:gray;
+        cursor: pointer;
+        &:hover{
+          color:$keyColor;
+        }
+        &.selected{
+          color:white;
+          background-color: $keyColor;
+        }
+      }
+      select{
+        padding:6px;
+        border:0;
+        background-color: $lectureBorderColor;
+      }
+    }
+    .example-example{
+      font-size:13px;
+    }
+    ol{
+      margin:5px 0;
+      padding: 0px 18px;
+      li{
+        font-size: 12px;
+        margin-bottom:8px;
+        width:100%;
+      }
+      input[type="text"]{
+        width: 100%;
+        border: 0;
+        background-color: $lectureBorderColor;
+        font-size: 12px;
+        padding:9px;
+      }
+    }
+    .add-example{
+      padding:5px;
+      color: $keyColor;
+      border:1px solid $keyColor;
+      border-radius: 5px;
+      font-size: 12px;
+      width:72px;
+      margin-left:18px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      &:hover{
+        color:white;
+        background-color: $keyColor;
+      }
+    }
+
+    textarea{
+      width:100%;
+      height:100px;
+      border: 0;
+      background-color: $lectureBorderColor;
+      resize: none;
+      font-family: inherit;
+      font-size: 12px;
+      padding:10px;
+      box-sizing: border-box;
+    }
+    input[type="submit"]{
+      padding:8px;
+      margin-top:10px;
+      border: 0;
+      background-color: $keyColor;
+      color:white;
+      cursor:pointer;
+      border-radius: 6px;
+      &:hover{
+        background-color: $lectureBorderColor;
+        color:gray;
+      }
+
+    }
+
+    &.eval {
+
+    }
+    &.test {
+    }
+  }
+}
+

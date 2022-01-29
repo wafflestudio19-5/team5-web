@@ -4,8 +4,29 @@ interface HeaderParams {
   state: string;
 }
 
+const notMain = [
+  "timetable",
+  "lecture",
+  "my",
+
+  "message",
+  "login",
+  "myscrap",
+  "mycomment",
+  "mypost",
+];
+
+const checkMain = (state: string) => {
+  if (notMain.includes(state)) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 const Header = () => {
   const params: HeaderParams = useParams();
+
   return (
     <nav className="Header">
       <div className="Header__wrapper">
@@ -22,7 +43,7 @@ const Header = () => {
           </div>
         </div>
         <ul className="Header__menu">
-          <li className={!params.state ? "active" : ""}>
+          <li className={checkMain(params.state) ? "active" : ""}>
             <Link to="/">게시판</Link>
           </li>
           <li className={params.state === "timetable" ? "active" : ""}>

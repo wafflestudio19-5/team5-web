@@ -85,6 +85,25 @@ export interface mainNoTitleBoardType {
   num_of_likes: number;
   num_of_comments: number;
 }
+export interface SubBoardType {
+  id: number;
+  title: string;
+}
+export interface BoardType {
+  id: number;
+  title: string;
+  description: string;
+  anonym_enabled: boolean;
+  is_market: boolean;
+  title_enabled: boolean;
+  question_enabled: boolean;
+  notice_enabled: boolean;
+  board_type: number;
+  sub_boards: SubBoardType[];
+  created_at: string;
+  manager: any | null;
+  head_board: any | null;
+}
 
 //Post API
 export interface postItemType {
@@ -271,24 +290,54 @@ export interface LectureTimeType {
 
 export interface TimeTableSearchQueryType {
   semester: string;
-  credits?: string;
-  department?: string;
+  credits?: string[];
+  department?: string[];
   title?: string;
   instructor?: string;
   course_code?: string;
   location?: string;
   ordering?: string;
+  type?: string;
+}
+
+export interface newLectureTimeType {
+  day: string;
+  startH: string;
+  startM: string;
+  endH: string;
+  endM: string;
+  location: string;
+}
+
+export interface newLectureType {
+  title: string;
+  instructor: string;
+  time: newLectureTimeType[];
+}
+
+export interface newLectureRequestType {
+  title: string;
+  instructor: string;
+  time: string[];
 }
 
 //Lecture에서 사용
 export interface EvalType {
   id: number;
+  course_id: number;
   course: string;
   rating: number;
   semester: string;
   content: string;
   is_mine: boolean;
   num_of_likes: number;
+}
+
+export interface myLectureType {
+  id: number;
+  instructor: string;
+  is_evaluated: boolean;
+  title: string;
 }
 
 export interface SearchedLectureType {
@@ -314,6 +363,48 @@ export interface LectureSummaryType {
   grade: string;
   attendance: string;
   exam_freq: string;
+}
+
+export interface myPointType {
+  sum: number;
+  details: pointHistoryType[];
+}
+export interface pointHistoryType {
+  id: number;
+  point: number;
+  reason: string;
+  created_at: string;
+}
+
+export interface NewEvalType {
+  semester: string;
+  assignment: number;
+  team_project: number;
+  grade: number;
+  attendance: number;
+  exam: number;
+  rating: number;
+  content: string;
+}
+
+export interface NewTestType {
+  semester: string;
+  exam: number;
+  types: string[];
+  examples: string[];
+  strategy: string;
+}
+
+export interface LectureTestType {
+  id: number;
+  is_readable: boolean;
+  exam: string;
+  semester: string;
+  strategy: string | null;
+  types: string | null;
+  examples: string[] | null;
+  is_mine: boolean;
+  num_of_likes: number;
 }
 
 export default {};

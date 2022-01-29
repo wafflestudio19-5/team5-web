@@ -13,11 +13,14 @@ import {
 import {
   TimeTableType,
   TimeTableSettingsType,
+  newLectureType,
+  LectureScheduleType,
 } from "../../../interface/interface";
 import { toastErrorData } from "../../../API/errorHandling";
 import NewLecture from "./NewLecture/NewLecture";
 import { time } from "../../../function/timeCal";
 import { calculateCredit } from "../../../function/lecture";
+import { postCustomLecture } from "../../../API/lectureAPI";
 
 interface TimeTableParams {
   year: string;
@@ -28,7 +31,12 @@ interface TimeTableParams {
 const emptyTable = {} as TimeTableType;
 const emptySettings = {} as TimeTableSettingsType;
 
-const semesters = ["2021년 겨울학기", "2022년 1학기"];
+const semesters = [
+  "2021년 1학기",
+  "2021년 2학기",
+  "2021년 겨울학기",
+  "2022년 1학기",
+];
 const semestersToYearSeason = (semesterString: string) => {
   const split = semesterString.split(" ");
   return { year: split[0].slice(0, -1), season: split[1].slice(0, -2) };
@@ -49,6 +57,9 @@ const TimeTable = () => {
   });
   const [currentTables, setCurrentTables] = useState<TimeTableType[]>([]);
   const [selectedTable, setSelectedTable] = useState<TimeTableType>(emptyTable);
+  const [previewLectures, setPreviewLectures] = useState<LectureScheduleType[]>(
+    []
+  );
 
   //수정할것
   const [resizeContainer, setResizeContainer] = useState(false);
@@ -92,6 +103,23 @@ const TimeTable = () => {
       }
     );
   };
+  const addCustomLectureToTable = (input: newLectureType) => {
+    const requestTime: string[] = [];
+    input.time.forEach((time) => {
+      requestTime.push(
+        `${time.day}/${time.startH}${time.startM}/${time.endH}${time.endM}/${time.location}`
+      );
+    });
+    postCustomLecture(selectedTable.id, { ...input, time: requestTime }).then(
+      (response) => {
+        setSelectedTable(response);
+      },
+      (error) => {
+        toastErrorData(error.response.data);
+      }
+    );
+  };
+
   const deleteLectureFromTable = (lectureId: number) => {
     if (window.confirm("강의를 삭제하시겠습니까?")) {
       deleteTimeTableLecture(selectedTable.id, lectureId).then(
@@ -104,6 +132,10 @@ const TimeTable = () => {
       );
     }
   };
+
+  useEffect(() => {
+    console.log(selectedTable);
+  }, [selectedTable]);
 
   //useEffects
   useEffect(() => {
@@ -220,6 +252,9 @@ const TimeTable = () => {
                   }}
                 >
                   {table.name}
+                  {table.is_default ? (
+                    <div className="default">기본시간표</div>
+                  ) : null}
                 </li>
               );
             })}
@@ -235,6 +270,7 @@ const TimeTable = () => {
         <Schedule
           lectures={selectedTable.lecture}
           deleteLectureFromTable={deleteLectureFromTable}
+          previewLectures={previewLectures}
         />
         {modalIsOpen && (
           <div
@@ -342,6 +378,8 @@ const TimeTable = () => {
         currentSemester={currentSemester.name}
         resizeContainer={setResizeContainer}
         addLectureToTable={addLectureToTable}
+        addCustomLectureToTable={addCustomLectureToTable}
+        setPreviewLectures={setPreviewLectures}
       />
     </div>
   );

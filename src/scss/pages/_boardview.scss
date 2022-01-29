@@ -6,6 +6,22 @@
     width:780px;
   }
 
+  .BoardView__subs{
+    display: flex;
+    align-items: center;
+    height:40px;
+    .BoardView__subboard{
+      padding: 5px;
+      cursor: pointer;
+      margin-right: 15px;
+      text-decoration: underline;
+      &.selected{
+        color:$keyColor;
+        font-weight: bold;
+      }
+    }
+  }
+
   .BoardView__title{
     width:748px;
     height:29px;

@@ -9,13 +9,22 @@ import { UserType } from "../../../../interface/interface";
 import ad_1 from "../../../../image/ad_1.jpg";
 import ad_2 from "../../../../image/ad_2.jpg";
 import ad_3 from "../../../../image/ad_3.jpg";
+import { postLogoutAPI } from "../../../../API/loginAPI";
+import { toastErrorData } from "../../../../API/errorHandling";
 const LeftBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
   const tryLogout = () => {
-    deleteToken();
-    dispatch(logout());
+    postLogoutAPI().then(
+      () => {
+        deleteToken();
+        dispatch(logout());
+      },
+      (e) => {
+        toastErrorData(e);
+      }
+    );
   };
 
   const [userInfo, setUserInfo] = useState<UserType>();

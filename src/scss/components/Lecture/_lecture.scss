@@ -5,15 +5,69 @@
   justify-content: center;
 }
 
+.LecturePoint-wrapper{
+  width:100%;
+  padding-top:104px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 .Lecture{
   width:780px;
   display: flex;
   flex-direction: column;
+  height:100%;
   align-items: center;
   overflow-y: hidden;
   .Lecture__my{
     box-sizing: border-box;
     width:100%;
+    border-radius: 12px;
+    border: 1px solid $lectureBorderColor;
+    margin-top:8px;
+    padding:15px;
+    position: relative;
+
+    .Lecture__my-list{
+      appearance: none;
+      list-style: none;
+      padding: 0;
+      li{
+        font-size: 12px;
+        margin-bottom: 10px;
+        .title{
+          margin-right: 15px;
+          font-size: 16px;
+        }
+        cursor: pointer;
+        button{
+          position: absolute;
+          height:25px;
+          right:20px;
+          appearance: none;
+          border:0px;
+          color:white;
+          background-color: $keyColor;
+          border-radius: 15px;
+          cursor: pointer;
+
+        }
+      }
+
+
+    }
+    .Lecture__my-point{
+      position: absolute;
+      top: 20px;
+      right:20px;
+      a{
+        appearance: none;
+        text-decoration: none;
+        color:$keyColor;
+      }
+    }
   }
   form{
     width:100%;
@@ -23,7 +77,10 @@
       height:48px;
       border: 0px;
       border-radius: 12px;
-      background-color: $lectureBorderColor;
+      padding-left:12px;
+      font-size:14px;
+      background:  $lectureBorderColor url("https://everytime.kr/images/new/aside.search.background.png") no-repeat right center;
+      background-size:50px 50px;
     }
   }
   .Lecture__list{
@@ -33,7 +90,7 @@
     margin-top:8px;
     padding:0;
     box-sizing: border-box;
-    height:720px;
+    max-height:600px;
     overflow-y: scroll;
 
     .Lecture__item-label{
@@ -55,13 +112,22 @@
       border: 1px solid $lectureBorderColor;
       border-top:0;
       padding:15px;
+      cursor: pointer;
+      &:hover{
+      background-color: $timetableBackgroundColor;
+      }
+      .star{
+        position: relative;
+        width:60px;
+        height:12px;
+        margin-bottom: 10px;
+      }
       p{
         margin:0;
         font-size:14px;
         &.title{
           font-size:16px;
           font-weight: bold;
-          margin-bottom: 5px;
           span{
             color:gray;
             font-weight: normal;
@@ -73,6 +139,76 @@
           margin-bottom: 5px;
         }
       }
+    }
+  }
+}
+
+.LecturePoint{
+  position:relative;
+  width:780px;
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  border: 1px solid $lectureBorderColor;
+  border-radius: 12px;
+  h3{
+    margin-top:10px;
+    margin-bottom:10px;
+  }
+  .LecturePoint__sum{
+    position:absolute;
+    top:26px;
+    right:26px;
+    .point{
+      font-weight: bold;
+      color:$keyColor;
+    }
+  }
+  .LecturePoint__history{
+    appearance: none;
+    list-style: none;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    li{
+      font-size: 16px;
+      padding: 15px 0px;
+      border-bottom:1px solid $lectureBorderColor;
+      .point{
+        display: inline-block;
+        color:#0ca5af;
+        font-weight: bold;
+        width:50px;
+        &.minus{
+          color:$keyColor;
+        }
+      }
+      .name{
+        display: inline-block;
+      }
+      .date{
+        display: inline-block;
+        font-size:14px;
+        position: absolute;
+        right:10px;
+        color:grey;
+      }
+    }
+  }
+}
+
+.LecturePoint-guide{
+  margin-top:10px;
+  width:780px;
+  padding: 16px;
+  border: 1px solid $lectureBorderColor;
+  border-radius: 12px;
+  ul{
+    font-size:13px;
+    padding-left:20px;
+    li{
+      padding:5px 0px;
     }
   }
 }
