@@ -39,6 +39,7 @@ export const authRequest: AxiosInstance = axios.create({
 
 //인터셉터 이용하여 Axios 인스턴스에 토큰 추가
 authRequest.interceptors.request.use(function (config: AxiosRequestConfig) {
+  console.log(config);
   if (config?.headers) {
     config.headers["Authorization"] = `Bearer ${getToken().access}`;
     return config;
@@ -54,7 +55,6 @@ authRequest.interceptors.response.use(
       const data = error.response.data;
       if (data.code === "token_not_valid") {
         const originalRequest = error.config;
-        console.log(getToken());
         postRefreshAPI(getToken().refresh).then((newToken) => {
           if (newToken) {
             store.dispatch(login(newToken));
@@ -62,7 +62,8 @@ authRequest.interceptors.response.use(
             originalRequest.headers[
               "Authorization"
             ] = `Bearer ${newToken.access}`;
-            return axios(error.config);
+            setTimeout(window.location.reload, 1);
+            return originalRequest;
           }
         });
       } else if (
