@@ -5,6 +5,7 @@ import { postListType } from "../../../../interface/interface";
 import Write from "./Write";
 import { time } from "../../../../function/timeCal";
 import { toastErrorData } from "../../../../API/errorHandling";
+import { toast } from "../../../Toast/ToastManager";
 
 const BoardView = () => {
   const params = useParams() as paramsType;
@@ -170,7 +171,15 @@ const BoardView = () => {
                   }}
                   onKeyPress={(e) => {
                     if (e.key === "Enter") {
-                      search(searchValue);
+                      if (searchValue.length > 0) {
+                        search(searchValue);
+                      } else {
+                        toast.show({
+                          title: "오류",
+                          content: "검색어를 한 글자 이상 입력하세요",
+                          duration: 5000,
+                        });
+                      }
                     }
                   }}
                 />
