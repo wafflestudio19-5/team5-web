@@ -38,8 +38,6 @@ const PostView = () => {
   const sendMessage = () => {
     const form = new FormData();
     form.append("content", message);
-    console.log(form);
-    console.log(message);
     postMessage(msgType.started_from, msgType.id, form).then((res) => {
       closeModal();
     });

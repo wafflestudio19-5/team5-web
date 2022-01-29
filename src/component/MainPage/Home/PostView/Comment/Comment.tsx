@@ -68,7 +68,6 @@ const Comment = ({
       window.alert("내용을 입력해주세요.");
       return;
     }
-    console.log(input);
     const form = new FormData();
     form.append("content", input.content);
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
@@ -77,7 +76,6 @@ const Comment = ({
     }
 
     postCommentAPI(postId, form).then((response) => {
-      console.log(response);
       setCommentList(response);
       setCommentInput({ ...commentInput, content: "" });
       setReplyInput({ ...replyInput, content: "" });
@@ -107,7 +105,6 @@ const Comment = ({
     if (window.confirm("이 댓글에 공감하십니까?")) {
       postCommentVoteAPI(comment.id).then(
         (response) => {
-          console.log(response);
           getComment();
         },
         (error) => {
@@ -125,7 +122,6 @@ const Comment = ({
     if (window.confirm("이 댓글을 삭제하시겠습니까?")) {
       deleteCommentAPI(parseInt(path.postId), commentID).then(
         (response) => {
-          console.log(response);
           if (response.is_success) {
             setCommentList(response.comments);
           }

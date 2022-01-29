@@ -26,7 +26,7 @@ const Edit = ({ postDetail, boardId, setEditPost }: post) => {
     form.append("tags", JSON.stringify(input.tags));
     form.append("is_anonymous", JSON.stringify(input.is_anonymous));
     form.append("is_question", JSON.stringify(input.is_question));
-    postEditAPI(form, postDetail.id).then((response) => console.log(response));
+    postEditAPI(form, postDetail.id).then((response) => {});
     setEditPost(false);
   };
 

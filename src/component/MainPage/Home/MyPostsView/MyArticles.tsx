@@ -35,7 +35,6 @@ const BoardView = () => {
   };
 
   useEffect(() => {
-    console.log(params.myMenu);
     setReloading(true);
   }, [params]);
 

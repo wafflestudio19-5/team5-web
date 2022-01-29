@@ -133,9 +133,7 @@ const TimeTable = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(selectedTable);
-  }, [selectedTable]);
+  useEffect(() => {}, [selectedTable]);
 
   //useEffects
   useEffect(() => {
@@ -168,7 +166,6 @@ const TimeTable = () => {
     if (params.scheduleId) {
       getTimeTableById(params.scheduleId).then(
         (response) => {
-          console.log("why?");
           setSelectedTable(response);
         },
         (error) => {
@@ -183,7 +180,6 @@ const TimeTable = () => {
       if (targetTable) {
         getTimeTableById(String(targetTable.id)).then(
           (response) => {
-            console.log("why?");
             setSelectedTable(response);
           },
           (error) => {

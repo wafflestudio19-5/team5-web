@@ -26,8 +26,6 @@ const Message = () => {
   const sendMessage = () => {
     const form = new FormData();
     form.append("content", message);
-    console.log(form);
-    console.log(message);
     postMessage("id", selectedChat?.id, form).then(
       (res) => {
         closeModal();
@@ -67,7 +65,6 @@ const Message = () => {
   useEffect(() => {
     getMessageList().then(
       (res) => {
-        console.log(res);
         setMessageList(res);
       },
       (error) => {

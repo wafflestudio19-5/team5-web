@@ -50,7 +50,6 @@ const SearchBoardView = () => {
   const getURL = (input: string | null) => {
     if (input) {
       const whereToSlice = input.indexOf("/", 8);
-      console.log(input.slice(whereToSlice));
       return input.slice(whereToSlice);
     } else {
       return "";
