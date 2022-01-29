@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import store from "../redux/store";
 import { postRefreshAPI } from "./loginAPI";
-import { saveToken } from "../function/localStorage";
-import { login } from "../redux/authorization";
-import { useHistory } from "react-router-dom";
+import { deleteToken, saveToken } from "../function/localStorage";
+import { login, logout } from "../redux/authorization";
+import { toast } from "../component/Toast/ToastManager";
 
 const URL = "https://www.waffle-minkyu.shop" as const;
 
@@ -55,17 +55,31 @@ authRequest.interceptors.response.use(
       const data = error.response.data;
       if (data.code === "token_not_valid") {
         const originalRequest = error.config;
-        postRefreshAPI(getToken().refresh).then((newToken) => {
-          if (newToken) {
-            store.dispatch(login(newToken));
-            saveToken(newToken);
-            originalRequest.headers[
-              "Authorization"
-            ] = `Bearer ${newToken.access}`;
-            setTimeout(window.location.reload, 1);
-            return originalRequest;
+        postRefreshAPI(getToken().refresh).then(
+          (newToken) => {
+            if (newToken) {
+              store.dispatch(login(newToken));
+              saveToken(newToken);
+              originalRequest.headers[
+                "Authorization"
+              ] = `Bearer ${newToken.access}`;
+              window.setTimeout(window.location.reload, 1);
+              return originalRequest;
+            }
+          },
+          (e) => {
+            toast.show({
+              title: "로그인 만료",
+              content: "다시 로그인 해 주십시오",
+              duration: 3000,
+            });
+            window.setTimeout(() => {
+              deleteToken();
+              store.dispatch(logout());
+              window.location.href = "login";
+            }, 3000);
           }
-        });
+        );
       } else if (
         data.detail === "You do not have permission to perform this action."
       ) {
