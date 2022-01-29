@@ -13,7 +13,7 @@ const SubMenu = () => {
     <div className="SubMenu">
       <ul className="SubMenu__group">
         {boardList.map((item: boardListType) => {
-          if (item.id <= 6) return <SubMenuItem key={item.id} item={item} />;
+          return <SubMenuItem key={item.id} item={item} />;
         })}
       </ul>
     </div>
