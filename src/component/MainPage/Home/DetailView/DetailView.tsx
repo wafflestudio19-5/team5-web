@@ -28,10 +28,18 @@ const DetailView = () => {
 
   useEffect(() => {
     getBoardAPI().then((response) => {
-      const boardDetail = response.find(
+      const loadedBoard = response.find(
         (board: any) => board.id === Number(params.boardId)
       );
-      setBoardDetail(boardDetail);
+      if (loadedBoard) {
+        setBoardDetail(loadedBoard);
+      } else {
+        setBoardDetail({
+          id: Number(params.boardId),
+          title: "",
+          description: "",
+        });
+      }
     });
   }, [params.boardId]);
 
