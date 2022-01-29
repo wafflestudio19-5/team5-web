@@ -26,7 +26,6 @@ const LectureList = () => {
   const loadMyLecture = () => {
     getMyLecture().then((response) => {
       setMyInfo(response);
-      console.log(response);
     });
   };
 
@@ -72,27 +71,31 @@ const LectureList = () => {
           포인트 <b>{myInfo.point}P</b> <Link to="/lecture/point">자세히</Link>
         </div>
       </div>
-      <ul className="Lecture__list" ref={scrollRef} onScroll={handleScroll}>
-        <li key="label" className="Lecture__item-label">
-          최근 강의평
-        </li>
-        {recentLecture.map((lecture) => {
-          return (
-            <li
-              key={lecture.id}
-              className="Lecture__item"
-              onClick={() => {
-                history.push(`/lecture/view/${lecture.course_id}`);
-              }}
-            >
-              <p className="title">{lecture.course}</p>
-              <div className="star">{generateStar(lecture.rating)}</div>
-              <p className="semester">{lecture.semester}</p>
-              <p>{lecture.content}</p>
-            </li>
-          );
-        })}
-      </ul>
+      {recentLecture.length > 0 ? (
+        <ul className="Lecture__list" ref={scrollRef} onScroll={handleScroll}>
+          <li key="label" className="Lecture__item-label">
+            최근 강의평
+          </li>
+          {recentLecture.map((lecture) => {
+            return (
+              <li
+                key={lecture.id}
+                className="Lecture__item"
+                onClick={() => {
+                  history.push(`/lecture/view/${lecture.course_id}`);
+                }}
+              >
+                <p className="title">{lecture.course}</p>
+                <div className="star">{generateStar(lecture.rating)}</div>
+                <p className="semester">{lecture.semester}</p>
+                <p>{lecture.content}</p>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <div className="loader" />
+      )}
     </>
   );
 };

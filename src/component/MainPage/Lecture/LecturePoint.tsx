@@ -35,7 +35,7 @@ const LecturePoint = () => {
                   )}
                 </div>
                 <div className="name">{detail.reason}</div>
-                <div className="date">{detail.created_at}</div>
+                <div className="date">{detail.created_at.split(".")[0]}</div>
               </li>
             );
           })}
